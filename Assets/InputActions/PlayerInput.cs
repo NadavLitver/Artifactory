@@ -44,6 +44,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Button"",
+                    ""id"": ""75be6cf6-c421-42cf-bb24-d037975e7f1e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -167,6 +176,76 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f447d79e-0bc1-40e8-8060-0719499b3dc1"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ce169cf8-783c-4d48-9336-a7d31306d09b"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
+        },
+        {
+            ""name"": ""General"",
+            ""id"": ""afe6f44e-cb7e-43db-b953-7de519fca710"",
+            ""actions"": [
+                {
+                    ""name"": ""Reset"",
+                    ""type"": ""Button"",
+                    ""id"": ""c2068f16-2efb-4c2f-9266-7803284c575f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Quit"",
+                    ""type"": ""Button"",
+                    ""id"": ""66b12a96-bb44-4ccd-a063-e7059a32d344"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e1795d33-8506-4e7b-820e-60897215633b"",
+                    ""path"": ""<Keyboard>/f5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""77a726c2-bd38-4c77-a07c-5e491b5a2c50"",
+                    ""path"": ""<Keyboard>/escape"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Quit"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -177,6 +256,11 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_BaseMovement = asset.FindActionMap("BaseMovement", throwIfNotFound: true);
         m_BaseMovement_move = m_BaseMovement.FindAction("move", throwIfNotFound: true);
         m_BaseMovement_jump = m_BaseMovement.FindAction("jump", throwIfNotFound: true);
+        m_BaseMovement_Attack = m_BaseMovement.FindAction("Attack", throwIfNotFound: true);
+        // General
+        m_General = asset.FindActionMap("General", throwIfNotFound: true);
+        m_General_Reset = m_General.FindAction("Reset", throwIfNotFound: true);
+        m_General_Quit = m_General.FindAction("Quit", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -238,12 +322,14 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private IBaseMovementActions m_BaseMovementActionsCallbackInterface;
     private readonly InputAction m_BaseMovement_move;
     private readonly InputAction m_BaseMovement_jump;
+    private readonly InputAction m_BaseMovement_Attack;
     public struct BaseMovementActions
     {
         private @PlayerInput m_Wrapper;
         public BaseMovementActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
         public InputAction @move => m_Wrapper.m_BaseMovement_move;
         public InputAction @jump => m_Wrapper.m_BaseMovement_jump;
+        public InputAction @Attack => m_Wrapper.m_BaseMovement_Attack;
         public InputActionMap Get() { return m_Wrapper.m_BaseMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -259,6 +345,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @jump.started -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnJump;
                 @jump.performed -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnJump;
                 @jump.canceled -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnJump;
+                @Attack.started -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnAttack;
+                @Attack.performed -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnAttack;
+                @Attack.canceled -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnAttack;
             }
             m_Wrapper.m_BaseMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -269,13 +358,63 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @jump.started += instance.OnJump;
                 @jump.performed += instance.OnJump;
                 @jump.canceled += instance.OnJump;
+                @Attack.started += instance.OnAttack;
+                @Attack.performed += instance.OnAttack;
+                @Attack.canceled += instance.OnAttack;
             }
         }
     }
     public BaseMovementActions @BaseMovement => new BaseMovementActions(this);
+
+    // General
+    private readonly InputActionMap m_General;
+    private IGeneralActions m_GeneralActionsCallbackInterface;
+    private readonly InputAction m_General_Reset;
+    private readonly InputAction m_General_Quit;
+    public struct GeneralActions
+    {
+        private @PlayerInput m_Wrapper;
+        public GeneralActions(@PlayerInput wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Reset => m_Wrapper.m_General_Reset;
+        public InputAction @Quit => m_Wrapper.m_General_Quit;
+        public InputActionMap Get() { return m_Wrapper.m_General; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(GeneralActions set) { return set.Get(); }
+        public void SetCallbacks(IGeneralActions instance)
+        {
+            if (m_Wrapper.m_GeneralActionsCallbackInterface != null)
+            {
+                @Reset.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnReset;
+                @Reset.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnReset;
+                @Reset.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnReset;
+                @Quit.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnQuit;
+                @Quit.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnQuit;
+                @Quit.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnQuit;
+            }
+            m_Wrapper.m_GeneralActionsCallbackInterface = instance;
+            if (instance != null)
+            {
+                @Reset.started += instance.OnReset;
+                @Reset.performed += instance.OnReset;
+                @Reset.canceled += instance.OnReset;
+                @Quit.started += instance.OnQuit;
+                @Quit.performed += instance.OnQuit;
+                @Quit.canceled += instance.OnQuit;
+            }
+        }
+    }
+    public GeneralActions @General => new GeneralActions(this);
     public interface IBaseMovementActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnAttack(InputAction.CallbackContext context);
+    }
+    public interface IGeneralActions
+    {
+        void OnReset(InputAction.CallbackContext context);
+        void OnQuit(InputAction.CallbackContext context);
     }
 }
