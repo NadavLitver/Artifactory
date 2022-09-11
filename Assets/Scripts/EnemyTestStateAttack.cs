@@ -7,7 +7,7 @@ public class EnemyTestStateAttack : State
     public Animator m_animator;
     public EnemyTestStateChase chaseState;
     public float timeBetweenAttacks;
-    private float counter;
+    public float counter;
     private void Start()
     {
         canAttack = true;
@@ -34,7 +34,6 @@ public class EnemyTestStateAttack : State
         }
         if (!chaseState.isPlayerInAttackRange)
         {
-            canAttack = true;
             return chaseState;
         }
         return this;

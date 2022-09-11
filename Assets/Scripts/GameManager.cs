@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -9,6 +8,9 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     public InputManager inputManager { get; private set; }
     public GeneralFunctions generalFunctions { get; private set; }
+    public PauseMenuHandler pauseMenuHandler { get; private set; }
+
+    public SoundManager soundManager { get; private set; }
 
     [SerializeField] internal AssetsRefrence assets;
     private void Awake()
@@ -25,7 +27,9 @@ public class GameManager : MonoBehaviour
         }
         generalFunctions = new GeneralFunctions();
         inputManager = GetComponentInChildren<InputManager>();
-       
+        pauseMenuHandler = GetComponentInChildren<PauseMenuHandler>();
+        soundManager = GetComponentInChildren<SoundManager>();
+
 
 
     }
@@ -46,6 +50,20 @@ public class GameManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
         Application.Quit();
+
+    }
+    public void QuitGame()
+    {
+
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#endif
+        Application.Quit();
+
+    }
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
 
     }
 }
