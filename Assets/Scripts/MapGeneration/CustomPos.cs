@@ -24,4 +24,9 @@ public class CustomPos
     {
         return new Vector3(givenV.x * x, givenV.y * y, 0);
     }
+
+    public override string ToString()
+    {
+        return $"({X} , {Y})";
+    }
 }
