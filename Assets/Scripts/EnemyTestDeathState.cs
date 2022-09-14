@@ -24,7 +24,7 @@ public class EnemyTestDeathState : State
     // Start is called before the first frame update
     void Start()
     {
-        m_actor.OnDeath.AddListener(OnDeathInterupt);
+        //m_actor.OnDeath.AddListener(OnDeathInterupt);
     }
 
    

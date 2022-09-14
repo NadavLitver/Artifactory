@@ -89,14 +89,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfca0ee522b372e4d986070f00dec4ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentHP: 0
   maxHP: 90
-  onTakeDamage:
+  TakeDamageEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  DeathEvent:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1385199052094072152}
-        m_TargetAssemblyTypeName: ColoredFlash, Assembly-CSharp
-        m_MethodName: Flash
-        m_Mode: 1
+      - m_Target: {fileID: 1327862718826719486}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Die
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 6116601147022408188}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -105,13 +121,11 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  onGetHealth:
-    m_PersistentCalls:
-      m_Calls: []
-  OnDeath:
-    m_PersistentCalls:
-      m_Calls: []
+  m_StatusEffects: []
   m_groundCheck: {fileID: 1090129317}
+  references:
+    version: 2
+    RefIds: []
 --- !u!114 &1385199052094072152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -172,6 +186,7 @@ GameObject:
   - component: {fileID: 1380533459441622728}
   - component: {fileID: 1282232644242522270}
   - component: {fileID: 1385592033679950849}
+  - component: {fileID: 1147369780154543506}
   - component: {fileID: 1385592033679950850}
   m_Layer: 6
   m_Name: Weapon-Sword
@@ -260,6 +275,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 15
+  m_ability: {fileID: 1147369780154543506}
+--- !u!114 &1147369780154543506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1385592033679950848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3a0f1e3d812f62548b5c2b09d885d3bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damageHandler:
+    amount: 10
+    myDmgType: 1
+  statusEffectsEnum: 00000000
 --- !u!58 &1385592033679950850
 CircleCollider2D:
   m_ObjectHideFlags: 0

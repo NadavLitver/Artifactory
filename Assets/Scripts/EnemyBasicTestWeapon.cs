@@ -5,12 +5,14 @@ using UnityEngine;
 public class EnemyBasicTestWeapon : MonoBehaviour
 {
     public float Damage;
+    public Ability m_ability;
     PlayerActor playerActorRef => GameManager.Instance.assets.playerActor;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
-            playerActorRef.TakeDamage(Damage);
+            playerActorRef.GetHit(m_ability);
+          
         }
     }
 }

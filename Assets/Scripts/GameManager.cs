@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour
     public InputManager inputManager { get; private set; }
     public GeneralFunctions generalFunctions { get; private set; }
     public PauseMenuHandler pauseMenuHandler { get; private set; }
+    public DamageManager DamageManager { get; private set; }
+
 
     public SoundManager soundManager { get; private set; }
 
@@ -29,7 +31,7 @@ public class GameManager : MonoBehaviour
         inputManager = GetComponentInChildren<InputManager>();
         pauseMenuHandler = GetComponentInChildren<PauseMenuHandler>();
         soundManager = GetComponentInChildren<SoundManager>();
-
+        DamageManager = GetComponentInChildren<DamageManager>();
 
 
     }
