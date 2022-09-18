@@ -9,6 +9,7 @@ public class Ability : MonoBehaviour
     [SerializeField] DamageHandler damageHandler = new DamageHandler();
     List<StatusEffect> statusEffects = new List<StatusEffect>();
     [SerializeField] List<StatusEffectEnum> statusEffectsEnum = new List<StatusEffectEnum>();
+    [SerializeField, Range(1,10)] int statusActiviationChange;
 
     private void Awake()
     {
@@ -25,6 +26,15 @@ public class Ability : MonoBehaviour
                     break;
             }
         }
+    }
+
+    public bool RollForStatusActivation()
+    {
+        if (Random.Range(1,11) <= statusActiviationChange)
+        {
+            return true;
+        }
+        return false;
     }
     public List<StatusEffect> StatusEffects { get => statusEffects; set => statusEffects = value; }
     public DamageHandler DamageHandler { get => damageHandler; set => damageHandler = value; }
