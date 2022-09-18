@@ -88,11 +88,11 @@ public class Actor : MonoBehaviour, IDamagable
     }
     public void GetHit(Ability givenAbility)
     {
-        foreach (StatusEffect SE in givenAbility.StatusEffects)
+        foreach (var SE in givenAbility.StatusEffects)
         {
-            if (givenAbility.RollForStatusActivation())
+            if (givenAbility.RollForStatusActivation(SE))
             {
-                RecieveStatusEffects(SE);
+                RecieveStatusEffects(SE.myStatus);
             }
         }
         TakeDamage(givenAbility.DamageHandler);
