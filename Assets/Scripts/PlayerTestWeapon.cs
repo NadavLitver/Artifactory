@@ -8,6 +8,7 @@ public class PlayerTestWeapon : Weapon
 {
     public int damage;
     public UnityEvent onEnemyHit;
+    public Ability m_ability;
     protected override void Attack()
     {
         m_animator.Play("Attack");
@@ -30,7 +31,8 @@ public class PlayerTestWeapon : Weapon
             }
             if (!ReferenceEquals(currentEnemyHit, null))
             {
-                currentEnemyHit.TakeDamage(damage);
+                // currentEnemyHit.TakeDamage(damage);
+                currentEnemyHit.GetHit(m_ability);
                 onEnemyHit.Invoke();
             }
         }

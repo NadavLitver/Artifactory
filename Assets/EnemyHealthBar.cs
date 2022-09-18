@@ -12,9 +12,10 @@ public class EnemyHealthBar : MonoBehaviour
     {
         m_sr = GetComponent<SpriteRenderer>();
         m_actor = GetComponentInParent<Actor>();
-        m_actor.onTakeDamage.AddListener(UpdateHealthBar);
+       // m_actor.onTakeDamage.AddListener(UpdateHealthBar);
         maxHpBarSize = m_sr.size.x;
         currentPercent = (m_actor.currentHP / m_actor.maxHP);
+        m_actor.TakeDamageEvent.AddListener(UpdateHealthBar);
     }
     public void UpdateHealthBar()
     {
