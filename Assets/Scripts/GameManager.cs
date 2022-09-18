@@ -85,6 +85,11 @@ public class GeneralFunctions
         return _isInRange;
     }
 
+    public float CalcRange(Vector3 posA, Vector3 posB)
+    {
+        return (posA - posB).magnitude;
+    }
+
     public void ResetScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
