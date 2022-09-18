@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 
@@ -46,5 +47,15 @@ public class ExitLocationInfo
 {
     public ExitLocationHorizontal HorizontalPos;
     public ExitLocationVertical VerticalPos;
+
+    public bool EquateLoc(ExitLocationInfo givenLocation)
+    {
+        if (HorizontalPos == givenLocation.HorizontalPos && VerticalPos == givenLocation.VerticalPos)
+        {
+            return true;
+        }
+        return false;
+    }
+    
 }
 

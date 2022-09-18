@@ -1,18 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapConnectionPoint : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] ExitLocationInfo locationInfo;
+    [SerializeField] RectTransform line;
+    public ExitLocationInfo LocationInfo { get => locationInfo; set => locationInfo = value; }
+    public RectTransform Line { get => line; set => line = value; }
+
+    public void ConnectLine(Transform destenation)
     {
-        
+        Vector3 direction = destenation.transform.position - transform.position;
+        RectTransform lineRect = (RectTransform)line.transform.GetChild(0).transform;
+        lineRect.sizeDelta = new Vector2(direction.magnitude, 8);
+        if (locationInfo.HorizontalPos == ExitLocationHorizontal.LEFT)
+        {
+            line.transform.rotation = new Quaternion(0, 180, 0, 0);
+        }
+        float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+        line.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }

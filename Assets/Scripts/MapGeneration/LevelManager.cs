@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -9,8 +10,10 @@ public class LevelManager : MonoBehaviour
     [SerializeField] List<Room> currentRunRooms = new List<Room>();
     [SerializeField] List<RunSettings> runSettings = new List<RunSettings>();
     [SerializeField] List<RunSettings> currentRunState = new List<RunSettings>();
+    [SerializeField] List<ConnectionData> cachedConnectionDatas = new List<ConnectionData>();
     [SerializeField] Room firstRoom;
     [SerializeField] int numberOfRooms;
+    [SerializeField] MapGenerator mapGenerator;
     List<Room> createdRooms = new List<Room>();
     RoomConnectivity roomConnectionCheck = new RoomConnectivity();
 
@@ -19,9 +22,11 @@ public class LevelManager : MonoBehaviour
     public int NumberOfRooms { get => numberOfRooms; }
     public List<RunSettings> RunSettings { get => runSettings; }
     public List<RunSettings> CurrentRunState { get => currentRunState; set => currentRunState = value; }
+    public List<ConnectionData> CachedConnectionDatas { get => cachedConnectionDatas; set => cachedConnectionDatas = value; }
 
     private void Start()
     {
+        mapGenerator = FindObjectOfType<MapGenerator>();
         InstantiateRooms(firstIsleRooms);
     }
 
@@ -211,6 +216,7 @@ public class LevelManager : MonoBehaviour
         givenConnectionData.PointB.Room.AssaignPosition(GetPositionFromExits(givenConnectionData.PointA.Exit, givenConnectionData.PointB.Exit));
         currentRunRooms.Add(givenConnectionData.PointB.Room);
         UpdateRunSettingsState(givenConnectionData.PointB.Room);
+        cachedConnectionDatas.Add(givenConnectionData);
         Debug.Log("connected rooms " + givenConnectionData.PointA.Room + " " + givenConnectionData.PointB.Room);
     }
 
@@ -282,6 +288,15 @@ public class LevelManager : MonoBehaviour
             item.transform.position = item.MyPos.vectorMult(v100);
             item.gameObject.SetActive(true);
         }
+        foreach (var item in currentRunRooms)
+        {
+            mapGenerator.AddTile(item);
+        }
+        foreach (var item in CachedConnectionDatas)
+        {
+            mapGenerator.AddConnection(item);
+        }
+
         //currentRunRooms[0].gameObject.SetActive(true);
     }
 }
