@@ -129,6 +129,7 @@ public class Actor : MonoBehaviour, IDamagable
             Debug.Log("yes " + counter);
             counter += intervalstime;
         }
+        //end
         RemoveStatusEffect(givenStatus);
     }
     #endregion

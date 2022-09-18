@@ -53,6 +53,24 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Mobility"",
+                    ""type"": ""Button"",
+                    ""id"": ""00a1d698-88e8-497f-b31b-6a83575f336a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ultimate"",
+                    ""type"": ""Button"",
+                    ""id"": ""e3cd3c51-04f8-4f1b-a818-29963b658d55"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -198,6 +216,39 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""51da01b3-605f-48df-bb28-fe916eaa0cce"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mobility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d0bfa52-1c10-4b49-bcb9-52a5b576e5d9"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Mobility"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1f96c05a-ae25-4151-b342-40556cd884a8"",
+                    ""path"": ""<Gamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ultimate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -257,6 +308,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_BaseMovement_move = m_BaseMovement.FindAction("move", throwIfNotFound: true);
         m_BaseMovement_jump = m_BaseMovement.FindAction("jump", throwIfNotFound: true);
         m_BaseMovement_Attack = m_BaseMovement.FindAction("Attack", throwIfNotFound: true);
+        m_BaseMovement_Mobility = m_BaseMovement.FindAction("Mobility", throwIfNotFound: true);
+        m_BaseMovement_Ultimate = m_BaseMovement.FindAction("Ultimate", throwIfNotFound: true);
         // General
         m_General = asset.FindActionMap("General", throwIfNotFound: true);
         m_General_Reset = m_General.FindAction("Reset", throwIfNotFound: true);
@@ -323,6 +376,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_BaseMovement_move;
     private readonly InputAction m_BaseMovement_jump;
     private readonly InputAction m_BaseMovement_Attack;
+    private readonly InputAction m_BaseMovement_Mobility;
+    private readonly InputAction m_BaseMovement_Ultimate;
     public struct BaseMovementActions
     {
         private @PlayerInput m_Wrapper;
@@ -330,6 +385,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @move => m_Wrapper.m_BaseMovement_move;
         public InputAction @jump => m_Wrapper.m_BaseMovement_jump;
         public InputAction @Attack => m_Wrapper.m_BaseMovement_Attack;
+        public InputAction @Mobility => m_Wrapper.m_BaseMovement_Mobility;
+        public InputAction @Ultimate => m_Wrapper.m_BaseMovement_Ultimate;
         public InputActionMap Get() { return m_Wrapper.m_BaseMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -348,6 +405,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Attack.started -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnAttack;
                 @Attack.performed -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnAttack;
                 @Attack.canceled -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnAttack;
+                @Mobility.started -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnMobility;
+                @Mobility.performed -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnMobility;
+                @Mobility.canceled -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnMobility;
+                @Ultimate.started -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnUltimate;
+                @Ultimate.performed -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnUltimate;
+                @Ultimate.canceled -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnUltimate;
             }
             m_Wrapper.m_BaseMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -361,6 +424,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Attack.started += instance.OnAttack;
                 @Attack.performed += instance.OnAttack;
                 @Attack.canceled += instance.OnAttack;
+                @Mobility.started += instance.OnMobility;
+                @Mobility.performed += instance.OnMobility;
+                @Mobility.canceled += instance.OnMobility;
+                @Ultimate.started += instance.OnUltimate;
+                @Ultimate.performed += instance.OnUltimate;
+                @Ultimate.canceled += instance.OnUltimate;
             }
         }
     }
@@ -411,6 +480,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
+        void OnMobility(InputAction.CallbackContext context);
+        void OnUltimate(InputAction.CallbackContext context);
     }
     public interface IGeneralActions
     {

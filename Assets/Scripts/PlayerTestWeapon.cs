@@ -6,14 +6,23 @@ using UnityEngine.Events;
 
 public class PlayerTestWeapon : Weapon
 {
-    public int damage;
     public UnityEvent onEnemyHit;
-    public Ability m_ability;
+
     protected override void Attack()
     {
+        currentAbility = m_ability;
         m_animator.Play("Attack");
-        
+
     }
+
+    protected override void Ultimate()
+    {
+
+        currentAbility = m_UltimateAbility;
+        m_animator.Play("Attack");
+
+    }
+
     protected override void OnWeaponHit(Collider2D collision)
     {
       
@@ -32,7 +41,7 @@ public class PlayerTestWeapon : Weapon
             if (!ReferenceEquals(currentEnemyHit, null))
             {
                 // currentEnemyHit.TakeDamage(damage);
-                currentEnemyHit.GetHit(m_ability);
+                currentEnemyHit.GetHit(currentAbility);
                 onEnemyHit.Invoke();
             }
         }

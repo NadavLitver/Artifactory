@@ -39,6 +39,7 @@ public class GameManager : MonoBehaviour
     {
         inputManager.inputs.General.Quit.canceled += QuitGame;
         inputManager.inputs.General.Reset.canceled += ResetScene;
+
     }
     private void ResetScene(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
