@@ -7,7 +7,6 @@ public enum RoomType
     MEDIUM,
     HARD,
     BOSS
-
     //can add more types in the future - merchant, rest etc...
 }
 
@@ -18,16 +17,21 @@ public class Room : MonoBehaviour
     [SerializeField] bool occupied;
     [SerializeField] RoomType roomType;
     [SerializeField] RoomSize size;
+    [SerializeField] int sizeX;
+    [SerializeField] int sizeY;
     [SerializeField] CustomPos myPos;
+    [SerializeField] List<CustomPos> occupiedPositions = new List<CustomPos>();
     public List<ExitInteractable> Exits { get => exits; }
     public bool IsStartingRoom { get => isStartingRoom; }
     public bool Occupied { get => occupied; set => occupied = value; }
     public RoomType RoomType { get => roomType; set => roomType = value; }
     public RoomSize Size { get => size; set => size = value; }
     public CustomPos MyPos { get => myPos; set => myPos = value; }
+    public List<CustomPos> OccupiedPositions { get => occupiedPositions; set => occupiedPositions = value; }
 
     void Awake()
     {
+        size = new RoomSize(sizeX, sizeY);
         ExitInteractable[] exitsFound = GetComponentsInChildren<ExitInteractable>();
         foreach (ExitInteractable exitInteractable in exitsFound)
         {
@@ -68,12 +72,29 @@ public class Room : MonoBehaviour
     public void AssaignPosition(CustomPos givenPos)
     {
         myPos = givenPos;
+
+        for (int i = 0; i < size.X; i++)
+        {
+            for (int j = 0; j < size.Y; j++)
+            {
+                occupiedPositions.Add(new CustomPos() { X = myPos.X + i, Y = myPos.Y + j });
+            }
+        }
     }
 }
 [System.Serializable]
 public class RoomSize
 {
+    // all rooms are 1/1 by default 
+    // x marks the amount of rows
+    // y marks the amount of collumns
     public int X;
     public int Y;
+
+    public RoomSize(int givenX = 1, int givenY = 1)
+    {
+        X = givenX;
+        Y = givenY;
+    }
 }
 

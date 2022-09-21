@@ -1794,6 +1794,80 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 957481408}
   m_CullTransparentMesh: 1
+--- !u!1 &974829088
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 974829089}
+  - component: {fileID: 974829090}
+  m_Layer: 0
+  m_Name: LevelManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &974829089
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974829088}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4180575170813383680}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &974829090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 974829088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d92364c8c09b724684b18c20929649f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firstIsleRooms:
+  - {fileID: 2375980297605324347, guid: ed43ffceb23f77c4eb86bc68b83cdcff, type: 3}
+  - {fileID: 2375980297605324347, guid: e0a980ab6659a6d46a0a6e0c78ae1fac, type: 3}
+  - {fileID: 2375980297605324347, guid: 12b90ae5a98ec174792097ef94e8253c, type: 3}
+  - {fileID: 2375980297605324347, guid: 13a928090ba48484bbd93b62daf1a9a4, type: 3}
+  - {fileID: 2375980297605324347, guid: c6740b1a9c256044a82fee13aefd11b7, type: 3}
+  - {fileID: 2375980297605324347, guid: 9c25ed6b8657a924e961e7b541a01c62, type: 3}
+  - {fileID: 2375980297605324347, guid: ef0c6bc7adc1ee54fb80001832a4a6dc, type: 3}
+  - {fileID: 2375980297605324347, guid: 3802916f03d76134db6d25bad163f070, type: 3}
+  - {fileID: 2375980297605324347, guid: a9603041b231bfe4e8d4d0e843fd15d7, type: 3}
+  - {fileID: 2375980297605324347, guid: 979b9d91b36ef4b4895129ddfb7ee45f, type: 3}
+  - {fileID: 2375980297605324347, guid: 3901cb45411b17f4e91010f492e1df68, type: 3}
+  - {fileID: 2375980297605324347, guid: 0164b04bf33a0cc4b9a485e046b90331, type: 3}
+  - {fileID: 2375980297605324347, guid: 631488b059e1e944492247d257af2a8d, type: 3}
+  secondIsleRooms: []
+  thirdIsleRooms: []
+  currentRunRooms: []
+  runSettings:
+  - RoomType: 0
+    Amount: 10
+  - RoomType: 1
+    Amount: 10
+  - RoomType: 2
+    Amount: 10
+  - RoomType: 3
+    Amount: 1
+  currentRunState: []
+  firstRoom: {fileID: 0}
+  numberOfRooms: 10
+  mapGenerator: {fileID: 0}
 --- !u!1 &1104336095
 GameObject:
   m_ObjectHideFlags: 0
