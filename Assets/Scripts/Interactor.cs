@@ -28,7 +28,7 @@ public class Interactor : MonoBehaviour
 
     IEnumerator UpdateClosestInteractable()
     {
-        while (true)
+        while (gameObject.activeInHierarchy)
         {
             yield return new WaitForSecondsRealtime(delayBetweenUpdates);
             Collider2D[] collidersFound = Physics2D.OverlapCircleAll(transform.position, checkRadius, layerToCheck);
