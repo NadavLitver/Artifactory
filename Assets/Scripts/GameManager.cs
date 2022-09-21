@@ -83,6 +83,7 @@ public class GeneralFunctions
     {
         bool _isInRange = (positionA - positionB).sqrMagnitude < range * range;
         return _isInRange;
+        
     }
 
     public void ResetScene()

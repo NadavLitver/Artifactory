@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 public class Ability : MonoBehaviour
 {
-    [Header("NAME")]
     [SerializeField] string Name;
+    [Header("NAME")]
     [Space(10)]
     [SerializeField] DamageHandler damageHandler = new DamageHandler();
     List<StatusEffect> statusEffects = new List<StatusEffect>();

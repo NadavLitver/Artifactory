@@ -108,7 +108,7 @@ public class Actor : MonoBehaviour, IDamagable
             onActorDeath();
         }
         ClampHP();
-
+        Debug.Log(gameObject.name + "has been hit and has " + currentHP + " HP ");
         //onTakeDamage?.Invoke();
     }
     #region statusEffectRoutinesAndFunctions
