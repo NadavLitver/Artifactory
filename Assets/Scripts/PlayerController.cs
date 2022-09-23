@@ -1,6 +1,5 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -14,6 +13,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector2 StartingScale;
     [SerializeField] Vector2 BottomRightPoint;
     [SerializeField] Vector2 BottomLeftPoint;
+    [SerializeField] private Vector2 topMidPoint;
     [SerializeField] float horInput;
     [SerializeField] float startingGravityScale;
     [SerializeField] bool isGrounded;
@@ -24,8 +24,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool CoyoteAvailable;
     [SerializeField] float acceleration;
     [SerializeField] Animator m_animator;
+    [SerializeField] private Vector2 externalForces;
 
-    [Header("Editable Properties"),Space(10)]
+    [Header("Editable Properties"), Space(10)]
+    [SerializeField, Range(0, 100)] float maxGravity;
+    [SerializeField, Range(0, 100)] float GravityScale;
     [Range(0, 100), SerializeField, Tooltip("Increasing Acceleration Speed will Decrease the time the player takes to reach max speed")]
     float accelerationSpeed;
     [SerializeField, Tooltip("What is Ground?")] LayerMask GroundLayerMask;
@@ -36,6 +39,7 @@ public class PlayerController : MonoBehaviour
     [Range(0, 1), SerializeField, Tooltip("Raycast range to check ground probably no need to change anything")] float groundCheckDistance;
     [Range(0, 1), SerializeField, Tooltip("How much time does the gravity change apply after hitting apex in jump")] float apexAirTimeGravityChange;
     [Range(0, 100), SerializeField, Tooltip("What is the new gravity applied at apex")] float apexGravityScale;
+    [Range(0, 1), SerializeField] float ceilingCheckDistance;
 
 
     public float GetHorInput { get => horInput; set => horInput = value; }
@@ -45,27 +49,29 @@ public class PlayerController : MonoBehaviour
     public bool GetIsGrounded { get => isGrounded; set => isGrounded = value; }
     public bool GetIsFalling { get => isFalling; set => isFalling = value; }
     public bool GetIsJumping { get => Jumping; set => Jumping = value; }
+    public Vector2 ExternalForces { get => externalForces; set => externalForces = value; }
 
     private void Awake()
     {
         m_rb = GetComponent<Rigidbody2D>();
-      //  m_livebody = GetComponent<LiveBody>();
         m_collider = GetComponent<Collider2D>();
         m_animator = GetComponentInChildren<Animator>();
         StartingScale = transform.localScale;
+        startingGravityScale = GravityScale;
+        isLookingRight = true;
 
-        startingGravityScale = m_rb.gravityScale;
     }
     void OnEnable()
     {
         canMove = true;
-        m_rb.gravityScale = startingGravityScale;
+        velocity = Vector2.zero;
+
     }
     public void GetColliderSizeInformation()
     {
         BottomRightPoint.x = m_collider.bounds.max.x - 0.2f;
         BottomRightPoint.y = m_collider.bounds.min.y + 0.1f;
-
+        topMidPoint = (Vector2)m_collider.bounds.center + Vector2.up * (m_collider.bounds.size.y * 0.5f);
         BottomLeftPoint.y = m_collider.bounds.min.y + 0.1f;
         BottomLeftPoint.x = m_collider.bounds.min.x + 0.2f;
 
@@ -75,50 +81,66 @@ public class PlayerController : MonoBehaviour
         if ((isGrounded || CoyoteAvailable) && GameManager.Instance.inputManager.JumpDown() && canMove)
         {
             Jumping = true;
-            m_rb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            velocity.y = jumpForce;
             isGrounded = false;
-            //m_livebody.animator.SetBool("Falling", false);
-            //m_livebody.animator.SetBool("Jumping", true);
+
             StartCoroutine(JumpApexWait());
         }
         else if (isFalling)
         {
             Jumping = false;
-            //m_livebody.animator.SetBool("Jumping", false);
         }
+
     }
     IEnumerator JumpApexWait()
     {
         yield return new WaitUntil(() => isFalling == true);
-        m_rb.gravityScale = apexGravityScale;
+        GravityScale = apexGravityScale;
         yield return new WaitForSeconds(apexAirTimeGravityChange);
-        m_rb.gravityScale = startingGravityScale;
+        GravityScale = startingGravityScale;
 
     }
 
-    // Update is called once per frame
     void Update()
     {
         SetVelocity();
         GetColliderSizeInformation();
         GetCoyoteAndSetGrounded();
         JumpPressed();
+        Ceiling();
         SetAnimatorParameters();
 
+    }
 
+    private void Ceiling()
+    {
+        if (CheckIsCeiling())
+        {
+            if (velocity.y > 0)
+            {
+                velocity.y = 0;
+            }
+            Debug.Log("Ceiling");
+        }
     }
 
     private void GetCoyoteAndSetGrounded()
     {
         bool wasGrounded = isGrounded;
         isGrounded = CheckIsGround();
-      
-        if (wasGrounded && !isGrounded && !Jumping)
+
+        if (!isGrounded)
         {
-            StartCoroutine(SetCoyoteForTime());
+            velocity.y = Mathf.MoveTowards(velocity.y, -maxGravity, GravityScale * Time.deltaTime);
+            if (wasGrounded && !Jumping)
+            {
+
+                StartCoroutine(SetCoyoteForTime());
+            }
         }
-        else if (isGrounded)
+        else
         {
+            velocity.y = Mathf.MoveTowards(velocity.y, 0, GravityScale * Time.deltaTime);
             Jumping = false;
         }
     }
@@ -132,55 +154,43 @@ public class PlayerController : MonoBehaviour
     {
 
         m_animator.SetBool("Grounded", isGrounded);
-        m_animator.SetBool("Running", ((m_rb.velocity.x != 0 || horInput != 0)&& isGrounded));
-        isFalling = (!isGrounded && m_rb.velocity.y < -1f);
-        //m_livebody.animator.SetBool("Falling", isFalling);
+        m_animator.SetBool("Running", ((m_rb.velocity.x != 0 || horInput != 0) && isGrounded));
+        isFalling = (!isGrounded && velocity.y < -1f);
     }
     private void SetVelocity()
     {
         horInput = GameManager.Instance.inputManager.GetMoveVector().x;
         if (canMove)
         {
-            //check flip
+
             if (horInput > 0)
             {
-                isLookingRight = true;
-                Flip();
+                if (!isLookingRight)
+                {
+                    isLookingRight = true;
+                    Flip();
+                    velocity.x *= -1;
+                }
+
             }
             else if (horInput < 0)
             {
-                isLookingRight = false;
-                Flip();
+                if (isLookingRight)
+                {
+                    isLookingRight = false;
+                    Flip();
+                    velocity.x *= -1;
+
+                }
             }
 
             acceleration = Mathf.MoveTowards(acceleration, horInput == 0 ? 0 : 1, accelerationSpeed * Time.deltaTime);
-            velocity = (horInput * speed * acceleration) * Vector2.right;
+            velocity.x = Mathf.MoveTowards(velocity.x, horInput == 0 ? 0 : horInput * speed * acceleration, accelerationSpeed * Time.deltaTime);
+            externalForces = Vector2.MoveTowards(externalForces, Vector2.zero, accelerationSpeed * Time.deltaTime);
 
         }
     }
-    public void Flip()
-    {
-
-        transform.localScale = new Vector3(isLookingRight ? StartingScale.x : -StartingScale.x, StartingScale.y, 1);
-
-    }
-    public void StopPlayer(float time)
-    {
-        StartCoroutine(StopPlayerRoutine(time));
-    }
-    IEnumerator StopPlayerRoutine(float time)
-    {
-        if (canMove == false)
-        {
-            yield break;
-        }
-        ResetVelocity();
-        canMove = false;
-        ZeroGravity();
-        yield return new WaitForSeconds(time);
-        ResetGravity();
-        canMove = true;
-    }
+    public void Flip() => transform.localScale = new Vector3(isLookingRight ? StartingScale.x : -StartingScale.x, StartingScale.y, 1);
     public void ResetVelocity()
     {
         velocity = Vector3.zero;
@@ -188,11 +198,24 @@ public class PlayerController : MonoBehaviour
     }
     public void ZeroGravity()
     {
-        m_rb.gravityScale = 0;
+        GravityScale = 0;
     }
     public void ResetGravity()
     {
-        m_rb.gravityScale = startingGravityScale;
+        GravityScale = startingGravityScale;
+    }
+    public bool CheckIsCeiling()
+    {
+        RaycastHit2D ceilingCheckRay = Physics2D.Raycast(BottomRightPoint, Vector2.up, ceilingCheckDistance, GroundLayerMask);
+        if (ceilingCheckRay)
+        {
+            if (ceilingCheckRay.collider.CompareTag("Block"))
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
     public bool CheckIsGround()
     {
@@ -204,15 +227,23 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         if (canMove)
-            m_rb.velocity = new Vector2(velocity.x, m_rb.velocity.y);
-       
+            m_rb.velocity = velocity + externalForces;
     }
-
+   
+    
+    public void RecieveForce(Vector2 force)
+    {
+        ExternalForces += force;
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = isGrounded ? Color.green : Color.red;
         Gizmos.DrawRay(BottomRightPoint, Vector2.down * groundCheckDistance);
+
         Gizmos.DrawRay(BottomLeftPoint, Vector2.down * groundCheckDistance);
+        Gizmos.color = CheckIsCeiling() ? Color.green : Color.red;
+        Gizmos.DrawRay(topMidPoint, Vector2.up * groundCheckDistance);
+
 
     }
 }

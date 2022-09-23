@@ -20,18 +20,11 @@ public class JumpPlatform : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            StartCoroutine(IEshootPlayer());
+            playerControllerRef.ResetVelocity();
+            playerControllerRef.RecieveForce(dir * force);
         }
     }
-    IEnumerator IEshootPlayer()
-    {
-        playerControllerRef.canMove = false;
-        playerControllerRef.ResetVelocity();
-        playerControllerRef.GetRb.AddForce(dir * force, ForceMode2D.Impulse);
-        yield return new WaitForSeconds(0.5f);
-        playerControllerRef.canMove = true;
-
-    }
+  
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawRay(transform.position, GizmoDir * force);
