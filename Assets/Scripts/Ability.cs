@@ -5,7 +5,8 @@ public class Ability : MonoBehaviour
 {
     [SerializeField] string Name;
     [Header("NAME")]
-    [Space(10)]
+    [Space(10)] 
+    //[SerializeField] 
     [SerializeField] DamageHandler damageHandler = new DamageHandler();
     List<StatusEffect> statusEffects = new List<StatusEffect>();
     [SerializeField] List<StatusEffectEnum> statusEffectsEnum = new List<StatusEffectEnum>();
@@ -26,6 +27,7 @@ public class Ability : MonoBehaviour
             }
         }
     }
+
     public List<StatusEffect> StatusEffects { get => statusEffects; set => statusEffects = value; }
     public DamageHandler DamageHandler { get => damageHandler; set => damageHandler = value; }
 }

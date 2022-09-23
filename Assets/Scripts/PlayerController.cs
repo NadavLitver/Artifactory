@@ -205,6 +205,7 @@ public class PlayerController : MonoBehaviour
     {
         if (canMove)
             m_rb.velocity = new Vector2(velocity.x, m_rb.velocity.y);
+       
     }
 
     private void OnDrawGizmos()

@@ -91,12 +91,13 @@ public class Actor : MonoBehaviour, IDamagable
         {
             RecieveStatusEffects(SE);
         }
+       
         TakeDamage(givenAbility.DamageHandler);
         //RecieveStatusEffects(givenAbility);
 
         //
     }
-
+    
     public void TakeDamage(DamageHandler dmgHandler)
     {
         onTakeDamage.Invoke(dmgHandler);
