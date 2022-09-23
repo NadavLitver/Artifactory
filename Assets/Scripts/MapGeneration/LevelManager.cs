@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class LevelManager : MonoBehaviour
@@ -30,6 +29,7 @@ public class LevelManager : MonoBehaviour
         InstantiateRooms(firstIsleRooms);
     }
 
+    [ContextMenu("Assemble Level")]
     public void AssembleLevel()
     {
         OrderRooms(createdRooms);
@@ -58,6 +58,7 @@ public class LevelManager : MonoBehaviour
         currentRunRooms.Add(firstRoom);
         firstRoom.Occupied = true;
         UpdateRunSettingsState(firstRoom);
+        FirstRoom.AssaignPosition(new CustomPos() { X = 0, Y = 0 });
 
         int count = 0;
         while (currentRunRooms.Count < numberOfRooms)
@@ -154,7 +155,8 @@ public class LevelManager : MonoBehaviour
                 }
                 if (aExit.CanConnectToExit(bExit))
                 {
-                    if (CheckPositionAvailability(GetPositionFromExits(aExit, bExit)))
+                    CustomPos roomToConnectPos = GetPositionFromExits(aExit, bExit);
+                    if (CheckPositionAvailability(roomToConnectPos) && CheckPositionAvailability(GetOccupiedPosFromPos(roomToConnectPos, roomToConnect.Size)))
                     {
                         ConnectionPoint pointA = new ConnectionPoint() { Room = origin, Exit = aExit };
                         ConnectionPoint pointB = new ConnectionPoint() { Room = roomToConnect, Exit = bExit };
@@ -204,10 +206,28 @@ public class LevelManager : MonoBehaviour
             {
                 return false;
             }
+            foreach (var occupiedPosBySize in item.OccupiedPositions)
+            {
+                if (occupiedPosBySize.EquatePos(givenPos))
+                {
+                    return false;
+                }
+            }
         }
         return true;
     }
 
+    public bool CheckPositionAvailability(List<CustomPos> givenPositions)
+    {
+        foreach (var item in givenPositions)
+        {
+            if (!CheckPositionAvailability(item))
+            {
+                return false;
+            }
+        }
+        return true;
+    }
     public void ConnectRooms(ConnectionData givenConnectionData)
     {
         givenConnectionData.PointA.Exit.ConnectToExit(givenConnectionData.PointB.Exit);
@@ -268,6 +288,20 @@ public class LevelManager : MonoBehaviour
         return newRoomPos;
     }
 
+    public List<CustomPos> GetOccupiedPosFromPos(CustomPos givenPos, RoomSize givenRoomSize)
+    {
+        List<CustomPos> occupiedPositions = new List<CustomPos>();
+
+        for (int i = 0; i < givenRoomSize.X; i++)
+        {
+            for (int j = 0; j < givenRoomSize.Y; j++)
+            {
+                occupiedPositions.Add(new CustomPos() { X = givenPos.X + i, Y = givenPos.Y + j });
+            }
+        }
+        return occupiedPositions;
+    }
+
     public void InstantiateRooms(List<Room> givenRoomList)
     {
         Vector3 v10 = new Vector3(10, 10, 0);
@@ -288,14 +322,14 @@ public class LevelManager : MonoBehaviour
             item.transform.position = item.MyPos.vectorMult(v100);
             item.gameObject.SetActive(true);
         }
-        foreach (var item in currentRunRooms)
+        /*foreach (var item in currentRunRooms)
         {
             mapGenerator.AddTile(item);
         }
         foreach (var item in CachedConnectionDatas)
         {
             mapGenerator.AddConnection(item);
-        }
+        }*/
 
         //currentRunRooms[0].gameObject.SetActive(true);
     }

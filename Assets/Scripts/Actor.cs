@@ -55,6 +55,7 @@ public class Actor : MonoBehaviour, IDamagable
             }
 
         }
+
         ActorStatusEffects.Add(givenStatusEffect);
         givenStatusEffect.cacheHost(this);
 
@@ -87,9 +88,12 @@ public class Actor : MonoBehaviour, IDamagable
     }
     public void GetHit(Ability givenAbility)
     {
-        foreach (StatusEffect SE in givenAbility.StatusEffects)
+        foreach (var SE in givenAbility.StatusEffects)
         {
-            RecieveStatusEffects(SE);
+            if (givenAbility.RollForStatusActivation(SE))
+            {
+                RecieveStatusEffects(SE.myStatus);
+            }
         }
        
         TakeDamage(givenAbility.DamageHandler);
@@ -104,7 +108,7 @@ public class Actor : MonoBehaviour, IDamagable
         float finalDamage = dmgHandler.calculateFinalDamage();
         currentHP -= finalDamage;
         TakeDamageEvent?.Invoke();
-        if(currentHP < 0)
+        if (currentHP < 0)
         {
             onActorDeath();
         }
