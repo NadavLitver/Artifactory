@@ -17,12 +17,15 @@ public class Actor : MonoBehaviour, IDamagable
     //  public UnityEvent onTakeDamage, onGetHealth, OnDeath;
     [SerializeReference] private List<StatusEffect> m_StatusEffects;
 
+    public Weapon TempActiveWeapon;
+
     public void Awake()
     {
         currentHP = maxHP;
         onTakeDamage = new UnityEvent<DamageHandler>();
         m_StatusEffects = new List<StatusEffect>();
         dotRoutines = new List<DOTStatusEffectData>();
+        TempActiveWeapon = GetComponentInChildren<Weapon>();
     }
     private void ClampHP() => currentHP = Mathf.Clamp(currentHP, 0, maxHP);
     //public virtual void TakeDamage(float damage)
@@ -55,7 +58,6 @@ public class Actor : MonoBehaviour, IDamagable
             }
 
         }
-
         ActorStatusEffects.Add(givenStatusEffect);
         givenStatusEffect.cacheHost(this);
 
