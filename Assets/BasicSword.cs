@@ -4,7 +4,7 @@ using UnityEngine.Events;
 
 public class BasicSword : Weapon
 {
-    public UnityEvent onEnemyHit;
+    //public UnityEvent onEnemyHit;
     private int CurrentAttack;
     private float LastAttackTime;
     public Ability ComboFinalAttack;
@@ -126,7 +126,6 @@ public class BasicSword : Weapon
         CurrentAttack = 1;
         Debug.Log(CurrentAttack);
         ExecuteFirstAttack();
-
     }
     private void ResetCombo()
     {
@@ -162,7 +161,7 @@ public class BasicSword : Weapon
             {
                 // currentEnemyHit.TakeDamage(damage);
                 currentEnemyHit.GetHit(currentAbility);
-                onEnemyHit.Invoke();
+               // onEnemyHit.Invoke();
             }
         }
 

@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
 {
     protected Animator m_animator;
     public UnityEvent onHit;
+    public UnityEvent<Actor, Ability> OnActorHit;
     public Ability m_ability;
     public Ability m_UltimateAbility;
     protected Ability currentAbility;
@@ -36,23 +37,22 @@ public class Weapon : MonoBehaviour
     {
         OnWeaponHit(collision);
         onHit?.Invoke();
+        if (collision.CompareTag("Enemy"))
+        {
+            Actor actorHit = collision.gameObject.GetComponent<Actor>();
+            OnActorHit?.Invoke(actorHit, currentAbility);
+        }
     }
     private void OnEnable()
     {
         GameManager.Instance.inputManager.onAttackDown.AddListener(Attack);
         GameManager.Instance.inputManager.onMobilityDown.AddListener(Mobility);
         GameManager.Instance.inputManager.onUltimateDown.AddListener(Ultimate);
-
-
-
     }
     private void OnDisable()
     {
         GameManager.Instance.inputManager.onAttackDown.RemoveListener(Attack);
         GameManager.Instance.inputManager.onMobilityDown.RemoveListener(Mobility);
         GameManager.Instance.inputManager.onUltimateDown.RemoveListener(Ultimate);
-
-
-
     }
 }

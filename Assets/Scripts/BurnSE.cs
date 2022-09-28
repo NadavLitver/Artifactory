@@ -16,7 +16,6 @@ public class BurnSE : StatusEffect
         time = GameManager.Instance.DamageManager.burnDuration;
         intervals =  GameManager.Instance.DamageManager.BurnIntervals;
         counter = 0;
-
     }
 
     public override void ActivateEffect()
@@ -26,7 +25,6 @@ public class BurnSE : StatusEffect
 
     public override void Reset()
     {
-
         counter = 0;
     }
 
@@ -38,8 +36,6 @@ public class BurnSE : StatusEffect
     public override void Unsubscribe()
     {
         host.onTakeDamage.RemoveListener(TakeDamageWhileBurning);
-        
-
     }
 
     void TakeDamageWhileBurning(DamageHandler dmgHandler)//only happens when already on fire

@@ -5,6 +5,11 @@ using UnityEngine;
 public class PlayerActor : Actor
 {
     public Animator m_animator;
+
+    private void Start()
+    {
+        RecieveStatusEffects(new TestBuff());
+    }
     public override void onActorDeath()
     {
         base.onActorDeath();
