@@ -10,7 +10,7 @@ public class PlayerTestWeapon : Weapon
 
     protected override void Attack()
     {
-        currentAbility = m_ability;
+        
         m_animator.Play("Attack");
 
     }
@@ -18,7 +18,7 @@ public class PlayerTestWeapon : Weapon
     protected override void Ultimate()
     {
 
-        currentAbility = m_UltimateAbility;
+      
         m_animator.Play("Attack");
 
     }
@@ -41,7 +41,7 @@ public class PlayerTestWeapon : Weapon
             if (!ReferenceEquals(currentEnemyHit, null))
             {
                 // currentEnemyHit.TakeDamage(damage);
-                currentEnemyHit.GetHit(currentAbility);
+               // currentEnemyHit.GetHit(currentAbility);
                 onEnemyHit.Invoke();
             }
         }

@@ -6,9 +6,7 @@ public class Ability : MonoBehaviour
     [SerializeField] string Name;
     [Space(10)]
     [SerializeField] DamageHandler damageHandler = new DamageHandler();
-
     [SerializeField] List<StatusEffectActivatonData> statusEffectsData = new List<StatusEffectActivatonData>();
-
     [SerializeField, Range(1, 100)] int statusActivationBaseChance;
     [SerializeField] bool useBaseChanceForStatuses;
     private void Awake()
@@ -46,6 +44,7 @@ public class Ability : MonoBehaviour
     }
     public List<StatusEffectActivatonData> StatusEffects { get => statusEffectsData; set => statusEffectsData = value; }
     public DamageHandler DamageHandler { get => damageHandler; set => damageHandler = value; }
+    public string AbilityName { get => Name; set => Name = value; }
 }
 
 
