@@ -160,7 +160,6 @@ public class BasicSword : Weapon
             }
             if (!ReferenceEquals(currentEnemyHit, null))
             {
-                // currentEnemyHit.TakeDamage(damage);
                 currentEnemyHit.GetHit(currentAbility);
                 onEnemyHit.Invoke();
             }
