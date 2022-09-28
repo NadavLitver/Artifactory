@@ -21,7 +21,7 @@ public class MovingPlatform : MonoBehaviour
         {
             playerOriginalParent = collision.transform.parent;
             collision.transform.SetParent(transform, true);
-            currentDestenation = destenation.position;
+            currentDestenation = destenation.localPosition;
         }
     }
 
@@ -36,9 +36,9 @@ public class MovingPlatform : MonoBehaviour
 
     public void MoveTowardsDestenation()
     {
-        if (!GameManager.Instance.generalFunctions.IsInRange(currentDestenation, transform.position, 0.1f))
+        if (!GameManager.Instance.generalFunctions.IsInRange(currentDestenation, transform.localPosition, 0.1f))
         {
-            Vector3 direction = (currentDestenation - transform.position).normalized;
+            Vector3 direction = (currentDestenation - transform.localPosition).normalized;
             transform.position += direction * moveSpeed * Time.deltaTime;
         }
     }
