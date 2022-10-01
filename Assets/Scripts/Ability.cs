@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
-public class Ability : MonoBehaviour
+
+[CreateAssetMenu(fileName = "New Ability", menuName = "Ability")]
+public class Ability : ScriptableObject
 {
     [Header("NAME")]
     [SerializeField] string Name;
@@ -9,7 +11,7 @@ public class Ability : MonoBehaviour
     [SerializeField] List<StatusEffectActivatonData> statusEffectsData = new List<StatusEffectActivatonData>();
     [SerializeField, Range(1, 100)] int statusActivationBaseChance;
     [SerializeField] bool useBaseChanceForStatuses;
-    private void Awake()
+    public void SetStatuses()
     {
         foreach (StatusEffectActivatonData item in statusEffectsData)
         {

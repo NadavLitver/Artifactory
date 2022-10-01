@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -17,54 +16,63 @@ public class AbilityCombo : MonoBehaviour
     bool extraInputCahced;
     [SerializeField, Range(0.1f, 1)] float clickGraceTime;
     float lastAttackTime;
-
+    bool IsInAnim;
     public UnityEvent OnAttackPerformed;
 
 
     private void Start()
     {
+        IsInAnim = false;
+        foreach (var item in abilities)
+        {
+            item.Ability.SetStatuses();
+        }
         ResetCombo();
     }
 
     public void PlayNextAbility()
     {
+        if (IsInAnim)
+        {
+            return;
+        }
+        CheckAbiltyCoolDown();
         if (canAttack)
         {
-            CheckAbiltyCoolDown();
-            routine = StartCoroutine(ExecuteAbility());
+            PlayAttack();
         }
     }
 
     public void CheckAbiltyCoolDown()
     {
-        if (Time.time - lastAttackTime > currentAbilityCombo.AbilityRecovery + clickGraceTime)
+        if (Time.time - lastAttackTime > currentAbilityCombo.AbilityRecovery + clickGraceTime)//x+y passed = reset
         {
             //if the player pressed after the cooldown + the allowed delay passed since the last attack the combo resets
             ResetCombo();
         }
+        else if (Time.time >= lastAttackTime + currentAbilityCombo.AbilityRecovery && Time.time <= lastAttackTime + currentAbilityCombo.AbilityRecovery + clickGraceTime)// after cooldown but before grace end
+        {
+            SetNextAbility();
+        }
     }
-    
-    IEnumerator ExecuteAbility()
+
+    public void PlayAttack()
     {
         OnAttackPerformed?.Invoke();
         canAttack = false;
         lastAttackTime = Time.time;
         Debug.Log(GetAbilityIndex());
-        yield return new WaitForSecondsRealtime(currentAbilityCombo.AbilityRecovery);
-        SetNextAbility();
-        canAttack = true;
     }
 
-
-    private void Attack()
+    public void ToggleIsinAnim()
     {
-        canAttack = false;
-        lastAttackTime = Time.time;
+        IsInAnim = !IsInAnim;
     }
-
 
     private void SetNextAbility()
     {
+        canAttack = true;
+
         if (currentAbilityCombo == abilities[abilities.Count - 1])
         {
             ResetCombo();

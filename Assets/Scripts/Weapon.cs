@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 [RequireComponent(typeof(Collider2D))]
@@ -36,33 +34,18 @@ public class Weapon : MonoBehaviour
     }
     protected virtual void OnWeaponHit(Collider2D collision)
     {
-        if (collision.CompareTag("Enemy"))
+        Actor currentActorHit = collision.GetComponent<Actor>();
+        if (!ReferenceEquals(currentActorHit, null))
         {
-            Actor currentEnemyHit = collision.GetComponent<Actor>();
-            if (ReferenceEquals(currentEnemyHit, null))
-            {
-                currentEnemyHit = collision.GetComponentInChildren<Actor>();
-                if (ReferenceEquals(currentEnemyHit, null))
-                {
-                    currentEnemyHit = collision.GetComponentInParent<Actor>();
-                }
-            }
-            if (!ReferenceEquals(currentEnemyHit, null))
-            {
-                currentEnemyHit.GetHit(AbilityCombo.CurrentAbility);
-                // onEnemyHit.Invoke();
-            }
+            currentActorHit.GetHit(abilityCombo.CurrentAbility);
+            OnActorHit?.Invoke(currentActorHit, AbilityCombo.CurrentAbility);
+
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         OnWeaponHit(collision);
         onHit?.Invoke();
-        if (collision.CompareTag("Enemy"))
-        {
-            Actor actorHit = collision.gameObject.GetComponent<Actor>();
-            OnActorHit?.Invoke(actorHit, AbilityCombo.CurrentAbility);
-        }
     }
 
     public virtual void Initialize()

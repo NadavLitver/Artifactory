@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class BasicSword : Weapon
 {
@@ -33,7 +32,7 @@ public class BasicSword : Weapon
         player.ResetVelocity();
         player.ZeroGravity();
         counter = 0;
-        Vector2 dir = new Vector2(player.transform.localScale.x,0.1f);
+        Vector2 dir = new Vector2(player.transform.localScale.x, 0.1f);
         Vector2 dashVelocity = dashForce * dir;
         while (counter < dashDuration)
         {
@@ -50,7 +49,7 @@ public class BasicSword : Weapon
 
     protected override void Ultimate()
     {
-       
+
         m_animator.Play("Attack");
     }
 
@@ -66,19 +65,11 @@ public class BasicSword : Weapon
     }
     protected override void AttackPerformed()
     {
-        if (AbilityCombo.GetAbilityIndex() == 1)
-        {
-            m_animator.Play(AbilityCombo.CurrentAbilityData.AbilityAnimationName);
-            return;
-        }
-        m_animator.SetTrigger(AbilityCombo.CurrentAbilityData.AbilityAnimationName);
+        /*if (AbilityCombo.GetAbilityIndex() == 1)
+        {*/
+        m_animator.Play("Attack");
+        //return;
+        //   }
+        //  m_animator.SetTrigger(AbilityCombo.CurrentAbilityData.AbilityAnimationName);
     }
-
-    protected override void OnWeaponHit(Collider2D collision)
-    {
-       
-
-    }
-   
-    
 }
