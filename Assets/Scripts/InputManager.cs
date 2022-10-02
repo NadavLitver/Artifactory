@@ -15,6 +15,9 @@ public class InputManager : MonoBehaviour
 
     public UnityEvent onUltimateDown;
 
+    public UnityEvent onJumpDown;
+
+
 
 
 
@@ -25,8 +28,13 @@ public class InputManager : MonoBehaviour
         inputs.BaseMovement.Attack.started += InvokeOnAttackDown;
         inputs.BaseMovement.Mobility.started += InvokeOnMobilityDown;
         inputs.BaseMovement.Ultimate.started += InvokeOnUltimateDown;
+        inputs.BaseMovement.jump.started += InvokeOnJumpDown;
 
+    }
 
+    private void InvokeOnJumpDown(InputAction.CallbackContext obj)
+    {
+        onJumpDown.Invoke();
     }
 
     private void InvokeOnUltimateDown(InputAction.CallbackContext obj)
@@ -43,10 +51,7 @@ public class InputManager : MonoBehaviour
     {
         onAttackDown.Invoke();
     }
-    //public void InvokeonUltimateDown()
-    //{
-    //    onUltimateDown.Invoke();
-    //}
+   
     public Vector2 GetMoveVector()
     {
         return inputs.BaseMovement.move.ReadValue<Vector2>();

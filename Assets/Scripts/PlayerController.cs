@@ -183,8 +183,8 @@ public class PlayerController : MonoBehaviour
 
                 }
             }
-
-            acceleration = Mathf.MoveTowards(acceleration, horInput == 0 ? 0 : 1, accelerationSpeed * Time.deltaTime);
+            float accelGoal = horInput == 0 ? 0 : 1;
+            acceleration = Mathf.MoveTowards(acceleration, accelGoal, accelerationSpeed * Time.deltaTime);
             velocity.x = Mathf.MoveTowards(velocity.x, horInput == 0 ? 0 : horInput * speed * acceleration, accelerationSpeed * Time.deltaTime);
             externalForces = Vector2.MoveTowards(externalForces, Vector2.zero, accelerationSpeed * Time.deltaTime);
 
@@ -193,7 +193,8 @@ public class PlayerController : MonoBehaviour
     public void Flip() => transform.localScale = new Vector3(isLookingRight ? StartingScale.x : -StartingScale.x, StartingScale.y, 1);
     public void ResetVelocity()
     {
-        velocity = Vector3.zero;
+        velocity = Vector2.zero;
+        externalForces = Vector2.zero;
         m_rb.velocity = Vector3.zero;
     }
     public void ZeroGravity()
