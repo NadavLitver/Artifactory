@@ -52,7 +52,6 @@ public class BurnSE : StatusEffect
         }
     }
 
-
     IEnumerator BurnDOT()
     {
         while (counter < time)

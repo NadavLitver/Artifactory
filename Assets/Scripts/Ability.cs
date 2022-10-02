@@ -11,23 +11,6 @@ public class Ability : ScriptableObject
     [SerializeField] List<StatusEffectActivatonData> statusEffectsData = new List<StatusEffectActivatonData>();
     [SerializeField, Range(1, 100)] int statusActivationBaseChance;
     [SerializeField] bool useBaseChanceForStatuses;
-    public void SetStatuses()
-    {
-        foreach (StatusEffectActivatonData item in statusEffectsData)
-        {
-            switch (item.StatusType)
-            {
-                case StatusEffectEnum.burn:
-                    item.myStatus = new BurnSE();
-                    break;
-                case StatusEffectEnum.freeze:
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-
     public bool RollForStatusActivation(StatusEffectActivatonData givenStatus)
     {
         if (useBaseChanceForStatuses)
@@ -55,7 +38,6 @@ public class StatusEffectActivatonData
 {
     [Range(1, 100)] public int chance;
     public StatusEffectEnum StatusType;
-    public StatusEffect myStatus;
     public StatusEffectActivatonData(int givenChance, StatusEffectEnum givenStatus)
     {
         chance = givenChance;

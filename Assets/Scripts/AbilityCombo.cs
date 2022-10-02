@@ -12,8 +12,6 @@ public class AbilityCombo : MonoBehaviour
     public AbilityComboData CurrentAbilityData { get => currentAbilityCombo; set => currentAbilityCombo = value; }
     public Ability CurrentAbility { get => currentAbilityCombo.Ability; }
     public bool CanAttack { get => canAttack; set => canAttack = value; }
-    Coroutine routine;
-    bool extraInputCahced;
     [SerializeField, Range(0.1f, 1)] float clickGraceTime;
     float lastAttackTime;
     bool IsInAnim;
@@ -23,10 +21,6 @@ public class AbilityCombo : MonoBehaviour
     private void Start()
     {
         IsInAnim = false;
-        foreach (var item in abilities)
-        {
-            item.Ability.SetStatuses();
-        }
         ResetCombo();
     }
 

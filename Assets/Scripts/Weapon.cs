@@ -39,7 +39,6 @@ public class Weapon : MonoBehaviour
         {
             currentActorHit.GetHit(abilityCombo.CurrentAbility);
             OnActorHit?.Invoke(currentActorHit, AbilityCombo.CurrentAbility);
-
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)

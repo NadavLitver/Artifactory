@@ -72,4 +72,5 @@ public class BasicSword : Weapon
         //   }
         //  m_animator.SetTrigger(AbilityCombo.CurrentAbilityData.AbilityAnimationName);
     }
+
 }

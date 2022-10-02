@@ -12,8 +12,6 @@ public class Actor : MonoBehaviour, IDamagable
 
     public UnityEvent TakeDamageEvent, DeathEvent;
 
-    List<DOTStatusEffectData> dotRoutines;
-
     //  public UnityEvent onTakeDamage, onGetHealth, OnDeath;
     [SerializeReference] private List<StatusEffect> m_StatusEffects;
 
@@ -24,7 +22,6 @@ public class Actor : MonoBehaviour, IDamagable
         currentHP = maxHP;
         onTakeDamage = new UnityEvent<DamageHandler>();
         m_StatusEffects = new List<StatusEffect>();
-        dotRoutines = new List<DOTStatusEffectData>();
         TempActiveWeapon = GetComponentInChildren<Weapon>();
     }
     private void ClampHP() => currentHP = Mathf.Clamp(currentHP, 0, maxHP);
@@ -34,20 +31,20 @@ public class Actor : MonoBehaviour, IDamagable
         DeathEvent?.Invoke();
     }
 
-    public void RecieveStatusEffects(StatusEffect givenStatusEffect)
+    public void RecieveStatusEffects(StatusEffectEnum givenStatusEffect)
     {
+        StatusEffect effect = GameManager.Instance.generalFunctions.GetStatusFromType(givenStatusEffect);
         foreach (StatusEffect SE in ActorStatusEffects)
         {
-            if (SE.GetType().Equals(givenStatusEffect.GetType()))
+            if (SE.GetType().Equals(effect.GetType()))
             {
                 //duplicate type already exists
                 SE.Reset();
                 return;
             }
         }
-        ActorStatusEffects.Add(givenStatusEffect);
-        givenStatusEffect.cacheHost(this);
-
+        ActorStatusEffects.Add(effect);
+        effect.cacheHost(this);
     }
 
     public void RemoveStatusEffect(StatusEffect givenEffect)
@@ -69,13 +66,13 @@ public class Actor : MonoBehaviour, IDamagable
         {
             if (givenAbility.RollForStatusActivation(SE))
             {
-                RecieveStatusEffects(SE.myStatus);
+                RecieveStatusEffects(SE.StatusType);
             }
         }
        
         TakeDamage(givenAbility.DamageHandler);
     }
-    
+
     public void TakeDamage(DamageHandler dmgHandler)
     {
         onTakeDamage.Invoke(dmgHandler);
@@ -88,10 +85,4 @@ public class Actor : MonoBehaviour, IDamagable
         }
         ClampHP();
     }
-}
-
-public class DOTStatusEffectData
-{
-    public Coroutine dotRoutine;
-    public StatusEffect myStatus;
 }
