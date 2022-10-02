@@ -1,33 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
-public class Ability : MonoBehaviour
+
+[CreateAssetMenu(fileName = "New Ability", menuName = "Ability")]
+public class Ability : ScriptableObject
 {
     [Header("NAME")]
     [SerializeField] string Name;
     [Space(10)]
     [SerializeField] DamageHandler damageHandler = new DamageHandler();
-
     [SerializeField] List<StatusEffectActivatonData> statusEffectsData = new List<StatusEffectActivatonData>();
-
     [SerializeField, Range(1, 100)] int statusActivationBaseChance;
     [SerializeField] bool useBaseChanceForStatuses;
-    private void Awake()
-    {
-        foreach (StatusEffectActivatonData item in statusEffectsData)
-        {
-            switch (item.StatusType)
-            {
-                case StatusEffectEnum.burn:
-                    item.myStatus = new BurnSE();
-                    break;
-                case StatusEffectEnum.freeze:
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
-
     public bool RollForStatusActivation(StatusEffectActivatonData givenStatus)
     {
         if (useBaseChanceForStatuses)
@@ -46,6 +29,7 @@ public class Ability : MonoBehaviour
     }
     public List<StatusEffectActivatonData> StatusEffects { get => statusEffectsData; set => statusEffectsData = value; }
     public DamageHandler DamageHandler { get => damageHandler; set => damageHandler = value; }
+    public string AbilityName { get => Name; set => Name = value; }
 }
 
 
@@ -54,7 +38,6 @@ public class StatusEffectActivatonData
 {
     [Range(1, 100)] public int chance;
     public StatusEffectEnum StatusType;
-    public StatusEffect myStatus;
     public StatusEffectActivatonData(int givenChance, StatusEffectEnum givenStatus)
     {
         chance = givenChance;

@@ -83,7 +83,7 @@ public class GeneralFunctions
     {
         bool _isInRange = (positionA - positionB).sqrMagnitude < range * range;
         return _isInRange;
-        
+
     }
 
     public float CalcRange(Vector3 posA, Vector3 posB)
@@ -95,4 +95,20 @@ public class GeneralFunctions
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public StatusEffect GetStatusFromType(StatusEffectEnum effect)
+    {
+        switch (effect)
+        {
+            case StatusEffectEnum.burn:
+                return new BurnSE();
+            case StatusEffectEnum.freeze:
+                break;
+            default:
+                break;
+        }
+        return null;
+    }
 }
+
+

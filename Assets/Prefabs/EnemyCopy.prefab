@@ -122,6 +122,7 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   m_StatusEffects: []
+  TempActiveWeapon: {fileID: 0}
   m_groundCheck: {fileID: 1090129317}
   references:
     version: 2
@@ -186,7 +187,6 @@ GameObject:
   - component: {fileID: 1380533459441622728}
   - component: {fileID: 1282232644242522270}
   - component: {fileID: 1385592033679950849}
-  - component: {fileID: 1147369780154543506}
   - component: {fileID: 1385592033679950850}
   m_Layer: 6
   m_Name: Weapon-Sword
@@ -275,23 +275,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damage: 15
-  m_ability: {fileID: 1147369780154543506}
---- !u!114 &1147369780154543506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1385592033679950848}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a0f1e3d812f62548b5c2b09d885d3bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  damageHandler:
-    amount: 10
-    myDmgType: 1
-  statusEffectsEnum: 00000000
+  m_ability: {fileID: 11400000, guid: 89c42a226e5ce9849963c9f5611700b4, type: 2}
 --- !u!58 &1385592033679950850
 CircleCollider2D:
   m_ObjectHideFlags: 0

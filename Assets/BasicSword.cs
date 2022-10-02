@@ -1,15 +1,9 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class BasicSword : Weapon
 {
     //public UnityEvent onEnemyHit;
-    private int CurrentAttack;
-    private float LastAttackTime;
-    public Ability ComboFinalAttack;
-    public float attack1Recovery, attack2Recovery, attack3Recovery;
-    public bool CanAttack;
     private bool CanDash;
     public bool isDashing;
     public float dashDuration;
@@ -20,9 +14,6 @@ public class BasicSword : Weapon
 
     private void Start()
     {
-        CurrentAttack = 1;
-        LastAttackTime = 0;
-        CanAttack = true;
         CanDash = true;
         player = GameManager.Instance.assets.Player.GetComponent<PlayerController>();
     }
@@ -41,7 +32,7 @@ public class BasicSword : Weapon
         player.ResetVelocity();
         player.ZeroGravity();
         counter = 0;
-        Vector2 dir = new Vector2(player.transform.localScale.x,0.1f);
+        Vector2 dir = new Vector2(player.transform.localScale.x, 0.1f);
         Vector2 dashVelocity = dashForce * dir;
         while (counter < dashDuration)
         {
@@ -55,116 +46,31 @@ public class BasicSword : Weapon
         yield return new WaitForSeconds(dashCooldown);
         CanDash = true;
     }
-    protected override void Attack()
-    {
-        if (!CanAttack)
-            return;
-        currentAbility = m_ability;
-        switch (CurrentAttack)
-        {
-            case 1:
-                ExecuteFirstAttack();
-                break;
-            case 2:
-                if (Time.time - LastAttackTime < attack2Recovery)
-                {
-                    ExecuteSecondAttack();
-                }
-                else
-                {
-                    ResetComboAndExecuteAttack();
-                }
 
-                break;
-            case 3:
-                if (Time.time - LastAttackTime < attack3Recovery && player.GetHorInput == 0)
-                {
-                    ExecuteThirdAttack();
-                }
-                else
-                {
-                    ResetComboAndExecuteAttack();
-
-                }
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void ExecuteFirstAttack()
-    {
-        m_animator.Play("Attack");
-        LastAttackTime = Time.time;
-        CurrentAttack = 2;
-        CanAttack = false;
-        LeanTween.delayedCall(0.5f, SetCanAttackTrue);
-        Debug.Log(CurrentAttack);
-    }
-    private void ExecuteSecondAttack()
-    {
-        m_animator.SetTrigger("Attack2");
-        LastAttackTime = Time.time;
-        CurrentAttack = 3;
-        CanAttack = false;
-        LeanTween.delayedCall(0.5f, SetCanAttackTrue);
-        Debug.Log(CurrentAttack);
-
-    }
-    private void ExecuteThirdAttack()
-    {
-        currentAbility = ComboFinalAttack;
-        m_animator.SetTrigger("Attack3");
-        LastAttackTime = Time.time;
-        CanAttack = false;
-        LeanTween.delayedCall(2f, ResetCombo);
-
-
-    }
-    private void ResetComboAndExecuteAttack()
-    {
-        CurrentAttack = 1;
-        Debug.Log(CurrentAttack);
-        ExecuteFirstAttack();
-    }
-    private void ResetCombo()
-    {
-        CurrentAttack = 1;
-        SetCanAttackTrue();
-        Debug.Log(CurrentAttack);
-    }
-    private void SetCanAttackTrue() => CanAttack = true;
     protected override void Ultimate()
     {
 
-        currentAbility = m_UltimateAbility;
         m_animator.Play("Attack");
-
     }
 
-    protected override void OnWeaponHit(Collider2D collision)
+    protected override void Attack()
     {
+        base.Attack();
 
-        if (collision.CompareTag("Enemy"))
-        {
-            Actor currentEnemyHit = collision.GetComponent<Actor>();
-            if (ReferenceEquals(currentEnemyHit, null))
-            {
-                currentEnemyHit = collision.GetComponentInChildren<Actor>();
-                if (ReferenceEquals(currentEnemyHit, null))
-                {
-                    currentEnemyHit = collision.GetComponentInParent<Actor>();
-
-                }
-            }
-            if (!ReferenceEquals(currentEnemyHit, null))
-            {
-                currentEnemyHit.GetHit(currentAbility);
-               // onEnemyHit.Invoke();
-            }
-        }
-
+        //switch over ability string 
+        //to get to the current ability 
+        //AbilityCombo.CurrentAbility
+        //to get the ability index use 
+        //AbilityCombo.GetAbilityIndex();
     }
-   
-    
+    protected override void AttackPerformed()
+    {
+        /*if (AbilityCombo.GetAbilityIndex() == 1)
+        {*/
+        m_animator.Play("Attack");
+        //return;
+        //   }
+        //  m_animator.SetTrigger(AbilityCombo.CurrentAbilityData.AbilityAnimationName);
+    }
+
 }

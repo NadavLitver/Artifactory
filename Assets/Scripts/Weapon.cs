@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 [RequireComponent(typeof(Collider2D))]
@@ -8,19 +6,24 @@ public class Weapon : MonoBehaviour
     protected Animator m_animator;
     public UnityEvent onHit;
     public UnityEvent<Actor, Ability> OnActorHit;
-    public Ability m_ability;
-    public Ability m_UltimateAbility;
-    protected Ability currentAbility;
-
+    [SerializeField] AbilityCombo abilityCombo;
+    public AbilityCombo AbilityCombo { get => abilityCombo; set => abilityCombo = value; }
 
     private void Awake()
     {
         m_animator = GetComponentInParent<Animator>();
+        abilityCombo.OnAttackPerformed.AddListener(AttackPerformed);
     }
     protected virtual void Attack()
     {
-       
+        abilityCombo.PlayNextAbility();
     }
+    protected virtual void AttackPerformed()
+    {
+
+    }
+
+
     protected virtual void Mobility()
     {
 
@@ -31,28 +34,34 @@ public class Weapon : MonoBehaviour
     }
     protected virtual void OnWeaponHit(Collider2D collision)
     {
-
+        Actor currentActorHit = collision.GetComponent<Actor>();
+        if (!ReferenceEquals(currentActorHit, null))
+        {
+            currentActorHit.GetHit(abilityCombo.CurrentAbility);
+            OnActorHit?.Invoke(currentActorHit, AbilityCombo.CurrentAbility);
+        }
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         OnWeaponHit(collision);
         onHit?.Invoke();
-        if (collision.CompareTag("Enemy"))
-        {
-            Actor actorHit = collision.gameObject.GetComponent<Actor>();
-            OnActorHit?.Invoke(actorHit, currentAbility);
-        }
     }
-    private void OnEnable()
+
+    public virtual void Initialize()
+    {
+        Subscribe();
+    }
+    public virtual void Subscribe()
     {
         GameManager.Instance.inputManager.onAttackDown.AddListener(Attack);
         GameManager.Instance.inputManager.onMobilityDown.AddListener(Mobility);
         GameManager.Instance.inputManager.onUltimateDown.AddListener(Ultimate);
     }
-    private void OnDisable()
+    public virtual void UnSubscribe()
     {
         GameManager.Instance.inputManager.onAttackDown.RemoveListener(Attack);
         GameManager.Instance.inputManager.onMobilityDown.RemoveListener(Mobility);
         GameManager.Instance.inputManager.onUltimateDown.RemoveListener(Ultimate);
     }
+
 }
