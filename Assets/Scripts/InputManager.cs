@@ -15,8 +15,7 @@ public class InputManager : MonoBehaviour
 
     public UnityEvent onUltimateDown;
 
-
-
+    public UnityEvent onAttackUp;
 
     private void Awake()
     {
@@ -25,8 +24,12 @@ public class InputManager : MonoBehaviour
         inputs.BaseMovement.Attack.started += InvokeOnAttackDown;
         inputs.BaseMovement.Mobility.started += InvokeOnMobilityDown;
         inputs.BaseMovement.Ultimate.started += InvokeOnUltimateDown;
+        inputs.BaseMovement.Attack.canceled += InvokeOnAttackUp;
+    }
 
-
+    private void InvokeOnAttackUp(InputAction.CallbackContext obj)
+    {
+        onAttackUp?.Invoke();
     }
 
     private void InvokeOnUltimateDown(InputAction.CallbackContext obj)
@@ -43,6 +46,8 @@ public class InputManager : MonoBehaviour
     {
         onAttackDown.Invoke();
     }
+
+
     //public void InvokeonUltimateDown()
     //{
     //    onUltimateDown.Invoke();

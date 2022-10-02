@@ -11,7 +11,7 @@ public class WeaponManager : MonoBehaviour
 
     private void Start()
     {
-        EquipWeapon(playerWeapons[0]);
+        EquipWeapon(playerWeapons[1]);
     }
 
 

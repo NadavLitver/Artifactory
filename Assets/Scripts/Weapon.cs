@@ -12,7 +12,10 @@ public class Weapon : MonoBehaviour
     private void Awake()
     {
         m_animator = GetComponentInParent<Animator>();
-        abilityCombo.OnAttackPerformed.AddListener(AttackPerformed);
+        if (!ReferenceEquals(abilityCombo, null))
+        {
+            abilityCombo.OnAttackPerformed.AddListener(AttackPerformed);
+        }
     }
     protected virtual void Attack()
     {
