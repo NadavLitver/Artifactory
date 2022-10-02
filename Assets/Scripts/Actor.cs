@@ -17,6 +17,9 @@ public class Actor : MonoBehaviour, IDamagable
 
     public Weapon TempActiveWeapon;
 
+    public bool IsInAttackAnim;
+
+
     public void Awake()
     {
         currentHP = maxHP;
@@ -59,6 +62,10 @@ public class Actor : MonoBehaviour, IDamagable
                 return;
             }
         }
+    }
+    public void ToggleIsinAnim()
+    {
+        IsInAttackAnim = !IsInAttackAnim;
     }
     public void GetHit(Ability givenAbility)
     {

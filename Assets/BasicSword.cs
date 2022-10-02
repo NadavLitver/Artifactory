@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Text;
 using UnityEngine;
 
 public class BasicSword : Weapon
@@ -11,11 +12,13 @@ public class BasicSword : Weapon
     private float counter = 0;
     public float dashForce;
     private PlayerController player;
-
+    private const string attackPrefix = "Attack";
+    private StringBuilder stringBuilder;
     private void Start()
     {
         CanDash = true;
         player = GameManager.Instance.assets.Player.GetComponent<PlayerController>();
+
     }
 
     protected override void Mobility()
@@ -50,7 +53,7 @@ public class BasicSword : Weapon
     protected override void Ultimate()
     {
 
-        m_animator.Play("Attack");
+        m_animator.SetTrigger("Attack");
     }
 
     protected override void Attack()
@@ -67,7 +70,13 @@ public class BasicSword : Weapon
     {
         /*if (AbilityCombo.GetAbilityIndex() == 1)
         {*/
-        m_animator.Play("Attack");
+        stringBuilder = new StringBuilder();
+        string animationString;
+        stringBuilder.Append(attackPrefix);
+        stringBuilder.Append(AbilityCombo.GetAbilityIndex().ToString());
+        animationString = stringBuilder.ToString();
+        Debug.Log(animationString);
+        m_animator.SetTrigger(animationString);
         //return;
         //   }
         //  m_animator.SetTrigger(AbilityCombo.CurrentAbilityData.AbilityAnimationName);

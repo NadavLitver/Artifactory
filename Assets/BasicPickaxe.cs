@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Text;
 using UnityEngine;
 
 public class BasicPickaxe : Weapon
@@ -15,6 +16,9 @@ public class BasicPickaxe : Weapon
     public LayerMask contactFilter;
     [SerializeField] private float maxClawTime;
     private Coroutine ClawRoutine;
+    private StringBuilder stringBuilder;
+    private const string attackPrefix = "Attack";
+
 
     private void Start()
     {
@@ -97,5 +101,17 @@ public class BasicPickaxe : Weapon
         Gizmos.DrawWireSphere(positionToCheckFrom, radiusForWallCheck);
         Gizmos.DrawWireSphere(moveToPositionForDebug, radiusForWallCheck);
 
+    }
+    protected override void AttackPerformed()
+    {
+       
+        stringBuilder = new StringBuilder();
+        string animationString;
+        stringBuilder.Append(attackPrefix);
+        stringBuilder.Append(AbilityCombo.GetAbilityIndex().ToString());
+        animationString = stringBuilder.ToString();
+        Debug.Log(animationString);
+        m_animator.SetTrigger(animationString);
+        
     }
 }

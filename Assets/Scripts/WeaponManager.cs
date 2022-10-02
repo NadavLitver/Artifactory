@@ -6,12 +6,18 @@ public class WeaponManager : MonoBehaviour
 {
     [SerializeField] List<Weapon> playerWeapons = new List<Weapon>();
     [SerializeField] Weapon currentWeapon;
+    Actor m_actor;
     public List<Weapon> PlayerWeapons { get => playerWeapons; set => playerWeapons = value; }
     public Weapon CurrentWeapon { get => currentWeapon; set => currentWeapon = value; }
 
     private void Start()
     {
         EquipWeapon(playerWeapons[0]);
+        m_actor = GetComponentInParent<Actor>();
+        if (ReferenceEquals(m_actor, null))
+        {
+            Debug.LogError("Ability Combo on" + gameObject.name + " is Null");
+        }
     }
 
 
@@ -26,7 +32,10 @@ public class WeaponManager : MonoBehaviour
             EquipWeapon(GetNextWeapon());
         }
     }
-
+    public void ToggleIsInAttackAnim()
+    {
+        m_actor.ToggleIsinAnim();
+    }
     private Weapon GetNextWeapon()
     {
         if (currentWeapon = playerWeapons[playerWeapons.Count - 1])

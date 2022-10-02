@@ -120,8 +120,7 @@ MonoBehaviour:
   OnActorHit:
     m_PersistentCalls:
       m_Calls: []
-  m_ability: {fileID: 0}
-  m_UltimateAbility: {fileID: 0}
+  abilityCombo: {fileID: 0}
   radiusForWallCheck: 0.5
   distaceFromPlayerToCheck: 0.5
   forceForWallJump: {x: 5, y: 15}
@@ -337,7 +336,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1033196446740940, guid: 6877fb649746c674d8fbbcf60d41892b, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1216293393019812, guid: 6877fb649746c674d8fbbcf60d41892b, type: 3}
       propertyPath: m_Layer
@@ -457,45 +456,7 @@ CircleCollider2D:
   m_Offset: {x: -0.0020136982, y: 0.41881752}
   serializedVersion: 2
   m_Radius: 0.55
---- !u!114 &1743386162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5176910634493148627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a0f1e3d812f62548b5c2b09d885d3bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Fire Attack
-  damageHandler:
-    amount: 20
-    myDmgType: 1
-  statusEffectsData: []
-  statusActivationBaseChance: 0
-  useBaseChanceForStatuses: 0
---- !u!114 &1743386165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5176910634493148627}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a0f1e3d812f62548b5c2b09d885d3bd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Normal Attack
-  damageHandler:
-    amount: 10
-    myDmgType: 0
-  statusEffectsData: []
-  statusActivationBaseChance: 0
-  useBaseChanceForStatuses: 0
---- !u!114 &1743386168
+--- !u!114 &7256337287138419753
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -513,18 +474,12 @@ MonoBehaviour:
   OnActorHit:
     m_PersistentCalls:
       m_Calls: []
-  m_ability: {fileID: 1743386165}
-  m_UltimateAbility: {fileID: 1743386162}
-  ComboFinalAttack: {fileID: 1743386169}
-  attack1Recovery: 1
-  attack2Recovery: 1
-  attack3Recovery: 1
-  CanAttack: 0
+  abilityCombo: {fileID: 0}
   isDashing: 0
   dashDuration: 0.15
   dashCooldown: 0.5
   dashForce: 20
---- !u!114 &1743386169
+--- !u!114 &6984376851359622008
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -533,13 +488,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 5176910634493148627}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3a0f1e3d812f62548b5c2b09d885d3bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 80c87ef0ebcf33748a29eead61f17739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: SwordFinalAttack
-  damageHandler:
-    amount: 20
-    myDmgType: 0
-  statusEffectsData: []
-  statusActivationBaseChance: 0
-  useBaseChanceForStatuses: 0
+  abilities:
+  - Ability: {fileID: 11400000, guid: bfd394731ce00b242a3ddf26ffc864ff, type: 2}
+    AbilityRecovery: 0.5
+    AbilityAnimationName: Attack
+  - Ability: {fileID: 11400000, guid: 89c42a226e5ce9849963c9f5611700b4, type: 2}
+    AbilityRecovery: 0.5
+    AbilityAnimationName: Attack2
+  - Ability: {fileID: 11400000, guid: 50ccdd7427b3539469d8b06eebfe2e0c, type: 2}
+    AbilityRecovery: 1
+    AbilityAnimationName: Attack3
+  currentAbilityCombo:
+    Ability: {fileID: 0}
+    AbilityRecovery: 0
+    AbilityAnimationName: 
+  clickGraceTime: 1
+  OnAttackPerformed:
+    m_PersistentCalls:
+      m_Calls: []

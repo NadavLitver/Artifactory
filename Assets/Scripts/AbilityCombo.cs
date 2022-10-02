@@ -7,6 +7,7 @@ public class AbilityCombo : MonoBehaviour
 {
     [SerializeField] List<AbilityComboData> abilities = new List<AbilityComboData>();
     [SerializeField] AbilityComboData currentAbilityCombo;
+   [SerializeField] Actor m_actor;
     bool canAttack;
     public List<AbilityComboData> Abilities { get => abilities; set => abilities = value; }
     public AbilityComboData CurrentAbilityData { get => currentAbilityCombo; set => currentAbilityCombo = value; }
@@ -14,19 +15,24 @@ public class AbilityCombo : MonoBehaviour
     public bool CanAttack { get => canAttack; set => canAttack = value; }
     [SerializeField, Range(0.1f, 1)] float clickGraceTime;
     float lastAttackTime;
-    bool IsInAnim;
     public UnityEvent OnAttackPerformed;
 
 
     private void Start()
     {
-        IsInAnim = false;
+        m_actor = GetComponentInParent<Actor>();
+        Debug.Log(m_actor);
+        if (ReferenceEquals(m_actor, null))
+        {
+            Debug.LogError("Ability Combo on" + gameObject.name + " is Null");
+        }
+        m_actor.IsInAttackAnim = false;
         ResetCombo();
     }
 
     public void PlayNextAbility()
     {
-        if (IsInAnim)
+        if (m_actor.IsInAttackAnim)
         {
             return;
         }
@@ -58,10 +64,7 @@ public class AbilityCombo : MonoBehaviour
         Debug.Log(GetAbilityIndex());
     }
 
-    public void ToggleIsinAnim()
-    {
-        IsInAnim = !IsInAnim;
-    }
+   
 
     private void SetNextAbility()
     {
