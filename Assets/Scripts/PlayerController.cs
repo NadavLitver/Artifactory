@@ -222,7 +222,6 @@ public class PlayerController : MonoBehaviour
     {
         bool bottomRightRay = Physics2D.Raycast(BottomRightPoint, Vector2.down, groundCheckDistance, GroundLayerMask);
         bool bottomLeftRay = Physics2D.Raycast(BottomLeftPoint, Vector2.down, groundCheckDistance, GroundLayerMask);
-
         return bottomRightRay || bottomLeftRay;
     }
     private void FixedUpdate()

@@ -76,6 +76,7 @@ public class AssetsRefrence
 {
     public GameObject Player;
     public PlayerActor playerActor;
+    public PlayerController PlayerController;
 }
 public class GeneralFunctions
 {

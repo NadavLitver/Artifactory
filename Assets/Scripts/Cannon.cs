@@ -7,20 +7,22 @@ public class Cannon : Weapon
     [SerializeField] ObjectPool bulletPool;
     [SerializeField] Transform muzzle;
     [SerializeField] float chargeDuration;
-    [SerializeField] float timeToLoad;
     [SerializeField] float timeTillFade;
+    float loadedTime;
+
     bool loaded;
     bool charging;
-
+    bool jumped;
+    [SerializeField] float jumpForce;
   
     protected override void Attack()
     {
         if (!loaded && !charging)
         {
             StartCoroutine(StartCharging());
-            StartCoroutine(FadeBullet());
         }
-        else if (loaded)
+        CheckBulletFade();
+        if (loaded)
         {
             FireBullet();
         }
@@ -32,18 +34,42 @@ public class Cannon : Weapon
         yield return new WaitForSecondsRealtime(chargeDuration);
         charging = false;
         loaded = true;
+        loadedTime = Time.time;
         Debug.Log("cannon armed");
     }
 
-    IEnumerator FadeBullet()
+    public void CheckBulletFade()
     {
-        yield return new WaitUntil(() => loaded);
-        yield return new WaitForSecondsRealtime(timeTillFade);
-        if (loaded)
+        if (Time.time - loadedTime >= timeTillFade)
         {
             loaded = false;
         }
     }
+
+
+    protected override void Mobility()
+    {
+        RocketJump();
+    }
+
+    private void RocketJump()
+    {
+        if (!jumped)
+        {
+            Vector2 velocity = GameManager.Instance.assets.PlayerController.GetVelocity;
+            GameManager.Instance.assets.PlayerController.ResetVelocity();
+            GameManager.Instance.assets.PlayerController.RecieveForce(new Vector2(velocity.x, jumpForce));
+            jumped = true;
+            StartCoroutine(waitForGrounded());
+        }
+    }
+
+    IEnumerator waitForGrounded()
+    {
+        yield return new WaitUntil(() => GameManager.Instance.assets.PlayerController.GetIsGrounded);
+        jumped = false;
+    }
+
 
     private void FireBullet()
     {
@@ -52,7 +78,7 @@ public class Cannon : Weapon
        // bullet.CacheDirection(transform.right);
         bullet.gameObject.SetActive(true);
         loaded = false;
-        m_animator.Play("Attack");
+        /*m_animator.Play("Attack");*/
     }
 
 
