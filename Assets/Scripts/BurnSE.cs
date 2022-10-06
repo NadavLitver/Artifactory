@@ -22,7 +22,7 @@ public class BurnSE : StatusEffect
     public override void ActivateEffect()
     {
         //host.StartDOT(time, intervals, m_DamageHandler, this);
-         routine = host.StartCoroutine(BurnDOT());
+        routine = host.StartCoroutine(BurnDOT());
     }
 
     public override void Reset()

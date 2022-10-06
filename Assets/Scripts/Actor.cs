@@ -9,6 +9,8 @@ public class Actor : MonoBehaviour, IDamagable
     public float maxHP;
     public List<StatusEffect> ActorStatusEffects { get => m_StatusEffects; set => m_StatusEffects = value; }
     public UnityEvent<DamageHandler> onTakeDamage { get; set; }
+    //ondealdmg<dmg, actor>
+    //onhit <ability, actor>
 
     public UnityEvent TakeDamageEvent, DeathEvent;
 

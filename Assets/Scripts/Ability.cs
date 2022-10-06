@@ -11,6 +11,7 @@ public class Ability : ScriptableObject
     [SerializeField] List<StatusEffectActivatonData> statusEffectsData = new List<StatusEffectActivatonData>();
     [SerializeField, Range(1, 100)] int statusActivationBaseChance;
     [SerializeField] bool useBaseChanceForStatuses;
+    
     public bool RollForStatusActivation(StatusEffectActivatonData givenStatus)
     {
         if (useBaseChanceForStatuses)
