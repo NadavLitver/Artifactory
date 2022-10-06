@@ -11,4 +11,11 @@ public class PlayerActor : Actor
         base.onActorDeath();
         m_animator.Play("Die");
     }
+    
+
+    [ContextMenu("Add Lightning Emblem")]
+    public void AddLightningdEmblem()
+    {
+        RecieveStatusEffects(StatusEffectEnum.LightningEmblem);
+    }
 }

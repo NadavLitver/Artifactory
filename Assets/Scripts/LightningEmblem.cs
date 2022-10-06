@@ -1,26 +1,40 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class LightningEmblem : StatusEffect
 {
+    private bool buffActive;
     public override void ActivateEffect()
     {
-        throw new System.NotImplementedException();
+        //nothing to activate
     }
 
     public override void Reset()
     {
-        throw new System.NotImplementedException();
+        //nothing to reset here
     }
 
     public override void Unsubscribe()
     {
-        throw new System.NotImplementedException();
+        host.OnKill.RemoveListener(ActivateBuff);
+        host.OnDealDamage.RemoveListener(EmpowerAttack);
     }
 
     protected override void Subscribe()
     {
-        throw new System.NotImplementedException();
+        host.OnKill.AddListener(ActivateBuff);
+        host.OnDealDamage.AddListener(EmpowerAttack);
     }
+
+    public void EmpowerAttack(DamageHandler givenDmg, Actor actor)
+    {
+        if (buffActive)
+        {
+            givenDmg.AddModifier(GameManager.Instance.DamageManager.LightningEmblemDamageMod);
+            buffActive = false;
+        }
+    }
+
+    public void ActivateBuff(Actor actor)
+    {
+        buffActive = true;
+    }
+
 }

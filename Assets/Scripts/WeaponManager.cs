@@ -12,7 +12,7 @@ public class WeaponManager : MonoBehaviour
 
     private void Start()
     {
-        EquipWeapon(playerWeapons[1]);
+        EquipWeapon(playerWeapons[2]);
         m_actor = GetComponentInParent<Actor>();
         if (ReferenceEquals(m_actor, null))
         {

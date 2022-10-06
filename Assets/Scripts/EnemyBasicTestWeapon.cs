@@ -11,7 +11,7 @@ public class EnemyBasicTestWeapon : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            playerActorRef.GetHit(m_ability);
+          //  playerActorRef.GetHit(m_ability);
 
         }
     }

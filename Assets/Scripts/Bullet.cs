@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Bullet : MonoBehaviour
 {
@@ -8,10 +9,20 @@ public class Bullet : MonoBehaviour
     [SerializeField] float lifeTime;
     [SerializeField] float Speed;
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] GameObject Explosion;
-    bool exploded = false;
+    [SerializeField] Explosion Explosion;
     [SerializeField] bool explosive;
+    bool exploded = false;
 
+    Weapon source;
+
+    public void CahceSource(Weapon givenWeapon)
+    {
+        source = givenWeapon;
+        if (!ReferenceEquals(Explosion, null))
+        {
+            Explosion.CacheSource(givenWeapon);
+        }
+    }
 
     private void Start()
     {
@@ -29,7 +40,7 @@ public class Bullet : MonoBehaviour
         Actor actor = collision.gameObject.GetComponent<Actor>();
         if (!ReferenceEquals(actor, null))
         {
-            actor.GetHit(impactAbility);
+            actor.GetHit(impactAbility, source.Host);
             Explode();
         }
     }
@@ -42,13 +53,13 @@ public class Bullet : MonoBehaviour
         }
         rb.velocity = Vector2.zero;
         exploded = true;
-        Explosion.SetActive(true);
+        Explosion.gameObject.SetActive(true);
         LeanTween.delayedCall(1f, TurnOff);
     }
 
     private void TurnOff()
     {
-        Explosion.SetActive(false);
+        Explosion.gameObject.SetActive(false);
         gameObject.SetActive(false);
         exploded = false;
     }

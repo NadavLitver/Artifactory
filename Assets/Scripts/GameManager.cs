@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     public GeneralFunctions generalFunctions { get; private set; }
     public PauseMenuHandler pauseMenuHandler { get; private set; }
     public DamageManager DamageManager { get; private set; }
+    public DamagePopupManager PopupManager { get; private set; }
 
 
     public SoundManager soundManager { get; private set; }
@@ -32,6 +33,7 @@ public class GameManager : MonoBehaviour
         pauseMenuHandler = GetComponentInChildren<PauseMenuHandler>();
         soundManager = GetComponentInChildren<SoundManager>();
         DamageManager = GetComponentInChildren<DamageManager>();
+        PopupManager = GetComponentInChildren<DamagePopupManager>();
 
 
     }
@@ -74,6 +76,7 @@ public class GameManager : MonoBehaviour
 [System.Serializable]
 public class AssetsRefrence
 {
+    [Header("PLAYER"), Space(10)]
     public GameObject Player;
     public PlayerActor playerActor;
     public PlayerController PlayerController;
@@ -105,11 +108,18 @@ public class GeneralFunctions
                 return new BurnSE();
             case StatusEffectEnum.freeze:
                 break;
+            case StatusEffectEnum.RubberDuck:
+                return new RubberDuck(); 
+            case StatusEffectEnum.LightningEmblem:
+                return new LightningEmblem();
+            case StatusEffectEnum.HealingGoblet:
+                return new HealingGoblet();
             default:
                 break;
         }
+
+
         return null;
     }
 }
-
 
