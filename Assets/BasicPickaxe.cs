@@ -54,6 +54,12 @@ public class BasicPickaxe : Weapon
     }
     protected override void Mobility()
     {
+        CheckFromWall();
+
+    }
+
+    private void CheckFromWall()
+    {
         Collider2D colliderHit = Physics2D.OverlapCircle(positionToCheckFrom, radiusForWallCheck, contactFilter);
         if (!ReferenceEquals(colliderHit, null) && colliderHit.CompareTag("Wall") && !Clawed)
         {
@@ -63,8 +69,8 @@ public class BasicPickaxe : Weapon
             }
             ClawRoutine = StartCoroutine(IEMoveToWall(colliderHit.ClosestPoint(player.transform.position)));
         }
-
     }
+
     IEnumerator IEMoveToWall(Vector3 positionToMoveTo)
     {
         Clawed = true;
