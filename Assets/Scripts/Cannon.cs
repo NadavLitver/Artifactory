@@ -14,7 +14,12 @@ public class Cannon : Weapon
     bool charging;
     bool jumped;
     [SerializeField] float jumpForce;
-  
+
+    private void OnEnable()
+    {
+     
+        charging = false;
+    }
     protected override void Attack()
     {
         if (!loaded && !charging)

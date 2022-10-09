@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Events;
-[RequireComponent(typeof(Collider2D))]
 public class Weapon : MonoBehaviour
 {
     protected Animator m_animator;

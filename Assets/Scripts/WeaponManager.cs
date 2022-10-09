@@ -12,7 +12,7 @@ public class WeaponManager : MonoBehaviour
 
     private void Start()
     {
-        EquipWeapon(playerWeapons[1]);
+        EquipWeapon(playerWeapons[0]);
         m_actor = GetComponentInParent<Actor>();
         if (ReferenceEquals(m_actor, null))
         {
@@ -74,15 +74,17 @@ public class WeaponManager : MonoBehaviour
         return null;
     }
 
-    private void EquipWeapon(Weapon givenWeapon)
+    public void EquipWeapon(Weapon givenWeapon)
     {
         if (currentWeapon != null)
         {
             currentWeapon.UnSubscribe();
+            currentWeapon.gameObject.SetActive(false);
         }
         currentWeapon = givenWeapon;
+        currentWeapon.gameObject.SetActive(true);
         currentWeapon.Initialize();
     }
 
-
+    
 }
