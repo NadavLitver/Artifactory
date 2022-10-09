@@ -34,7 +34,7 @@ public class WeaponManager : MonoBehaviour
     }
     public void ToggleIsInAttackAnim()
     {
-        m_actor.ToggleIsinAnim();
+        m_actor.IsInAttackAnim = !m_actor.IsInAttackAnim;
     }
     private Weapon GetNextWeapon()
     {
@@ -84,6 +84,7 @@ public class WeaponManager : MonoBehaviour
         currentWeapon = givenWeapon;
         currentWeapon.gameObject.SetActive(true);
         currentWeapon.Initialize();
+        //m_actor.IsInAttackAnim = false;
     }
 
     

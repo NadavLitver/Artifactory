@@ -5,6 +5,7 @@ public class Explosion : MonoBehaviour
     [SerializeField] float radius;
     [SerializeField] Ability explosionAbility;
     private Weapon source;
+    [SerializeField] LayerMask HitLayer;
     private void OnEnable()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);

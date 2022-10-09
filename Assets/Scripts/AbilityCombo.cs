@@ -29,7 +29,6 @@ public class AbilityCombo : MonoBehaviour
         m_actor.IsInAttackAnim = false;
         ResetCombo();
     }
-
     public void PlayNextAbility()
     {
         if (m_actor.IsInAttackAnim)
@@ -103,7 +102,7 @@ public class AbilityCombo : MonoBehaviour
         }
         return 0;
     }
-
+  
 }
 
 [System.Serializable]

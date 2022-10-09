@@ -87,10 +87,7 @@ public class Actor : MonoBehaviour, IDamagable
             }
         }
     }
-    public void ToggleIsinAnim()
-    {
-        IsInAttackAnim = !IsInAttackAnim;
-    }
+   
     public void GetHit(Ability givenAbility, Actor host)
     {
         foreach (var SE in givenAbility.StatusEffects)

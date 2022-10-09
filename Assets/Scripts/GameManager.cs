@@ -28,7 +28,10 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
+
+        //non mono
         generalFunctions = new GeneralFunctions();
+        //mono
         inputManager = GetComponentInChildren<InputManager>();
         pauseMenuHandler = GetComponentInChildren<PauseMenuHandler>();
         soundManager = GetComponentInChildren<SoundManager>();
