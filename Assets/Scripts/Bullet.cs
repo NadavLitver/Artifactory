@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
+using System;
+using System.Collections;
 
 public class Bullet : MonoBehaviour
 {
@@ -32,11 +31,12 @@ public class Bullet : MonoBehaviour
     private void OnEnable()
     {
         rb.velocity = Vector2.right * Speed * GameManager.Instance.assets.Player.transform.localScale.x;
-        LeanTween.delayedCall(lifeTime, Explode);
+        StartCoroutine(ExplodeOnLifeTimeExpired());
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //the impact of the bullet itself.
+        Debug.Log(collision.gameObject.name);
         Actor actor = collision.gameObject.GetComponent<Actor>();
         if (!ReferenceEquals(actor, null))
         {
@@ -49,6 +49,9 @@ public class Bullet : MonoBehaviour
     {
         if (exploded || !explosive)
         {
+            rb.velocity = Vector2.zero;
+            exploded = true;
+            TurnOff();
             return;
         }
         rb.velocity = Vector2.zero;
@@ -64,5 +67,10 @@ public class Bullet : MonoBehaviour
         exploded = false;
     }
 
+    IEnumerator ExplodeOnLifeTimeExpired()
+    {
+        yield return new WaitForSeconds(lifeTime);
+        Explode();
+    }
 
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 public class DamagePopupManager : MonoBehaviour
 {
     [SerializeField] private PopupPool popupPool;
-    public void SetDamagePopup(string amount, Vector2 pos)
+    public void SetDamagePopup(DamageHandler amount, Vector2 pos)
     {
         DamagePopup pop = popupPool.GetPooledObject();
         pop.gameObject.SetActive(true);
@@ -22,6 +22,24 @@ public class DamagePopupManager : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(1f);
         pop.SetActive(false);
+    }
+
+    public Color GetDamageTypeColor(DamageType givenType)
+    {
+        switch (givenType)
+        {
+            case DamageType.normal:
+                return Color.black;
+            
+            case DamageType.fire:
+                return Color.red;
+            
+            case DamageType.ice:
+                return Color.blue;
+              
+            default:
+                return Color.black;
+        }
     }
 
 }

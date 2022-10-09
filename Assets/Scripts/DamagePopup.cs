@@ -1,25 +1,28 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using TMPro;
 
 public class DamagePopup : MonoBehaviour
 {
-    [SerializeField]private TextMesh text;
-    [SerializeField] float dragSpeed;
+    [SerializeField] private TextMesh text;
     [SerializeField] float dragTime;
+    [SerializeField, Range(1,3)] float dragDistance;
+    [SerializeField, Range(1,2)] float sizeIncrease;
+   
 
-    public void SetUp(string givenString, Vector2 position, Vector2 direction)
+    public void SetUp(DamageHandler givenDmg, Vector2 position, Vector2 direction)
     {
-        text.text = givenString;
+        text.color = GameManager.Instance.PopupManager.GetDamageTypeColor(givenDmg.myDmgType);
+        text.text = ((int)givenDmg.calculateFinalDamage()).ToString();
         transform.position = position;
-        LeanTween.move(gameObject, direction * dragSpeed, dragTime);
+        LeanTween.move(gameObject, position + (direction * dragDistance), dragTime).setEaseOutCubic();
+        LeanTween.scale(gameObject, transform.localScale * sizeIncrease, dragTime);
+        LeanTween.delayedCall(dragTime * 1.3f, TurnOff);
     }
 
 
 
     public void TurnOff()
     {
+        transform.localScale = Vector3.one;
         gameObject.SetActive(false);
     }
 }

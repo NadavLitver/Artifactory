@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class HealingGoblet : StatusEffect
 {
     int counter = 0;
@@ -34,6 +30,8 @@ public class HealingGoblet : StatusEffect
             counter = 0;
         }
         else
+        {
             counter++;
+        }
     }
 }

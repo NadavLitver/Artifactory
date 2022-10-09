@@ -80,6 +80,11 @@ public class AssetsRefrence
     public GameObject Player;
     public PlayerActor playerActor;
     public PlayerController PlayerController;
+
+    [Header("RELICS"), Space(10)]
+    public Sprite RubberDuck;
+    public Sprite LightningEmblem;
+    public Sprite HealingGoblet;
 }
 public class GeneralFunctions
 {

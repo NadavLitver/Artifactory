@@ -6,7 +6,7 @@ public class Dummy : Actor
 {
     private void Start()
     {
-        DeathEvent.AddListener(HealBackToFull);
+        OnDeath.AddListener(HealBackToFull);
     }
 
     public void HealBackToFull()
