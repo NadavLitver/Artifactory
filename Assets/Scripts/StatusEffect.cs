@@ -17,5 +17,8 @@ public abstract class StatusEffect
 public enum StatusEffectEnum
 {
     burn,
-    freeze
+    freeze,
+    RubberDuck,
+    LightningEmblem,
+    HealingGoblet
 }

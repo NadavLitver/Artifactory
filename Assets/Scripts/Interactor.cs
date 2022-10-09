@@ -32,12 +32,25 @@ public class Interactor : MonoBehaviour
         {
             yield return new WaitForSecondsRealtime(delayBetweenUpdates);
             Collider2D[] collidersFound = Physics2D.OverlapCircleAll(transform.position, checkRadius, layerToCheck);
+            foreach (var item in collidersFound)
+            {
+                IProximityDetection proximity = item.GetComponent<IProximityDetection>();
+                if (!ReferenceEquals(proximity, null))
+                {
+                    proximity.OnInProximity?.Invoke();
+                    
+                }
+            }
             if (collidersFound.Length <= 0)
             {
                 closestInteractable = null;
             }
             foreach (var item in collidersFound)
             {
+                if (!item.gameObject.CompareTag("Interactable"))
+                {
+                    continue;
+                }
                 if (closestInteractable == null)
                 {
                     closestInteractable = item;

@@ -9,17 +9,20 @@ public class Cannon : Weapon
     [SerializeField] float chargeDuration;
     [SerializeField] float timeTillFade;
     float loadedTime;
-
     bool loaded;
     bool charging;
     bool jumped;
     [SerializeField] float jumpForce;
 
-    private void OnEnable()
+    private void Start()
     {
-     
-        charging = false;
+        foreach (var item in bulletPool.pooledObjects)
+        {
+            Bullet bullet = item.GetComponent<Bullet>();
+            bullet.CahceSource(this);
+        }   
     }
+
     protected override void Attack()
     {
         if (!loaded && !charging)
@@ -80,10 +83,8 @@ public class Cannon : Weapon
     {
         GameObject bullet = bulletPool.GetPooledObject();
         bullet.transform.position = muzzle.position;
-       // bullet.CacheDirection(transform.right);
         bullet.gameObject.SetActive(true);
         loaded = false;
-        /*m_animator.Play("Attack");*/
     }
 
 
