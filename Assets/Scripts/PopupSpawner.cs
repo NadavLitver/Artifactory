@@ -9,12 +9,15 @@ public class PopupSpawner : MonoBehaviour
     private void Start()
     {
         owner = GetComponent<Actor>();
-        owner.OnDamageCalcOver.AddListener(SpawnPopup);
+        owner.OnDamageCalcOver.AddListener(SpawnDmgPopup);
+        //added to the attacked actor 
+        owner.OnRecieveHealth.AddListener(SpawnDmgPopup);
     }
 
-    private void SpawnPopup(DamageHandler givendmg)
+    private void SpawnDmgPopup(DamageHandler givendmg)
     {
         GameManager.Instance.PopupManager.SetDamagePopup(givendmg, transform.position);
-    }  
-
+    }
 }
+
+  

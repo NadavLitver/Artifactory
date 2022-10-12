@@ -33,4 +33,5 @@ public enum DamageType
     normal,
     fire,
     ice,
+    heal
 }

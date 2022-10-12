@@ -16,11 +16,12 @@ public class Room : MonoBehaviour
     [SerializeField] bool isStartingRoom;
     [SerializeField] bool occupied;
     [SerializeField] RoomType roomType;
-    [SerializeField] RoomSize size;
+    RoomSize size;
     [SerializeField] int sizeX;
     [SerializeField] int sizeY;
     [SerializeField] CustomPos myPos;
     [SerializeField] List<CustomPos> occupiedPositions = new List<CustomPos>();
+    [SerializeField] Transform startPosition;
     public List<ExitInteractable> Exits { get => exits; }
     public bool IsStartingRoom { get => isStartingRoom; }
     public bool Occupied { get => occupied; set => occupied = value; }
@@ -28,6 +29,7 @@ public class Room : MonoBehaviour
     public RoomSize Size { get => size; set => size = value; }
     public CustomPos MyPos { get => myPos; set => myPos = value; }
     public List<CustomPos> OccupiedPositions { get => occupiedPositions; set => occupiedPositions = value; }
+    public Transform StartPosition { get => startPosition; set => startPosition = value; }
 
     void Awake()
     {
