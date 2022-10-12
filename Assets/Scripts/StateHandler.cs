@@ -19,6 +19,7 @@ public class StateHandler : MonoBehaviour
             SwitchToState(nextState);
         }
     }
+ 
     private void SwitchToState(State _state)
     {
         currentState = _state;
