@@ -4,7 +4,8 @@ public class Explosion : MonoBehaviour
 {
     [SerializeField] float radius;
     [SerializeField] Ability explosionAbility;
-
+    private Weapon source;
+    [SerializeField] LayerMask HitLayer;
     private void OnEnable()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
@@ -13,9 +14,14 @@ public class Explosion : MonoBehaviour
             Actor actor = item.GetComponent<Actor>();
             if (!ReferenceEquals(actor, null))
             {
-                actor.GetHit(explosionAbility);
+                actor.GetHit(explosionAbility, source.Host);
             }
         }
+    }
+
+    public void CacheSource(Weapon givenWeapon)
+    {
+        source = givenWeapon;
     }
 
     private void OnDrawGizmos()

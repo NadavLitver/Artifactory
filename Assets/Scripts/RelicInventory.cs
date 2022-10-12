@@ -12,6 +12,7 @@ public class RelicInventory : MonoBehaviour
     public void AddRelic(Relic givenRelic)
     {
         relicList.Add(givenRelic);
+        GameManager.Instance.assets.playerActor.RecieveStatusEffects(givenRelic.MyEffectEnum);
     }
 
 

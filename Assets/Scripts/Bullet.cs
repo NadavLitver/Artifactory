@@ -1,6 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Collections;
 
 public class Bullet : MonoBehaviour
 {
@@ -8,10 +8,20 @@ public class Bullet : MonoBehaviour
     [SerializeField] float lifeTime;
     [SerializeField] float Speed;
     [SerializeField] Rigidbody2D rb;
-    [SerializeField] GameObject Explosion;
-    bool exploded = false;
+    [SerializeField] Explosion Explosion;
     [SerializeField] bool explosive;
+    bool exploded = false;
 
+    Weapon source;
+
+    public void CahceSource(Weapon givenWeapon)
+    {
+        source = givenWeapon;
+        if (!ReferenceEquals(Explosion, null))
+        {
+            Explosion.CacheSource(givenWeapon);
+        }
+    }
 
     private void Start()
     {
@@ -21,15 +31,16 @@ public class Bullet : MonoBehaviour
     private void OnEnable()
     {
         rb.velocity = Vector2.right * Speed * GameManager.Instance.assets.Player.transform.localScale.x;
-        LeanTween.delayedCall(lifeTime, Explode);
+        StartCoroutine(ExplodeOnLifeTimeExpired());
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
         //the impact of the bullet itself.
+        Debug.Log(collision.gameObject.name);
         Actor actor = collision.gameObject.GetComponent<Actor>();
         if (!ReferenceEquals(actor, null))
         {
-            actor.GetHit(impactAbility);
+            actor.GetHit(impactAbility, source.Host);
             Explode();
         }
     }
@@ -38,20 +49,28 @@ public class Bullet : MonoBehaviour
     {
         if (exploded || !explosive)
         {
+            rb.velocity = Vector2.zero;
+            exploded = true;
+            TurnOff();
             return;
         }
         rb.velocity = Vector2.zero;
         exploded = true;
-        Explosion.SetActive(true);
+        Explosion.gameObject.SetActive(true);
         LeanTween.delayedCall(1f, TurnOff);
     }
 
     private void TurnOff()
     {
-        Explosion.SetActive(false);
+        Explosion.gameObject.SetActive(false);
         gameObject.SetActive(false);
         exploded = false;
     }
 
+    IEnumerator ExplodeOnLifeTimeExpired()
+    {
+        yield return new WaitForSeconds(lifeTime);
+        Explode();
+    }
 
 }

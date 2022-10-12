@@ -5,10 +5,14 @@ using UnityEngine;
 public class PlayerActor : Actor
 {
     public Animator m_animator;
-    
+    [SerializeField] RelicInventory playerRelicInventory;
+
+    public RelicInventory PlayerRelicInventory { get => playerRelicInventory;}
+
     public override void onActorDeath()
     {
         base.onActorDeath();
         m_animator.Play("Die");
     }
+    
 }

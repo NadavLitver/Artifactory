@@ -11,12 +11,9 @@ public enum RelicEffectsEnum
 
 public class Relic : MonoBehaviour
 {
-    private StatusEffect effect;
-    [SerializeField] RelicEffectsEnum myEffect;
+    [SerializeField] StatusEffectEnum myEffect;
 
-
-
-
-    public RelicEffectsEnum MyEffect { get => myEffect; set => myEffect = value; }
+    public StatusEffect MyEffect { get => GameManager.Instance.generalFunctions.GetStatusFromType(myEffect); }
+    public StatusEffectEnum MyEffectEnum { get => myEffect; set => myEffect = value; }
 
 }

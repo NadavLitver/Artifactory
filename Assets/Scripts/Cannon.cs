@@ -9,20 +9,32 @@ public class Cannon : Weapon
     [SerializeField] float chargeDuration;
     [SerializeField] float timeTillFade;
     float loadedTime;
-
-    bool loaded;
-    bool charging;
+    bool isLoaded;
+    bool isCharging;
     bool jumped;
     [SerializeField] float jumpForce;
-  
+
+    private void OnEnable()
+    {
+        isCharging = false;
+    }
+    private void Start()
+    {
+        foreach (var item in bulletPool.pooledObjects)
+        {
+            Bullet bullet = item.GetComponent<Bullet>();
+            bullet.CahceSource(this);
+        }   
+    }
+
     protected override void Attack()
     {
-        if (!loaded && !charging)
+        if (!isLoaded && !isCharging)
         {
             StartCoroutine(StartCharging());
         }
         CheckBulletFade();
-        if (loaded)
+        if (isLoaded)
         {
             FireBullet();
         }
@@ -30,10 +42,10 @@ public class Cannon : Weapon
 
     IEnumerator StartCharging()
     {
-        charging = true;
+        isCharging = true;
         yield return new WaitForSecondsRealtime(chargeDuration);
-        charging = false;
-        loaded = true;
+        isCharging = false;
+        isLoaded = true;
         loadedTime = Time.time;
         Debug.Log("cannon armed");
     }
@@ -42,7 +54,7 @@ public class Cannon : Weapon
     {
         if (Time.time - loadedTime >= timeTillFade)
         {
-            loaded = false;
+            isLoaded = false;
         }
     }
 
@@ -75,10 +87,8 @@ public class Cannon : Weapon
     {
         GameObject bullet = bulletPool.GetPooledObject();
         bullet.transform.position = muzzle.position;
-       // bullet.CacheDirection(transform.right);
         bullet.gameObject.SetActive(true);
-        loaded = false;
-        /*m_animator.Play("Attack");*/
+        isLoaded = false;
     }
 
 

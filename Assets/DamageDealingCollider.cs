@@ -39,7 +39,7 @@ public class DamageDealingCollider : MonoBehaviour
             if (!ReferenceEquals(currentEnemyHit, null))
             {
                 // currentEnemyHit.TakeDamage(damage);
-                currentEnemyHit.GetHit(m_ability);
+              //  currentEnemyHit.GetHit(m_ability);
                 onHit.Invoke();
             }
         }

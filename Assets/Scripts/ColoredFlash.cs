@@ -41,7 +41,7 @@ public class ColoredFlash : MonoBehaviour
         // Get the SpriteRenderer to be used,
         // alternatively you could set it from the inspector.
         m_actor = GetComponent<Actor>();
-        m_actor.TakeDamageEvent.AddListener(Flash);
+        m_actor.TakeDamageGFX.AddListener(Flash);
         spriteRenderers = GetComponentsInChildren<SpriteRenderer>();
         originalColors = new Color[spriteRenderers.Length];
         // Get the material that the SpriteRenderer uses, 

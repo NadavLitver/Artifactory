@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Events;
-[RequireComponent(typeof(Collider2D))]
 public class Weapon : MonoBehaviour
 {
     protected Animator m_animator;
@@ -9,9 +8,13 @@ public class Weapon : MonoBehaviour
     [SerializeField] AbilityCombo abilityCombo;
     public AbilityCombo AbilityCombo { get => abilityCombo; set => abilityCombo = value; }
 
+    [SerializeField] private Actor host;
+    public Actor Host { get => host; set => host = value; }
+
     private void Awake()
     {
         m_animator = GetComponentInParent<Animator>();
+        host = GetComponentInParent<Actor>();
         if (!ReferenceEquals(abilityCombo, null))
         {
             abilityCombo.OnAttackPerformed.AddListener(AttackPerformed);
@@ -40,7 +43,7 @@ public class Weapon : MonoBehaviour
         Actor currentActorHit = collision.GetComponent<Actor>();
         if (!ReferenceEquals(currentActorHit, null))
         {
-            currentActorHit.GetHit(abilityCombo.CurrentAbility);
+            currentActorHit.GetHit(abilityCombo.CurrentAbility, Host);
             OnActorHit?.Invoke(currentActorHit, AbilityCombo.CurrentAbility);
         }
     }

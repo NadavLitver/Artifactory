@@ -20,8 +20,12 @@ public class DamageHandler
         {
             baseAmount *= mod;
         }
-        modifiers.Clear();
         return baseAmount;
+    }
+
+    public void ClearMods()
+    {
+        modifiers.Clear();
     }
 }
 public enum DamageType
