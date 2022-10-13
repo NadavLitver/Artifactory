@@ -4,40 +4,38 @@ using UnityEngine;
 public class EnemyRayData : MonoBehaviour
 {
     [SerializeField] Transform fatherTransform;
-    [SerializeField] float maxJumpHeight;
+    [SerializeField] float rayHeights;
     [SerializeField] float distanceBetweenRays;
     [SerializeField] float RayLength;
     [SerializeField] int amountOfRays;
     [SerializeField] List<Vector2> rayPoints;
     [SerializeField] List<Vector2> HitPoints;
     [SerializeField] LayerMask GroundMask;
-    private void InitRayPoints()
+    [SerializeField] bool useBoundingBox;
+    [SerializeField] boundingBox m_boundingBox;
+    private Vector2 startingPos;
+    public List<Vector2> GetHitPoints { get => HitPoints; set => HitPoints = value; }
+    private void Start()
     {
-        if (rayPoints.Count < amountOfRays)
-        {
-            int missingRays = amountOfRays - rayPoints.Count;
-            for (int i = 0; i < missingRays; i++)
-            {
-                rayPoints.Add(Vector2.zero);
-                HitPoints.Add(Vector2.zero);
-            }
-        }
-        else if (rayPoints.Count > amountOfRays)
-        {
-            int missingRays = rayPoints.Count - amountOfRays;
-            for (int i = 0; i < missingRays; i++)
-            {
-                rayPoints.RemoveAt(rayPoints.Count -1);
-                HitPoints.RemoveAt(HitPoints.Count - 1);
-                
-            }
-        }
+        startingPos = fatherTransform.position;
+       
+            m_boundingBox.maxX = (startingPos + m_boundingBox.offset).x + m_boundingBox.size * 0.5f;
+            m_boundingBox.maxY = (startingPos + m_boundingBox.offset).y + m_boundingBox.size * 0.5f;
+            m_boundingBox.minX = (startingPos + m_boundingBox.offset).x - m_boundingBox.size * 0.5f;
+            m_boundingBox.minY = (startingPos + m_boundingBox.offset).y - m_boundingBox.size * 0.5f;
+
+        
+    }
+    private void clearRayListData()
+    {
+        rayPoints.Clear();
+        HitPoints.Clear();
 
     }
 
     public void Update()
     {
-        InitRayPoints();
+        clearRayListData();
         SetRayPoints();
         ShootRays();
     }
@@ -45,7 +43,7 @@ public class EnemyRayData : MonoBehaviour
     {
         float distanceBetween = distanceBetweenRays;
         Vector2 m_position = fatherTransform.position;
-        float yPos = m_position.y + maxJumpHeight;
+        float yPos = m_position.y + rayHeights;
         for (int i = 0; i < amountOfRays; i++)
         {
             int RayPointDirection = GetRayDirection(i);
@@ -53,20 +51,60 @@ public class EnemyRayData : MonoBehaviour
             {
                 distanceBetween += distanceBetweenRays;
             }
-            rayPoints[i] = new Vector2(m_position.x + distanceBetween * RayPointDirection, yPos);
+            Vector2 currentRayPos = new Vector2(m_position.x + distanceBetween * RayPointDirection, yPos);
+            if (useBoundingBox)
+            {
+                if (isPointInBox(currentRayPos))
+                {
+                    rayPoints.Add(currentRayPos);
+                }
+            }
+            else
+            {
+                rayPoints.Add(currentRayPos);
+
+            }
+            
 
         }
 
     }
+    public bool isPointInBox(Vector2 point)
+    {
+        
+        if(point.x < m_boundingBox.maxX && point.x > m_boundingBox.minX && point.y < m_boundingBox.maxY && point.y > m_boundingBox.minY)
+        {
+            if (!Physics2D.OverlapPoint(point))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     void ShootRays()
     {
-        for (int i = 0; i < amountOfRays; i++)
+        for (int i = 0; i < rayPoints.Count; i++)
         {
             RaycastHit2D hit2D = Physics2D.Raycast(rayPoints[i], Vector2.down, RayLength, GroundMask);
-            HitPoints[i] = hit2D.point;
+            if(hit2D.collider != null)
+            {
+              HitPoints.Add(hit2D.collider.bounds.ClosestPoint(hit2D.point));
+            }
             
             
         }
+    }
+    public bool isRayHitDataEmpty()
+    {
+        return !(HitPoints.Count >= 1);
+    }
+    public Vector2 GetRandomPos()
+    {
+        if (HitPoints.Count == 0)
+            return Vector2.zero;
+
+        int randomPoint = Random.Range(0, HitPoints.Count);
+        return HitPoints[randomPoint];
     }
     int GetRayDirection(int i)=> (i % 2 == 0) ? 1 : -1;
     private void OnDrawGizmosSelected()
@@ -87,5 +125,18 @@ public class EnemyRayData : MonoBehaviour
         }
 
     }
-    
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireCube(startingPos + m_boundingBox.offset, Vector2.one * m_boundingBox.size);
+        //Gizmos.DrawWireSphere(new Vector2(m_boundingBox.maxX, m_boundingBox.maxY),1);
+        //Gizmos.DrawWireSphere(new Vector2(m_boundingBox.minX, m_boundingBox.minY), 1);
+
+    }
+}
+[System.Serializable]
+struct boundingBox{
+  public float size;
+  public  Vector2 offset;
+
+  public float maxY, minY, maxX, minX;
 }
