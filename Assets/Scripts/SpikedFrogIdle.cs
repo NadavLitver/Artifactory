@@ -12,7 +12,15 @@ public class SpikedFrogIdle : State
     [SerializeField] State NoticePlayerState;
     public override State RunCurrentState()
     {
-        
+        //play jump anim?
+        launcher.Launch(rayData.GetRandomPos());
+
+        if (lineOfSight.CanSeePlayer())
+        {
+            return NoticePlayerState;
+        }
+
+        return this;
     }
 
     void Start()
@@ -20,11 +28,5 @@ public class SpikedFrogIdle : State
         launcher = GetComponent<BallLauncher>();
         rayData = GetComponent<EnemyRayData>();
         lineOfSight = GetComponent<EnemyLineOfSight>();
-    }
-
-    
-    void Update()
-    {
-        
     }
 }

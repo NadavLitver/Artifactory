@@ -43,7 +43,7 @@ public class BallLauncher : MonoBehaviour
 		}
 	}
 	[ContextMenu("Launch")]
-	void Launch(Vector2 target)
+	public void Launch(Vector2 target)
 	{
 		if (rayData.isRayHitDataEmpty())
 			return;

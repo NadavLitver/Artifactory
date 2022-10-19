@@ -9,6 +9,7 @@ public class DynamicHpBar : MonoBehaviour
     [SerializeField] float hpThreshold;
     [SerializeField] Transform bar;
     [SerializeField] Transform cubePrefab;
+    [SerializeField] bool refill;
     //cubes amount = maxhp/ threshold
     //cube x width  = threshold/maxhp
 
@@ -60,16 +61,18 @@ public class DynamicHpBar : MonoBehaviour
         }
     }
 
-
-
     public void UpdateBar(DamageHandler givenDmg)
     {
-        camulativeDmg += givenDmg.calculateFinalDamage();
+        camulativeDmg = givenDmg.calculateFinalDamage();
         int amountToRemove = (int)(camulativeDmg / hpThreshold);
         for (int i = 0; i < amountToRemove; i++)
         {
             cubesCreated[cubesCreated.Count- 1].gameObject.SetActive(false);
             cubesCreated.RemoveAt(cubesCreated.Count - 1);
+            if (cubesCreated.Count <= 0 && refill)
+            {
+                DrawCubes();
+            }
         }
     }
 

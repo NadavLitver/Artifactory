@@ -121,8 +121,8 @@ public class EnemyRayData : MonoBehaviour
 
             }
         }
-
     }
+
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireCube(startingPos + m_boundingBox.offset, Vector2.one * m_boundingBox.size);
