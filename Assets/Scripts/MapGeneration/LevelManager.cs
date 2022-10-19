@@ -27,7 +27,7 @@ public class LevelManager : MonoBehaviour
     {
         mapGenerator = FindObjectOfType<MapGenerator>();
         InstantiateRooms(firstIsleRooms);
-        LeanTween.delayedCall(1f ,AssembleLevel);
+      //  LeanTween.delayedCall(1f ,AssembleLevel);
     }
 
     [ContextMenu("Assemble Level")]
