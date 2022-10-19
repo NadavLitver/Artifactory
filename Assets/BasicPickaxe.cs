@@ -7,9 +7,11 @@ public class BasicPickaxe : Weapon
     [SerializeField] float radiusForWallCheck;
     PlayerController player;
     [SerializeField] float distaceFromPlayerToCheck;
+    [SerializeField] Vector2 JumpToClawForce;
     private bool Clawed;
     private Vector2 moveToPositionForDebug;
     private int playerLookdir => player.GetIsLookingRight ? 1 : -1;
+    private Vector2 jumpToClawForce => new Vector2(JumpToClawForce.x * playerLookdir, JumpToClawForce.y);
     private Vector2 positionToCheckFrom => (Vector2)transform.position + (Vector2.right * distaceFromPlayerToCheck * playerLookdir);
     [SerializeField] Vector2 forceForWallJump;
 
@@ -54,7 +56,14 @@ public class BasicPickaxe : Weapon
     }
     protected override void Mobility()
     {
-        CheckFromWall();
+        if (player.GetIsGrounded)
+        {
+            StartCoroutine(IEJumpFromMobility());
+        }
+        else
+        {
+            CheckFromWall();   
+        }
 
     }
 
@@ -70,7 +79,19 @@ public class BasicPickaxe : Weapon
             ClawRoutine = StartCoroutine(IEMoveToWall(colliderHit.ClosestPoint(player.transform.position)));
         }
     }
+    IEnumerator IEJumpFromMobility()
+    {
+      
+        player.ResetVelocity();
+        player.RecieveForce(jumpToClawForce);
 
+        yield return new WaitUntil(() => player.GetIsFalling == true);
+        while (!player.GetIsGrounded && !Clawed)
+        {
+            CheckFromWall();
+            yield return new WaitForEndOfFrame();
+        }
+    }
     IEnumerator IEMoveToWall(Vector3 positionToMoveTo)
     {
         Clawed = true;
