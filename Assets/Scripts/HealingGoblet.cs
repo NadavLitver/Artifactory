@@ -13,20 +13,23 @@ public class HealingGoblet : StatusEffect
 
     public override void Unsubscribe()
     {
-        host.OnDealDamage.RemoveListener(StealLife);
-
+        host.OnDealingDamageCalcOver.RemoveListener(StealLife);
     }
 
     protected override void Subscribe()
     {
-        host.OnDealDamage.AddListener(StealLife);
+        host.OnDealingDamageCalcOver.AddListener(StealLife);
     }
 
-    private void StealLife(DamageHandler givenDmg, Actor givenActor)
+    private void StealLife(DamageHandler givenDmg)
     {
+        //givenDmg = damage dealt by owner
         if (counter == 10)
         {
-            //heal host 
+            DamageHandler healingDmg = new DamageHandler();
+            healingDmg.amount = givenDmg.calculateFinalDamage() * GameManager.Instance.DamageManager.HealingGobletLifeStealPercentage;
+            healingDmg.myDmgType = DamageType.heal;
+            host.Heal(healingDmg);
             counter = 0;
         }
         else

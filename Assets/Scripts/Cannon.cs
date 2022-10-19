@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using System.Collections.Generic;
 
 public class Cannon : Weapon
 {
@@ -24,7 +23,7 @@ public class Cannon : Weapon
         {
             Bullet bullet = item.GetComponent<Bullet>();
             bullet.CahceSource(this);
-        }   
+        }
     }
 
     protected override void Attack()
@@ -78,6 +77,7 @@ public class Cannon : Weapon
 
     IEnumerator waitForGrounded()
     {
+        yield return new WaitForSeconds(0.1f);
         yield return new WaitUntil(() => GameManager.Instance.assets.PlayerController.GetIsGrounded);
         jumped = false;
     }

@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public bool canMove;
     [SerializeField] Rigidbody2D m_rb;
     [SerializeField] Vector2 velocity;
+    [SerializeField] private Vector2 externalForces;
     [SerializeField] Vector2 StartingScale;
     [SerializeField] Vector2 BottomRightPoint;
     [SerializeField] Vector2 BottomLeftPoint;
@@ -24,7 +25,6 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool CoyoteAvailable;
     [SerializeField] float acceleration;
     [SerializeField] Animator m_animator;
-    [SerializeField] private Vector2 externalForces;
 
     [Header("Editable Properties"), Space(10)]
     [SerializeField, Range(0, 100)] float maxGravity;
@@ -49,7 +49,8 @@ public class PlayerController : MonoBehaviour
     public bool GetIsGrounded { get => isGrounded; set => isGrounded = value; }
     public bool GetIsFalling { get => isFalling; set => isFalling = value; }
     public bool GetIsJumping { get => Jumping; set => Jumping = value; }
-    public Vector2 ExternalForces { get => externalForces; set => externalForces = value; }
+    public Vector2 GetExternalForces { get => externalForces; set => externalForces = value; }
+    public bool GetCoyoteAvailable { get => CoyoteAvailable; set => CoyoteAvailable = value; }
 
     private void Awake()
     {
@@ -116,9 +117,13 @@ public class PlayerController : MonoBehaviour
     {
         if (CheckIsCeiling())
         {
-            if (velocity.y > 0)
+            if (m_rb.velocity.y > 0)
             {
+               // ResetVelocity();
                 velocity.y = 0;
+                m_rb.velocity = new Vector2(m_rb.velocity.x, 0);
+                externalForces.y = 0;
+
             }
             Debug.Log("Ceiling");
         }
@@ -233,7 +238,7 @@ public class PlayerController : MonoBehaviour
     
     public void RecieveForce(Vector2 force)
     {
-        ExternalForces += force;
+        GetExternalForces += force;
     }
     private void OnDrawGizmos()
     {

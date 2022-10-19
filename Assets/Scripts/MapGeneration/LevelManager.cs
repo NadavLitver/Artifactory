@@ -15,7 +15,7 @@ public class LevelManager : MonoBehaviour
     [SerializeField] MapGenerator mapGenerator;
     List<Room> createdRooms = new List<Room>();
     RoomConnectivity roomConnectionCheck = new RoomConnectivity();
-
+    Room active;
     public List<Room> CurrentRunRooms { get => currentRunRooms; }
     public Room FirstRoom { get => firstRoom; set => firstRoom = value; }
     public int NumberOfRooms { get => numberOfRooms; }
@@ -307,7 +307,7 @@ public class LevelManager : MonoBehaviour
         Vector3 v10 = new Vector3(10, 10, 0);
         foreach (var item in givenRoomList)
         {
-            GameObject go = Instantiate(item.gameObject, item.MyPos.vectorMult(v10), Quaternion.identity);
+            GameObject go = Instantiate(item.gameObject);
             Room r = go.GetComponent<Room>();
             createdRooms.Add(r);
             go.SetActive(false);
@@ -316,21 +316,20 @@ public class LevelManager : MonoBehaviour
 
     public void BeginRun()
     {
-        Vector3 v100 = new Vector3(10, 10, 0);
         foreach (var item in currentRunRooms)
         {
-            item.transform.position = item.MyPos.vectorMult(v100);
-            item.gameObject.SetActive(true);
+            item.gameObject.SetActive(false);
         }
-        /*foreach (var item in currentRunRooms)
-        {
-            mapGenerator.AddTile(item);
-        }
-        foreach (var item in CachedConnectionDatas)
-        {
-            mapGenerator.AddConnection(item);
-        }*/
+        CurrentRunRooms[0].gameObject.SetActive(true);
+        active = currentRunRooms[0];
+        GameManager.Instance.generalFunctions.SpawnObjectAt(GameManager.Instance.assets.Player.gameObject, active.StartPosition.position);
+    }
 
-        //currentRunRooms[0].gameObject.SetActive(true);
+    public void MoveToRoom(ExitInteractable givenExit)
+    {
+        active.gameObject.SetActive(false);
+        givenExit.OtherExit.MyRoom.gameObject.SetActive(true);
+        active = givenExit.OtherExit.MyRoom;
+        GameManager.Instance.generalFunctions.SpawnObjectAt(GameManager.Instance.assets.Player.gameObject, givenExit.OtherExit.transform.position);
     }
 }

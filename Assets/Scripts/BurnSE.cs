@@ -58,7 +58,6 @@ public class BurnSE : StatusEffect
         {
             host.TakeDamage(m_DamageHandler);
             yield return new WaitForSeconds(intervalsTime);
-            Debug.Log("yes " + counter);
             counter += intervalsTime;
         }
         host.RemoveStatusEffect(this);

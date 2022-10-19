@@ -9,6 +9,11 @@ public class PlayerActor : Actor
 
     public RelicInventory PlayerRelicInventory { get => playerRelicInventory;}
 
+    private void Start()
+    {
+        OnDealingDamageCalcOver.AddListener(GameManager.Instance.assets.CameraShake.screenShakeBasedOnDamage);
+    }
+
     public override void onActorDeath()
     {
         base.onActorDeath();
