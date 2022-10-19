@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool CoyoteAvailable;
     [SerializeField] float acceleration;
     [SerializeField] Animator m_animator;
+   // [SerializeField] PlayerGroundCheck m_groundCheck;
+
 
     [Header("Editable Properties"), Space(10)]
     [SerializeField, Range(0, 100)] float maxGravity;
@@ -70,11 +72,11 @@ public class PlayerController : MonoBehaviour
     }
     public void GetColliderSizeInformation()
     {
-        BottomRightPoint.x = m_collider.bounds.max.x - 0.2f;
+        BottomRightPoint.x = m_collider.bounds.max.x - 0.4f;
         BottomRightPoint.y = m_collider.bounds.min.y + 0.1f;
         topMidPoint = (Vector2)m_collider.bounds.center + Vector2.up * (m_collider.bounds.size.y * 0.5f);
         BottomLeftPoint.y = m_collider.bounds.min.y + 0.1f;
-        BottomLeftPoint.x = m_collider.bounds.min.x + 0.2f;
+        BottomLeftPoint.x = m_collider.bounds.min.x + 0.4f;
 
     }
     private void JumpPressed()
@@ -147,6 +149,7 @@ public class PlayerController : MonoBehaviour
         {
             velocity.y = Mathf.MoveTowards(velocity.y, 0, GravityScale * Time.deltaTime);
             Jumping = false;
+            
         }
     }
     IEnumerator SetCoyoteForTime()
@@ -227,6 +230,7 @@ public class PlayerController : MonoBehaviour
     {
         bool bottomRightRay = Physics2D.Raycast(BottomRightPoint, Vector2.down, groundCheckDistance, GroundLayerMask);
         bool bottomLeftRay = Physics2D.Raycast(BottomLeftPoint, Vector2.down, groundCheckDistance, GroundLayerMask);
+       
         return bottomRightRay || bottomLeftRay;
     }
     private void FixedUpdate()
