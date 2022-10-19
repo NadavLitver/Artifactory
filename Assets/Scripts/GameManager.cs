@@ -93,6 +93,9 @@ public class AssetsRefrence
 
     [Header("CAMERA"), Space(10)]
     public ScreenShakeHandler CameraShake;
+
+    [Header("HEALTH BAR")]
+    public ObjectPool CubePool;
 }
 public class GeneralFunctions
 {
