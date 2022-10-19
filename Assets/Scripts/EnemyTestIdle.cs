@@ -28,7 +28,6 @@ public class EnemyTestIdle : State
         bool isSwitch = (!m_groundCheck.isGrounded() || wallCheck.IsInfrontWall());
         if (isSwitch)
         {
-            
             fatherTransform.localScale = new Vector3(fatherTransform.localScale.x * -1, startScale.y, startScale.z);
         }
      

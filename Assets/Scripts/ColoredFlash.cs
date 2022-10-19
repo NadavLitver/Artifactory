@@ -46,7 +46,7 @@ public class ColoredFlash : MonoBehaviour
         originalColors = new Color[spriteRenderers.Length];
         // Get the material that the SpriteRenderer uses, 
         // so we can switch back to it after the flash ended.
-        originalMaterial = spriteRenderers[0].material;
+      //  originalMaterial = spriteRenderers[0].material;
 
         for (int i = 0; i < originalColors.Length; i++)
         {

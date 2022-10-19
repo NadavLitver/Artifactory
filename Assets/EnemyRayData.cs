@@ -15,22 +15,20 @@ public class EnemyRayData : MonoBehaviour
     [SerializeField] boundingBox m_boundingBox;
     private Vector2 startingPos;
     public List<Vector2> GetHitPoints { get => HitPoints; set => HitPoints = value; }
+    internal boundingBox BoundingBox { get => m_boundingBox; }
+
     private void Start()
     {
         startingPos = fatherTransform.position;
-       
-            m_boundingBox.maxX = (startingPos + m_boundingBox.offset).x + m_boundingBox.size * 0.5f;
-            m_boundingBox.maxY = (startingPos + m_boundingBox.offset).y + m_boundingBox.size * 0.5f;
-            m_boundingBox.minX = (startingPos + m_boundingBox.offset).x - m_boundingBox.size * 0.5f;
-            m_boundingBox.minY = (startingPos + m_boundingBox.offset).y - m_boundingBox.size * 0.5f;
-
-        
+        m_boundingBox.maxX = (startingPos + m_boundingBox.offset).x + m_boundingBox.size * 0.5f;
+        m_boundingBox.maxY = (startingPos + m_boundingBox.offset).y + m_boundingBox.size * 0.5f;
+        m_boundingBox.minX = (startingPos + m_boundingBox.offset).x - m_boundingBox.size * 0.5f;
+        m_boundingBox.minY = (startingPos + m_boundingBox.offset).y - m_boundingBox.size * 0.5f;
     }
     private void clearRayListData()
     {
         rayPoints.Clear();
         HitPoints.Clear();
-
     }
 
     public void Update()
@@ -64,15 +62,15 @@ public class EnemyRayData : MonoBehaviour
                 rayPoints.Add(currentRayPos);
 
             }
-            
+
 
         }
 
     }
     public bool isPointInBox(Vector2 point)
     {
-        
-        if(point.x < m_boundingBox.maxX && point.x > m_boundingBox.minX && point.y < m_boundingBox.maxY && point.y > m_boundingBox.minY)
+
+        if (point.x < m_boundingBox.maxX && point.x > m_boundingBox.minX && point.y < m_boundingBox.maxY && point.y > m_boundingBox.minY)
         {
             if (!Physics2D.OverlapPoint(point))
             {
@@ -86,12 +84,12 @@ public class EnemyRayData : MonoBehaviour
         for (int i = 0; i < rayPoints.Count; i++)
         {
             RaycastHit2D hit2D = Physics2D.Raycast(rayPoints[i], Vector2.down, RayLength, GroundMask);
-            if(hit2D.collider != null)
+            if (hit2D.collider != null)
             {
-              HitPoints.Add(hit2D.collider.bounds.ClosestPoint(hit2D.point));
+                HitPoints.Add(hit2D.collider.bounds.ClosestPoint(hit2D.point));
             }
-            
-            
+
+
         }
     }
     public bool isRayHitDataEmpty()
@@ -106,7 +104,7 @@ public class EnemyRayData : MonoBehaviour
         int randomPoint = Random.Range(0, HitPoints.Count);
         return HitPoints[randomPoint];
     }
-    int GetRayDirection(int i)=> (i % 2 == 0) ? 1 : -1;
+    int GetRayDirection(int i) => (i % 2 == 0) ? 1 : -1;
     private void OnDrawGizmosSelected()
     {
         if (Application.isPlaying)
@@ -134,9 +132,10 @@ public class EnemyRayData : MonoBehaviour
     }
 }
 [System.Serializable]
-struct boundingBox{
-  public float size;
-  public  Vector2 offset;
+struct boundingBox
+{
+    public float size;
+    public Vector2 offset;
 
-  public float maxY, minY, maxX, minX;
+    public float maxY, minY, maxX, minX;
 }
