@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class BallLauncher : MonoBehaviour
 {
 
@@ -15,12 +15,14 @@ public class BallLauncher : MonoBehaviour
 	private float startingGravity;
 	private float debugCounter;
 	public float debugIntrevals;
+
+	public bool IsJumping;
 	//private LaunchData debuglaunchData;
 	void Start()
 	{
-		startingGravity = ball.gravityScale;
-		ball.gravityScale = 0;
-	}
+       // startingGravity = ball.gravityScale;
+       // ball.gravityScale = 0;
+    }
 
 	void Update()
 	{
@@ -49,8 +51,9 @@ public class BallLauncher : MonoBehaviour
 			return;
 		LaunchData currentLaunchData = CalculateLaunchData(target);
 		StartCoroutine(IEStopWhenTimeOver(currentLaunchData));
-		ball.gravityScale = startingGravity;
+		//ball.gravityScale = startingGravity;
 		ball.velocity = currentLaunchData.initialVelocity;//use the calc func to get new one
+		
 	}
 
 	LaunchData CalculateLaunchData(Vector2 target)
@@ -65,9 +68,11 @@ public class BallLauncher : MonoBehaviour
 	}
 	IEnumerator IEStopWhenTimeOver(LaunchData launchData)
     {
+		IsJumping = true;
 		yield return new WaitForSeconds(launchData.timeToTarget);
+		IsJumping = false;
 		ball.velocity = Vector2.zero;
-		ball.gravityScale = 0;
+	//	ball.gravityScale = 0;
     }
 	void DrawPath(LaunchData launchData)
 	{

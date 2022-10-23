@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
 public class ColoredFlash : MonoBehaviour
 {
     #region Datamembers
@@ -15,7 +16,7 @@ public class ColoredFlash : MonoBehaviour
 
     #endregion
     #region Private Fields
-    private Actor m_actor;
+    [SerializeField] private Actor m_actor;
     // The SpriteRenderer that should flash.
     public SpriteRenderer[] spriteRenderers;
 
@@ -40,7 +41,7 @@ public class ColoredFlash : MonoBehaviour
     {
         // Get the SpriteRenderer to be used,
         // alternatively you could set it from the inspector.
-        m_actor = GetComponent<Actor>();
+        //GetActorWhereverItMayBe();
         m_actor.TakeDamageGFX.AddListener(Flash);
         spriteRenderers = GetComponents<SpriteRenderer>();
         originalColors = new Color[spriteRenderers.Length];
@@ -59,6 +60,25 @@ public class ColoredFlash : MonoBehaviour
     }
 
     #endregion
+
+
+    void GetActorWhereverItMayBe()
+    {
+        m_actor = GetComponent<Actor>();
+        if (ReferenceEquals(m_actor, null))
+        {
+            m_actor = GetComponentInChildren<Actor>();
+            if (ReferenceEquals(m_actor, null))
+            {
+                m_actor = GetComponentInParent<Actor>();
+                if (ReferenceEquals(m_actor, null))
+                {
+
+                    Debug.LogError("no actor found on " + name);
+                }
+            }
+        }
+    }
 
     public void Flash()
     {

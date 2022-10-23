@@ -35,7 +35,6 @@ public class PlayerTestWeapon : Weapon
                 if(ReferenceEquals(currentEnemyHit, null))
                 {
                     currentEnemyHit = collision.GetComponentInParent<Actor>();
-
                 }
             }
             if (!ReferenceEquals(currentEnemyHit, null))

@@ -9,9 +9,10 @@ public class Dummy : Actor
         OnDeath.AddListener(HealBackToFull);
     }
 
+    [ContextMenu("Heal")]
     public void HealBackToFull()
     {
-        currentHP = maxHP;
+        Heal(new DamageHandler() { amount = maxHP });
     }
 
 }

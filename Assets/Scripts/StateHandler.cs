@@ -5,10 +5,12 @@ using UnityEngine;
 public class StateHandler : MonoBehaviour
 {
     [SerializeField] State currentState;
+
+    //first state ^
     
     void Update()
     {
-        RunStateMachine();
+       RunStateMachine();
     }
     private void RunStateMachine()
     {
