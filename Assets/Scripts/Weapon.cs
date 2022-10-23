@@ -30,7 +30,7 @@ public class Weapon : MonoBehaviour
     }
 
 
-    protected virtual void Mobility()
+    public virtual void Mobility()
     {
 
     }

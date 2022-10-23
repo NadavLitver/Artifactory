@@ -5,7 +5,7 @@ using UnityEngine;
 public class BasicPickaxe : Weapon
 {
     [SerializeField] float radiusForWallCheck;
-    PlayerController player;
+    PlayerController player => GameManager.Instance.assets.Player.GetComponent<PlayerController>();
     [SerializeField] float distaceFromPlayerToCheck;
     [SerializeField] Vector2 JumpToClawForce;
     private bool Clawed;
@@ -24,7 +24,7 @@ public class BasicPickaxe : Weapon
 
     private void Start()
     {
-        player = GameManager.Instance.assets.Player.GetComponent<PlayerController>();
+      //  player = GameManager.Instance.assets.Player.GetComponent<PlayerController>();
         GameManager.Instance.inputManager.onJumpDown.AddListener(WallJump);
     }
 
@@ -54,7 +54,7 @@ public class BasicPickaxe : Weapon
     {
         base.Attack();
     }
-    protected override void Mobility()
+    public override void Mobility()
     {
         if (player.GetIsGrounded)
         {
@@ -102,7 +102,7 @@ public class BasicPickaxe : Weapon
         float Counter = 0;
         Vector2 startingPosition = player.transform.position;
 
-        while (!GameManager.Instance.generalFunctions.IsInRange(player.transform.position, positionToMoveTo, 0.1f))
+        while (!GameManager.Instance.generalFunctions.IsInRange(player.transform.position, positionToMoveTo, 0.3f))
         {
             player.transform.position = Vector3.Lerp(startingPosition, positionToMoveTo, Counter / 1);
             Counter += Time.deltaTime * 5;

@@ -49,7 +49,7 @@ MonoBehaviour:
   explosionAbility: {fileID: 11400000, guid: 36b2303892797084f8153cf61369fce7, type: 2}
   HitLayer:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 12288
 --- !u!212 &4856084356713579208
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -152,7 +152,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   impactAbility: {fileID: 11400000, guid: 89c42a226e5ce9849963c9f5611700b4, type: 2}
   lifeTime: 2
-  Speed: 20
+  Speed: 10
   rb: {fileID: 1572220828382042516}
   Explosion: {fileID: 7715897193401691477}
   explosive: 1
@@ -239,7 +239,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

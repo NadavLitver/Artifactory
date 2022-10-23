@@ -84,6 +84,12 @@ public class WeaponManager : MonoBehaviour
         currentWeapon = givenWeapon;
         currentWeapon.gameObject.SetActive(true);
         currentWeapon.Initialize();
+        if (!GameManager.Instance.assets.PlayerController.GetIsGrounded)
+        {
+            currentWeapon.Mobility();
+        }
+     
+        
         //m_actor.IsInAttackAnim = false;
     }
 

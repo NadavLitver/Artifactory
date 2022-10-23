@@ -58,7 +58,7 @@ public class Cannon : Weapon
     }
 
 
-    protected override void Mobility()
+    public override void Mobility()
     {
         RocketJump();
     }

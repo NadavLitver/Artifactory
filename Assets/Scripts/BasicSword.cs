@@ -21,7 +21,7 @@ public class BasicSword : Weapon
 
     }
 
-    protected override void Mobility()
+    public override void Mobility()
     {
         if (CanDash)
             StartCoroutine(IEDash());

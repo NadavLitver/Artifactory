@@ -33,7 +33,8 @@ public class Bullet : MonoBehaviour
         rb.velocity = Vector2.right * Speed * GameManager.Instance.assets.Player.transform.localScale.x;
         StartCoroutine(ExplodeOnLifeTimeExpired());
     }
-    private void OnCollisionEnter2D(Collision2D collision)
+   
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         //the impact of the bullet itself.
         Debug.Log(collision.gameObject.name);

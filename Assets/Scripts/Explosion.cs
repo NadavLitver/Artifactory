@@ -8,7 +8,7 @@ public class Explosion : MonoBehaviour
     [SerializeField] LayerMask HitLayer;
     private void OnEnable()
     {
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius, HitLayer);
         foreach (var item in colliders)
         {
             Actor actor = item.GetComponent<Actor>();
