@@ -18,9 +18,13 @@ public class Actor : MonoBehaviour, IDamagable
     /// </summary>
     public UnityEvent<DamageHandler, Actor> OnDealDamage;
     /// <summary>
-    /// invoked when this actor is done adding damage mods
+    /// invoked when this actor is done adding damage mods(reciever)
     /// </summary>
     public UnityEvent<DamageHandler> OnDamageCalcOver;
+    /// <summary>
+    /// invoked when this actor is done adding damage mods(attacker)
+    /// </summary>
+    public UnityEvent<DamageHandler> OnDealingDamageCalcOver;
     /// <summary>
     /// invoked when this actor is hit by another actor
     /// </summary>
@@ -33,6 +37,13 @@ public class Actor : MonoBehaviour, IDamagable
     /// invoked when this actor applys a status effect to another one
     /// </summary>
     public UnityEvent<StatusEffectEnum> OnApplyStatusEffect;
+    /// <summary>
+    /// invoked when this actor is healed
+    /// </summary>
+    public UnityEvent<DamageHandler> OnRecieveHealth;
+
+
+
 
     public UnityEvent TakeDamageGFX, OnDeath;
 
@@ -108,6 +119,7 @@ public class Actor : MonoBehaviour, IDamagable
         host.OnDealDamage?.Invoke(dmgHandler, this);
         onTakeDamage?.Invoke(dmgHandler);
         OnDamageCalcOver?.Invoke(dmgHandler);
+        host.OnDealingDamageCalcOver?.Invoke(dmgHandler);
         float finalDamage = dmgHandler.calculateFinalDamage();
         currentHP -= finalDamage;
         dmgHandler.ClearMods();
@@ -146,5 +158,12 @@ public class Actor : MonoBehaviour, IDamagable
             onActorDeath();
         }
         ClampHP();
+    }
+    public void Heal(DamageHandler givenDmg)
+    {
+        OnRecieveHealth?.Invoke(givenDmg);
+        currentHP += givenDmg.calculateFinalDamage();
+        ClampHP();
+
     }
 }

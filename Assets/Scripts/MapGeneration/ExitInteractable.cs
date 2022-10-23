@@ -25,6 +25,7 @@ public class ExitInteractable : MonoBehaviour
     public Room MyRoom { get => myRoom; set => myRoom = value; }
     public ExitLocationInfo ExitLocation { get => exitLocation; set => exitLocation = value; }
     public bool Occupied { get => occupied;}
+    public ExitInteractable OtherExit { get => otherExit; set => otherExit = value; }
 
     public bool CanConnectToExit(ExitInteractable givenExit)//are the exits compatible?
     {
@@ -39,6 +40,14 @@ public class ExitInteractable : MonoBehaviour
     {
         otherExit = givenExit;
         occupied = true;
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            GameManager.Instance.LevelManager.MoveToRoom(this);
+        }
     }
 }
 

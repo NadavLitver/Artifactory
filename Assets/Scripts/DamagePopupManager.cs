@@ -36,7 +36,10 @@ public class DamagePopupManager : MonoBehaviour
             
             case DamageType.ice:
                 return Color.blue;
-              
+
+            case DamageType.heal:
+                return Color.green;
+
             default:
                 return Color.black;
         }

@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public PauseMenuHandler pauseMenuHandler { get; private set; }
     public DamageManager DamageManager { get; private set; }
     public DamagePopupManager PopupManager { get; private set; }
+    public LevelManager LevelManager { get; private set; }
 
 
     public SoundManager soundManager { get; private set; }
@@ -37,6 +38,7 @@ public class GameManager : MonoBehaviour
         soundManager = GetComponentInChildren<SoundManager>();
         DamageManager = GetComponentInChildren<DamageManager>();
         PopupManager = GetComponentInChildren<DamagePopupManager>();
+        LevelManager = GetComponentInChildren<LevelManager>();
 
 
     }
@@ -88,6 +90,12 @@ public class AssetsRefrence
     public Sprite RubberDuck;
     public Sprite LightningEmblem;
     public Sprite HealingGoblet;
+
+    [Header("CAMERA"), Space(10)]
+    public ScreenShakeHandler CameraShake;
+
+    [Header("HEALTH BAR")]
+    public ObjectPool CubePool;
 }
 public class GeneralFunctions
 {
@@ -106,6 +114,11 @@ public class GeneralFunctions
     public void ResetScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void SpawnObjectAt(GameObject obj, Vector3 pos)
+    {
+        obj.transform.position = pos;
     }
 
     public StatusEffect GetStatusFromType(StatusEffectEnum effect)

@@ -24,10 +24,10 @@ public class BallLauncher : MonoBehaviour
 
 	void Update()
 	{
-        if (Input.GetKeyDown(KeyCode.Space))
+        /*if (Input.GetKeyDown(KeyCode.Space))
         {
             Launch();
-        }
+        }*/
 
         if (debugPath)
 		{
@@ -43,11 +43,11 @@ public class BallLauncher : MonoBehaviour
 		}
 	}
 	[ContextMenu("Launch")]
-	void Launch()
+	public void Launch(Vector2 target)
 	{
 		if (rayData.isRayHitDataEmpty())
 			return;
-		LaunchData currentLaunchData = CalculateLaunchData(RandomTarget);
+		LaunchData currentLaunchData = CalculateLaunchData(target);
 		StartCoroutine(IEStopWhenTimeOver(currentLaunchData));
 		ball.gravityScale = startingGravity;
 		ball.velocity = currentLaunchData.initialVelocity;//use the calc func to get new one
@@ -72,7 +72,6 @@ public class BallLauncher : MonoBehaviour
 	void DrawPath(LaunchData launchData)
 	{
 		Vector3 previousDrawPoint = ball.position;
-
 		int resolution = 30;
 		for (int i = 1; i <= resolution; i++)
 		{
