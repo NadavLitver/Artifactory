@@ -52,7 +52,7 @@ public class EnemyRayData : MonoBehaviour
             Vector2 currentRayPos = new Vector2(m_position.x + distanceBetween * RayPointDirection, yPos);
             if (useBoundingBox)
             {
-                if (isPointInBox(currentRayPos))
+                if (isPointInBoxAndInCollider(currentRayPos))
                 {
                     rayPoints.Add(currentRayPos);
                 }
@@ -60,16 +60,12 @@ public class EnemyRayData : MonoBehaviour
             else
             {
                 rayPoints.Add(currentRayPos);
-
             }
-
-
         }
 
     }
-    public bool isPointInBox(Vector2 point)
+    public bool isPointInBoxAndInCollider(Vector2 point)
     {
-
         if (point.x < m_boundingBox.maxX && point.x > m_boundingBox.minX && point.y < m_boundingBox.maxY && point.y > m_boundingBox.minY)
         {
             if (!Physics2D.OverlapPoint(point))
@@ -79,6 +75,17 @@ public class EnemyRayData : MonoBehaviour
         }
         return false;
     }
+
+    public bool isPointInBoxButNotInCollider(Vector2 point)
+    {
+        if (point.x < m_boundingBox.maxX && point.x > m_boundingBox.minX && point.y < m_boundingBox.maxY && point.y > m_boundingBox.minY)
+        {
+            return true;
+        }
+        return false;
+    }
+
+
     void ShootRays()
     {
         for (int i = 0; i < rayPoints.Count; i++)
@@ -121,6 +128,20 @@ public class EnemyRayData : MonoBehaviour
 
             }
         }
+    }
+
+    public Vector2 GetClosestPointToPoint(Vector2 givenPos)
+    {
+        Vector2 currentPoint  = HitPoints[0];
+        foreach (var item in HitPoints)
+        {
+            GameManager.Instance.generalFunctions.CalcRange(currentPoint, givenPos);
+            if (GameManager.Instance.generalFunctions.CalcRange(currentPoint, givenPos) > GameManager.Instance.generalFunctions.CalcRange(item, givenPos))
+            {
+                currentPoint = item;
+            }
+        }
+        return currentPoint;
     }
 
     private void OnDrawGizmos()

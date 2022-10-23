@@ -46,11 +46,11 @@ public class Actor : MonoBehaviour, IDamagable
 
 
     public UnityEvent TakeDamageGFX, OnDeath;
+    public UnityEvent OnHealGFX;
 
     //  public UnityEvent onTakeDamage, onGetHealth, OnDeath;
     [SerializeReference] private List<StatusEffect> m_StatusEffects;
 
-    public Weapon TempActiveWeapon;
 
     public bool IsInAttackAnim;
 
@@ -60,7 +60,6 @@ public class Actor : MonoBehaviour, IDamagable
         currentHP = maxHP;
         onTakeDamage = new UnityEvent<DamageHandler>();
         m_StatusEffects = new List<StatusEffect>();
-        TempActiveWeapon = GetComponentInChildren<Weapon>();
     }
     private void ClampHP() => currentHP = Mathf.Clamp(currentHP, 0, maxHP);
     public virtual void onActorDeath()
@@ -164,6 +163,7 @@ public class Actor : MonoBehaviour, IDamagable
         OnRecieveHealth?.Invoke(givenDmg);
         currentHP += givenDmg.calculateFinalDamage();
         ClampHP();
+        OnHealGFX?.Invoke();
 
     }
 }
