@@ -12,7 +12,7 @@ public class StateHandler : MonoBehaviour
     {
        RunStateMachine();
     }
-    private void RunStateMachine()
+    protected void RunStateMachine()
     {
         State nextState = currentState?.RunCurrentState();
 

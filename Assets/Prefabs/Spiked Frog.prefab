@@ -168,6 +168,9 @@ MonoBehaviour:
   debugPath: 1
   debugIntrevals: 5
   IsJumping: 0
+  LandedEvent:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &1154823752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,6 +249,8 @@ MonoBehaviour:
   SpikedFrogFinalJump: {fileID: 1154823763}
   rayData: {fileID: 6728404320829621133}
   spikedFrogGroundCheck: {fileID: 3322619}
+  RB: {fileID: 6728404320883149197}
+  freezeDUration: 0.5
 --- !u!114 &1154823762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,6 +289,7 @@ GameObject:
   - component: {fileID: 1367142808}
   - component: {fileID: 1489497844601875327}
   - component: {fileID: 8148802219243712764}
+  - component: {fileID: 378837385}
   m_Layer: 13
   m_Name: Spiked Frog
   m_TagString: Untagged
@@ -435,6 +441,18 @@ MonoBehaviour:
   references:
     version: 2
     RefIds: []
+--- !u!114 &378837385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6728404320883149187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 260220feca668bd418b158dcffc82824, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7329605738004119608
 GameObject:
   m_ObjectHideFlags: 0

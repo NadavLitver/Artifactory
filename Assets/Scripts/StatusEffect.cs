@@ -1,7 +1,8 @@
 [System.Serializable]
 public abstract class StatusEffect
 {
-    protected Actor host;    
+    protected Actor host;
+
     public void cacheHost(Actor _host)
     {
         host = _host;

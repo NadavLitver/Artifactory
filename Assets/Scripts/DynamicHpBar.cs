@@ -45,6 +45,7 @@ public class DynamicHpBar : MonoBehaviour
             default:
                 break;
         }
+        StartCoroutine(FlipWhenNegative());
         updateValues();
     }
 
@@ -147,4 +148,19 @@ public class DynamicHpBar : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
     }
+
+   
+    IEnumerator FlipWhenNegative()
+    {
+        yield return new WaitUntil(()=>transform.parent.transform.localScale.x < 0);
+        transform.localScale *= -1;
+        StartCoroutine(FlipWhenPositive());
+    }
+
+    IEnumerator FlipWhenPositive()
+    {
+        yield return new WaitUntil(() => transform.parent.transform.localScale.x > 0);
+        transform.localScale *= -1;
+        StartCoroutine(FlipWhenNegative());
+    }    
 }
