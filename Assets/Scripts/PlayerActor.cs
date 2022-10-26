@@ -11,7 +11,7 @@ public class PlayerActor : Actor
 
     private void Start()
     {
-        OnDealingDamageCalcOver.AddListener(GameManager.Instance.assets.CameraShake.screenShakeBasedOnDamage);
+      //  OnDealingDamageCalcOver.AddListener(GameManager.Instance.assets.CameraShake.screenShakeBasedOnDamage);
     }
 
     public override void onActorDeath()

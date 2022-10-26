@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
@@ -8,19 +6,44 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private Transform viewTarget;
     [SerializeField] Vector3 off;
     // This is how smoothly your camera follows the player
-    [SerializeField]
-    [Range(0, 3)]
-    private float smoothness = 0.175f;
-    private Vector3 velocity = Vector3.zero;
+    //[SerializeField, Range(0, 3)]
+    //private float smoothness = 0.175f;
+    //private Vector3 velocity = Vector3.zero;
     Vector3 desiredPosition;
+    private float xOffset;
+    private PlayerController playerController;
+    [SerializeField, Range(0, 100)] float followSpeed;
+    private bool isPlayerLookingRight => playerController.GetIsLookingRight;
+    public bool locked;
+    
+    [SerializeField] float HorizontalOffsetChangeSpeed;
+
+    private void Start()
+    {
+        xOffset = off.x;
+        playerController = GameManager.Instance.assets.PlayerController;
+        locked = false;
+    }
 
     private void Update()
     {
-         desiredPosition = viewTarget.position + off;
-    }
-    private void LateUpdate()
-    {
-        transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref velocity, smoothness);
+        if (!locked)
+        {
+            desiredPosition = viewTarget.position + off;
 
+        }
+        if (isPlayerLookingRight)
+        {
+            off.x = Mathf.MoveTowards(off.x, xOffset, Time.deltaTime * HorizontalOffsetChangeSpeed);
+        }
+        else
+        {
+            off.x = Mathf.MoveTowards(off.x, -xOffset, Time.deltaTime * HorizontalOffsetChangeSpeed);
+        }
+        transform.position = Vector3.MoveTowards(transform.position, desiredPosition, Time.deltaTime * followSpeed);
     }
+    //private void LateUpdate()
+    //{
+     
+    //}
 }
