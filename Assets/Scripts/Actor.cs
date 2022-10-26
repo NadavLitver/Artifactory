@@ -164,6 +164,10 @@ public class Actor : MonoBehaviour, IDamagable
         currentHP += givenDmg.calculateFinalDamage();
         ClampHP();
         OnHealGFX?.Invoke();
+    }
 
+    public void DisableOnInAnim()
+    {
+        IsInAttackAnim = false;
     }
 }

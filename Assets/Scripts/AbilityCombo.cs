@@ -21,7 +21,6 @@ public class AbilityCombo : MonoBehaviour
     private void Start()
     {
         m_actor = GetComponentInParent<Actor>();
-        Debug.Log(m_actor);
         if (ReferenceEquals(m_actor, null))
         {
             Debug.LogError("Ability Combo on" + gameObject.name + " is Null");
