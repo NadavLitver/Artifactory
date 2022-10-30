@@ -36,5 +36,10 @@ public class CinemachineHandler : CinemachineExtension
         framingTransposer = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
         startingOffsetX = framingTransposer.m_TrackedObjectOffset.x;
     }
-    
+    [ContextMenu("STOP")]
+    public void stopfollow()
+    {
+        virtualCamera.Follow = null;
+       
+    }
 }
