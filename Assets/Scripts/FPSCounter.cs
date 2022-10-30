@@ -10,7 +10,7 @@ public class FPSCounter : MonoBehaviour
 
     private void Awake()
     {
-        Application.targetFrameRate = 300;
+        Application.targetFrameRate = 120;
     }
 
     public void Update()

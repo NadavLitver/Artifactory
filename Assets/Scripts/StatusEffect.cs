@@ -21,5 +21,6 @@ public enum StatusEffectEnum
     freeze,
     RubberDuck,
     LightningEmblem,
-    HealingGoblet
+    HealingGoblet,
+    Invulnerability
 }
