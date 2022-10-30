@@ -12,6 +12,10 @@ public class CinemachineHandler : CinemachineExtension
 
     protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
     {
+        if (!Application.isPlaying)
+        {
+            return;
+        }
         if(vcam.Follow)
         {
             if (isPlayerLookingRight)
@@ -23,6 +27,7 @@ public class CinemachineHandler : CinemachineExtension
                 framingTransposer.m_TrackedObjectOffset.x = Mathf.MoveTowards(framingTransposer.m_TrackedObjectOffset.x, -startingOffsetX, deltaTime * horizontalSpeed);
             }
         }
+       
     }
 
     private void Start()
