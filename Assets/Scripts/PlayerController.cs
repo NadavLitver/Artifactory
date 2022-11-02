@@ -86,7 +86,7 @@ public class PlayerController : MonoBehaviour
             Jumping = true;
             velocity.y = jumpForce;
             isGrounded = false;
-
+            m_animator.SetTrigger("Jump");
             StartCoroutine(JumpApexWait());
         }
         else if (isFalling)
@@ -164,6 +164,7 @@ public class PlayerController : MonoBehaviour
         m_animator.SetBool("Grounded", isGrounded);
         m_animator.SetBool("Running", ((m_rb.velocity.x != 0 || horInput != 0) && isGrounded));
         isFalling = (!isGrounded && velocity.y < -1f);
+        m_animator.SetBool("Falling", isFalling);
     }
     private void SetVelocity()
     {
