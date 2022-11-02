@@ -111,6 +111,7 @@ public class Actor : MonoBehaviour, IDamagable
         host.OnHit?.Invoke(givenAbility, this);
         //invoking the hit event on the actor that hit me
         TakeDamage(givenAbility.DamageHandler, host);
+
     }
 
     public void TakeDamage(DamageHandler dmgHandler, Actor host)
