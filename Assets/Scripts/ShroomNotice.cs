@@ -16,12 +16,13 @@ public class ShroomNotice : State
             handler.RB.velocity = Vector2.zero;
             return handler.ShroomDefense;
         }
-        if (!GameManager.Instance.generalFunctions.IsInRange(transform.position, GameManager.Instance.assets.Player.transform.position, noticeThreshold))
-        {//if the player is outside of the detection threshold
-            return handler.ShroomIdle;
+        else if (GameManager.Instance.generalFunctions.IsInRange(transform.position, GameManager.Instance.assets.Player.transform.position, noticeThreshold))
+        {//if the player is inside of the detection threshold
+            //return handler.ShroomThrow;
+            return handler.ShroomRam;
         }
         // return handler.ShroomMoveBackwards;
-        return this;
+        return handler.ShroomIdle;
     }
 
     // Start is called before the first frame update

@@ -17,12 +17,13 @@ public class ShroomDefense : State
             currentTime = 0;
             return handler.ShroomNotice;
         }
-        return this;
+        return handler.ShroomRam;
     }
     // Start is called before the first frame update
     void Start()
     {
         handler = GetComponent<StoneShroomStateHandler>();
+        currentTime = DefenseCoolDown;
     }
 
 }

@@ -41,10 +41,6 @@ public class Actor : MonoBehaviour, IDamagable
     /// invoked when this actor is healed
     /// </summary>
     public UnityEvent<DamageHandler> OnRecieveHealth;
-
-
-
-
     public UnityEvent TakeDamageGFX, OnDeath;
     public UnityEvent OnHealGFX;
 
@@ -111,6 +107,11 @@ public class Actor : MonoBehaviour, IDamagable
         host.OnHit?.Invoke(givenAbility, this);
         //invoking the hit event on the actor that hit me
         TakeDamage(givenAbility.DamageHandler, host);
+        if (givenAbility.KnockbackForce != 0)
+        {
+            RecieveForce();
+        }
+
     }
 
     public void TakeDamage(DamageHandler dmgHandler, Actor host)
@@ -142,6 +143,10 @@ public class Actor : MonoBehaviour, IDamagable
         }
 
         TakeDamage(m_ability.DamageHandler);
+        if (m_ability.KnockbackForce != 0)
+        {
+            RecieveForce();
+        }
     }
 
     public void TakeDamage(DamageHandler dmgHandler)
@@ -164,6 +169,11 @@ public class Actor : MonoBehaviour, IDamagable
         currentHP += givenDmg.calculateFinalDamage();
         ClampHP();
         OnHealGFX?.Invoke();
+    }
+
+    public virtual void RecieveForce()
+    {
+
     }
 
     public void DisableOnInAnim()

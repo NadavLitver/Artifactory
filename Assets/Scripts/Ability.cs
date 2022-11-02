@@ -11,7 +11,9 @@ public class Ability : ScriptableObject
     [SerializeField] List<StatusEffectActivatonData> statusEffectsData = new List<StatusEffectActivatonData>();
     [SerializeField, Range(1, 100)] int statusActivationBaseChance;
     [SerializeField] bool useBaseChanceForStatuses;
-    
+    [SerializeField] float knockbackForce;
+
+    Vector2 forceDircetion;
     public bool RollForStatusActivation(StatusEffectActivatonData givenStatus)
     {
         if (useBaseChanceForStatuses)
@@ -31,6 +33,12 @@ public class Ability : ScriptableObject
     public List<StatusEffectActivatonData> StatusEffects { get => statusEffectsData; set => statusEffectsData = value; }
     public DamageHandler DamageHandler { get => damageHandler; set => damageHandler = value; }
     public string AbilityName { get => Name; set => Name = value; }
+    public float KnockbackForce { get => knockbackForce; set => knockbackForce = value; }
+
+    public void CacheForceDirection(Vector2 givenDirection)
+    {
+        forceDircetion = givenDirection;
+    }
 }
 
 

@@ -7,6 +7,9 @@ public class GroundCheck : MonoBehaviour
     public LayerMask GroundLayer;
     [SerializeField] float groundCheckDistance;
     [SerializeField] Vector3 offset;
+
+    public Vector3 Offset { get => offset; set => offset = value; }
+
     public bool isGrounded()
     {
         return Physics2D.Raycast(transform.position + offset, Vector2.down, groundCheckDistance, GroundLayer);
