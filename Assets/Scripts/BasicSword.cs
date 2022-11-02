@@ -54,7 +54,7 @@ public class BasicSword : Weapon
     protected override void Ultimate()
     {
 
-        m_animator.SetTrigger("Attack");
+        //m_animator.SetTrigger("Attack");
     }
 
     protected override void Attack()
