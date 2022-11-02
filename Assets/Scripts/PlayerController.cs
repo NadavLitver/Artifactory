@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
     public bool GetIsJumping { get => Jumping; set => Jumping = value; }
     public Vector2 GetExternalForces { get => externalForces; set => externalForces = value; }
     public bool GetCoyoteAvailable { get => CoyoteAvailable; set => CoyoteAvailable = value; }
+    public Animator Animator { get => m_animator; set => m_animator = value; }
 
     private void Awake()
     {
@@ -147,6 +148,10 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            //if (!wasGrounded)
+            //{
+            //    m_animator.SetTrigger("Land");
+            //}
             velocity.y = Mathf.MoveTowards(velocity.y, 0, GravityScale * Time.deltaTime);
             Jumping = false;
             

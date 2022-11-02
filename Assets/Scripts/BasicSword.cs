@@ -35,6 +35,7 @@ public class BasicSword : Weapon
         player.ResetVelocity();
         player.ZeroGravity();
         counter = 0;
+        player.Animator.SetTrigger("Mobility");
         Vector2 dir = new Vector2(player.transform.localScale.x, 0.1f);
         Vector2 dashVelocity = dashForce * dir;
         while (counter < dashDuration)
