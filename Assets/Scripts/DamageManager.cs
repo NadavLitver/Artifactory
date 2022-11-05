@@ -7,6 +7,9 @@ public class DamageManager : MonoBehaviour
     public float burnDamage;
     [Tooltip("How often do you want the burn to trigger? ")] public float BurnIntervals;
 
+    [Header("Invulnerability Properties"), Space(10)]
+    public float InvlunerabilityDuration;
+
     [Header("Rubber Duck Properties"), Space(10)]
     [Range(1, 100)] public float RubberDuckDamageBlockChance;
 

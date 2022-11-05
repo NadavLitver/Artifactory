@@ -6,13 +6,17 @@ public class GroundCheck : MonoBehaviour
 {
     public LayerMask GroundLayer;
     [SerializeField] float groundCheckDistance;
+    [SerializeField] Vector3 offset;
+
+    public Vector3 Offset { get => offset; set => offset = value; }
+
     public bool isGrounded()
     {
-        return Physics2D.Raycast(transform.position, Vector2.down, groundCheckDistance, GroundLayer);
+        return Physics2D.Raycast(transform.position + offset, Vector2.down, groundCheckDistance, GroundLayer);
     }
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         Gizmos.color = isGrounded() ? Color.green : Color.red;
-        Gizmos.DrawRay(transform.position, Vector2.down * groundCheckDistance);
+        Gizmos.DrawRay(transform.position + offset, Vector2.down * groundCheckDistance);
     }
 }

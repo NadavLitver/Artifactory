@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.Events;
 public class WeaponManager : MonoBehaviour
 {
     [SerializeField] List<Weapon> playerWeapons = new List<Weapon>();
@@ -9,6 +9,8 @@ public class WeaponManager : MonoBehaviour
     Actor m_actor;
     public List<Weapon> PlayerWeapons { get => playerWeapons; set => playerWeapons = value; }
     public Weapon CurrentWeapon { get => currentWeapon; set => currentWeapon = value; }
+
+    public UnityEvent OnSwitchWeapon;
 
     private void Start()
     {
@@ -18,6 +20,7 @@ public class WeaponManager : MonoBehaviour
         {
             Debug.LogError("Ability Combo on" + gameObject.name + " is Null");
         }
+        OnSwitchWeapon.AddListener(m_actor.DisableOnInAnim);
     }
 
 
@@ -88,10 +91,17 @@ public class WeaponManager : MonoBehaviour
         {
             currentWeapon.Mobility();
         }
-     
+
+        OnSwitchWeapon?.Invoke();
         
         //m_actor.IsInAttackAnim = false;
     }
 
+
+    public void DisableInAttackAnim()
+    {
+
+        m_actor.DisableOnInAnim();
+    }
     
 }

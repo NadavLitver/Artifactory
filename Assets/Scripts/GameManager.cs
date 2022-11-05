@@ -135,6 +135,8 @@ public class GeneralFunctions
                 return new LightningEmblem();
             case StatusEffectEnum.HealingGoblet:
                 return new HealingGoblet();
+            case StatusEffectEnum.Invulnerability:
+                return new Invulnerability();
             default:
                 break;
         }

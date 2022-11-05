@@ -12,7 +12,7 @@ public class Dummy : Actor
     [ContextMenu("Heal")]
     public void HealBackToFull()
     {
-        Heal(new DamageHandler() { amount = maxHP });
+        Heal(new DamageHandler() { amount = maxHP, myDmgType = DamageType.heal });
     }
 
 }

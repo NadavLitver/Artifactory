@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 public class BallLauncher : MonoBehaviour
 {
 
@@ -16,6 +17,7 @@ public class BallLauncher : MonoBehaviour
 
     public bool IsJumping;
 
+    public UnityEvent LandedEvent;
 
 
     void Update()
@@ -60,6 +62,8 @@ public class BallLauncher : MonoBehaviour
         IsJumping = true;
         yield return new WaitForSeconds(launchData.timeToTarget);
         IsJumping = false;
+        LandedEvent?.Invoke();
+        //landed
         ball.velocity = Vector2.zero;
 
     }
