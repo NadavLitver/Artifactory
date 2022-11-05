@@ -60,7 +60,7 @@ public class Actor : MonoBehaviour, IDamagable
     private void ClampHP() => currentHP = Mathf.Clamp(currentHP, 0, maxHP);
     public virtual void onActorDeath()
     {
-        Debug.Log(gameObject.name + "hasDead");
+        Debug.Log(gameObject.name + "had Died");
         OnDeath?.Invoke();
     }
 

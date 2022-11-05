@@ -11,7 +11,9 @@ public class GroundCheckCollection : MonoBehaviour
     public GroundCheck[] GroundChecks { get => groundChecks;}
 
     public bool CompletleyGrounded => IsEverythingGrounded();
+    public bool Grounded => IsAtLeastOneGrounded();
 
+    public bool FlipRequired;
     private void Awake()
     {
         groundChecks = GetComponents<GroundCheck>();

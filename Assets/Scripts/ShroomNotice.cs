@@ -9,19 +9,27 @@ public class ShroomNotice : State
     [SerializeField] float noticeThreshold;
     public override State RunCurrentState()
     {
-        //if the player is within melee threshold block attack
-        //move away from the player 
-        if (GameManager.Instance.generalFunctions.IsInRange(transform.position, GameManager.Instance.assets.Player.transform.position, defenseThreshold))
-        {//if the player is inside the defense zone
-            handler.RB.velocity = Vector2.zero;
-            return handler.ShroomDefense;
+        if (handler.AttackMode)
+        {
+            if (GameManager.Instance.generalFunctions.IsInRange(transform.position, GameManager.Instance.assets.Player.transform.position, defenseThreshold))
+            {//if the player is inside the defense zone
+                handler.RB.velocity = Vector2.zero;
+                return handler.ShroomRam;
+            }
+            return handler.ShroomLookForCap;
         }
-        else if (GameManager.Instance.generalFunctions.IsInRange(transform.position, GameManager.Instance.assets.Player.transform.position, noticeThreshold))
-        {//if the player is inside of the detection threshold
-            //return handler.ShroomThrow;
-            return handler.ShroomRam;
+        else
+        {
+            if (GameManager.Instance.generalFunctions.IsInRange(transform.position, GameManager.Instance.assets.Player.transform.position, defenseThreshold))
+            {//if the player is inside the defense zone
+                handler.RB.velocity = Vector2.zero;
+                return handler.ShroomDefense;
+            }
+            if (GameManager.Instance.generalFunctions.IsInRange(transform.position, GameManager.Instance.assets.Player.transform.position, noticeThreshold))
+            {
+                return handler.ShroomThrow;
+            }
         }
-        // return handler.ShroomMoveBackwards;
         return handler.ShroomIdle;
     }
 

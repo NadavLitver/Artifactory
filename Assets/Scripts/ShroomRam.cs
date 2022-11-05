@@ -12,18 +12,21 @@ public class ShroomRam : State
     public override State RunCurrentState()
     {
         if (!startedRamming)
-        {
-            Vector2 ramDirection = new Vector2(GameManager.Instance.assets.playerActor.transform.position.x - transform.position.x, 0).normalized;
-            currentDest = GameManager.Instance.assets.Player.transform.position;
-            handler.RB.velocity = ramSpeed * ramDirection;
+        {//started
+            Vector2 ramDir = (GameManager.Instance.assets.playerActor.transform.position - transform.position).normalized;
+            currentDest = GameManager.Instance.assets.playerActor.transform.position;
+            handler.RB.velocity = new Vector2(ramDir.x * ramSpeed, handler.RB.velocity.y);
             startedRamming = true;
+            handler.RamCollider.SetActive(true);
         }
-        if (startedRamming && GameManager.Instance.generalFunctions.IsInRange(transform.position, currentDest, ramTargetOffset))
-        {
-            return this;
+        if (GameManager.Instance.generalFunctions.IsInRange(transform.position, currentDest, ramTargetOffset))
+        {//reached
+            startedRamming = false;
+            DisableCollider();
+            return handler.ShroomIdle;
         }
-        startedRamming = false;
-        return handler.ShroomIdle;
+        return this;
+
     }
 
     void Start()
@@ -31,10 +34,18 @@ public class ShroomRam : State
         handler = GetComponent<StoneShroomStateHandler>();
     }
 
+    void DisableCollider()
+    {
+        handler.RamCollider.SetActive(false);
+
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;
         Gizmos.DrawWireSphere(transform.position, ramTargetOffset);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(currentDest, 1);
     }
 
 }

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShroomThrow : State
@@ -9,13 +7,19 @@ public class ShroomThrow : State
 
     public override State RunCurrentState()
     {
-        Vector2 throwDir = new Vector2(handler.RB.velocity.normalized.x, 0);
+        //get a shroom cap from an object pooler
+        //set its position to be equal to yours
+        //add force to it in the direction of the player
+        //return notice
         handler.RB.velocity = Vector2.zero;
-        handler.ShroomCap.gameObject.SetActive(true);
-        handler.ShroomActor.transform.parent = transform.parent.parent;
-        handler.ShroomCap.RB.AddForce(throwDir * throwForce, ForceMode2D.Impulse);
+        ShroomCap cap = handler.GetCapToThrow();
+        cap.transform.position = transform.position;
+        cap.gameObject.SetActive(true);
+        Vector2 throwDir = (GameManager.Instance.assets.playerActor.transform.position - transform.position).normalized;
+        cap.RB.AddForce(new Vector2(throwDir.x * throwForce, 0), ForceMode2D.Impulse);
         handler.AttackMode = true;
-        return handler.ShroomLookForCap;
+        return handler.ShroomNotice;
+
     }
 
     // Start is called before the first frame update

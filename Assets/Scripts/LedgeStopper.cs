@@ -1,12 +1,10 @@
 using System.Collections;
 using UnityEngine;
-using System;
 
 public class LedgeStopper : MonoBehaviour
 {
     [SerializeField] Rigidbody2D rb;
     [SerializeField] GroundCheckCollection groundChecks;
-
     //when reaching a ledge return the ground check thats triggering the ledge and block 
     //the rigidbody from walking that way
 
@@ -23,9 +21,10 @@ public class LedgeStopper : MonoBehaviour
         {
             if (check.Offset.x > 0 && rb.velocity.x > 0 || check.Offset.x < 0 && rb.velocity.x < 0)
             {
-                rb.velocity = new Vector2(rb.velocity.x*-1, rb.velocity.y);
+                groundChecks.FlipRequired = true;
             }
         }
+        yield return new WaitForEndOfFrame();
         StartCoroutine(WaitUntilNotEverythingIsGrounded());
     }
 }

@@ -1,12 +1,14 @@
 using UnityEngine;
+using System;
+using System.Collections;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class ShroomCap : MonoBehaviour, IDamagable
 {
     public Rigidbody2D RB;
     public Ability ShroomCapAbility;
-    public GroundCheckCollection grouncChecks;
-
+    public GroundCheckCollection groundChecks;
+    bool landed;
     
     public void GetHit(Ability m_ability)
     {
@@ -37,7 +39,7 @@ public class ShroomCap : MonoBehaviour, IDamagable
     void Start()
     {
         RB = GetComponent<Rigidbody2D>();
-        grouncChecks = GetComponent<GroundCheckCollection>();
+        groundChecks = GetComponent<GroundCheckCollection>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -51,6 +53,10 @@ public class ShroomCap : MonoBehaviour, IDamagable
             return;
         }
 
+        if (!groundChecks.IsAtLeastOneGrounded())
+        {
+            return;
+        }
         StoneShroomStateHandler handler = collision.GetComponentInChildren<StoneShroomStateHandler>();
         if (!ReferenceEquals(handler, null))
         {
