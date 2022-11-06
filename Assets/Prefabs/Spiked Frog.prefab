@@ -423,18 +423,6 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1154823760}
-        m_TargetAssemblyTypeName: SpikedFrogStateHandler, Assembly-CSharp
-        m_MethodName: Freeze
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 1
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 9189810574590924089}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
         m_MethodName: Play
@@ -445,6 +433,18 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: FrogDeath
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1154823760}
+        m_TargetAssemblyTypeName: SpikedFrogStateHandler, Assembly-CSharp
+        m_MethodName: Freeze
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   OnHealGFX:
@@ -479,6 +479,7 @@ GameObject:
   - component: {fileID: 7826186856627661702}
   - component: {fileID: 3236287938443897728}
   - component: {fileID: 9189810574590924089}
+  - component: {fileID: 1745476001}
   m_Layer: 13
   m_Name: GFX
   m_TagString: Untagged
@@ -541,7 +542,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: -2095066785, guid: d37961e6a717cb34cb4edf6920fc3ebf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -590,6 +591,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1745476001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7329605738004119608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2223a8ee8950a4f40920dc3fa7f839d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fatherObject: {fileID: 6728404320883149187}
 --- !u!1001 &6728404320916769108
 PrefabInstance:
   m_ObjectHideFlags: 0

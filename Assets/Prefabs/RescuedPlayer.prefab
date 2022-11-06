@@ -231,7 +231,7 @@ MonoBehaviour:
   host: {fileID: 0}
   radiusForWallCheck: 0.5
   distaceFromPlayerToCheck: 0.5
-  JumpToClawForce: {x: 0, y: 0}
+  JumpToClawForce: {x: 5, y: 15}
   forceForWallJump: {x: 5, y: 15}
   contactFilter:
     serializedVersion: 2
@@ -583,9 +583,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.0020136982, y: 0.41881752}
+  m_Offset: {x: 1, y: 0}
   serializedVersion: 2
-  m_Radius: 0.55
+  m_Radius: 1
 --- !u!114 &7729859463431324916
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -638,7 +638,7 @@ MonoBehaviour:
   abilityCombo: {fileID: 7729859463431324916}
   host: {fileID: 0}
   isDashing: 0
-  dashDuration: 0.15
+  dashDuration: 0.2
   dashCooldown: 0.5
   dashForce: 20
 --- !u!1 &841067442087295126
@@ -715,6 +715,9 @@ MonoBehaviour:
   - {fileID: 840070347747206294}
   - {fileID: 840070348364434380}
   currentWeapon: {fileID: 0}
+  OnSwitchWeapon:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!212 &207153476
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -755,7 +758,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 5
   m_Sprite: {fileID: 1373695224, guid: 4a914c844073ab640a4420e69704b281, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
