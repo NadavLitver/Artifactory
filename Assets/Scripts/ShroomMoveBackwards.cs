@@ -3,17 +3,19 @@ using UnityEngine;
 public class ShroomMoveBackwards : State
 {
     StoneShroomStateHandler handler;
-
+    [SerializeField] float noticeOffset;
+    [SerializeField] float moveBackwardsSpeed;
     public override State RunCurrentState()
     {
-        handler.Flipper.enabled = false;
-        if (handler.ShroomGroundCheck.IsEverythingGrounded())
+        handler.Flipper.Disabled = true;
+        handler.RB.velocity = new Vector2(transform.parent.localScale.x * -1 * moveBackwardsSpeed, handler.RB.velocity.y);
+        if (GameManager.Instance.generalFunctions.IsInRange(GameManager.Instance.assets.playerActor.transform.position, transform.position, handler.ShroomLineOfSight.range + noticeOffset))
         {
-            handler.RB.velocity = new Vector2(transform.position.x - GameManager.Instance.assets.Player.transform.position.x, handler.RB.velocity.y);
+            return this;
         }
-
-        return handler.ShroomDefense;
-        //return defense 
+        handler.ShroomGroundCheck.FlipRequired = true;
+        handler.Enrage();
+        return handler.ShroomIdle;
     }
 
 

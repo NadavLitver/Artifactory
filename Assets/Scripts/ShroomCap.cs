@@ -53,6 +53,10 @@ public class ShroomCap : MonoBehaviour, IDamagable
             return;
         }
 
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
         if (!groundChecks.IsAtLeastOneGrounded())
         {
             return;
@@ -63,7 +67,6 @@ public class ShroomCap : MonoBehaviour, IDamagable
             handler.AttackMode = false;
             gameObject.SetActive(false);
         }
-
     }
 
 }

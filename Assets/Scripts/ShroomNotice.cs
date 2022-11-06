@@ -5,30 +5,32 @@ using UnityEngine;
 public class ShroomNotice : State
 {
     StoneShroomStateHandler handler;
-    [SerializeField] float defenseThreshold;
-    [SerializeField] float noticeThreshold;
     public override State RunCurrentState()
     {
         if (handler.AttackMode)
         {
-            if (GameManager.Instance.generalFunctions.IsInRange(transform.position, GameManager.Instance.assets.Player.transform.position, defenseThreshold))
-            {//if the player is inside the defense zone
-                handler.RB.velocity = Vector2.zero;
+            if (GameManager.Instance.generalFunctions.CalcRange(transform.position, GameManager.Instance.assets.playerActor.transform.position) <= GameManager.Instance.generalFunctions.CalcRange(transform.position, handler.CurrentCap.transform.position) )
+            {
+                handler.CurrentRamTarget = GameManager.Instance.assets.Player.transform;
                 return handler.ShroomRam;
             }
             return handler.ShroomLookForCap;
         }
         else
         {
-            if (GameManager.Instance.generalFunctions.IsInRange(transform.position, GameManager.Instance.assets.Player.transform.position, defenseThreshold))
-            {//if the player is inside the defense zone
-                handler.RB.velocity = Vector2.zero;
+            if (handler.isPlayerWithinDefenseRange())
+            {
                 return handler.ShroomDefense;
             }
-            if (GameManager.Instance.generalFunctions.IsInRange(transform.position, GameManager.Instance.assets.Player.transform.position, noticeThreshold))
+            else if (handler.isPlayerWithinThrowRange() && handler.Enraged)
             {
                 return handler.ShroomThrow;
             }
+            else if (!handler.Enraged)
+            {
+                return handler.ShroomMoveBackwards;
+            }
+
         }
         return handler.ShroomIdle;
     }
@@ -39,13 +41,6 @@ public class ShroomNotice : State
         handler = GetComponent<StoneShroomStateHandler>();
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(transform.position, defenseThreshold);
-        Gizmos.color = Color.blue;
-        Gizmos.DrawWireSphere(transform.position, noticeThreshold);
-
-    }
+   
 
 }
