@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using System;
 public class CinemachineHandler : CinemachineExtension
 {
     CinemachineVirtualCamera virtualCamera;
@@ -12,7 +13,7 @@ public class CinemachineHandler : CinemachineExtension
 
     protected override void PostPipelineStageCallback(CinemachineVirtualCameraBase vcam, CinemachineCore.Stage stage, ref CameraState state, float deltaTime)
     {
-        if (!Application.isPlaying)
+        if (ReferenceEquals(framingTransposer,null))
         {
             return;
         }
