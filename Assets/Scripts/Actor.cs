@@ -180,4 +180,8 @@ public class Actor : MonoBehaviour, IDamagable
     {
         IsInAttackAnim = false;
     }
+    public void EnableOnInAnim()
+    {
+        IsInAttackAnim = true;
+    }
 }

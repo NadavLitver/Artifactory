@@ -103,5 +103,10 @@ public class WeaponManager : MonoBehaviour
 
         m_actor.DisableOnInAnim();
     }
-    
+    public void EnableInAttackAnim()
+    {
+
+        m_actor.EnableOnInAnim();
+    }
+
 }

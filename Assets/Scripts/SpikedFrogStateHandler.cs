@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SpikedFrogStateHandler : StateHandler
 {
+    public Animator m_animator;
     public BallLauncher launcher;
     public EnemyLineOfSight lineOfSight;
     public State spikedFrogIdle;
@@ -13,7 +14,7 @@ public class SpikedFrogStateHandler : StateHandler
     public GroundCheck spikedFrogGroundCheck;
     public Rigidbody2D RB;
     bool frozen;
-    [SerializeField] float freezeDUration;
+    [SerializeField] float freezeDuration;
 
     private void Start()
     {
@@ -26,13 +27,21 @@ public class SpikedFrogStateHandler : StateHandler
         {
             RunStateMachine();
         }
+        m_animator.SetBool("Jumping", launcher.IsJumping);
+            
     }
 
     public void Freeze()
     {
         frozen = true;
         RB.constraints = RigidbodyConstraints2D.FreezePosition;
-        LeanTween.delayedCall(freezeDUration, UnFreeze);
+        LeanTween.delayedCall(freezeDuration, UnFreeze);
+    }
+    public void Freeze(float freezeDur)
+    {
+        frozen = true;
+        RB.constraints = RigidbodyConstraints2D.FreezePosition;
+        LeanTween.delayedCall(freezeDur, UnFreeze);
     }
     public void UnFreeze()
     {

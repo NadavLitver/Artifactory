@@ -48,6 +48,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 128
   groundCheckDistance: 0.4
+  offset: {x: 0, y: 0, z: 0}
 --- !u!1 &892493603
 GameObject:
   m_ObjectHideFlags: 0
@@ -240,6 +241,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentState: {fileID: 1154823754}
+  m_animator: {fileID: 9189810574590924089}
   launcher: {fileID: 6728404320829621132}
   lineOfSight: {fileID: 1154823759}
   spikedFrogIdle: {fileID: 1154823754}
@@ -250,7 +252,7 @@ MonoBehaviour:
   rayData: {fileID: 6728404320829621133}
   spikedFrogGroundCheck: {fileID: 3322619}
   RB: {fileID: 6728404320883149197}
-  freezeDUration: 0.5
+  freezeDuration: 1.5
 --- !u!114 &1154823762
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -421,16 +423,28 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6728404320883149187}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1154823760}
+        m_TargetAssemblyTypeName: SpikedFrogStateHandler, Assembly-CSharp
+        m_MethodName: Freeze
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 1
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 9189810574590924089}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: Play
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: FrogDeath
           m_BoolArgument: 0
         m_CallState: 2
   OnHealGFX:
@@ -464,6 +478,7 @@ GameObject:
   - component: {fileID: 1279974855012235335}
   - component: {fileID: 7826186856627661702}
   - component: {fileID: 3236287938443897728}
+  - component: {fileID: 9189810574590924089}
   m_Layer: 13
   m_Name: GFX
   m_TagString: Untagged
@@ -479,8 +494,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7329605738004119608}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.82, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6728404320883149186}
@@ -527,12 +542,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5f7fa9a7940a64e79b5a42d9f661d42c, type: 3}
-  m_Color: {r: 0.4329505, g: 1, b: 0, a: 1}
+  m_Sprite: {fileID: -2095066785, guid: d37961e6a717cb34cb4edf6920fc3ebf, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -555,6 +570,26 @@ MonoBehaviour:
   m_actor: {fileID: 8148802219243712764}
   spriteRenderers: []
   flashColor: {r: 1, g: 1, b: 1, a: 1}
+--- !u!95 &9189810574590924089
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7329605738004119608}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9ef841f074846434d998268a04c4450b, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &6728404320916769108
 PrefabInstance:
   m_ObjectHideFlags: 0
