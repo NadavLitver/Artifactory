@@ -23,11 +23,11 @@ public class ShroomDefense : State
             lastDefended = Time.time;
             defending = true;
         }
-        else if (defending)
+        if (defending)
         {
             return this;
         }
-        else
+        else if(handler.Enraged)
         {
             return handler.ShroomThrow;
         }

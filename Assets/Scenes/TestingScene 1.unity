@@ -1201,12 +1201,10 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 739750640}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.2, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1729105043}
-  - {fileID: 1478054604}
+  m_Children: []
   m_Father: {fileID: 1810422613}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1222,12 +1220,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 769aeaeb1ef9b5d49b232c4640bd3309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayLength: 2
+  maxPos: {x: 0, y: 0}
+  minPos: {x: 0, y: 0}
+  rayLength: 0.32
   layer:
     serializedVersion: 2
     m_Bits: 128
-  rightGetter: {fileID: 1729105043}
-  leftGetter: {fileID: 1478054604}
+  rightGetter: {fileID: 0}
+  leftGetter: {fileID: 0}
+  scoutMs: 2
+  Done: 0
 --- !u!1 &745656769
 GameObject:
   m_ObjectHideFlags: 0
@@ -5351,37 +5353,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d27df80470544547a5215df3eca2871, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1478054603
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1478054604}
-  m_Layer: 12
-  m_Name: LeftBounder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1478054604
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1478054603}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 739750641}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1572652938 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 840070348364434380, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
@@ -5543,37 +5514,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4e3778ef551c8204bb4a0fe8667294d8, type: 3}
---- !u!1 &1729105042
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1729105043}
-  m_Layer: 12
-  m_Name: RightBounder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1729105043
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1729105042}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 739750641}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1743182731
 GameObject:
   m_ObjectHideFlags: 0
@@ -5792,7 +5732,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1810422607}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 42.68, y: 0.62, z: 0.7950871}
+  m_LocalPosition: {x: 39.66, y: 0.62, z: 0.7950871}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -7446,11 +7386,12 @@ MonoBehaviour:
   CurrentCap: {fileID: 0}
   RamCollider: {fileID: 580170945}
   CurrentRamTarget: {fileID: 0}
-  Bounder: {fileID: 0}
-  DefenseThreshold: 1.2
+  Bounder: {fileID: 739750642}
+  DefenseThreshold: 2.66
   ThrowThreshold: 5.3
   RamThreshold: 2.76
   MovementDir: 1
+  RequireFlip: 0
   Enraged: 0
   stunned: 0
   frozen: 0
@@ -7493,7 +7434,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   throwForce: 14.06
-  throwDelay: 0.5
+  throwDelay: 1.52
 --- !u!114 &2127980187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7507,7 +7448,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ramSpeed: 4
-  ramTargetOffset: 1
+  ramTargetOffset: 0.76
   ramRecoveryTime: 1
 --- !u!114 &2127980188
 MonoBehaviour:
@@ -7536,6 +7477,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noticeOffset: 2
   moveBackwardsSpeed: 0.3
+  walkBackDuration: 3
 --- !u!1001 &1905663005272034993
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7807,6 +7749,10 @@ PrefabInstance:
       propertyPath: assets.playerActor
       value: 
       objectReference: {fileID: 1038026938}
+    - target: {fileID: 4180575170813383680, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
+      propertyPath: assets.BounderScout
+      value: 
+      objectReference: {fileID: 7286397062145270228, guid: 6c38a5c0a53fc5146be94217aa9aef63, type: 3}
     - target: {fileID: 4180575170813383680, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
       propertyPath: assets.PlayerController
       value: 

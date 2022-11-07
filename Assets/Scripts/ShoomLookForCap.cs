@@ -10,7 +10,7 @@ public class ShoomLookForCap : State
     {
         //if the handler is in defense mode return idle
         //if the handler isnt in defense mode set velocity in the direction of the cap
-        if (!handler.AttackMode)
+        if (!handler.AttackMode || handler.CheckForFlip()) // if picked up cap or reached ledge
         {
             return handler.ShroomIdle;
         }

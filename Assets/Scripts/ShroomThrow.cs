@@ -15,12 +15,12 @@ public class ShroomThrow : State
         handler.Freeze(throwDelay);
         ShroomCap cap = handler.GetCapToThrow();
         cap.transform.position = transform.position;
+        cap.SetUpPositions(handler.Bounder.MaxPos, handler.Bounder.MinPos);
         cap.gameObject.SetActive(true);
-        Vector2 throwDir = (GameManager.Instance.assets.playerActor.transform.position - transform.position).normalized;
-        cap.RB.AddForce(new Vector2(throwDir.x * throwForce, 0), ForceMode2D.Impulse);
+        cap.Throw(new Vector2(handler.GetPlayerDirection().x * throwForce, 0));
         handler.AttackMode = true;
+        handler.Freeze(throwDelay);
         return handler.ShroomNotice;
-
     }
 
     // Start is called before the first frame update

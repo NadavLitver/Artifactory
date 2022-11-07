@@ -1,5 +1,5 @@
+using System.Collections;
 using UnityEngine;
-
 public class EnemyBounder : MonoBehaviour
 {
     [SerializeField] private Vector2 maxPos;
@@ -8,66 +8,82 @@ public class EnemyBounder : MonoBehaviour
     [SerializeField] LayerMask layer;
     [SerializeField] Transform rightGetter;
     [SerializeField] Transform leftGetter;
+    [SerializeField] float scoutMs;
+    [SerializeField] bool getter;
+    public bool Done;
     Vector2 lastLeftHit;
     Vector2 lastRightHit;
-    bool foundMin;
-    bool foundMax;
+    bool foundLeft;
+    bool foundRight;
+
     public Vector2 MaxPos { get => maxPos; }
     public Vector2 MinPos { get => minPos; }
 
     private void OnEnable()
     {
-        foundMin = false;
-        foundMax = false;
-        GetBounderies();
-    }
-    private void Start()
-    {
-        GetBounderies();
-    }
-
-    void GetBounderies()
-    {
-        int counter = 0;
-        while (!foundMin && counter < 2000000)
+        if (!getter)
         {
-            counter++;
-            GetLeftEdge();
-        }
-        while (!foundMax && counter < 2000000)
-        {
-            counter++;
-            GetRightEdge();
+            rightGetter = Instantiate(GameManager.Instance.assets.BounderScout, transform.position, Quaternion.identity);
+            leftGetter = Instantiate(GameManager.Instance.assets.BounderScout, transform.position, Quaternion.identity);
+            StartCoroutine(WaitUntilDone());
+            StartCoroutine(GetLeftPoint());
+            StartCoroutine(GetRightPoint());
         }
     }
 
-    void GetLeftEdge()
+    public void CachePoints(Vector2 max, Vector2 min)
     {
-        rightGetter.position -= new Vector3(1, 0, 0);
-        RaycastHit2D leftHit = Physics2D.Raycast(leftGetter.transform.position, Vector2.down, layer);
-        if (leftHit)
+        maxPos = max;
+        minPos = min;
+    }
+
+    IEnumerator GetLeftPoint()
+    {
+        while (!foundLeft)
         {
-            lastLeftHit = leftHit.point;
-        }
-        else
-        {
-            minPos = lastLeftHit;
-            foundMin = true;
+            RaycastHit2D downHit = Physics2D.Raycast(leftGetter.position, Vector2.down, rayLength, layer);
+            RaycastHit2D frontHit = Physics2D.Raycast(leftGetter.position, Vector2.left, rayLength, layer);
+            if (ReferenceEquals(downHit.collider, null) || !ReferenceEquals(frontHit.collider, null))
+            {
+                foundLeft = true;
+                minPos = lastLeftHit;
+                break;
+            }
+            else
+            {
+                lastLeftHit = downHit.point;
+                leftGetter.Translate(Vector2.left * scoutMs * Time.deltaTime);
+            }
+            yield return new WaitForEndOfFrame();
         }
     }
 
-    void GetRightEdge()
+    IEnumerator GetRightPoint()
     {
-        rightGetter.position += new Vector3(1, 0, 0);
-        RaycastHit2D rightHit = Physics2D.Raycast(rightGetter.transform.position, Vector2.down, layer);
-        if (rightHit)
+        while (!foundRight)
         {
-            lastRightHit = rightHit.point;
-        }
-        else
-        {
-            maxPos = lastRightHit;
-            foundMax = true;
+            RaycastHit2D downHit = Physics2D.Raycast(rightGetter.position, Vector2.down, rayLength, layer);
+            RaycastHit2D frontHit = Physics2D.Raycast(rightGetter.position, Vector2.right, rayLength, layer);
+            if (ReferenceEquals(downHit.collider, null) || !ReferenceEquals(frontHit.collider, null))
+            {
+                foundRight = true;
+                maxPos = lastRightHit;
+                break;
+            }
+            else
+            {
+                lastRightHit = downHit.point;
+                rightGetter.Translate(Vector2.right * scoutMs * Time.deltaTime);
+            }
+            yield return new WaitForEndOfFrame();
         }
     }
+
+    IEnumerator WaitUntilDone()
+    {
+        yield return new WaitUntil(() => foundRight && foundLeft);
+        Done = true;
+    }
+
+
 }

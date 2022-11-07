@@ -96,6 +96,10 @@ public class AssetsRefrence
 
     [Header("HEALTH BAR")]
     public ObjectPool CubePool;
+
+
+    [Header("Bounder")]
+    public Transform BounderScout;
 }
 public class GeneralFunctions
 {

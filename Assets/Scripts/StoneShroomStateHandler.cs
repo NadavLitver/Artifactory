@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StoneShroomStateHandler : StateHandler
@@ -28,6 +26,7 @@ public class StoneShroomStateHandler : StateHandler
     public float ThrowThreshold;
     public float RamThreshold;
     public int MovementDir;
+    public bool RequireFlip;
     public bool Enraged;
     public bool stunned;
     public bool frozen;
@@ -40,16 +39,16 @@ public class StoneShroomStateHandler : StateHandler
 
     private void Update()
     {
-        if (!frozen && !stunned)
+        if (!frozen && !stunned && Bounder.Done)
         {
             RunStateMachine();
-        }
+         }
     }
 
     private void Start()
     {
         ShroomActor.TakeDamageGFX.AddListener(Enrage);
-        
+
     }
 
     public void Enrage()
@@ -122,6 +121,24 @@ public class StoneShroomStateHandler : StateHandler
         }
     }
 
+    public bool CheckForFlip()
+    {
+        if (GameManager.Instance.generalFunctions.IsInRange(transform.position, Bounder.MaxPos, 1.1f) && RB.velocity.x > 0)
+        {
+            return true;
+        }
+        else if (GameManager.Instance.generalFunctions.IsInRange(transform.position, Bounder.MinPos, 1.1f) && RB.velocity.x < 0)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    public Vector2 GetPlayerDirection()
+    {
+        return (GameManager.Instance.assets.playerActor.transform.position - transform.position).normalized;
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -130,7 +147,10 @@ public class StoneShroomStateHandler : StateHandler
         Gizmos.DrawWireSphere(transform.position, RamThreshold);
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(transform.position, ThrowThreshold);
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, 1);
+
     }
 
-   
+
 }

@@ -5,17 +5,41 @@ public class ShroomMoveBackwards : State
     StoneShroomStateHandler handler;
     [SerializeField] float noticeOffset;
     [SerializeField] float moveBackwardsSpeed;
+    [SerializeField] float walkBackDuration;
+    float startedWalkingBack;
+    bool enteredState;
+
+    //basing back movement distance on duration and not range because we dont want to get the enemy stuck at a certain distance
     public override State RunCurrentState()
     {
-        handler.Flipper.Disabled = true;
-        handler.RB.velocity = new Vector2(transform.parent.localScale.x * -1 * moveBackwardsSpeed, handler.RB.velocity.y);
-        if (GameManager.Instance.generalFunctions.IsInRange(GameManager.Instance.assets.playerActor.transform.position, transform.position, handler.ShroomLineOfSight.range + noticeOffset))
+        if (!enteredState)
         {
-            return this;
+            //as we only want to walk back once we cache the moment the state is first called
+            enteredState = true;
+            startedWalkingBack = Time.time;
         }
-        handler.ShroomGroundCheck.FlipRequired = true;
-        handler.Enrage();
-        return handler.ShroomIdle;
+
+        if (Time.time - startedWalkingBack >= walkBackDuration || handler.CheckForFlip())
+        {// if walked for the entire duration or if reached a ledge.
+            handler.Enrage();
+            handler.MovementDir *= -1;
+            handler.Flipper.Disabled = false;
+            return handler.ShroomIdle;
+        }
+
+        else if (handler.isPlayerWithinDefenseRange())
+        {
+            handler.Enrage();
+            handler.Flipper.Disabled = false;
+            return handler.ShroomDefense;
+        }
+
+        handler.Flipper.Disabled = true;
+        handler.RB.velocity = new Vector2(moveBackwardsSpeed * handler.MovementDir * -1, 0);
+        return this;
+
+
+
     }
 
 

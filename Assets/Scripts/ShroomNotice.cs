@@ -11,10 +11,10 @@ public class ShroomNotice : State
         {
             if (GameManager.Instance.generalFunctions.CalcRange(transform.position, GameManager.Instance.assets.playerActor.transform.position) <= GameManager.Instance.generalFunctions.CalcRange(transform.position, handler.CurrentCap.transform.position) )
             {
-                handler.CurrentRamTarget = GameManager.Instance.assets.Player.transform;
-                return handler.ShroomRam;
+                handler.CurrentRamTarget = GameManager.Instance.assets.Player.transform;   
             }
-            return handler.ShroomLookForCap;
+            handler.CurrentRamTarget = handler.CurrentCap.transform;
+            return handler.ShroomRam;
         }
         else
         {

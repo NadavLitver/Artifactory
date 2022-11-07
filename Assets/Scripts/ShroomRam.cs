@@ -22,7 +22,7 @@ public class ShroomRam : State
             handler.RB.velocity = new Vector2(ramDir.x * ramSpeed, handler.RB.velocity.y);
             StartedCharging = true;
         }
-        if (GameManager.Instance.generalFunctions.IsInRange(transform.position, currentDest, ramTargetOffset) || !handler.ShroomGroundCheck.IsEverythingGrounded())
+        if (GameManager.Instance.generalFunctions.IsInRange(transform.position, currentDest, ramTargetOffset) || handler.CheckForFlip())
         {
             handler.Freeze(ramRecoveryTime);
             handler.RamCollider.SetActive(false);
