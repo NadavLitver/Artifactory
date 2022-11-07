@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Dummy : Actor
 {
+
+    [SerializeField] Ability hitself;
     private void Start()
     {
         OnDeath.AddListener(HealBackToFull);
@@ -13,6 +15,11 @@ public class Dummy : Actor
     public void HealBackToFull()
     {
         Heal(new DamageHandler() { amount = maxHP, myDmgType = DamageType.heal });
+    }
+
+    public void hitSelf()
+    {
+        GetHit(hitself);
     }
 
 }

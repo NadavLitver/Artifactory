@@ -17,7 +17,6 @@ public class DynamicHpBar : MonoBehaviour
     [SerializeField] Transform cubePrefab;
     [SerializeField] bool refill;
 
-
     [SerializeField] Transform chipAwayhealthBar;
     [SerializeField] Transform chipAwayDamagedhealthBar;
     Coroutine activeRotineDMG;
@@ -28,6 +27,8 @@ public class DynamicHpBar : MonoBehaviour
     List<Transform> cubesCreated = new List<Transform>();
 
     float camulativeDmg = 0;
+    float lastChangeCurrentHp;
+
     private void Start()
     {
        //actor = GetComponentInParent<Actor>();
@@ -39,8 +40,8 @@ public class DynamicHpBar : MonoBehaviour
                 DrawCubes();
                 break;
             case BarMode.ChipAway:
-                actor.TakeDamageGFX.AddListener(ChipAwayBarTakeDmg);
-                actor.OnHealGFX.AddListener(ChipAwayBarHealDamage);
+                actor.TakeDamageGFX.AddListener(updateValues);
+                actor.OnHealGFX.AddListener(updateValues);
                 break;
             default:
                 break;
@@ -53,6 +54,7 @@ public class DynamicHpBar : MonoBehaviour
     {
         maxHp = actor.maxHP;
         curHp = actor.currentHP;
+        EnqueueNextBarChange();
     }
 
     [ContextMenu("createCubes")]
@@ -101,24 +103,48 @@ public class DynamicHpBar : MonoBehaviour
     }
 
 
-    public void ChipAwayBarTakeDmg()
+    public void EnqueueNextBarChange()
     {
-        updateValues();
-        chipAwayhealthBar.localScale = new Vector3(curHp / maxHp, 1, 1);
-        if (!ReferenceEquals(activeRotineDMG, null))
-        {
-            StopCoroutine(activeRotineDMG);
-        }
-        activeRotineDMG = StartCoroutine(ChipAwayHpBarDamage());
-    }
-    public void ChipAwayBarHealDamage()
-    {
-        updateValues();
-        chipAwayDamagedhealthBar.localScale = new Vector3(curHp / maxHp, 1, 1);
         if (!ReferenceEquals(activeRotineHeal, null))
         {
             StopCoroutine(activeRotineHeal);
         }
+        if (!ReferenceEquals(activeRotineDMG, null))
+        {
+            StopCoroutine(activeRotineDMG);
+        }
+        if (lastChangeCurrentHp > curHp)//took damage
+        {
+            ChipAwayBarTakeDmg();
+        }
+        else//restored hp
+        {
+            ChipAwayBarHealDamage();
+        }
+    }
+
+
+
+    public void ChipAwayBarTakeDmg()
+    {
+        float amount = curHp / maxHp;
+        if (amount <=  0)
+        {
+            chipAwayhealthBar.localScale = new Vector3(0, 1, 1);
+            return;
+        }
+        chipAwayhealthBar.localScale = new Vector3(curHp / maxHp, 1, 1);
+        activeRotineDMG = StartCoroutine(ChipAwayHpBarDamage());
+    }
+    public void ChipAwayBarHealDamage()
+    {
+        float amount = curHp / maxHp;
+        if (amount >= maxHp)
+        {
+            chipAwayhealthBar.localScale = new Vector3(1, 1, 1);
+            return;
+        }
+        chipAwayDamagedhealthBar.localScale = new Vector3(curHp / maxHp, 1, 1);
         activeRotineHeal = StartCoroutine(ChipAwayHpBarHealing());
     }
 
@@ -149,7 +175,11 @@ public class DynamicHpBar : MonoBehaviour
         }
     }
 
-   
+    //while losing hp green bar is set to a certain fill, red bar is dragged to chase it
+    //while restoring hp red bar is set to a certain fill, green bar is dragged to chase it 
+    //if restoring hp while the red bar is being dragged - stop dragging it and set it to a pos instead
+    //if taking dmg while the green bar is being dragged - stop dragging it and set it to the pos instead
+    //if taking damage and healing and the same time - the second effect is given priority
     IEnumerator FlipWhenNegative()
     {
         yield return new WaitUntil(()=>transform.parent.transform.localScale.x < 0);
