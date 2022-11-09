@@ -8,16 +8,28 @@ public class ShroomDefense : State
     [SerializeField] float pushBackForce;
     StoneShroomStateHandler handler;
     float lastDefended;
+    bool defending;
 
     public override State RunCurrentState()
     {
         //the shroom will defend if the cooldown permits
+        handler.RB.velocity = Vector2.zero;
         if (Time.time - lastDefended >= defenseCoolDown)
         {
             Debug.Log("shroom is now defending");
             handler.ShroomActor.TakeDamageGFX.AddListener(PushBack);
+            handler.ShroomActor.OnStatusEffectRemoved.AddListener(SetDefendingOff);
             handler.ShroomActor.RecieveStatusEffects(StatusEffectEnum.Invulnerability);
             lastDefended = Time.time;
+            defending = true;
+        }
+        if (defending)
+        {
+            return this;
+        }
+        else if(handler.Enraged)
+        {
+            return handler.ShroomThrow;
         }
         return handler.ShroomNotice;
     }
@@ -33,5 +45,13 @@ public class ShroomDefense : State
         Vector2 pushbackdir = (GameManager.Instance.assets.playerActor.transform.position - transform.position)* -1;
         handler.RB.AddForce(new Vector2(pushBackForce * pushbackdir.x, 0), ForceMode2D.Impulse);
         handler.ShroomActor.TakeDamageGFX.RemoveListener(PushBack);
+    }
+
+    public void SetDefendingOff(StatusEffect effect)
+    {
+        if (effect is Invulnerability)
+        {
+            defending = false;
+        }
     }
 }

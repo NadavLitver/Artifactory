@@ -10,6 +10,8 @@ public class RigidBodyFlip : MonoBehaviour
     Rigidbody2D rb;
     Vector3 positiveVector;
     Vector3 negativeVector;
+
+    public bool Disabled;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -19,14 +21,16 @@ public class RigidBodyFlip : MonoBehaviour
     }
 
     IEnumerator FlipWhenNegative()
-    {
+    { 
         yield return new WaitUntil(() => rb.velocity.x < 0 );
+        yield return new WaitUntil(() => !Disabled );
         transform.localScale = negativeVector;
         StartCoroutine(FlipWhenPositive());
     }
     IEnumerator FlipWhenPositive()
     {
         yield return new WaitUntil(() => rb.velocity.x > 0);
+        yield return new WaitUntil(() => !Disabled);
         transform.localScale  = positiveVector;
         StartCoroutine(FlipWhenNegative());
     }

@@ -26,7 +26,7 @@ public class PositionSetter : MonoBehaviour
         {
            // yield return new WaitForSecondsRealtime(delayBetweenUpdates);
             Collider2D[] collidersFound = Physics2D.OverlapCircleAll(transform.position, checkRadius, layerToCheck);
-            Debug.Log("Found " + collidersFound.Length + " amount of enemies ");
+            //Debug.Log("Found " + collidersFound.Length + " amount of enemies ");
             if (collidersFound.Length < 1)
             {
                 transform.localPosition = Vector2.MoveTowards(transform.localPosition,  offset, Time.deltaTime * 2);

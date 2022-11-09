@@ -38,6 +38,14 @@ public class Actor : MonoBehaviour, IDamagable
     /// </summary>
     public UnityEvent<StatusEffectEnum> OnApplyStatusEffect;
     /// <summary>
+    /// invoked when this actor recieves a status effect
+    /// </summary>
+    public UnityEvent<StatusEffectEnum> OnRecieveStatusEffect;
+    /// <summary>
+    /// invoked when this actor loses a status effect
+    /// </summary>
+    public UnityEvent<StatusEffect> OnStatusEffectRemoved;
+    /// <summary>
     /// invoked when this actor is healed
     /// </summary>
     public UnityEvent<DamageHandler> OnRecieveHealth;
@@ -78,6 +86,7 @@ public class Actor : MonoBehaviour, IDamagable
         }
         ActorStatusEffects.Add(effect);
         effect.cacheHost(this);
+        OnRecieveStatusEffect?.Invoke(givenStatusEffect);
     }
 
     public void RemoveStatusEffect(StatusEffect givenEffect)
@@ -89,6 +98,7 @@ public class Actor : MonoBehaviour, IDamagable
                 //duplicate type already exists
                 ActorStatusEffects.Remove(item);
                 item.Unsubscribe();
+                OnStatusEffectRemoved?.Invoke(givenEffect);
                 return;
             }
         }

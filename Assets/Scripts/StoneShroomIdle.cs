@@ -3,29 +3,27 @@ using UnityEngine;
 public class StoneShroomIdle : State
 {
     StoneShroomStateHandler handler;
+    [SerializeField] float stopDuration;
+    [SerializeField] float stopCooldown;
+    [SerializeField] float lastStop;
     [SerializeField] float idleSpeed;
-    int movementDir = 1;
     public override State RunCurrentState()
     {
-        //if we can see the player go into notice player 
-        //if the object is grounded, walk along the x axis to the right side. 
-        //if the object is not grounded change the direction of movement
-        if (handler.ShroomGroundCheck.FlipRequired)
+        if (handler.AttackMode) //if the cap is on the floor
         {
-            handler.ShroomGroundCheck.FlipRequired = false;
-            movementDir *= -1;
+            handler.CurrentRamTarget = handler.CurrentCap.transform;
+            return handler.ShroomRam;
         }
-        if (handler.ShroomLineOfSight.CanSeePlayer())
+        else if (handler.ShroomLineOfSight.CanSeePlayer())
         {
             return handler.ShroomNotice;
         }
-        if (handler.AttackMode)//if the shroom doest have its cap
+        if (handler.CheckForFlip())
         {
-            return handler.ShroomLookForCap;
+            handler.MovementDir *= -1;
         }
-        handler.RB.velocity = new Vector2(idleSpeed * movementDir , handler.RB.velocity.y);
+        handler.RB.velocity = new Vector2(idleSpeed * handler.MovementDir, 0);
         return this;
-
     }
 
     private void Start()

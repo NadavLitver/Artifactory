@@ -3,6 +3,7 @@ using UnityEngine;
 public class ShroomThrow : State
 {
     [SerializeField] float throwForce;
+    [SerializeField] float throwDelay;
     StoneShroomStateHandler handler;
 
     public override State RunCurrentState()
@@ -11,15 +12,15 @@ public class ShroomThrow : State
         //set its position to be equal to yours
         //add force to it in the direction of the player
         //return notice
-        handler.RB.velocity = Vector2.zero;
+        handler.Freeze(throwDelay);
         ShroomCap cap = handler.GetCapToThrow();
         cap.transform.position = transform.position;
+        cap.SetUpPositions(handler.Bounder.MaxPos, handler.Bounder.MinPos);
         cap.gameObject.SetActive(true);
-        Vector2 throwDir = (GameManager.Instance.assets.playerActor.transform.position - transform.position).normalized;
-        cap.RB.AddForce(new Vector2(throwDir.x * throwForce, 0), ForceMode2D.Impulse);
+        cap.Throw(new Vector2(handler.GetPlayerDirection().x * throwForce, 0));
         handler.AttackMode = true;
+        handler.Freeze(throwDelay);
         return handler.ShroomNotice;
-
     }
 
     // Start is called before the first frame update
