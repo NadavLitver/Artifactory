@@ -27,7 +27,7 @@ public class HealingGoblet : StatusEffect
         if (counter == 10)
         {
             DamageHandler healingDmg = new DamageHandler();
-            healingDmg.amount = givenDmg.calculateFinalDamage() * GameManager.Instance.DamageManager.HealingGobletLifeStealPercentage;
+            healingDmg.amount = givenDmg.calculateFinalDamageMult() * GameManager.Instance.DamageManager.HealingGobletLifeStealPercentage;
             healingDmg.myDmgType = DamageType.heal;
             host.Heal(healingDmg);
             counter = 0;

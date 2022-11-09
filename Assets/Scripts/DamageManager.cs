@@ -2,6 +2,10 @@ using UnityEngine;
 
 public class DamageManager : MonoBehaviour
 {
+    [Header("Global Stats")]
+    public float BaseCritDamage;
+
+
     [Header("Burn Properties"), Space(10)]
     public float burnDuration;
     public float burnDamage;
