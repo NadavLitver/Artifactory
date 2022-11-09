@@ -134,7 +134,7 @@ public class Actor : MonoBehaviour, IDamagable
         currentHP -= finalDamage;
         dmgHandler.ClearMods();
         TakeDamageGFX?.Invoke();
-        if (currentHP < 0)
+        if (currentHP <= 0)
         {
             onActorDeath();
             host.OnKill?.Invoke(this);
@@ -167,7 +167,7 @@ public class Actor : MonoBehaviour, IDamagable
         currentHP -= finalDamage;
         dmgHandler.ClearMods();
         TakeDamageGFX?.Invoke();
-        if (currentHP < 0)
+        if (currentHP <= 0)
         {
             onActorDeath();
         }
