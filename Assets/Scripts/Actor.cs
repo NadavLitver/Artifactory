@@ -157,14 +157,13 @@ public class Actor : MonoBehaviour, IDamagable
         host.OnDealingDamageCalcOver?.Invoke(dmgHandler);
         float finalDamage = dmgHandler.calculateFinalDamageMult();
         currentHP -= finalDamage;
-        dmgHandler.ClearMods();
         TakeDamageGFX?.Invoke();
         if (currentHP <= 0)
         {
             onActorDeath();
             host.OnKill?.Invoke(this);
         }
-        Debug.Log(finalDamage);
+        dmgHandler.ClearMods();
         ClampHP();
     }
 
@@ -189,12 +188,12 @@ public class Actor : MonoBehaviour, IDamagable
         OnDamageCalcOver?.Invoke(dmgHandler);
         float finalDamage = dmgHandler.calculateFinalDamageMult();
         currentHP -= finalDamage;
-        dmgHandler.ClearMods();
         TakeDamageGFX?.Invoke();
         if (currentHP <= 0)
         {
             onActorDeath();
         }
+        dmgHandler.ClearMods();
         ClampHP();
     }
     public void Heal(DamageHandler givenDmg)
