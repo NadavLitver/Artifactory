@@ -414,6 +414,12 @@ MonoBehaviour:
   OnApplyStatusEffect:
     m_PersistentCalls:
       m_Calls: []
+  OnRecieveStatusEffect:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStatusEffectRemoved:
+    m_PersistentCalls:
+      m_Calls: []
   OnRecieveHealth:
     m_PersistentCalls:
       m_Calls: []
@@ -423,6 +429,18 @@ MonoBehaviour:
   OnDeath:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1154823760}
+        m_TargetAssemblyTypeName: SpikedFrogStateHandler, Assembly-CSharp
+        m_MethodName: Freeze
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 3
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 9189810574590924089}
         m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
         m_MethodName: Play
@@ -433,18 +451,6 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: FrogDeath
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1154823760}
-        m_TargetAssemblyTypeName: SpikedFrogStateHandler, Assembly-CSharp
-        m_MethodName: Freeze
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 1
-          m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
   OnHealGFX:
@@ -467,6 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 260220feca668bd418b158dcffc82824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Disabled: 0
 --- !u!1 &7329605738004119608
 GameObject:
   m_ObjectHideFlags: 0

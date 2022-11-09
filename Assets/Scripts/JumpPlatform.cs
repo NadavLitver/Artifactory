@@ -10,21 +10,31 @@ public class JumpPlatform : MonoBehaviour
     private Vector2 GizmoDir => new Vector2(x, y).normalized;
 
     private Vector2 dir;
+    private int JumpTriggerHash;
 
+    private Animator m_animator;
     private void Start()
     {
         dir = new Vector2(x, y);
         playerControllerRef = GameManager.Instance.assets.Player.GetComponent<PlayerController>();
+        m_animator = GetComponentInChildren<Animator>();
+        JumpTriggerHash = Animator.StringToHash("Trigger");
     }
-    private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
-            playerControllerRef.ResetVelocity();
-            playerControllerRef.RecieveForce(dir * force);
+            m_animator.SetTrigger(JumpTriggerHash);
         }
     }
-  
+
+    private void GivePlayerForce()
+    {
+        playerControllerRef.ResetVelocity();
+        playerControllerRef.RecieveForce(dir * force);
+    }
+
     private void OnDrawGizmosSelected()
     {
         Gizmos.DrawRay(transform.position, GizmoDir * force);
