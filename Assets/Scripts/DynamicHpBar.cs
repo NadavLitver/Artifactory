@@ -27,7 +27,7 @@ public class DynamicHpBar : MonoBehaviour
     List<Transform> cubesCreated = new List<Transform>();
 
     float camulativeDmg = 0;
-    float lastChangeCurrentHp;
+    float lastChangeCurrentHp =0;
 
     private void Start()
     {
@@ -41,13 +41,14 @@ public class DynamicHpBar : MonoBehaviour
                 break;
             case BarMode.ChipAway:
                 actor.TakeDamageGFX.AddListener(updateValues);
+                actor.TakeDamageGFX.AddListener(ChipAwayBarTakeDmg);
                 actor.OnHealGFX.AddListener(updateValues);
+                actor.OnHealGFX.AddListener(ChipAwayBarHealDamage);
                 break;
             default:
                 break;
         }
         StartCoroutine(FlipWhenNegative());
-        updateValues();
     }
 
     void updateValues()
@@ -113,27 +114,18 @@ public class DynamicHpBar : MonoBehaviour
         {
             StopCoroutine(activeRotineDMG);
         }
-        if (lastChangeCurrentHp > curHp)//took damage
-        {
-            ChipAwayBarTakeDmg();
-        }
-        else//restored hp
-        {
-            ChipAwayBarHealDamage();
-        }
     }
-
-
 
     public void ChipAwayBarTakeDmg()
     {
         float amount = curHp / maxHp;
-        if (amount <=  0)
+        if (amount <= 0)
         {
             chipAwayhealthBar.localScale = new Vector3(0, 1, 1);
+            activeRotineDMG = StartCoroutine(ChipAwayHpBarDamage());
             return;
         }
-        chipAwayhealthBar.localScale = new Vector3(curHp / maxHp, 1, 1);
+        chipAwayhealthBar.localScale = new Vector3(amount, 1, 1);
         activeRotineDMG = StartCoroutine(ChipAwayHpBarDamage());
     }
     public void ChipAwayBarHealDamage()
@@ -142,6 +134,8 @@ public class DynamicHpBar : MonoBehaviour
         if (amount >= maxHp)
         {
             chipAwayhealthBar.localScale = new Vector3(1, 1, 1);
+            activeRotineHeal = StartCoroutine(ChipAwayHpBarHealing());
+
             return;
         }
         chipAwayDamagedhealthBar.localScale = new Vector3(curHp / maxHp, 1, 1);
