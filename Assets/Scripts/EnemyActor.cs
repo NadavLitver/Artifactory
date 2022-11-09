@@ -16,4 +16,9 @@ public class EnemyActor : Actor
         
         
     }
+
+    public void HealBackToFull()
+    {
+        Heal(new DamageHandler() { amount = maxHP, myDmgType = DamageType.heal});
+    }
 }

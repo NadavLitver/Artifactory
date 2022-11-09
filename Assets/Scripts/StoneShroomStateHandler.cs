@@ -48,9 +48,22 @@ public class StoneShroomStateHandler : StateHandler
     private void Start()
     {
         ShroomActor.TakeDamageGFX.AddListener(Enrage);
-
+        ShroomActor.OnDeath.AddListener(Freeze);
+        ShroomActor.OnDeath.AddListener(RespawnOnCap);
     }
-
+    public void RespawnOnCap()
+    {
+        //play repsawn anim here i guess
+        if (!AttackMode)
+        {
+            return;
+        }
+        gameObject.SetActive(true);
+        transform.parent.position = new Vector2(CurrentCap.transform.position.x, CurrentCap.transform.position.y);
+        ShroomActor.HealBackToFull();
+        Freeze(0.5f);
+        Interrupt(ShroomIdle);
+    }
     public void Enrage()
     {
         Enraged = true;
@@ -63,6 +76,12 @@ public class StoneShroomStateHandler : StateHandler
         RB.constraints = RigidbodyConstraints2D.FreezePosition;
         LeanTween.delayedCall(duration, UnFreeze);
 
+    }
+
+    public void Freeze()
+    {
+        frozen = true;
+        RB.constraints = RigidbodyConstraints2D.FreezePosition;
     }
     public void UnFreeze()
     {

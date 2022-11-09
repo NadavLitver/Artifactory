@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -28,7 +27,7 @@ public class Actor : MonoBehaviour, IDamagable
     /// <summary>
     /// invoked when this actor is hit by another actor
     /// </summary>
-    public UnityEvent<Ability, Actor> OnHit;
+    public UnityEvent<Ability, Actor> OnHitByActor;
     /// <summary>
     /// invoked when this actor kills another one
     /// </summary>
@@ -53,11 +52,12 @@ public class Actor : MonoBehaviour, IDamagable
     public UnityEvent OnHealGFX;
 
     //  public UnityEvent onTakeDamage, onGetHealth, OnDeath;
-    [SerializeReference] private List<StatusEffect> m_StatusEffects;
+    [SerializeField] private List<StatusEffect> m_StatusEffects;
 
 
     public bool IsInAttackAnim;
 
+    [SerializeField] bool effectable;
 
     public void Awake()
     {
@@ -103,25 +103,24 @@ public class Actor : MonoBehaviour, IDamagable
             }
         }
     }
-   
+
     public void GetHit(Ability givenAbility, Actor host)
     {
-        foreach (var SE in givenAbility.StatusEffects)
+        if (effectable)
         {
-            if (givenAbility.RollForStatusActivation(SE))
+            foreach (var SE in givenAbility.StatusEffects)
             {
-                RecieveStatusEffects(SE.StatusType);
-                host.OnApplyStatusEffect?.Invoke(SE.StatusType);
+                if (givenAbility.RollForStatusActivation(SE))
+                {
+                    RecieveStatusEffects(SE.StatusType);
+                    host.OnApplyStatusEffect?.Invoke(SE.StatusType);
+                }
             }
         }
-        host.OnHit?.Invoke(givenAbility, this);
+
+        host.OnHitByActor?.Invoke(givenAbility, this);
         //invoking the hit event on the actor that hit me
         TakeDamage(givenAbility.DamageHandler, host);
-        if (givenAbility.KnockbackForce != 0)
-        {
-            RecieveForce();
-        }
-
     }
 
     public void TakeDamage(DamageHandler dmgHandler, Actor host)
@@ -144,19 +143,17 @@ public class Actor : MonoBehaviour, IDamagable
 
     public void GetHit(Ability m_ability)
     {
-        foreach (var SE in m_ability.StatusEffects)
+        if (effectable)
         {
-            if (m_ability.RollForStatusActivation(SE))
+            foreach (var SE in m_ability.StatusEffects)
             {
-                RecieveStatusEffects(SE.StatusType);
+                if (m_ability.RollForStatusActivation(SE))
+                {
+                    RecieveStatusEffects(SE.StatusType);
+                }
             }
         }
-
         TakeDamage(m_ability.DamageHandler);
-        if (m_ability.KnockbackForce != 0)
-        {
-            RecieveForce();
-        }
     }
 
     public void TakeDamage(DamageHandler dmgHandler)
