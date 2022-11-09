@@ -75,7 +75,6 @@ public class StoneShroomStateHandler : StateHandler
         frozen = true;
         RB.constraints = RigidbodyConstraints2D.FreezePosition;
         LeanTween.delayedCall(duration, UnFreeze);
-
     }
 
     public void Freeze()
