@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEditor;
+
 
 public class FPSCounter : MonoBehaviour
 {
@@ -10,7 +12,7 @@ public class FPSCounter : MonoBehaviour
 
     private void Awake()
     {
-        Application.targetFrameRate = 120;
+        Application.targetFrameRate = 300;
     }
 
     public void Update()

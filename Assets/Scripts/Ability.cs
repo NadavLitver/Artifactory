@@ -12,7 +12,8 @@ public class Ability : ScriptableObject
     [SerializeField, Range(1, 100)] int statusActivationBaseChance;
     [SerializeField] bool useBaseChanceForStatuses;
     [SerializeField] float knockbackForce;
-
+    [SerializeField] float critHitChace;
+    [SerializeField] float critHitDamage = 1;
     Vector2 forceDircetion;
     public bool RollForStatusActivation(StatusEffectActivatonData givenStatus)
     {
@@ -34,6 +35,8 @@ public class Ability : ScriptableObject
     public DamageHandler DamageHandler { get => damageHandler; set => damageHandler = value; }
     public string AbilityName { get => Name; set => Name = value; }
     public float KnockbackForce { get => knockbackForce; set => knockbackForce = value; }
+    public float CritHitChace { get => critHitChace; set => critHitChace = value; }
+    public float CritHitDamage { get => critHitDamage; set => critHitDamage = value; }
 
     public void CacheForceDirection(Vector2 givenDirection)
     {

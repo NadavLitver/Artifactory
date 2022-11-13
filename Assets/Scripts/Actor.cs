@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,6 +6,10 @@ public class Actor : MonoBehaviour, IDamagable
 {
     public float currentHP;
     public float maxHP;
+    [SerializeField] float baseCritHit;
+    [SerializeField] float baseCritDamage;
+    DamageHandler critHit;
+    DamageHandler critDamage;
     public List<StatusEffect> ActorStatusEffects { get => m_StatusEffects; set => m_StatusEffects = value; }
 
     /// <summary>
@@ -26,9 +29,17 @@ public class Actor : MonoBehaviour, IDamagable
     /// </summary>
     public UnityEvent<DamageHandler> OnDealingDamageCalcOver;
     /// <summary>
+    /// invoked when this actor deals critical damage
+    /// </summary>
+    public UnityEvent<DamageHandler> OnDealCriticalDamage;
+    /// <summary>
+    /// invoked when this actor takes critical damage
+    /// </summary>
+    public UnityEvent<DamageHandler> OnTakeCriticalDamage;
+    /// <summary>
     /// invoked when this actor is hit by another actor
     /// </summary>
-    public UnityEvent<Ability, Actor> OnHit;
+    public UnityEvent<Ability, Actor> OnHitByActor;
     /// <summary>
     /// invoked when this actor kills another one
     /// </summary>
@@ -53,18 +64,27 @@ public class Actor : MonoBehaviour, IDamagable
     public UnityEvent OnHealGFX;
 
     //  public UnityEvent onTakeDamage, onGetHealth, OnDeath;
-    [SerializeReference] private List<StatusEffect> m_StatusEffects;
+    [SerializeField] private List<StatusEffect> m_StatusEffects;
 
 
     public bool IsInAttackAnim;
 
+    [SerializeField] bool effectable;
 
     public void Awake()
     {
         currentHP = maxHP;
         onTakeDamage = new UnityEvent<DamageHandler>();
         m_StatusEffects = new List<StatusEffect>();
+        SetUpCrits();
     }
+
+    void SetUpCrits()
+    {
+        critHit = new DamageHandler() { amount = baseCritHit };
+        critDamage = new DamageHandler() { amount = baseCritDamage + GameManager.Instance.DamageManager.BaseCritDamage + 1 };
+    }
+
     private void ClampHP() => currentHP = Mathf.Clamp(currentHP, 0, maxHP);
     public virtual void onActorDeath()
     {
@@ -103,25 +123,30 @@ public class Actor : MonoBehaviour, IDamagable
             }
         }
     }
-   
+
     public void GetHit(Ability givenAbility, Actor host)
     {
-        foreach (var SE in givenAbility.StatusEffects)
+        if (effectable)
         {
-            if (givenAbility.RollForStatusActivation(SE))
+            foreach (var SE in givenAbility.StatusEffects)
             {
-                RecieveStatusEffects(SE.StatusType);
-                host.OnApplyStatusEffect?.Invoke(SE.StatusType);
+                if (givenAbility.RollForStatusActivation(SE))
+                {
+                    RecieveStatusEffects(SE.StatusType);
+                    host.OnApplyStatusEffect?.Invoke(SE.StatusType);
+                }
             }
         }
-        host.OnHit?.Invoke(givenAbility, this);
+        if (host.CalcCrit(givenAbility))//checking for crit hit
+        {
+            //adding damage mod
+            host.OnDealCriticalDamage?.Invoke(givenAbility.DamageHandler);
+            OnTakeCriticalDamage?.Invoke(givenAbility.DamageHandler);
+            givenAbility.DamageHandler.AddModifier(host.CalcCritDamage(givenAbility));
+        }
+        host.OnHitByActor?.Invoke(givenAbility, this);
         //invoking the hit event on the actor that hit me
         TakeDamage(givenAbility.DamageHandler, host);
-        if (givenAbility.KnockbackForce != 0)
-        {
-            RecieveForce();
-        }
-
     }
 
     public void TakeDamage(DamageHandler dmgHandler, Actor host)
@@ -130,53 +155,51 @@ public class Actor : MonoBehaviour, IDamagable
         onTakeDamage?.Invoke(dmgHandler);
         OnDamageCalcOver?.Invoke(dmgHandler);
         host.OnDealingDamageCalcOver?.Invoke(dmgHandler);
-        float finalDamage = dmgHandler.calculateFinalDamage();
+        float finalDamage = dmgHandler.calculateFinalNumberMult();
         currentHP -= finalDamage;
-        dmgHandler.ClearMods();
         TakeDamageGFX?.Invoke();
         if (currentHP <= 0)
         {
             onActorDeath();
             host.OnKill?.Invoke(this);
         }
+        dmgHandler.ClearMods();
         ClampHP();
     }
 
     public void GetHit(Ability m_ability)
     {
-        foreach (var SE in m_ability.StatusEffects)
+        if (effectable)
         {
-            if (m_ability.RollForStatusActivation(SE))
+            foreach (var SE in m_ability.StatusEffects)
             {
-                RecieveStatusEffects(SE.StatusType);
+                if (m_ability.RollForStatusActivation(SE))
+                {
+                    RecieveStatusEffects(SE.StatusType);
+                }
             }
         }
-
         TakeDamage(m_ability.DamageHandler);
-        if (m_ability.KnockbackForce != 0)
-        {
-            RecieveForce();
-        }
     }
 
     public void TakeDamage(DamageHandler dmgHandler)
     {
         onTakeDamage?.Invoke(dmgHandler);
         OnDamageCalcOver?.Invoke(dmgHandler);
-        float finalDamage = dmgHandler.calculateFinalDamage();
+        float finalDamage = dmgHandler.calculateFinalNumberMult();
         currentHP -= finalDamage;
-        dmgHandler.ClearMods();
         TakeDamageGFX?.Invoke();
         if (currentHP <= 0)
         {
             onActorDeath();
         }
+        dmgHandler.ClearMods();
         ClampHP();
     }
     public void Heal(DamageHandler givenDmg)
     {
         OnRecieveHealth?.Invoke(givenDmg);
-        currentHP += givenDmg.calculateFinalDamage();
+        currentHP += givenDmg.calculateFinalNumberMult();
         ClampHP();
         OnHealGFX?.Invoke();
     }
@@ -193,5 +216,26 @@ public class Actor : MonoBehaviour, IDamagable
     public void EnableOnInAnim()
     {
         IsInAttackAnim = true;
+    }
+
+    public bool CalcCrit(Ability givenAbility)
+    {
+        critHit.AddModifier(givenAbility.CritHitChace);
+        float crit = critHit.calculateFinalNumberAdd();
+        critHit.ClearMods();
+        if (Random.Range(1, 100) <= crit *100)
+        {
+            Debug.Log("Crit!");
+            return true;
+        }
+        return false;
+    }
+     
+    public float CalcCritDamage(Ability givenAbility)
+    {
+        critDamage.AddModifier(givenAbility.CritHitDamage);
+        float totalCritDamage = critDamage.calculateFinalNumberAdd();
+        critDamage.ClearMods();
+        return totalCritDamage;
     }
 }

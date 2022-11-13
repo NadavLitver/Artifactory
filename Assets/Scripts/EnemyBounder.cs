@@ -21,7 +21,7 @@ public class EnemyBounder : MonoBehaviour
 
     private void OnEnable()
     {
-        if (!getter)
+        if (!getter && !Done)
         {
             rightGetter = Instantiate(GameManager.Instance.assets.BounderScout, transform.position, Quaternion.identity);
             leftGetter = Instantiate(GameManager.Instance.assets.BounderScout, transform.position, Quaternion.identity);

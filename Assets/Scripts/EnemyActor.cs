@@ -14,4 +14,9 @@ public class EnemyActor : Actor
     {
         base.RecieveForce();
     }
+
+    public void HealBackToFull()
+    {
+        Heal(new DamageHandler() { amount = maxHP, myDmgType = DamageType.heal});
+    }
 }
