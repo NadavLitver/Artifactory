@@ -11,7 +11,7 @@ public class DamagePopup : MonoBehaviour
     public void SetUp(DamageHandler givenDmg, Vector2 position, Vector2 direction)
     {
         text.color = GameManager.Instance.PopupManager.GetDamageTypeColor(givenDmg.myDmgType);
-        text.text = ((int)givenDmg.calculateFinalDamageMult()).ToString();
+        text.text = ((int)givenDmg.calculateFinalNumberMult()).ToString();
         transform.position = position;
         LeanTween.move(gameObject, position + (direction * dragDistance), dragTime).setEaseOutCubic();
         LeanTween.scale(gameObject, transform.localScale * sizeIncrease, dragTime);

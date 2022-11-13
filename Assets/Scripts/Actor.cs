@@ -155,7 +155,7 @@ public class Actor : MonoBehaviour, IDamagable
         onTakeDamage?.Invoke(dmgHandler);
         OnDamageCalcOver?.Invoke(dmgHandler);
         host.OnDealingDamageCalcOver?.Invoke(dmgHandler);
-        float finalDamage = dmgHandler.calculateFinalDamageMult();
+        float finalDamage = dmgHandler.calculateFinalNumberMult();
         currentHP -= finalDamage;
         TakeDamageGFX?.Invoke();
         if (currentHP <= 0)
@@ -186,7 +186,7 @@ public class Actor : MonoBehaviour, IDamagable
     {
         onTakeDamage?.Invoke(dmgHandler);
         OnDamageCalcOver?.Invoke(dmgHandler);
-        float finalDamage = dmgHandler.calculateFinalDamageMult();
+        float finalDamage = dmgHandler.calculateFinalNumberMult();
         currentHP -= finalDamage;
         TakeDamageGFX?.Invoke();
         if (currentHP <= 0)
@@ -199,7 +199,7 @@ public class Actor : MonoBehaviour, IDamagable
     public void Heal(DamageHandler givenDmg)
     {
         OnRecieveHealth?.Invoke(givenDmg);
-        currentHP += givenDmg.calculateFinalDamageMult();
+        currentHP += givenDmg.calculateFinalNumberMult();
         ClampHP();
         OnHealGFX?.Invoke();
     }
@@ -221,7 +221,7 @@ public class Actor : MonoBehaviour, IDamagable
     public bool CalcCrit(Ability givenAbility)
     {
         critHit.AddModifier(givenAbility.CritHitChace);
-        float crit = critHit.calculateFinalDamageAdd();
+        float crit = critHit.calculateFinalNumberAdd();
         critHit.ClearMods();
         if (Random.Range(1, 100) <= crit *100)
         {
@@ -234,7 +234,7 @@ public class Actor : MonoBehaviour, IDamagable
     public float CalcCritDamage(Ability givenAbility)
     {
         critDamage.AddModifier(givenAbility.CritHitDamage);
-        float totalCritDamage = critDamage.calculateFinalDamageAdd();
+        float totalCritDamage = critDamage.calculateFinalNumberAdd();
         critDamage.ClearMods();
         return totalCritDamage;
     }

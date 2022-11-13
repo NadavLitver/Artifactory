@@ -90,7 +90,7 @@ public class DynamicHpBar : MonoBehaviour
 
     public void UpdateCubicBar(DamageHandler givenDmg)
     {
-        camulativeDmg = givenDmg.calculateFinalDamageMult();
+        camulativeDmg = givenDmg.calculateFinalNumberMult();
         int amountToRemove = (int)(camulativeDmg / hpThreshold);
         for (int i = 0; i < amountToRemove; i++)
         {

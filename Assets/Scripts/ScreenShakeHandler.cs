@@ -9,7 +9,7 @@ public class ScreenShakeHandler : MonoBehaviour
     float _screenshakeForce;
     public void screenShakeBasedOnDamage(DamageHandler givenDmg)
     {
-        _screenshakeForce = givenDmg.calculateFinalDamageMult();
+        _screenshakeForce = givenDmg.calculateFinalNumberMult();
         _screenshakeForce /= 100;
         _screenshakeForce += 1;
         _screenshakeForce = Mathf.Clamp(_screenshakeForce, 0.1f, 5);

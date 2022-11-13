@@ -11,9 +11,8 @@ public class DamageHandler
     public void AddModifier(float givenMod)
     {
         modifiers.Add(givenMod);
-
     }
-    public float calculateFinalDamageMult()
+    public float calculateFinalNumberMult()
     {
         float baseAmount = amount;
         foreach (float mod in modifiers)
@@ -23,7 +22,7 @@ public class DamageHandler
         return baseAmount;
     }
 
-    public float calculateFinalDamageAdd()
+    public float calculateFinalNumberAdd()
     {
         float baseAmount = amount;
         foreach (float mod in modifiers)
