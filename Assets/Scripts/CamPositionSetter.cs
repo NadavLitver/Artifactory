@@ -20,6 +20,9 @@ public class CamPositionSetter : MonoBehaviour
     public Collider2D[] collidersFound;
     Vector2 finalPoint;
     public AnimationCurve DeathDollyInCurve;
+
+    public CinemachineVirtualCamera VirtualCamera { get => virtualCamera; set => virtualCamera = value; }
+
     public void Start()
     {
         follow = true;

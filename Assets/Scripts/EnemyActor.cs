@@ -13,7 +13,5 @@ public class EnemyActor : Actor
     public override void RecieveForce()
     {
         base.RecieveForce();
-        
-        
     }
 }

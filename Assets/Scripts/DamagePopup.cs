@@ -22,6 +22,7 @@ public class DamagePopup : MonoBehaviour
 
     public void TurnOff()
     {
+       
         transform.localScale = Vector3.one;
         gameObject.SetActive(false);
     }

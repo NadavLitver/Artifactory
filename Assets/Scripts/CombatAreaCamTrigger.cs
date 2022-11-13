@@ -8,7 +8,7 @@ public class CombatAreaCamTrigger : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            //finish this script nadav
+            GameManager.Instance.assets.camPositionSetter.VirtualCamera.Follow = transform;
         }
     }
 }

@@ -1,5 +1,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
+
 
 [DefaultExecutionOrder(-10)]
 public class GameManager : MonoBehaviour
@@ -46,7 +48,7 @@ public class GameManager : MonoBehaviour
     {
         inputManager.inputs.General.Quit.canceled += QuitGame;
         inputManager.inputs.General.Reset.canceled += ResetScene;
-
+        assets.playerActor.OnDeath.AddListener(generalFunctions.onPlayerDiedActions);
     }
     private void ResetScene(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
@@ -92,7 +94,7 @@ public class AssetsRefrence
     public Sprite HealingGoblet;
 
     [Header("CAMERA"), Space(10)]
-    public ScreenShakeHandler CameraShake;
+    public CamPositionSetter camPositionSetter;
 
     [Header("HEALTH BAR")]
     public ObjectPool CubePool;
@@ -124,7 +126,12 @@ public class GeneralFunctions
     {
         obj.transform.position = pos;
     }
-
+    public void onPlayerDiedActions()
+    {
+        LeanTween.cancelAll();
+        LeanTween.delayedCall(1, ResetScene);
+    }
+    
     public StatusEffect GetStatusFromType(StatusEffectEnum effect)
     {
         switch (effect)
