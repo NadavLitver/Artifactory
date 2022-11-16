@@ -71,6 +71,24 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Touch"",
+                    ""type"": ""Button"",
+                    ""id"": ""fe2a3a58-6bb9-4256-92f7-2dcbd4cdb3dc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TouchPos"",
+                    ""type"": ""Value"",
+                    ""id"": ""39331bb5-a5d9-4710-8b9c-f6b1bf952fbe"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -249,6 +267,50 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""Ultimate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d7635810-5007-4125-a92b-380a916a6a38"",
+                    ""path"": ""<Touchscreen>/primaryTouch/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Touch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""42b0669d-83a2-4737-9000-5ebe4eb88700"",
+                    ""path"": ""<Pointer>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Touch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""59b7d1f0-5367-43dd-803a-e51854858ce8"",
+                    ""path"": ""<Touchscreen>/primaryTouch/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TouchPos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6875d31a-0bce-4eff-8aa3-e0d5912aa47f"",
+                    ""path"": ""<Pointer>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TouchPos"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -310,6 +372,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_BaseMovement_Attack = m_BaseMovement.FindAction("Attack", throwIfNotFound: true);
         m_BaseMovement_Mobility = m_BaseMovement.FindAction("Mobility", throwIfNotFound: true);
         m_BaseMovement_Ultimate = m_BaseMovement.FindAction("Ultimate", throwIfNotFound: true);
+        m_BaseMovement_Touch = m_BaseMovement.FindAction("Touch", throwIfNotFound: true);
+        m_BaseMovement_TouchPos = m_BaseMovement.FindAction("TouchPos", throwIfNotFound: true);
         // General
         m_General = asset.FindActionMap("General", throwIfNotFound: true);
         m_General_Reset = m_General.FindAction("Reset", throwIfNotFound: true);
@@ -378,6 +442,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_BaseMovement_Attack;
     private readonly InputAction m_BaseMovement_Mobility;
     private readonly InputAction m_BaseMovement_Ultimate;
+    private readonly InputAction m_BaseMovement_Touch;
+    private readonly InputAction m_BaseMovement_TouchPos;
     public struct BaseMovementActions
     {
         private @PlayerInput m_Wrapper;
@@ -387,6 +453,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_BaseMovement_Attack;
         public InputAction @Mobility => m_Wrapper.m_BaseMovement_Mobility;
         public InputAction @Ultimate => m_Wrapper.m_BaseMovement_Ultimate;
+        public InputAction @Touch => m_Wrapper.m_BaseMovement_Touch;
+        public InputAction @TouchPos => m_Wrapper.m_BaseMovement_TouchPos;
         public InputActionMap Get() { return m_Wrapper.m_BaseMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -411,6 +479,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Ultimate.started -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnUltimate;
                 @Ultimate.performed -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnUltimate;
                 @Ultimate.canceled -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnUltimate;
+                @Touch.started -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnTouch;
+                @Touch.performed -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnTouch;
+                @Touch.canceled -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnTouch;
+                @TouchPos.started -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnTouchPos;
+                @TouchPos.performed -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnTouchPos;
+                @TouchPos.canceled -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnTouchPos;
             }
             m_Wrapper.m_BaseMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -430,6 +504,12 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @Ultimate.started += instance.OnUltimate;
                 @Ultimate.performed += instance.OnUltimate;
                 @Ultimate.canceled += instance.OnUltimate;
+                @Touch.started += instance.OnTouch;
+                @Touch.performed += instance.OnTouch;
+                @Touch.canceled += instance.OnTouch;
+                @TouchPos.started += instance.OnTouchPos;
+                @TouchPos.performed += instance.OnTouchPos;
+                @TouchPos.canceled += instance.OnTouchPos;
             }
         }
     }
@@ -482,6 +562,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnMobility(InputAction.CallbackContext context);
         void OnUltimate(InputAction.CallbackContext context);
+        void OnTouch(InputAction.CallbackContext context);
+        void OnTouchPos(InputAction.CallbackContext context);
     }
     public interface IGeneralActions
     {

@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.EnhancedTouch;
 
 public class InputManager : MonoBehaviour
 {
@@ -18,7 +20,8 @@ public class InputManager : MonoBehaviour
     public UnityEvent onJumpDown;
 
 
-
+    public UnityEvent OnTouchDown;
+    public UnityEvent OnTouchUp;
 
 
     private void Awake()
@@ -29,7 +32,24 @@ public class InputManager : MonoBehaviour
         inputs.BaseMovement.Mobility.started += InvokeOnMobilityDown;
         inputs.BaseMovement.Ultimate.started += InvokeOnUltimateDown;
         inputs.BaseMovement.jump.started += InvokeOnJumpDown;
+        inputs.BaseMovement.Touch.started += Touch_started;
+        inputs.BaseMovement.Touch.canceled += Touch_canceled;
+        
 
+    }
+
+    private void Touch_canceled(InputAction.CallbackContext obj)
+    {
+        OnTouchUp.Invoke();
+    }
+
+    private void Touch_started(InputAction.CallbackContext obj)
+    {
+        OnTouchDown.Invoke();
+    }
+    public Vector2 Touch_ScreenPos()
+    {
+        return inputs.BaseMovement.TouchPos.ReadValue<Vector2>();
     }
 
     private void InvokeOnJumpDown(InputAction.CallbackContext obj)
