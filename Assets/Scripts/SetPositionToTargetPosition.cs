@@ -5,6 +5,10 @@ using UnityEngine;
 public class SetPositionToTargetPosition : MonoBehaviour
 {
     [SerializeField] Transform Target;
+    private void Start()
+    {
+        transform.parent = null;
+    }
     public void Update()
     {
         transform.position = Target.position;

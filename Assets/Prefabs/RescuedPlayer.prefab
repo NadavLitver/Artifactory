@@ -249,6 +249,7 @@ Transform:
   - {fileID: 5508809318916323046}
   - {fileID: 5508809317102165000}
   - {fileID: 7792121383410523594}
+  - {fileID: 1467768457}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -346,6 +347,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHP: 0
   maxHP: 100
+  baseCritHit: 0
+  baseCritDamage: 0.5
   OnDealDamage:
     m_PersistentCalls:
       m_Calls: []
@@ -355,7 +358,13 @@ MonoBehaviour:
   OnDealingDamageCalcOver:
     m_PersistentCalls:
       m_Calls: []
-  OnHit:
+  OnDealCriticalDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTakeCriticalDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHitByActor:
     m_PersistentCalls:
       m_Calls: []
   OnKill:
@@ -378,17 +387,26 @@ MonoBehaviour:
       m_Calls: []
   OnDeath:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   OnHealGFX:
     m_PersistentCalls:
       m_Calls: []
-  m_StatusEffects: []
   IsInAttackAnim: 0
+  effectable: 0
   m_animator: {fileID: 791565559279450814}
   playerRelicInventory: {fileID: 840070347042588615}
-  references:
-    version: 2
-    RefIds: []
 --- !u!114 &840070347042588615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -550,13 +568,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities:
-  - Ability: {fileID: 11400000, guid: bfd394731ce00b242a3ddf26ffc864ff, type: 2}
-    AbilityRecovery: 0
-    AbilityAnimationName: Attack
   - Ability: {fileID: 11400000, guid: 89c42a226e5ce9849963c9f5611700b4, type: 2}
     AbilityRecovery: 0
+    AbilityAnimationName: Attack
+  - Ability: {fileID: 11400000, guid: bfd394731ce00b242a3ddf26ffc864ff, type: 2}
+    AbilityRecovery: 0
     AbilityAnimationName: Attack2
-  - Ability: {fileID: 11400000, guid: 50ccdd7427b3539469d8b06eebfe2e0c, type: 2}
+  - Ability: {fileID: 11400000, guid: b9d93eb80b5623e45848348e1de8e35e, type: 2}
     AbilityRecovery: 0
     AbilityAnimationName: Attack3
   currentAbilityCombo:
@@ -849,6 +867,80 @@ Transform:
   m_Father: {fileID: 840070347753010960}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &231805843970902974
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 840070347753010960}
+    m_Modifications:
+    - target: {fileID: 231805842679305527, guid: 19d542791a21a54419318718e58b90b2, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 231805842679305527, guid: 19d542791a21a54419318718e58b90b2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -12.440001
+      objectReference: {fileID: 0}
+    - target: {fileID: 231805842679305527, guid: 19d542791a21a54419318718e58b90b2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 231805842679305527, guid: 19d542791a21a54419318718e58b90b2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 231805842679305527, guid: 19d542791a21a54419318718e58b90b2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 231805842679305527, guid: 19d542791a21a54419318718e58b90b2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 231805842679305527, guid: 19d542791a21a54419318718e58b90b2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 231805842679305527, guid: 19d542791a21a54419318718e58b90b2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 231805842679305527, guid: 19d542791a21a54419318718e58b90b2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 231805842679305527, guid: 19d542791a21a54419318718e58b90b2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 231805842679305527, guid: 19d542791a21a54419318718e58b90b2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 231805842679305528, guid: 19d542791a21a54419318718e58b90b2, type: 3}
+      propertyPath: Target
+      value: 
+      objectReference: {fileID: 840070347753010960}
+    - target: {fileID: 231805842679305529, guid: 19d542791a21a54419318718e58b90b2, type: 3}
+      propertyPath: m_Name
+      value: CamFollowHolder
+      objectReference: {fileID: 0}
+    - target: {fileID: 231805843576916410, guid: 19d542791a21a54419318718e58b90b2, type: 3}
+      propertyPath: virtualCamera
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 231805843576916410, guid: 19d542791a21a54419318718e58b90b2, type: 3}
+      propertyPath: playerTransform
+      value: 
+      objectReference: {fileID: 840070347753010960}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 19d542791a21a54419318718e58b90b2, type: 3}
+--- !u!4 &1467768457 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 231805842679305527, guid: 19d542791a21a54419318718e58b90b2, type: 3}
+  m_PrefabInstance: {fileID: 231805843970902974}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8554387217310039931
 PrefabInstance:
   m_ObjectHideFlags: 0
