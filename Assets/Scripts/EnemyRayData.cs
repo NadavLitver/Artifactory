@@ -146,7 +146,16 @@ public class EnemyRayData : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.DrawWireCube(startingPos + m_boundingBox.offset, Vector2.one * m_boundingBox.size);
+        if (Application.isPlaying)
+        {
+          Gizmos.DrawWireCube(startingPos + m_boundingBox.offset, Vector2.one * m_boundingBox.size);
+
+        }
+        else
+        {
+         Gizmos.DrawWireCube((Vector2)transform.position + m_boundingBox.offset, Vector2.one * m_boundingBox.size);
+
+        }
         //Gizmos.DrawWireSphere(new Vector2(m_boundingBox.maxX, m_boundingBox.maxY),1);
         //Gizmos.DrawWireSphere(new Vector2(m_boundingBox.minX, m_boundingBox.minY), 1);
 
