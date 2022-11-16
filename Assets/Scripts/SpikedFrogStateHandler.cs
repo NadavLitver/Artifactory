@@ -45,7 +45,10 @@ public class SpikedFrogStateHandler : StateHandler
     }
     public void UnFreeze()
     {
-     
+        if (RB == null)
+        {
+            return;
+        }
         RB.constraints = RigidbodyConstraints2D.None;
         RB.constraints = RigidbodyConstraints2D.FreezeRotation;
         frozen = false;

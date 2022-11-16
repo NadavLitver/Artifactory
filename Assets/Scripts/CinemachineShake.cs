@@ -21,6 +21,7 @@ public class CinemachineShake : MonoBehaviour
         {
             camNoise.m_AmplitudeGain = givenDmg.calculateFinalNumberMult() / 100;
             camNoise.m_AmplitudeGain = Mathf.Clamp(camNoise.m_AmplitudeGain, 0, 1);
+            camNoise.m_AmplitudeGain *= 2;
             if (!ReferenceEquals(activeRoutine, null))
             {
                 StopCoroutine(activeRoutine);

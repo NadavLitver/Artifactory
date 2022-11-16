@@ -15,6 +15,8 @@ public class GameManager : MonoBehaviour
     public DamagePopupManager PopupManager { get; private set; }
     public LevelManager LevelManager { get; private set; }
 
+    public VfxManager vfxManager { get; private set; }
+
 
     public SoundManager soundManager { get; private set; }
 
@@ -41,6 +43,8 @@ public class GameManager : MonoBehaviour
         DamageManager = GetComponentInChildren<DamageManager>();
         PopupManager = GetComponentInChildren<DamagePopupManager>();
         LevelManager = GetComponentInChildren<LevelManager>();
+        vfxManager = GetComponentInChildren<VfxManager>();
+
 
 
     }
@@ -99,6 +103,9 @@ public class AssetsRefrence
     [Header("HEALTH BAR")]
     public ObjectPool CubePool;
 
+    [Header("CANVAS")]
+    public BlackFade blackFade;
+    public GameObject mobileControls;
 
     [Header("Bounder")]
     public Transform BounderScout;
@@ -129,6 +136,7 @@ public class GeneralFunctions
     public void onPlayerDiedActions()
     {
         LeanTween.cancelAll();
+       
         LeanTween.delayedCall(1, ResetScene);
     }
     

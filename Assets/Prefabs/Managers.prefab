@@ -61,6 +61,53 @@ MonoBehaviour:
   pooledObjects: []
   PrefabToPool: {fileID: 4588843092609352554, guid: 12eb162b40717e14bbfba8954b2b1c12, type: 3}
   NumToPool: 20
+--- !u!1 &1518239164
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1518239165}
+  - component: {fileID: 1518239166}
+  m_Layer: 0
+  m_Name: VfxManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1518239165
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518239164}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4180575170529028752}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1518239166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518239164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e901cadc654e7734b9e770e2d1d8931f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  visualEffectDatas:
+  - m_effect: 0
+    effectPrefab: {fileID: 100000, guid: f06e78284f831ae469c74624ab5d513b, type: 3}
 --- !u!1 &2023060717
 GameObject:
   m_ObjectHideFlags: 0
@@ -162,6 +209,12 @@ MonoBehaviour:
   onJumpDown:
     m_PersistentCalls:
       m_Calls: []
+  OnTouchDown:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTouchUp:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4180575170529028755
 GameObject:
   m_ObjectHideFlags: 0
@@ -198,6 +251,7 @@ Transform:
   - {fileID: 291605101}
   - {fileID: 7318723720013602907}
   - {fileID: 3387252577018232578}
+  - {fileID: 1518239165}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -220,8 +274,9 @@ MonoBehaviour:
     RubberDuck: {fileID: 21300000, guid: 5e90b84ce22ce87448f6d2d0a6c2575d, type: 3}
     LightningEmblem: {fileID: 21300000, guid: 40731a68def4cf14482ccaf0ac902a71, type: 3}
     HealingGoblet: {fileID: 21300000, guid: 07733e9e87e4ca74db3578d683acc9a3, type: 3}
-    CameraShake: {fileID: 0}
+    camPositionSetter: {fileID: 0}
     CubePool: {fileID: 0}
+    BounderScout: {fileID: 0}
 --- !u!1 &4207107459726920179
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,6 +524,10 @@ PrefabInstance:
     - target: {fileID: 7382524246091496564, guid: a7e966f696a66614f9efc20e8773d2e6, type: 3}
       propertyPath: BurnIntervals
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382524246091496564, guid: a7e966f696a66614f9efc20e8773d2e6, type: 3}
+      propertyPath: BaseCritDamage
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7382524246091496564, guid: a7e966f696a66614f9efc20e8773d2e6, type: 3}
       propertyPath: LightningEmblemDamageMod
