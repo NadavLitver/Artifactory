@@ -91,7 +91,7 @@ public class EnemyRayData : MonoBehaviour
         for (int i = 0; i < rayPoints.Count; i++)
         {
             RaycastHit2D hit2D = Physics2D.Raycast(rayPoints[i], Vector2.down, RayLength, GroundMask);
-            if (hit2D.collider != null)
+            if (hit2D.collider != null && isPointInBoxButNotInCollider(hit2D.point))
             {
                 HitPoints.Add(hit2D.collider.bounds.ClosestPoint(hit2D.point));
             }

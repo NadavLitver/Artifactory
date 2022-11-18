@@ -99,7 +99,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &5204457944198003611
 Transform:
   m_ObjectHideFlags: 0
@@ -2529,6 +2529,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5204457944198003611}
     m_Modifications:
+    - target: {fileID: 2706448201579363496, guid: 7915310fd3972cd45b65ecc84f31dc99, type: 3}
+      propertyPath: m_Sprites.Array.data[3]
+      value: 
+      objectReference: {fileID: 1562518382, guid: ae5d2387c05a1b847b36bd7cc7f9e2a3, type: 3}
+    - target: {fileID: 2706448201579363496, guid: 7915310fd3972cd45b65ecc84f31dc99, type: 3}
+      propertyPath: m_Sprites.Array.data[4]
+      value: 
+      objectReference: {fileID: -1520721903, guid: ae5d2387c05a1b847b36bd7cc7f9e2a3, type: 3}
     - target: {fileID: 2706448201579363497, guid: 7915310fd3972cd45b65ecc84f31dc99, type: 3}
       propertyPath: m_RootOrder
       value: 14
@@ -2893,22 +2901,74 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1595102629011138451, guid: b755821dee527964ea281a3dca70ae4c, type: 3}
       propertyPath: m_LocalAABB.m_Center.x
-      value: 21.656996
+      value: 21.657
       objectReference: {fileID: 0}
     - target: {fileID: 1595102629011138451, guid: b755821dee527964ea281a3dca70ae4c, type: 3}
       propertyPath: m_LocalAABB.m_Center.y
-      value: -10.016106
+      value: -10.016107
       objectReference: {fileID: 0}
     - target: {fileID: 1595102629011138451, guid: b755821dee527964ea281a3dca70ae4c, type: 3}
       propertyPath: m_LocalAABB.m_Extent.x
-      value: 26.864025
+      value: 26.864023
       objectReference: {fileID: 0}
     - target: {fileID: 1595102629011138451, guid: b755821dee527964ea281a3dca70ae4c, type: 3}
       propertyPath: m_LocalAABB.m_Extent.y
-      value: 7.285698
+      value: 7.285699
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 1595102629011138451, guid: b755821dee527964ea281a3dca70ae4c, type: 3}
+      propertyPath: m_Sprites.Array.data[3]
+      value: 
+      objectReference: {fileID: 1562518382, guid: ae5d2387c05a1b847b36bd7cc7f9e2a3, type: 3}
+    - target: {fileID: 1595102629011138451, guid: b755821dee527964ea281a3dca70ae4c, type: 3}
+      propertyPath: m_Sprites.Array.data[4]
+      value: 
+      objectReference: {fileID: -1520721903, guid: ae5d2387c05a1b847b36bd7cc7f9e2a3, type: 3}
+    m_RemovedComponents:
+    - {fileID: 881859603281747572, guid: b755821dee527964ea281a3dca70ae4c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b755821dee527964ea281a3dca70ae4c, type: 3}
+--- !u!1 &7441329401414218187 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1595102629011138445, guid: b755821dee527964ea281a3dca70ae4c, type: 3}
+  m_PrefabInstance: {fileID: 8171245829327607366}
+  m_PrefabAsset: {fileID: 0}
+--- !u!60 &1660847562
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7441329401414218187}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: -5.196289, y: -2.7304077}
+      - {x: 10.084225, y: -2.730408}
+      - {x: 10.084225, y: -6.138008}
+      - {x: 13.089149, y: -6.138008}
+      - {x: 13.089149, y: -9.9}
+      - {x: 18.3, y: -9.9}
+      - {x: 18.3, y: -8.420868}
+      - {x: 48.52102, y: -8.420868}
+      - {x: 48.52102, y: -17.301805}
+      - {x: -5.207024, y: -17.107967}
+      - {x: -5.197154, y: -3.8874059}
+      - {x: -5.1970363, y: -3.7296612}
+      - {x: -5.196289, y: -2.7304077}
 --- !u!4 &7441329401414218196 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1595102629011138450, guid: b755821dee527964ea281a3dca70ae4c, type: 3}

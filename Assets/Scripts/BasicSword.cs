@@ -39,42 +39,12 @@ public class BasicSword : Weapon
         player.Animator.SetTrigger("Mobility");
         Vector2 dir = new Vector2(player.transform.localScale.x, 0.1f);
         Vector2 dashVelocity = dashForce * dir;
-        RaycastHit2D hitInfo = Physics2D.Raycast(player.transform.position, dir, 10, groundLayer);
-        if (hitInfo.collider != null)
-        {
-            if (dir.x == 1)
-            {
-                while (counter < dashDuration || player.transform.position.x >= hitInfo.point.x)
-                {
-                    counter += Time.deltaTime;
-                    player.GetRb.velocity = dashVelocity;
-                    yield return new WaitForEndOfFrame();
-                }
-            }
-            else
-            {
-                while (counter < dashDuration || player.transform.position.x <= hitInfo.point.x)
-                {
-                    counter += Time.deltaTime;
-                    player.GetRb.velocity = dashVelocity;
-                    yield return new WaitForEndOfFrame();
-                }
-            }
-
-        }
-        else
-        {
-            while (counter < dashDuration)
-            {
-                counter += Time.deltaTime;
-                player.GetRb.velocity = dashVelocity;
-                yield return new WaitForEndOfFrame();
-            }
-        }
-     
+        player.GetRb.velocity = dashVelocity;
+        yield return new WaitForSeconds(dashDuration);
         player.canMove = true;
         isDashing = false;
         player.ResetGravity();
+        player.GetRb.velocity = player.transform.forward;
         yield return new WaitForSeconds(dashCooldown);
         CanDash = true;
     }
