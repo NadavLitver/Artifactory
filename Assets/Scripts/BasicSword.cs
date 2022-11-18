@@ -14,6 +14,7 @@ public class BasicSword : Weapon
     private PlayerController player;
     private const string attackPrefix = "Attack";
     private StringBuilder stringBuilder;
+    [SerializeField] private LayerMask groundLayer;
     private void Start()
     {
         CanDash = true;
@@ -38,12 +39,39 @@ public class BasicSword : Weapon
         player.Animator.SetTrigger("Mobility");
         Vector2 dir = new Vector2(player.transform.localScale.x, 0.1f);
         Vector2 dashVelocity = dashForce * dir;
-        while (counter < dashDuration)
+        RaycastHit2D hitInfo = Physics2D.Raycast(player.transform.position, dir, 10, groundLayer);
+        if (hitInfo.collider != null)
         {
-            counter += Time.deltaTime;
-            player.GetRb.velocity = dashVelocity;
-            yield return new WaitForEndOfFrame();
+            if (dir.x == 1)
+            {
+                while (counter < dashDuration || player.transform.position.x >= hitInfo.point.x)
+                {
+                    counter += Time.deltaTime;
+                    player.GetRb.velocity = dashVelocity;
+                    yield return new WaitForEndOfFrame();
+                }
+            }
+            else
+            {
+                while (counter < dashDuration || player.transform.position.x <= hitInfo.point.x)
+                {
+                    counter += Time.deltaTime;
+                    player.GetRb.velocity = dashVelocity;
+                    yield return new WaitForEndOfFrame();
+                }
+            }
+
         }
+        else
+        {
+            while (counter < dashDuration)
+            {
+                counter += Time.deltaTime;
+                player.GetRb.velocity = dashVelocity;
+                yield return new WaitForEndOfFrame();
+            }
+        }
+     
         player.canMove = true;
         isDashing = false;
         player.ResetGravity();
