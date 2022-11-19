@@ -11,19 +11,23 @@ public class ShroomRam : State
     StoneShroomStateHandler handler;
     Vector3 currentDest;
     bool StartedCharging;
+    bool tookDamage;
     public override State RunCurrentState()
     {
         Debug.Log("ramming");
         if (!StartedCharging)
         {
+            handler.ShroomActor.TakeDamageGFX.AddListener(TurnOnTookDamage);
             Vector2 ramDir = (handler.CurrentRamTarget.position - transform.position).normalized;
             currentDest = handler.ClosestPointInsideRange(handler.RamThreshold);
             handler.RamCollider.SetActive(true);
             handler.RB.velocity = new Vector2(ramDir.x * ramSpeed, handler.RB.velocity.y);
             StartedCharging = true;
         }
-        if (GameManager.Instance.generalFunctions.IsInRange(transform.position, currentDest, ramTargetOffset) || handler.CheckForFlip())
+        if (GameManager.Instance.generalFunctions.IsInRange(transform.position, currentDest, ramTargetOffset) || handler.CheckForFlip() || tookDamage)
         {
+            handler.ShroomActor.TakeDamageGFX.RemoveListener(TurnOnTookDamage);
+            tookDamage = false;
             handler.Freeze(ramRecoveryTime);
             handler.RamCollider.SetActive(false);
             StartedCharging = false;
@@ -36,6 +40,12 @@ public class ShroomRam : State
     {
         handler = GetComponent<StoneShroomStateHandler>();
     }
+
+    private void TurnOnTookDamage()
+    {
+        tookDamage = true;
+    }
+
 
     IEnumerator Ram()
     {
