@@ -46,7 +46,7 @@ public class EnemyBounder : MonoBehaviour
             if (ReferenceEquals(downHit.collider, null) || !ReferenceEquals(frontHit.collider, null))
             {
                 foundLeft = true;
-                minPos = lastLeftHit;
+                minPos = new Vector2(lastLeftHit.x + 1, lastLeftHit.y);
                 break;
             }
             else
@@ -67,7 +67,7 @@ public class EnemyBounder : MonoBehaviour
             if (ReferenceEquals(downHit.collider, null) || !ReferenceEquals(frontHit.collider, null))
             {
                 foundRight = true;
-                maxPos = lastRightHit;
+                maxPos = new Vector2(lastRightHit.x - 1, lastRightHit.y);
                 break;
             }
             else
@@ -83,6 +83,13 @@ public class EnemyBounder : MonoBehaviour
     {
         yield return new WaitUntil(() => foundRight && foundLeft);
         Done = true;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireSphere(MaxPos, 1);
+        Gizmos.DrawWireSphere(MinPos, 1);
     }
 
 

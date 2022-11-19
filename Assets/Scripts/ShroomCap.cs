@@ -93,14 +93,14 @@ public class ShroomCap : MonoBehaviour, IDamagable
     {
         yield return new WaitUntil(() => transform.position.x > maxPoint.x || transform.position.x < minPoint.x);
         Debug.Log("found");
-        RB.constraints = RigidbodyConstraints2D.FreezeAll;
         if (RB.velocity.x > 0)
         {
-            transform.position = maxPoint;
+            transform.position = new Vector2(maxPoint.x - 1, maxPoint.y);
         }
         else
         {
-            transform.position = minPoint;
+            transform.position = new Vector2(minPoint.x + 1, minPoint.y);
         }
+        RB.constraints = RigidbodyConstraints2D.FreezeAll;
     }
 }

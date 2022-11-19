@@ -141,11 +141,11 @@ public class StoneShroomStateHandler : StateHandler
 
     public bool CheckForFlip()
     {
-        if (GameManager.Instance.generalFunctions.IsInRange(transform.position, Bounder.MaxPos, 1.1f) && RB.velocity.x > 0)
+        if (GameManager.Instance.generalFunctions.IsInRange(transform.position, Bounder.MaxPos, 1.5f) && RB.velocity.x > 0)
         {
             return true;
         }
-        else if (GameManager.Instance.generalFunctions.IsInRange(transform.position, Bounder.MinPos, 1.1f) && RB.velocity.x < 0)
+        else if (GameManager.Instance.generalFunctions.IsInRange(transform.position, Bounder.MinPos, 1.5f) && RB.velocity.x < 0)
         {
             return true;
         }
