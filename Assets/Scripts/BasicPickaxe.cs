@@ -24,7 +24,7 @@ public class BasicPickaxe : Weapon
 
     private void Start()
     {
-      //  player = GameManager.Instance.assets.Player.GetComponent<PlayerController>();
+        //  player = GameManager.Instance.assets.Player.GetComponent<PlayerController>();
         GameManager.Instance.inputManager.onJumpDown.AddListener(WallJump);
     }
 
@@ -34,7 +34,24 @@ public class BasicPickaxe : Weapon
         {
 
             player.canMove = true;
-            Vector2 wallJumpVelocity = new Vector2((-playerLookdir * player.GetHorInput) * forceForWallJump.x, forceForWallJump.y);
+            Vector2 wallJumpVelocity = forceForWallJump;
+          
+            if (playerLookdir == -1 && (player.GetHorInput == -1 || player.GetHorInput == 0))
+            {
+                
+                wallJumpVelocity = new Vector2(0, forceForWallJump.y);
+            }
+            else if (playerLookdir == 1 && player.GetHorInput == -1)
+            {
+              
+                wallJumpVelocity = new Vector2(-forceForWallJump.x, forceForWallJump.y);
+            }
+            else if (playerLookdir == 1 && (player.GetHorInput == 1 || player.GetHorInput == 0))
+            {
+                wallJumpVelocity = new Vector2(0, forceForWallJump.y);
+
+            }
+        
             player.ResetGravity();
             player.ResetVelocity();
             player.RecieveForce(wallJumpVelocity);
@@ -46,7 +63,7 @@ public class BasicPickaxe : Weapon
 
             }
         }
-      
+
 
     }
 
@@ -62,7 +79,7 @@ public class BasicPickaxe : Weapon
         }
         else
         {
-            CheckFromWall();   
+            CheckFromWall();
         }
 
     }
@@ -81,7 +98,7 @@ public class BasicPickaxe : Weapon
     }
     IEnumerator IEJumpFromMobility()
     {
-      
+
         player.ResetVelocity();
         player.RecieveForce(jumpToClawForce);
 
@@ -131,7 +148,7 @@ public class BasicPickaxe : Weapon
     }
     protected override void AttackPerformed()
     {
-       
+
         stringBuilder = new StringBuilder();
         string animationString;
         stringBuilder.Append(attackPrefix);
@@ -139,6 +156,6 @@ public class BasicPickaxe : Weapon
         animationString = stringBuilder.ToString();
         Debug.Log(animationString);
         m_animator.SetTrigger(animationString);
-        
+
     }
 }
