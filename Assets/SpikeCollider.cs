@@ -24,6 +24,13 @@ public class SpikeCollider : MonoBehaviour
     IEnumerator OnPlayerHit()
     {
         GameManager.Instance.assets.playerActor.GetHit(m_ability);
+        GameManager.Instance.assets.PlayerController.canMove = false;
+        GameManager.Instance.assets.PlayerController.ResetVelocity();
+      
+        blackFadeRef.FadeToBlack();
+        yield return new WaitForSeconds(2);
+        blackFadeRef.FadeFromBlack();
+
         if (CheckpointManager.hasPosition)
         {
             GameManager.Instance.assets.playerActor.transform.position = CheckpointManager.LastCheckPointPosition;
@@ -32,9 +39,9 @@ public class SpikeCollider : MonoBehaviour
         {//just in case
             GameManager.Instance.assets.playerActor.transform.position = GameManager.Instance.LevelManager.Active.transform.position;
         }
-        blackFadeRef.FadeToBlack();
-        yield return new WaitForSeconds(1);
-        blackFadeRef.FadeFromBlack();
+
+        yield return new WaitForSeconds(1.5f);
+        GameManager.Instance.assets.PlayerController.canMove = true;
         playerHit = false;
     }
 }
