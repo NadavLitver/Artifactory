@@ -90,6 +90,9 @@ public class Cannon : Weapon
         bullet.gameObject.SetActive(true);
         isLoaded = false;
     }
-
+    private void OnDisable()
+    {
+        jumped = false;
+    }
 
 }

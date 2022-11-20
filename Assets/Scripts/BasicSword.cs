@@ -80,5 +80,9 @@ public class BasicSword : Weapon
         //   }
         //  m_animator.SetTrigger(AbilityCombo.CurrentAbilityData.AbilityAnimationName);
     }
+    //private void OnDisable()
+    //{
+    //    isDashing = false;
+    //}
 
 }
