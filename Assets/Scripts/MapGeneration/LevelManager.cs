@@ -22,6 +22,7 @@ public class LevelManager : MonoBehaviour
     public List<RunSettings> RunSettings { get => runSettings; }
     public List<RunSettings> CurrentRunState { get => currentRunState; set => currentRunState = value; }
     public List<ConnectionData> CachedConnectionDatas { get => cachedConnectionDatas; set => cachedConnectionDatas = value; }
+    public Room Active { get => active; set => active = value; }
 
     private void Start()
     {

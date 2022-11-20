@@ -14,11 +14,11 @@ public class BlackFade : MonoBehaviour
         GameManager.Instance.assets.playerActor.OnDeath.AddListener(FadeToBlack);
         FadeFromBlack();
     }
-    void FadeToBlack()
+    public void FadeToBlack()
     {
         StartCoroutine(LerpAlpha(1, fadeToBlackCurve));
     }
-    void FadeFromBlack()
+    public void FadeFromBlack()
     {
         StartCoroutine(LerpAlpha(0, fadeFromBlackCurve));
 
@@ -30,7 +30,7 @@ public class BlackFade : MonoBehaviour
         while (counter < 1)
         {
             m_image.color = new Color(0, 0, 0, Mathf.Lerp(startingAlpha, goal, curve.Evaluate(counter)));
-            counter += Time.deltaTime/2;
+            counter += Time.deltaTime / 2;
             yield return new WaitForEndOfFrame();
         }
     }
