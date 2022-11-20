@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class CheckpointManager : MonoBehaviour
 {
-   //public static 
+    public static Vector2 LastCheckPointPosition;
 }
