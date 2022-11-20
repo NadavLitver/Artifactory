@@ -6,8 +6,9 @@ public class PlayerActor : Actor
 {
     public Animator m_animator;
     [SerializeField] RelicInventory playerRelicInventory;
-
+    [SerializeField] ItemInventory playerItemInventory;
     public RelicInventory PlayerRelicInventory { get => playerRelicInventory;}
+    public ItemInventory PlayerItemInventory { get => playerItemInventory; set => playerItemInventory = value; }
 
     private void Start()
     {

@@ -100,15 +100,18 @@ public class AssetsRefrence
     [Header("CAMERA"), Space(10)]
     public CamPositionSetter camPositionSetter;
 
-    [Header("HEALTH BAR")]
+    [Header("HEALTH BAR"), Space(10)]
     public ObjectPool CubePool;
 
-    [Header("CANVAS")]
+    [Header("CANVAS"), Space(10)]
     public BlackFade blackFade;
     public GameObject mobileControls;
 
-    [Header("Bounder")]
+    [Header("Bounder"), Space(10)]
     public Transform BounderScout;
+
+    [Header("CraftingUi"), Space(10)]
+    public CraftingMapNode craftingMapNode;
 }
 public class GeneralFunctions
 {
