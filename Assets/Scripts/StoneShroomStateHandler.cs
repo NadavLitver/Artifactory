@@ -43,7 +43,7 @@ public class StoneShroomStateHandler : StateHandler
         if (!frozen && !stunned && Bounder.Done)
         {
             RunStateMachine();
-         }
+        }
     }
 
     private void Start()
@@ -157,6 +157,8 @@ public class StoneShroomStateHandler : StateHandler
     {
         return (GameManager.Instance.assets.playerActor.transform.position - transform.position).normalized;
     }
+
+
 
     private void OnDrawGizmos()
     {
