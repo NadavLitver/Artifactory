@@ -27,7 +27,7 @@ public class JoystickConfiner : MonoBehaviour
     {
 
         Vector2 currentPosOnScreen = GameManager.Instance.inputManager.Touch_ScreenPos();
-        Debug.Log("CurrentTouchPos = " + currentPosOnScreen + "rectOffset = " + m_Rect.offsetMax);
+      //  Debug.Log("CurrentTouchPos = " + currentPosOnScreen + "rectOffset = " + m_Rect.offsetMax);
         //if(RectTransformUtility.ScreenPointToLocalPointInRectangle(m_Rect,currentPosOnScreen,Camera.main,out Vector2 localPoint))
         //{
         //    JoystickToMove.position = currentPosOnScreen;

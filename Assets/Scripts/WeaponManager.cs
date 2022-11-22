@@ -79,6 +79,12 @@ public class WeaponManager : MonoBehaviour
 
     public void EquipWeapon(Weapon givenWeapon)
     {
+        if (ReferenceEquals(givenWeapon, currentWeapon))
+        {
+            currentWeapon.Mobility();
+            return;
+        }
+
         if (currentWeapon != null)
         {
             currentWeapon.UnSubscribe();
