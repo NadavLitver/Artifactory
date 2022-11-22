@@ -112,6 +112,8 @@ public class AssetsRefrence
 
     [Header("CraftingUi"), Space(10)]
     public CraftingMapNode craftingMapNode;
+
+
 }
 public class GeneralFunctions
 {
@@ -119,7 +121,6 @@ public class GeneralFunctions
     {
         bool _isInRange = (positionA - positionB).sqrMagnitude < range * range;
         return _isInRange;
-
     }
 
     public float CalcRange(Vector3 posA, Vector3 posB)
@@ -162,8 +163,6 @@ public class GeneralFunctions
             default:
                 break;
         }
-
-
         return null;
     }
 }
