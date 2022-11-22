@@ -7,11 +7,14 @@ public class StoneShroomIdle : State
     [SerializeField] float stopCooldown;
     [SerializeField] float lastStop;
     [SerializeField] float idleSpeed;
+  
+
     public override State RunCurrentState()
     {
         if (handler.AttackMode) //if the cap is on the floor
         {
             handler.CurrentRamTarget = handler.CurrentCap.transform;
+           // handler.Anim.SetTrigger(ramAnimationTriggerHash);
             return handler.ShroomRam;
         }
         else if (handler.ShroomLineOfSight.CanSeePlayer())
@@ -29,5 +32,7 @@ public class StoneShroomIdle : State
     private void Start()
     {
         handler = GetComponent<StoneShroomStateHandler>();
+        //ramAnimationTriggerHash = Animator.StringToHash("Ram");
+
     }
 }

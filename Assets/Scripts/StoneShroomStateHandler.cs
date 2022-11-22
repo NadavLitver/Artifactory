@@ -31,7 +31,7 @@ public class StoneShroomStateHandler : StateHandler
     public bool Enraged;
     public bool stunned;
     public bool frozen;
-
+    
     public ShroomCap GetCapToThrow()
     {
         CurrentCap = ShroomCapPool.GetPooledObject();
@@ -175,3 +175,4 @@ public class StoneShroomStateHandler : StateHandler
 
 
 }
+
