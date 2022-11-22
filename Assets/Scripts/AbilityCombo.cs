@@ -59,7 +59,7 @@ public class AbilityCombo : MonoBehaviour
         OnAttackPerformed?.Invoke();
         canAttack = false;
         lastAttackTime = Time.time;
-        Debug.Log(GetAbilityIndex());
+       // Debug.Log(GetAbilityIndex());
     }
 
    

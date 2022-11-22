@@ -22,12 +22,13 @@ public class LevelManager : MonoBehaviour
     public List<RunSettings> RunSettings { get => runSettings; }
     public List<RunSettings> CurrentRunState { get => currentRunState; set => currentRunState = value; }
     public List<ConnectionData> CachedConnectionDatas { get => cachedConnectionDatas; set => cachedConnectionDatas = value; }
+    public Room Active { get => active; set => active = value; }
 
     private void Start()
     {
         mapGenerator = FindObjectOfType<MapGenerator>();
         InstantiateRooms(firstIsleRooms);
-      // LeanTween.delayedCall(1f ,AssembleLevel);
+        LeanTween.delayedCall(0.5f ,AssembleLevel);
     }
 
     [ContextMenu("Assemble Level")]
@@ -320,6 +321,14 @@ public class LevelManager : MonoBehaviour
         foreach (var item in currentRunRooms)
         {
             item.gameObject.SetActive(false);
+
+            foreach (var exit in item.Exits)
+            {
+                if (ReferenceEquals(exit.OtherExit, null))
+                {
+                    exit.gameObject.SetActive(false);
+                }
+            }
         }
         CurrentRunRooms[0].gameObject.SetActive(true);
         active = currentRunRooms[0];
@@ -327,7 +336,7 @@ public class LevelManager : MonoBehaviour
     }
 
     public void MoveToRoom(ExitInteractable givenExit)
-    {
+   {
         active.gameObject.SetActive(false);
         givenExit.OtherExit.MyRoom.gameObject.SetActive(true);
         active = givenExit.OtherExit.MyRoom;
