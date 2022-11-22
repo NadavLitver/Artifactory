@@ -20,6 +20,6 @@ public class CraftingLine : MonoBehaviour
 
     public void AddNode(CraftingMapNode givenNode)
     {
-                    
+        nodes.Add(givenNode);
     }
 }

@@ -57,8 +57,8 @@ public class CraftingMap : MonoBehaviour
         for (int i = 0; i < recipeLine.Nodes.Count; i++)
         {
             CraftingMapNode newNode = CreateNode();
-            //setup node 
             newNode.transform.position = currentNode.Line.transform.position;
+            recipeLine.AddNode(newNode);
             currentNode = newNode;
         }
     }
