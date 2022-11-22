@@ -81,7 +81,7 @@ public class WeaponManager : MonoBehaviour
     {
         if (ReferenceEquals(givenWeapon, currentWeapon))
         {
-            currentWeapon.Mobility();
+            //currentWeapon.Mobility();
             return;
         }
 
