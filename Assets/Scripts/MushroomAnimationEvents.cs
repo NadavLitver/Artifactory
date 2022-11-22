@@ -13,5 +13,6 @@ public class MushroomAnimationEvents : MonoBehaviour
         cap.SetUpPositions(handler.Bounder.MaxPos, handler.Bounder.MinPos);
         cap.gameObject.SetActive(true);
         cap.Throw(new Vector2(handler.GetPlayerDirection().x * handler.ThrowForce, 0));
+        handler.Freeze(handler.ThrowDelay);
     }
 }
