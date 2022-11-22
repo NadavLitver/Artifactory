@@ -24,6 +24,8 @@ public class ShroomMoveBackwards : State
             handler.Enrage();
             handler.MovementDir *= -1;
             handler.Flipper.Disabled = false;
+            handler.Anim.SetTrigger(handler.Idlehash);
+
             return handler.ShroomIdle;
         }
 
@@ -31,6 +33,7 @@ public class ShroomMoveBackwards : State
         {
             handler.Enrage();
             handler.Flipper.Disabled = false;
+            handler.Anim.SetTrigger(handler.Defendhash);
             return handler.ShroomDefense;
         }
 
