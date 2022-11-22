@@ -26,11 +26,22 @@ public class StoneShroomStateHandler : StateHandler
     public float DefenseThreshold;
     public float ThrowThreshold;
     public float RamThreshold;
+    public float ThrowForce;
+    public float ThrowDelay;
     public int MovementDir;
     public bool RequireFlip;
     public bool Enraged;
     public bool stunned;
     public bool frozen;
+
+    internal int Idlehash;
+    internal int Throwhash;
+    internal int Noticehash;
+    internal int Ramhash;
+    internal int Pickuphash;
+    internal int Diehash;
+    internal int Regenhash;
+    internal int Defendhash;
     
     public ShroomCap GetCapToThrow()
     {
@@ -51,6 +62,14 @@ public class StoneShroomStateHandler : StateHandler
         ShroomActor.TakeDamageGFX.AddListener(Enrage);
         ShroomActor.OnDeath.AddListener(Freeze);
         ShroomActor.OnDeath.AddListener(RespawnOnCap);
+
+        Idlehash = Animator.StringToHash("Idle");
+        Ramhash = Animator.StringToHash("Ram");
+        Throwhash = Animator.StringToHash("Throw");
+        Pickuphash = Animator.StringToHash("Pickup");
+        Diehash = Animator.StringToHash("Die");
+        Regenhash = Animator.StringToHash("Regen");
+        Defendhash = Animator.StringToHash("Defend");
     }
     public void RespawnOnCap()
     {

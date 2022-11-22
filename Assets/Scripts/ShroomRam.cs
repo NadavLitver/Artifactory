@@ -32,6 +32,7 @@ public class ShroomRam : State
             handler.Freeze(ramRecoveryTime);
             handler.RamCollider.SetActive(false);
             StartedCharging = false;
+            handler.Anim.SetTrigger(handler.Idlehash);
             return handler.ShroomIdle;
         }
         return this;       

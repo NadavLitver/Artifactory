@@ -8,19 +8,22 @@ public class ShroomThrow : State
 
     public override State RunCurrentState()
     {
-        //get a shroom cap from an object pooler
-        //set its position to be equal to yours
-        //add force to it in the direction of the player
-        //return notice
-        handler.Anim.SetTrigger("Throw");
-        handler.Freeze(throwDelay);
-        ShroomCap cap = handler.GetCapToThrow();
-        cap.transform.position = transform.position;
-        cap.SetUpPositions(handler.Bounder.MaxPos, handler.Bounder.MinPos);
-        cap.gameObject.SetActive(true);
-        cap.Throw(new Vector2(handler.GetPlayerDirection().x * throwForce, 0));
+        /* handler.Freeze(throwDelay);
+         ShroomCap cap = handler.GetCapToThrow();
+         cap.transform.position = transform.position;
+         cap.SetUpPositions(handler.Bounder.MaxPos, handler.Bounder.MinPos);
+         cap.gameObject.SetActive(true);
+         cap.Throw(new Vector2(handler.GetPlayerDirection().x * throwForce, 0));
+         handler.AttackMode = true;
+         handler.Freeze(throwDelay);*/
+
         handler.AttackMode = true;
-        handler.Freeze(throwDelay);
+        if (ReferenceEquals(handler.CurrentCap, null))
+        {
+            return this;
+        }
+        Debug.Log("threw cap");
+        handler.Anim.SetTrigger(handler.Noticehash);
         return handler.ShroomNotice;
     }
 

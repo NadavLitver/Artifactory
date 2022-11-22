@@ -14,11 +14,12 @@ public class StoneShroomIdle : State
         if (handler.AttackMode) //if the cap is on the floor
         {
             handler.CurrentRamTarget = handler.CurrentCap.transform;
-           // handler.Anim.SetTrigger(ramAnimationTriggerHash);
+            handler.Anim.SetTrigger(handler.Ramhash);
             return handler.ShroomRam;
         }
         else if (handler.ShroomLineOfSight.CanSeePlayer())
         {
+            handler.Anim.SetTrigger(handler.Noticehash);
             return handler.ShroomNotice;
         }
         if (handler.CheckForFlip())

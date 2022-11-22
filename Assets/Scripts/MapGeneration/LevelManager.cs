@@ -336,7 +336,7 @@ public class LevelManager : MonoBehaviour
     }
 
     public void MoveToRoom(ExitInteractable givenExit)
-   {
+    {
         active.gameObject.SetActive(false);
         givenExit.OtherExit.MyRoom.gameObject.SetActive(true);
         active = givenExit.OtherExit.MyRoom;

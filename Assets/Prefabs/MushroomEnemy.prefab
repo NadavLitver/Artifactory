@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2334491815719937578}
   - component: {fileID: 2334491815719937579}
   - component: {fileID: 889718817}
+  - component: {fileID: 1803346107}
   m_Layer: 12
   m_Name: GFX
   m_TagString: Untagged
@@ -105,6 +106,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1803346107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2334491815719937577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05b05e7198782d04da17a39ce37ea8f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  handler: {fileID: 2334491817456721697}
 --- !u!1 &2334491816039330447
 GameObject:
   m_ObjectHideFlags: 0
@@ -256,8 +270,9 @@ MonoBehaviour:
     m_Bits: 128
   rightGetter: {fileID: 0}
   leftGetter: {fileID: 0}
-  scoutMs: 2
+  scoutMs: 5
   getter: 0
+  timeOut: 1
   Done: 0
 --- !u!1 &2334491816185990517
 GameObject:
@@ -351,7 +366,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2334491817139954401
 Transform:
   m_ObjectHideFlags: 0
@@ -673,9 +688,12 @@ MonoBehaviour:
   RamCollider: {fileID: 2334491816185990517}
   CurrentRamTarget: {fileID: 0}
   Bounder: {fileID: 2334491816076872518}
+  Anim: {fileID: 889718817}
   DefenseThreshold: 2.66
   ThrowThreshold: 5.3
   RamThreshold: 2.76
+  ThrowForce: 5
+  ThrowDelay: 1
   MovementDir: 1
   RequireFlip: 0
   Enraged: 0
