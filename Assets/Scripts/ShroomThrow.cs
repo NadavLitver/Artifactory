@@ -12,6 +12,7 @@ public class ShroomThrow : State
         //set its position to be equal to yours
         //add force to it in the direction of the player
         //return notice
+        handler.Anim.SetTrigger("Throw");
         handler.Freeze(throwDelay);
         ShroomCap cap = handler.GetCapToThrow();
         cap.transform.position = transform.position;

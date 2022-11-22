@@ -21,6 +21,7 @@ public class StoneShroomStateHandler : StateHandler
     public GameObject RamCollider;
     public Transform CurrentRamTarget;
     public EnemyBounder Bounder;
+    public Animator Anim;
 
     public float DefenseThreshold;
     public float ThrowThreshold;

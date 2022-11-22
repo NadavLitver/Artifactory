@@ -7,6 +7,7 @@ public class ShroomNotice : State
     StoneShroomStateHandler handler;
     public override State RunCurrentState()
     {
+        handler.Anim.SetTrigger("Notice");
         if (handler.AttackMode)
         {
             if (GameManager.Instance.generalFunctions.CalcRange(transform.position, GameManager.Instance.assets.playerActor.transform.position) <= GameManager.Instance.generalFunctions.CalcRange(transform.position, handler.CurrentCap.transform.position) )

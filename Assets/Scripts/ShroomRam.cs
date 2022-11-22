@@ -17,6 +17,7 @@ public class ShroomRam : State
         Debug.Log("ramming");
         if (!StartedCharging)
         {
+            handler.Anim.SetTrigger("Ram");
             handler.ShroomActor.TakeDamageGFX.AddListener(TurnOnTookDamage);
             Vector2 ramDir = (handler.CurrentRamTarget.position - transform.position).normalized;
             currentDest = handler.ClosestPointInsideRange(handler.RamThreshold);

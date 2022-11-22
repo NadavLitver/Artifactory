@@ -16,6 +16,7 @@ public class ShroomDefense : State
         handler.RB.velocity = Vector2.zero;
         if (Time.time - lastDefended >= defenseCoolDown)
         {
+            handler.Anim.SetTrigger("Defend");
             Debug.Log("shroom is now defending");
             handler.ShroomActor.TakeDamageGFX.AddListener(PushBack);
             handler.ShroomActor.OnStatusEffectRemoved.AddListener(SetDefendingOff);
