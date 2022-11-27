@@ -24,7 +24,6 @@ public class ShroomNotice : State
             }
             else if (!handler.Enraged)
             {
-
                 return handler.ShroomMoveBackwards;
             }
         }

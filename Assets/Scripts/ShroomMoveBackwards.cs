@@ -24,7 +24,7 @@ public class ShroomMoveBackwards : State
             handler.MovementDir *= -1;
             handler.Flipper.Disabled = false;
             handler.Anim.SetTrigger(handler.Idlehash);
-
+            enteredState = false;
             return handler.ShroomIdle;
         }
 
@@ -33,10 +33,10 @@ public class ShroomMoveBackwards : State
             handler.Enrage();
             handler.Flipper.Disabled = false;
             handler.Anim.SetTrigger(handler.Defendhash);
+            enteredState = false;
             return handler.ShroomDefense;
         }
 
-        //play the walk back animation
         handler.Flipper.Disabled = true;
         handler.RB.velocity = new Vector2(moveBackwardsSpeed * handler.MovementDir * -1, 0);
         return this;

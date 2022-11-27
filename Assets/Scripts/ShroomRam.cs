@@ -9,10 +9,14 @@ public class ShroomRam : State
     Vector3 currentDest;
     bool StartedCharging;
     bool tookDamage;
+    bool entered;
     public override State RunCurrentState()
     {
-        Debug.Log("ramming");
-        //play ram animation
+        if (!entered)
+        {
+            entered = true;
+            handler.Anim.SetTrigger(handler.Ramhash);
+        }
         if (!StartedCharging)
         {
             handler.Anim.SetTrigger("Ram");
@@ -23,15 +27,10 @@ public class ShroomRam : State
             handler.RB.velocity = new Vector2(ramDir.x * ramSpeed, handler.RB.velocity.y);
             StartedCharging = true;
         }
-        else if (tookDamage)
+        if (GameManager.Instance.generalFunctions.IsInRange(transform.position, currentDest, ramTargetOffset) || handler.CheckForFlip() || tookDamage)
         {
             StopCharge();
-            //return walk to shroom + stun
-
-        }
-        if (GameManager.Instance.generalFunctions.IsInRange(transform.position, currentDest, ramTargetOffset) || handler.CheckForFlip())
-        {
-            StopCharge();
+            entered = false;
             return handler.ShroomIdle;
         }
         return this;
