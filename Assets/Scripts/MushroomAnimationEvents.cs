@@ -8,11 +8,6 @@ public class MushroomAnimationEvents : MonoBehaviour
 
     public void ThrowCap()
     {
-        ShroomCap cap = handler.GetCapToThrow();
-        cap.transform.position = transform.position;
-        cap.SetUpPositions(handler.Bounder.MaxPos, handler.Bounder.MinPos);
-        cap.gameObject.SetActive(true);
-        cap.Throw(new Vector2(handler.GetPlayerDirection().x * handler.ThrowForce, 0));
-        handler.Freeze(handler.ThrowDelay);
+        handler.ReadyToThrow = true;
     }
 }

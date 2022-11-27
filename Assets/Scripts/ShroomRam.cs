@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class ShroomRam : State
 {
@@ -15,6 +12,7 @@ public class ShroomRam : State
     public override State RunCurrentState()
     {
         Debug.Log("ramming");
+        //play ram animation
         if (!StartedCharging)
         {
             handler.Anim.SetTrigger("Ram");
@@ -25,17 +23,18 @@ public class ShroomRam : State
             handler.RB.velocity = new Vector2(ramDir.x * ramSpeed, handler.RB.velocity.y);
             StartedCharging = true;
         }
-        if (GameManager.Instance.generalFunctions.IsInRange(transform.position, currentDest, ramTargetOffset) || handler.CheckForFlip() || tookDamage)
+        else if (tookDamage)
         {
-            handler.ShroomActor.TakeDamageGFX.RemoveListener(TurnOnTookDamage);
-            tookDamage = false;
-            handler.Freeze(ramRecoveryTime);
-            handler.RamCollider.SetActive(false);
-            StartedCharging = false;
-            handler.Anim.SetTrigger(handler.Idlehash);
+            StopCharge();
+            //return walk to shroom + stun
+
+        }
+        if (GameManager.Instance.generalFunctions.IsInRange(transform.position, currentDest, ramTargetOffset) || handler.CheckForFlip())
+        {
+            StopCharge();
             return handler.ShroomIdle;
         }
-        return this;       
+        return this;
     }
 
     void Start()
@@ -49,18 +48,13 @@ public class ShroomRam : State
     }
 
 
-    IEnumerator Ram()
+    private void StopCharge()
     {
-        Vector2 ramDir = (GameManager.Instance.assets.playerActor.transform.position - transform.position).normalized;
-        currentDest = handler.ClosestPointInsideRange(handler.RamThreshold);
-        handler.RamCollider.SetActive(true);
-        while (!GameManager.Instance.generalFunctions.IsInRange(transform.position, currentDest, ramTargetOffset) && handler.ShroomGroundCheck.IsEverythingGrounded())
-        {
-            handler.RB.velocity = new Vector2(ramDir.x * ramSpeed, handler.RB.velocity.y);
-            yield return new WaitForEndOfFrame();
-        }
+        handler.ShroomActor.TakeDamageGFX.RemoveListener(TurnOnTookDamage);
+        tookDamage = false;
+        handler.Freeze(ramRecoveryTime);
         handler.RamCollider.SetActive(false);
-        handler.stunned = false;
+        StartedCharging = false;
     }
 
     private void OnDrawGizmos()

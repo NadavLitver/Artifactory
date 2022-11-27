@@ -33,15 +33,20 @@ public class StoneShroomStateHandler : StateHandler
     public bool Enraged;
     public bool stunned;
     public bool frozen;
+    public bool ReadyToThrow;
 
     internal int Idlehash;
     internal int Throwhash;
-    internal int Noticehash;
+    internal int WalkBackhash;
     internal int Ramhash;
     internal int Pickuphash;
+    internal int Defendhash;
+    internal int WalkChash;
+    internal int Walkhash;
+
+
     internal int Diehash;
     internal int Regenhash;
-    internal int Defendhash;
     
     public ShroomCap GetCapToThrow()
     {
@@ -67,9 +72,14 @@ public class StoneShroomStateHandler : StateHandler
         Ramhash = Animator.StringToHash("Ram");
         Throwhash = Animator.StringToHash("Throw");
         Pickuphash = Animator.StringToHash("Pickup");
+        Defendhash = Animator.StringToHash("Defend");
+        WalkChash = Animator.StringToHash("WalkC");
+        Defendhash = Animator.StringToHash("Walk");
+        WalkBackhash = Animator.StringToHash("WalkBack");
+
+
         Diehash = Animator.StringToHash("Die");
         Regenhash = Animator.StringToHash("Regen");
-        Defendhash = Animator.StringToHash("Defend");
     }
     public void RespawnOnCap()
     {

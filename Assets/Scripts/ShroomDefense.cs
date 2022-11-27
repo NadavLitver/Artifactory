@@ -10,7 +10,7 @@ public class ShroomDefense : State
 
     public override State RunCurrentState()
     {
-        //the shroom will defend if the cooldown permits
+        //play defend animation
         handler.RB.velocity = Vector2.zero;
         if (Time.time - lastDefended >= defenseCoolDown)
         {
@@ -26,10 +26,8 @@ public class ShroomDefense : State
         }
         else if (handler.Enraged)
         {
-            handler.Anim.SetTrigger(handler.Throwhash);
             return handler.ShroomThrow;
         }
-        handler.Anim.SetTrigger(handler.Noticehash);
 
         return handler.ShroomNotice;
     }
