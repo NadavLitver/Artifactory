@@ -67,8 +67,10 @@ public class ShroomCap : MonoBehaviour, IDamagable
         if (Time.time - threw >= pickupCd)
         {
             StoneShroomStateHandler handler = collision.GetComponentInChildren<StoneShroomStateHandler>();
-            if (!ReferenceEquals(handler, null))
+            if (!ReferenceEquals(handler, null) && handler.AttackMode)
             {
+                Debug.Log("picked up");
+                handler.Anim.SetTrigger(handler.Pickuphash);
                 handler.AttackMode = false;
                 gameObject.SetActive(false);
             }

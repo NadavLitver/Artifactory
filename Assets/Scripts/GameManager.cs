@@ -100,15 +100,20 @@ public class AssetsRefrence
     [Header("CAMERA"), Space(10)]
     public CamPositionSetter camPositionSetter;
 
-    [Header("HEALTH BAR")]
+    [Header("HEALTH BAR"), Space(10)]
     public ObjectPool CubePool;
 
-    [Header("CANVAS")]
+    [Header("CANVAS"), Space(10)]
     public BlackFade blackFade;
     public GameObject mobileControls;
 
-    [Header("Bounder")]
+    [Header("Bounder"), Space(10)]
     public Transform BounderScout;
+
+    [Header("CraftingUi"), Space(10)]
+    public CraftingMapNode craftingMapNode;
+
+
 }
 public class GeneralFunctions
 {
@@ -116,7 +121,6 @@ public class GeneralFunctions
     {
         bool _isInRange = (positionA - positionB).sqrMagnitude < range * range;
         return _isInRange;
-
     }
 
     public float CalcRange(Vector3 posA, Vector3 posB)
@@ -159,8 +163,6 @@ public class GeneralFunctions
             default:
                 break;
         }
-
-
         return null;
     }
 }

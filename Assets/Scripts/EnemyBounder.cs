@@ -10,6 +10,8 @@ public class EnemyBounder : MonoBehaviour
     [SerializeField] Transform leftGetter;
     [SerializeField] float scoutMs;
     [SerializeField] bool getter;
+    [SerializeField] float timeOut;
+    float startTime;
     public bool Done;
     Vector2 lastLeftHit;
     Vector2 lastRightHit;
@@ -39,14 +41,13 @@ public class EnemyBounder : MonoBehaviour
 
     IEnumerator GetLeftPoint()
     {
-        while (!foundLeft)
+        startTime = Time.time;
+        while (!foundLeft || Time.time - startTime >= timeOut)
         {
             RaycastHit2D downHit = Physics2D.Raycast(leftGetter.position, Vector2.down, rayLength, layer);
             RaycastHit2D frontHit = Physics2D.Raycast(leftGetter.position, Vector2.left, rayLength, layer);
             if (ReferenceEquals(downHit.collider, null) || !ReferenceEquals(frontHit.collider, null))
             {
-                foundLeft = true;
-                minPos = new Vector2(lastLeftHit.x + 1, lastLeftHit.y);
                 break;
             }
             else
@@ -56,18 +57,30 @@ public class EnemyBounder : MonoBehaviour
             }
             yield return new WaitForEndOfFrame();
         }
+        SetLeftPoint();
+    }
+
+    private void SetLeftPoint()
+    {
+        foundLeft = true;
+        minPos = new Vector2(lastLeftHit.x + 1, lastLeftHit.y);
+    }
+
+    private void SetRightPoint()
+    {
+        foundRight = true;
+        maxPos = new Vector2(lastRightHit.x - 1, lastRightHit.y);
     }
 
     IEnumerator GetRightPoint()
     {
-        while (!foundRight)
+        startTime = Time.time;
+        while (!foundRight || Time.time - startTime >= timeOut)
         {
             RaycastHit2D downHit = Physics2D.Raycast(rightGetter.position, Vector2.down, rayLength, layer);
             RaycastHit2D frontHit = Physics2D.Raycast(rightGetter.position, Vector2.right, rayLength, layer);
             if (ReferenceEquals(downHit.collider, null) || !ReferenceEquals(frontHit.collider, null))
             {
-                foundRight = true;
-                maxPos = new Vector2(lastRightHit.x - 1, lastRightHit.y);
                 break;
             }
             else
@@ -77,6 +90,7 @@ public class EnemyBounder : MonoBehaviour
             }
             yield return new WaitForEndOfFrame();
         }
+        SetRightPoint();
     }
 
     IEnumerator WaitUntilDone()

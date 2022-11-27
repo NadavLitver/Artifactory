@@ -2,13 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum RelicEffectsEnum
-{
-    RubberDuck,
-    LightningEmblem,
-    HealingGoblet
-}
-
 public class Relic : MonoBehaviour
 {
     [SerializeField] StatusEffectEnum myEffect;

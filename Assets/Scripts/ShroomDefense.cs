@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShroomDefense : State
@@ -16,7 +14,6 @@ public class ShroomDefense : State
         handler.RB.velocity = Vector2.zero;
         if (Time.time - lastDefended >= defenseCoolDown)
         {
-            Debug.Log("shroom is now defending");
             handler.ShroomActor.TakeDamageGFX.AddListener(PushBack);
             handler.ShroomActor.OnStatusEffectRemoved.AddListener(SetDefendingOff);
             handler.ShroomActor.RecieveStatusEffects(StatusEffectEnum.Invulnerability);
@@ -27,13 +24,16 @@ public class ShroomDefense : State
         {
             return this;
         }
-        else if(handler.Enraged)
+        else if (handler.Enraged)
         {
+            handler.Anim.SetTrigger(handler.Throwhash);
             return handler.ShroomThrow;
         }
+        handler.Anim.SetTrigger(handler.Noticehash);
+
         return handler.ShroomNotice;
     }
-   
+
     void Start()
     {
         handler = GetComponent<StoneShroomStateHandler>();
@@ -42,7 +42,7 @@ public class ShroomDefense : State
 
     public void PushBack()
     {
-        Vector2 pushbackdir = (GameManager.Instance.assets.playerActor.transform.position - transform.position)* -1;
+        Vector2 pushbackdir = (GameManager.Instance.assets.playerActor.transform.position - transform.position) * -1;
         handler.RB.AddForce(new Vector2(pushBackForce * pushbackdir.x, 0), ForceMode2D.Impulse);
         handler.ShroomActor.TakeDamageGFX.RemoveListener(PushBack);
     }

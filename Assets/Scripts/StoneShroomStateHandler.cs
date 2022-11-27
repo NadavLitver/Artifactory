@@ -21,16 +21,28 @@ public class StoneShroomStateHandler : StateHandler
     public GameObject RamCollider;
     public Transform CurrentRamTarget;
     public EnemyBounder Bounder;
+    public Animator Anim;
 
     public float DefenseThreshold;
     public float ThrowThreshold;
     public float RamThreshold;
+    public float ThrowForce;
+    public float ThrowDelay;
     public int MovementDir;
     public bool RequireFlip;
     public bool Enraged;
     public bool stunned;
     public bool frozen;
 
+    internal int Idlehash;
+    internal int Throwhash;
+    internal int Noticehash;
+    internal int Ramhash;
+    internal int Pickuphash;
+    internal int Diehash;
+    internal int Regenhash;
+    internal int Defendhash;
+    
     public ShroomCap GetCapToThrow()
     {
         CurrentCap = ShroomCapPool.GetPooledObject();
@@ -42,7 +54,7 @@ public class StoneShroomStateHandler : StateHandler
         if (!frozen && !stunned && Bounder.Done)
         {
             RunStateMachine();
-         }
+        }
     }
 
     private void Start()
@@ -50,6 +62,14 @@ public class StoneShroomStateHandler : StateHandler
         ShroomActor.TakeDamageGFX.AddListener(Enrage);
         ShroomActor.OnDeath.AddListener(Freeze);
         ShroomActor.OnDeath.AddListener(RespawnOnCap);
+
+        Idlehash = Animator.StringToHash("Idle");
+        Ramhash = Animator.StringToHash("Ram");
+        Throwhash = Animator.StringToHash("Throw");
+        Pickuphash = Animator.StringToHash("Pickup");
+        Diehash = Animator.StringToHash("Die");
+        Regenhash = Animator.StringToHash("Regen");
+        Defendhash = Animator.StringToHash("Defend");
     }
     public void RespawnOnCap()
     {
@@ -157,6 +177,8 @@ public class StoneShroomStateHandler : StateHandler
         return (GameManager.Instance.assets.playerActor.transform.position - transform.position).normalized;
     }
 
+
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -172,3 +194,4 @@ public class StoneShroomStateHandler : StateHandler
 
 
 }
+
