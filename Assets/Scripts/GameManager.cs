@@ -106,6 +106,7 @@ public class AssetsRefrence
     [Header("CANVAS"), Space(10)]
     public BlackFade blackFade;
     public GameObject mobileControls;
+    public MobileControlsHandler mobileButtonHandler;
 
     [Header("Bounder"), Space(10)]
     public Transform BounderScout;

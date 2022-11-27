@@ -261,6 +261,9 @@ MonoBehaviour:
   OnTouchUp:
     m_PersistentCalls:
       m_Calls: []
+  OnInteract:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &4180575170529028755
 GameObject:
   m_ObjectHideFlags: 0
@@ -325,7 +328,9 @@ MonoBehaviour:
     CubePool: {fileID: 0}
     blackFade: {fileID: 0}
     mobileControls: {fileID: 0}
+    mobileButtonHandler: {fileID: 0}
     BounderScout: {fileID: 0}
+    craftingMapNode: {fileID: 0}
 --- !u!1 &4207107459726920179
 GameObject:
   m_ObjectHideFlags: 0
@@ -494,7 +499,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d92364c8c09b724684b18c20929649f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firstIsleRooms: []
+  firstIsleRooms:
+  - {fileID: 3149440148777350306, guid: 534d9e517b65f134196a20b1014c09ad, type: 3}
+  - {fileID: 5954773215286868691, guid: 675a6c45376e11f459856379caf1d180, type: 3}
+  - {fileID: 1398470984, guid: fb700f8c60a416544ae57319b358ce92, type: 3}
+  - {fileID: 2053621644, guid: 3a71c310797a02a468c5c13a2fa4bb10, type: 3}
+  - {fileID: 1060796543, guid: 44608926081bcaf448e299905ea80743, type: 3}
   secondIsleRooms: []
   thirdIsleRooms: []
   currentRunRooms: []

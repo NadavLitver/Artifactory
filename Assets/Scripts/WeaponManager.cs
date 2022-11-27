@@ -99,7 +99,7 @@ public class WeaponManager : MonoBehaviour
         }
 
         OnSwitchWeapon?.Invoke();
-        
+        GameManager.Instance.assets.mobileButtonHandler.SetMobilityOnButton(playerWeapons.IndexOf(givenWeapon));
         //m_actor.IsInAttackAnim = false;
     }
 

@@ -23,6 +23,7 @@ public class InputManager : MonoBehaviour
     public UnityEvent OnTouchDown;
     public UnityEvent OnTouchUp;
 
+    public UnityEvent OnInteract;
 
     private void Awake()
     {
@@ -34,8 +35,15 @@ public class InputManager : MonoBehaviour
         inputs.BaseMovement.jump.started += InvokeOnJumpDown;
         inputs.BaseMovement.Touch.started += Touch_started;
         inputs.BaseMovement.Touch.canceled += Touch_canceled;
-        
+        inputs.BaseMovement.Interact.started += Interact_started;
 
+
+
+    }
+
+    private void Interact_started(InputAction.CallbackContext obj)
+    {
+        OnInteract.Invoke();
     }
 
     private void Touch_canceled(InputAction.CallbackContext obj)

@@ -12,10 +12,13 @@ public class Interactor : MonoBehaviour
     [SerializeField] LayerMask layerToCheck;
 
     public Collider2D ClosestInteractable { get => closestInteractable; set => closestInteractable = value; }
+    private MobileControlsHandler mobileButtonsRef;
 
     void Start()
     {
         StartCoroutine(UpdateClosestInteractable());
+        GameManager.Instance.inputManager.OnInteract.AddListener(Interact);
+        mobileButtonsRef = GameManager.Instance.assets.mobileButtonHandler;
     }
 
     public void Interact()
@@ -44,6 +47,12 @@ public class Interactor : MonoBehaviour
             if (collidersFound.Length <= 0)
             {
                 closestInteractable = null;
+                mobileButtonsRef.SetAttack();
+
+            }
+            else
+            {
+                mobileButtonsRef.SetInteractable();
             }
             foreach (var item in collidersFound)
             {
