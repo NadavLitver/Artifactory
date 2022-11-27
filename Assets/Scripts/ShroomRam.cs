@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class ShroomRam : State
 {
@@ -12,9 +9,14 @@ public class ShroomRam : State
     Vector3 currentDest;
     bool StartedCharging;
     bool tookDamage;
+    bool entered;
     public override State RunCurrentState()
     {
-        Debug.Log("ramming");
+        if (!entered)
+        {
+            entered = true;
+            handler.Anim.SetTrigger(handler.Ramhash);
+        }
         if (!StartedCharging)
         {
             handler.Anim.SetTrigger("Ram");
@@ -27,15 +29,11 @@ public class ShroomRam : State
         }
         if (GameManager.Instance.generalFunctions.IsInRange(transform.position, currentDest, ramTargetOffset) || handler.CheckForFlip() || tookDamage)
         {
-            handler.ShroomActor.TakeDamageGFX.RemoveListener(TurnOnTookDamage);
-            tookDamage = false;
-            handler.Freeze(ramRecoveryTime);
-            handler.RamCollider.SetActive(false);
-            StartedCharging = false;
-            handler.Anim.SetTrigger(handler.Idlehash);
+            StopCharge();
+            entered = false;
             return handler.ShroomIdle;
         }
-        return this;       
+        return this;
     }
 
     void Start()
@@ -49,18 +47,13 @@ public class ShroomRam : State
     }
 
 
-    IEnumerator Ram()
+    private void StopCharge()
     {
-        Vector2 ramDir = (GameManager.Instance.assets.playerActor.transform.position - transform.position).normalized;
-        currentDest = handler.ClosestPointInsideRange(handler.RamThreshold);
-        handler.RamCollider.SetActive(true);
-        while (!GameManager.Instance.generalFunctions.IsInRange(transform.position, currentDest, ramTargetOffset) && handler.ShroomGroundCheck.IsEverythingGrounded())
-        {
-            handler.RB.velocity = new Vector2(ramDir.x * ramSpeed, handler.RB.velocity.y);
-            yield return new WaitForEndOfFrame();
-        }
+        handler.ShroomActor.TakeDamageGFX.RemoveListener(TurnOnTookDamage);
+        tookDamage = false;
+        handler.Freeze(ramRecoveryTime);
         handler.RamCollider.SetActive(false);
-        handler.stunned = false;
+        StartedCharging = false;
     }
 
     private void OnDrawGizmos()

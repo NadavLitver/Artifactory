@@ -2,32 +2,33 @@ using UnityEngine;
 
 public class ShroomThrow : State
 {
-    [SerializeField] float throwForce;
-    [SerializeField] float throwDelay;
     StoneShroomStateHandler handler;
-
+    bool entered;
     public override State RunCurrentState()
     {
-        /* handler.Freeze(throwDelay);
-         ShroomCap cap = handler.GetCapToThrow();
-         cap.transform.position = transform.position;
-         cap.SetUpPositions(handler.Bounder.MaxPos, handler.Bounder.MinPos);
-         cap.gameObject.SetActive(true);
-         cap.Throw(new Vector2(handler.GetPlayerDirection().x * throwForce, 0));
-         handler.AttackMode = true;
-         handler.Freeze(throwDelay);*/
-
+        if (!entered)
+        {
+            entered = true;
+            handler.Anim.SetTrigger(handler.Throwhash);
+        }
         handler.AttackMode = true;
-        if (ReferenceEquals(handler.CurrentCap, null))
+        handler.RB.velocity = Vector2.zero;
+        if (!handler.ReadyToThrow)
         {
             return this;
         }
-        Debug.Log("threw cap");
-        handler.Anim.SetTrigger(handler.Noticehash);
+        ShroomCap cap = handler.GetCapToThrow();
+        cap.transform.position = transform.position;
+        cap.SetUpPositions(handler.Bounder.MaxPos, handler.Bounder.MinPos);
+        cap.gameObject.SetActive(true);
+        cap.Throw(new Vector2(handler.GetPlayerDirection().x * handler.ThrowForce, 0));
+        handler.Freeze(handler.ThrowDelay);
+        handler.ReadyToThrow = false;
+
+        entered = false;
         return handler.ShroomNotice;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         handler = GetComponent<StoneShroomStateHandler>();

@@ -14,18 +14,17 @@ public class ShroomMoveBackwards : State
     {
         if (!enteredState)
         {
-            //as we only want to walk back once we cache the moment the state is first called
             enteredState = true;
             startedWalkingBack = Time.time;
         }
 
         if (Time.time - startedWalkingBack >= walkBackDuration || handler.CheckForFlip())
-        {// if walked for the entire duration or if reached a ledge.
+        {
             handler.Enrage();
             handler.MovementDir *= -1;
             handler.Flipper.Disabled = false;
             handler.Anim.SetTrigger(handler.Idlehash);
-
+            enteredState = false;
             return handler.ShroomIdle;
         }
 
@@ -34,15 +33,13 @@ public class ShroomMoveBackwards : State
             handler.Enrage();
             handler.Flipper.Disabled = false;
             handler.Anim.SetTrigger(handler.Defendhash);
+            enteredState = false;
             return handler.ShroomDefense;
         }
 
         handler.Flipper.Disabled = true;
         handler.RB.velocity = new Vector2(moveBackwardsSpeed * handler.MovementDir * -1, 0);
         return this;
-
-
-
     }
 
 
