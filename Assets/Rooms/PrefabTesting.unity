@@ -1173,22 +1173,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 889718817, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 702e0dfde59dda04f8c89c2040edc272, type: 2}
-    - target: {fileID: 2334491815719937579, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
-      propertyPath: m_SortingLayer
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 2334491815719937579, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
-      propertyPath: m_SortingLayerID
-      value: -2069616245
-      objectReference: {fileID: 0}
-    - target: {fileID: 2334491816185990517, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2334491817139954401, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1203,7 +1187,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2334491817139954401, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.7950871
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2334491817139954401, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1233,53 +1217,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2334491817139954404, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 2334491817139954427, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
       propertyPath: m_Name
       value: MushroomEnemy (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 2334491817456721696, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
-      propertyPath: idleTime
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 2334491817456721697, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
-      propertyPath: ShroomWalk
-      value: 
-      objectReference: {fileID: 1703560641}
-    - target: {fileID: 2334491817456721697, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
-      propertyPath: ThrowForce
-      value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2334491817456721697, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
-      propertyPath: ShroomPickup
-      value: 
-      objectReference: {fileID: 1703560642}
-    - target: {fileID: 2334491817456721697, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
-      propertyPath: ShroomThrowWait
-      value: 
-      objectReference: {fileID: 1703560643}
-    - target: {fileID: 2334491817456721697, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
-      propertyPath: m_debugTextMesh
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2334491817456721697, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
-      propertyPath: CurrentRamTarget
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 2334491817456721703, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2334491817456721703, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2334491817456721705, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
-      propertyPath: walkBackDuration
-      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
@@ -2109,52 +2049,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fbbfd2a4fc3a45549b23ab207824cf1f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &1703560631 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2334491817456721702, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
-  m_PrefabInstance: {fileID: 1036463598}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1703560641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703560631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14abda53e36b3214a976483cf6e22033, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stopCooldown: 5
-  lastStop: 0
-  speed: 2
---- !u!114 &1703560642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703560631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10e0d5268df35cc4e8b6b86c4b2a7207, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pickupDuration: 1.5
---- !u!114 &1703560643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1703560631}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acae3802f7da9e747aba51c9c29afecd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ThrowRecovery: 1
 --- !u!1 &1722359293 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2090516216634905296, guid: 97f9531a6a1db1a4cac40205d5070749, type: 3}

@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -2069616245
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 1606638617, guid: 3d590df7151db124ba81c18222483164, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -97,7 +97,7 @@ Animator:
   m_GameObject: {fileID: 2334491815719937577}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: bf9fbc085ca55144f9dc70d30d2cdcd9, type: 2}
+  m_Controller: {fileID: 9100000, guid: 702e0dfde59dda04f8c89c2040edc272, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -522,6 +522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Disabled: 0
+  IsLookingRight: 0
 --- !u!1 &2334491817191552503
 GameObject:
   m_ObjectHideFlags: 0
@@ -634,6 +635,9 @@ GameObject:
   - component: {fileID: 2334491817456721711}
   - component: {fileID: 2334491817456721710}
   - component: {fileID: 2334491817456721705}
+  - component: {fileID: 1703560641}
+  - component: {fileID: 1703560642}
+  - component: {fileID: 1703560643}
   m_Layer: 12
   m_Name: StateHandler
   m_TagString: Untagged
@@ -649,7 +653,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2334491817456721702}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.18999863, y: 0.049999952, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -676,9 +680,9 @@ MonoBehaviour:
   ShroomThrow: {fileID: 2334491817456721710}
   ShroomLookForCap: {fileID: 0}
   ShroomMoveBackwards: {fileID: 2334491817456721705}
-  ShroomWalk: {fileID: 0}
-  ShroomPickup: {fileID: 0}
-  ShroomThrowWait: {fileID: 0}
+  ShroomWalk: {fileID: 1703560641}
+  ShroomPickup: {fileID: 1703560642}
+  ShroomThrowWait: {fileID: 1703560643}
   ShroomLineOfSight: {fileID: 2334491817340363321}
   ShroomGroundCheck: {fileID: 2334491816039330442}
   RB: {fileID: 2334491817139954400}
@@ -694,7 +698,7 @@ MonoBehaviour:
   DefenseThreshold: 2.66
   ThrowThreshold: 5.3
   RamThreshold: 2.76
-  ThrowForce: 5
+  ThrowForce: 12
   ThrowDelay: 1
   PickupFreezeDuration: 0
   MovementDir: 1
@@ -721,7 +725,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de3c5fb81c2aef44b930287cfdda595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleTime: 0
+  idleTime: 2
 --- !u!114 &2334491817456721699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -790,7 +794,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   noticeOffset: 2
   moveBackwardsSpeed: 0.3
-  walkBackDuration: 3
+  walkBackDuration: 2
+--- !u!114 &1703560641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2334491817456721702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14abda53e36b3214a976483cf6e22033, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopCooldown: 5
+  lastStop: 0
+  speed: 2
+--- !u!114 &1703560642
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2334491817456721702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 10e0d5268df35cc4e8b6b86c4b2a7207, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupDuration: 1.5
+--- !u!114 &1703560643
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2334491817456721702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acae3802f7da9e747aba51c9c29afecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ThrowRecovery: 1
 --- !u!1001 &2334491817592321804
 PrefabInstance:
   m_ObjectHideFlags: 0
