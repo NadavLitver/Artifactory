@@ -45,8 +45,8 @@ public class ExitInteractable : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-        {
-            GameManager.Instance.LevelManager.MoveToRoom(this);
+        {// on remember this is good remove comments!!!
+           // GameManager.Instance.LevelManager.MoveToRoom(this);
         }
     }
 }

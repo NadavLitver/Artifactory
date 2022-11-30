@@ -28,7 +28,7 @@ public class ShroomNotice : State
             }
         }
 
-        return handler.ShroomIdle;
+        return handler.ShroomWalk;
     }
 
     // Start is called before the first frame update

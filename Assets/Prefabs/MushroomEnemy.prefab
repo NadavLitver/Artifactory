@@ -30,7 +30,8 @@ Transform:
   m_LocalPosition: {x: 0.22, y: 0.06, z: 0}
   m_LocalScale: {x: -3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2334491816185990518}
   m_Father: {fileID: 2334491817139954401}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -248,7 +249,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2334491817139954401}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2334491816076872518
 MonoBehaviour:
@@ -299,13 +300,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2334491816185990517}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.07333334, y: -0.02, z: 0}
+  m_LocalScale: {x: -0.33333334, y: 0.33333334, z: 0.33333334}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 2334491817139954401}
-  m_RootOrder: 6
+  m_Father: {fileID: 2334491815719937578}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2334491816185990512
 BoxCollider2D:
@@ -385,7 +386,6 @@ Transform:
   - {fileID: 2334491817456721703}
   - {fileID: 4247355369479050685}
   - {fileID: 2334491817191552496}
-  - {fileID: 2334491816185990518}
   - {fileID: 2334491816076872517}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -633,7 +633,6 @@ GameObject:
   - component: {fileID: 2334491817456721708}
   - component: {fileID: 2334491817456721711}
   - component: {fileID: 2334491817456721710}
-  - component: {fileID: 2334491817456721704}
   - component: {fileID: 2334491817456721705}
   m_Layer: 12
   m_Name: StateHandler
@@ -675,8 +674,11 @@ MonoBehaviour:
   ShroomNotice: {fileID: 2334491817456721699}
   ShroomRam: {fileID: 2334491817456721711}
   ShroomThrow: {fileID: 2334491817456721710}
-  ShroomLookForCap: {fileID: 2334491817456721704}
+  ShroomLookForCap: {fileID: 0}
   ShroomMoveBackwards: {fileID: 2334491817456721705}
+  ShroomWalk: {fileID: 0}
+  ShroomPickup: {fileID: 0}
+  ShroomThrowWait: {fileID: 0}
   ShroomLineOfSight: {fileID: 2334491817340363321}
   ShroomGroundCheck: {fileID: 2334491816039330442}
   RB: {fileID: 2334491817139954400}
@@ -694,12 +696,19 @@ MonoBehaviour:
   RamThreshold: 2.76
   ThrowForce: 5
   ThrowDelay: 1
+  PickupFreezeDuration: 0
   MovementDir: 1
   RequireFlip: 0
   Enraged: 0
   stunned: 0
   frozen: 0
   ReadyToThrow: 0
+  OnPickedUpShroom:
+    m_PersistentCalls:
+      m_Calls: []
+  OnShroomThrown:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!114 &2334491817456721696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -712,10 +721,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4de3c5fb81c2aef44b930287cfdda595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stopDuration: 0.4
-  stopCooldown: 4
-  lastStop: 0
-  idleSpeed: 1.2
+  idleTime: 0
 --- !u!114 &2334491817456721699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -757,6 +763,7 @@ MonoBehaviour:
   ramSpeed: 4
   ramTargetOffset: 0.76
   ramRecoveryTime: 1
+  StartedCharging: 0
 --- !u!114 &2334491817456721710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -769,19 +776,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ccf70bf3d6d3704bae00829cc2f091b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2334491817456721704
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2334491817456721702}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75b2b6d4de8209d4096ec5700938b3ba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lookForCapSpeed: 1.2
 --- !u!114 &2334491817456721705
 MonoBehaviour:
   m_ObjectHideFlags: 0

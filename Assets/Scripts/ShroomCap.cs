@@ -10,7 +10,23 @@ public class ShroomCap : MonoBehaviour, IDamagable
     [SerializeField] Vector2 maxPoint;
     [SerializeField] Vector2 minPoint;
     [SerializeField] float pickupCd;
-    float threw;
+    bool dealtDamage;
+    float LastThrown;
+    float startingGrav;
+
+    [SerializeField] GroundCheckNew groundCheck;
+
+    public GroundCheckNew GroundCheck { get => groundCheck; }
+
+    private void Update()
+    {
+        if (groundCheck.IsGrounded())
+        {
+            dealtDamage = true;
+            RB.velocity = Vector2.zero;
+            RB.gravityScale = 0;
+        }
+    }
 
     public void GetHit(Ability m_ability)
     {
@@ -43,40 +59,46 @@ public class ShroomCap : MonoBehaviour, IDamagable
         RB = GetComponent<Rigidbody2D>();
     }
 
+
     private void OnEnable()
     {
-        threw = Time.time;
-        RB.constraints = RigidbodyConstraints2D.None;
-        RB.constraints = RigidbodyConstraints2D.FreezeRotation;
-    }
+        LastThrown = Time.time;
+        startingGrav = RB.gravityScale;
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    }
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && !dealtDamage)
         {
             //calc direction
             Vector2 forceDir = GameManager.Instance.assets.playerActor.transform.position - transform.position;
             ShroomCapAbility.CacheForceDirection(forceDir);
             GameManager.Instance.assets.playerActor.GetHit(ShroomCapAbility);
+            dealtDamage = true;
             return;
         }
     }
-
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (Time.time - threw >= pickupCd)
+        if (Time.time - LastThrown >= pickupCd)
         {
             StoneShroomStateHandler handler = collision.GetComponentInChildren<StoneShroomStateHandler>();
             if (!ReferenceEquals(handler, null) && handler.AttackMode)
             {
                 Debug.Log("picked up");
+                handler.PickupInteruption();
                 handler.Anim.SetTrigger(handler.Pickuphash);
                 handler.AttackMode = false;
                 gameObject.SetActive(false);
             }
         }
     }
+    private void OnDisable()
+    {
+        dealtDamage = false;
+        RB.gravityScale = startingGrav;
 
+    }
 
     public void SetUpPositions(Vector2 max, Vector2 min)
     {
@@ -87,6 +109,7 @@ public class ShroomCap : MonoBehaviour, IDamagable
 
     public void Throw(Vector3 calculatedForce)
     {
+
         RB.AddForce(calculatedForce, ForceMode2D.Impulse);
         StartCoroutine(KeepToBounries());
     }
@@ -103,6 +126,7 @@ public class ShroomCap : MonoBehaviour, IDamagable
         {
             transform.position = new Vector2(minPoint.x + 1, minPoint.y);
         }
-        RB.constraints = RigidbodyConstraints2D.FreezeAll;
+        RB.velocity = Vector2.zero;
+        RB.gravityScale = 0;
     }
 }

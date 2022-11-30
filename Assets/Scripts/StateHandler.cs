@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StateHandler : MonoBehaviour
 {
-    [SerializeField] State currentState;
+    [SerializeField] protected State currentState;
 
     //first state ^
     
@@ -16,10 +16,16 @@ public class StateHandler : MonoBehaviour
     {
         State nextState = currentState?.RunCurrentState();
 
+        if(currentState != nextState)
+        {
+            nextState.onStateEnter();
+        }
+      
         if(nextState!= null)
         {
             SwitchToState(nextState);
         }
+        
     }
  
     private void SwitchToState(State _state)
@@ -30,4 +36,5 @@ public class StateHandler : MonoBehaviour
     {
         SwitchToState(_state);
     }
+   
 }

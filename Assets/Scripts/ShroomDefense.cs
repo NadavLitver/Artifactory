@@ -7,23 +7,25 @@ public class ShroomDefense : State
     StoneShroomStateHandler handler;
     float lastDefended;
     bool defending;
-    bool entered;
 
     public override State RunCurrentState()
     {
-        if (!entered)
-        {
-            entered = true;
-            handler.Anim.SetTrigger(handler.Defendhash);
-        }
-        handler.RB.velocity = Vector2.zero;
+       
         if (Time.time - lastDefended >= defenseCoolDown)
         {
-            handler.ShroomActor.TakeDamageGFX.AddListener(PushBack);
+           // handler.ShroomActor.TakeDamageGFX.AddListener(PushBack);
+            handler.RB.velocity = Vector2.zero;
             handler.ShroomActor.OnStatusEffectRemoved.AddListener(SetDefendingOff);
             handler.ShroomActor.RecieveStatusEffects(StatusEffectEnum.Invulnerability);
             lastDefended = Time.time;
             defending = true;
+            Vector2 playerDir = handler.GetPlayerDirection();
+            if (playerDir.x < 0 && handler.Flipper.IsLookingRight || playerDir.x > 0 && !handler.Flipper.IsLookingRight)
+            {
+                handler.Flipper.Flip();
+            }
+            handler.Anim.SetTrigger("Defend");
+
         }
         if (defending)
         {
@@ -31,11 +33,9 @@ public class ShroomDefense : State
         }
         else if (handler.Enraged)
         {
-            entered = false;
 
             return handler.ShroomThrow;
         }
-        entered = false;
 
         return handler.ShroomNotice;
     }
@@ -43,6 +43,7 @@ public class ShroomDefense : State
     void Start()
     {
         handler = GetComponent<StoneShroomStateHandler>();
+        lastDefended = defenseCoolDown;
     }
 
 

@@ -7,31 +7,27 @@ public class ShroomRam : State
     [SerializeField] float ramRecoveryTime;
     StoneShroomStateHandler handler;
     Vector3 currentDest;
-    bool StartedCharging;
+    [SerializeField] bool StartedCharging;
     bool tookDamage;
-    bool entered;
+
+
+    public override void onStateEnter()
+    {
+        handler.Anim.SetTrigger(handler.Ramhash);
+        handler.ShroomActor.TakeDamageGFX.AddListener(TurnOnTookDamage);
+        currentDest = handler.ClosestPointInsideRange(handler.RamThreshold);
+        Vector2 ramDir = (currentDest - transform.position).normalized;
+        handler.RamCollider.SetActive(true);
+        handler.RB.velocity = new Vector2(ramDir.x * ramSpeed, handler.RB.velocity.y);
+        StartedCharging = true;
+    }
     public override State RunCurrentState()
     {
-        if (!entered)
-        {
-            entered = true;
-            handler.Anim.SetTrigger(handler.Ramhash);
-        }
-        if (!StartedCharging)
-        {
-            handler.Anim.SetTrigger("Ram");
-            handler.ShroomActor.TakeDamageGFX.AddListener(TurnOnTookDamage);
-            Vector2 ramDir = (handler.CurrentRamTarget.position - transform.position).normalized;
-            currentDest = handler.ClosestPointInsideRange(handler.RamThreshold);
-            handler.RamCollider.SetActive(true);
-            handler.RB.velocity = new Vector2(ramDir.x * ramSpeed, handler.RB.velocity.y);
-            StartedCharging = true;
-        }
+       
         if (GameManager.Instance.generalFunctions.IsInRange(transform.position, currentDest, ramTargetOffset) || handler.CheckForFlip() || tookDamage)
         {
             StopCharge();
-            entered = false;
-            return handler.ShroomIdle;
+            return handler.ShroomWalk;
         }
         return this;
     }
@@ -51,7 +47,7 @@ public class ShroomRam : State
     {
         handler.ShroomActor.TakeDamageGFX.RemoveListener(TurnOnTookDamage);
         tookDamage = false;
-        handler.Freeze(ramRecoveryTime);
+     //   handler.Freeze(ramRecoveryTime);
         handler.RamCollider.SetActive(false);
         StartedCharging = false;
     }

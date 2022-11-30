@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class StoneShroomStateHandler : StateHandler
 {
@@ -9,6 +11,9 @@ public class StoneShroomStateHandler : StateHandler
     public State ShroomThrow;
     public State ShroomLookForCap;
     public State ShroomMoveBackwards;
+    public State ShroomWalk;
+    public State ShroomPickup;
+    public State ShroomThrowWait;
 
     public EnemyLineOfSight ShroomLineOfSight;
     public GroundCheckCollection ShroomGroundCheck;
@@ -28,6 +33,7 @@ public class StoneShroomStateHandler : StateHandler
     public float RamThreshold;
     public float ThrowForce;
     public float ThrowDelay;
+    public int PickupFreezeDuration;
     public int MovementDir;
     public bool RequireFlip;
     public bool Enraged;
@@ -47,7 +53,8 @@ public class StoneShroomStateHandler : StateHandler
 
     internal int Diehash;
     internal int Regenhash;
-    
+    public UnityEvent OnPickedUpShroom;
+    public UnityEvent OnShroomThrown;
     public ShroomCap GetCapToThrow()
     {
         CurrentCap = ShroomCapPool.GetPooledObject();
@@ -56,17 +63,32 @@ public class StoneShroomStateHandler : StateHandler
 
     private void Update()
     {
+
         if (!frozen && !stunned && Bounder.Done)
         {
             RunStateMachine();
-        }
-    }
 
+        }
+        /* else if (frozen)
+         {
+             if (!Anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+             {
+                 Anim.Play(Idlehash);
+             }
+
+         }*/
+    }
+    public void PickupInteruption()
+    {
+        Interrupt(ShroomPickup);
+    }
     private void Start()
     {
         ShroomActor.TakeDamageGFX.AddListener(Enrage);
         ShroomActor.OnDeath.AddListener(Freeze);
         ShroomActor.OnDeath.AddListener(RespawnOnCap);
+        OnPickedUpShroom.AddListener(PickupFreeze);
+
 
         Idlehash = Animator.StringToHash("Idle");
         Ramhash = Animator.StringToHash("Ram");
@@ -188,6 +210,24 @@ public class StoneShroomStateHandler : StateHandler
     }
 
 
+    IEnumerator WaitForAttackMode()
+    {
+        yield return new WaitUntil(() => AttackMode);
+        OnPickedUpShroom?.Invoke();
+        StartCoroutine(WaitForNotAttackMode());
+    }
+
+    IEnumerator WaitForNotAttackMode()
+    {
+        yield return new WaitUntil(() => !AttackMode);
+        OnShroomThrown?.Invoke();
+        StartCoroutine(WaitForAttackMode());
+    }
+
+    private void PickupFreeze()
+    {
+        Freeze(PickupFreezeDuration);
+    }
 
     private void OnDrawGizmos()
     {
