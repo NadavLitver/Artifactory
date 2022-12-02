@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Cinemachine;
 
 
 [DefaultExecutionOrder(-10)]
@@ -113,6 +112,10 @@ public class AssetsRefrence
 
     [Header("CraftingUi"), Space(10)]
     public CraftingMapNode craftingMapNode;
+    public Sprite GlimmeringSprite;
+    public Sprite BranchSprite;
+    public Sprite RuneSprite;
+    public Sprite LeatherSprite;
 
 
 }
@@ -128,6 +131,10 @@ public class GeneralFunctions
     {
         return (posA - posB).magnitude;
     }
+    public Vector2 CalcRangeV2(Vector3 posA, Vector3 posB)
+    {
+        return (posA - posB);
+    }
 
     public void ResetScene()
     {
@@ -141,10 +148,10 @@ public class GeneralFunctions
     public void onPlayerDiedActions()
     {
         LeanTween.cancelAll();
-       
+
         LeanTween.delayedCall(1, ResetScene);
     }
-    
+
     public StatusEffect GetStatusFromType(StatusEffectEnum effect)
     {
         switch (effect)
@@ -154,7 +161,7 @@ public class GeneralFunctions
             case StatusEffectEnum.freeze:
                 break;
             case StatusEffectEnum.RubberDuck:
-                return new RubberDuck(); 
+                return new RubberDuck();
             case StatusEffectEnum.LightningEmblem:
                 return new LightningEmblem();
             case StatusEffectEnum.HealingGoblet:
@@ -165,6 +172,24 @@ public class GeneralFunctions
                 break;
         }
         return null;
+    }
+
+
+    public Sprite GetSpriteFromItemType(ItemType givenItem)
+    {
+        switch (givenItem)
+        {
+            case ItemType.Glimmering:
+                return GameManager.Instance.assets.GlimmeringSprite;
+            case ItemType.Branch:
+                return GameManager.Instance.assets.BranchSprite;
+            case ItemType.Rune:
+                return GameManager.Instance.assets.RuneSprite;
+            case ItemType.Leather:
+                return GameManager.Instance.assets.LeatherSprite;
+            default:
+                return null;
+        }
     }
 }
 
