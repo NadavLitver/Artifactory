@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class ShroomCap : MonoBehaviour, IDamagable
+public class ShroomCap : Actor, IDamagable
 {
     public Rigidbody2D RB;
     public Ability ShroomCapAbility;
@@ -18,6 +18,9 @@ public class ShroomCap : MonoBehaviour, IDamagable
 
     public GroundCheckNew GroundCheck { get => groundCheck; }
 
+
+    
+
     private void Update()
     {
         if (groundCheck.IsGrounded())
@@ -29,37 +32,14 @@ public class ShroomCap : MonoBehaviour, IDamagable
        
     }
 
-    public void GetHit(Ability m_ability)
-    {
-        TakeDamage(m_ability.DamageHandler);
-    }
-
-    public void GetHit(Ability m_ability, Actor host)
-    {
-        TakeDamage(m_ability.DamageHandler, host);
-
-    }
-
-    public void Heal(DamageHandler givenDmg)
-    {
-
-    }
-
-    public void TakeDamage(DamageHandler dmgHandler)
-    {
-
-    }
-
-    public void TakeDamage(DamageHandler dmgHandler, Actor host)
-    {
-
-    }
+  
 
     void Start()
     {
         RB = GetComponent<Rigidbody2D>();
+        effectable = false;
+        OnDeath.AddListener(() => gameObject.SetActive(false));
     }
-
 
     private void OnEnable()
     {
