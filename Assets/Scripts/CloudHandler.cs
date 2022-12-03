@@ -14,8 +14,8 @@ public class CloudHandler : MonoBehaviour
     {
         for (int i = 0; i < Clouds.Length; i++)
         {
-            Clouds[i].position = new Vector2(Mathf.MoveTowards(Clouds[i].position.x, CloudEndingPos.position.x, Time.deltaTime * Random.Range(0.2f, 4f)), Clouds[i].position.y);
-            if (GameManager.Instance.generalFunctions.IsInRange(Clouds[i].position, CloudEndingPos.position, 1f))
+            Clouds[i].position = new Vector2(Mathf.MoveTowards(Clouds[i].position.x, CloudEndingPos.position.x, Time.deltaTime * Random.Range(0.4f, 4f)), Clouds[i].position.y);
+            if (Mathf.Abs(CloudEndingPos.position.x - Clouds[i].position.x) < 1)
             {
                 Clouds[i].position = CloudStartingPos.position;
             }

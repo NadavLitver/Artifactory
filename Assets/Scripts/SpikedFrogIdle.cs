@@ -2,15 +2,24 @@ using UnityEngine;
 
 public class SpikedFrogIdle : State
 {
-    SpikedFrogStateHandler handler;
+   [SerializeField] SpikedFrogStateHandler handler;
+    void Start()
+    {
+        if (ReferenceEquals(handler, null))
+        {
+          handler = GetComponent<SpikedFrogStateHandler>();
+        }
+
+        //handler.launcher.JumpedEvent.AddListener(TurnOffLanded);
+    }
     public override State RunCurrentState()
     {
-        //play jump anim?
-        if (!handler.launcher.IsJumping)
+       
+        if (!handler.launcher.IsJumping)  
         {
             handler.launcher.Launch(handler.rayData.GetRandomPos());
             handler.m_animator.Play("FrogIdleJump");
-         }
+        }
 
         if (handler.lineOfSight.CanSeePlayer())
         {
@@ -21,11 +30,6 @@ public class SpikedFrogIdle : State
     }
 
 
- 
-    void Start()
-    {
-        handler = GetComponent<SpikedFrogStateHandler>();
-     
-       //handler.launcher.JumpedEvent.AddListener(TurnOffLanded);
-    }
+
+   
 }
