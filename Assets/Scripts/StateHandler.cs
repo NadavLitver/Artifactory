@@ -34,6 +34,10 @@ public class StateHandler : MonoBehaviour
     }
     public void Interrupt(State _state)
     {
+        if (currentState != _state)
+        {
+            _state.onStateEnter();
+        }
         SwitchToState(_state);
     }
    

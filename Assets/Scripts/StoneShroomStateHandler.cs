@@ -9,17 +9,19 @@ public class StoneShroomStateHandler : StateHandler
     public State ShroomNotice;
     public State ShroomRam;
     public State ShroomThrow;
-    public State ShroomLookForCap;
+    ///public State ShroomLookForCap;
     public State ShroomMoveBackwards;
     public State ShroomWalk;
     public State ShroomPickup;
     public State ShroomThrowWait;
+    public State ShroomRessurect;
+    public State ShroomDie;
+
 
     public EnemyLineOfSight ShroomLineOfSight;
     public GroundCheckCollection ShroomGroundCheck;
     public Rigidbody2D RB;
     public RigidBodyFlip Flipper;
-    public bool AttackMode;
     public EnemyActor ShroomActor;
     public ShroomCapObjectPool ShroomCapPool;
     public ShroomCap CurrentCap;
@@ -35,6 +37,7 @@ public class StoneShroomStateHandler : StateHandler
     public float ThrowDelay;
     public int PickupFreezeDuration;
     public int MovementDir;
+    public bool AttackMode;
     public bool RequireFlip;
     public bool Enraged;
     public bool stunned;
@@ -49,6 +52,7 @@ public class StoneShroomStateHandler : StateHandler
     internal int Defendhash;
     internal int WalkChash;
     internal int Walkhash;
+    internal int RessurectHash;
 
 
     internal int Diehash;
@@ -85,8 +89,8 @@ public class StoneShroomStateHandler : StateHandler
     private void Start()
     {
         ShroomActor.TakeDamageGFX.AddListener(Enrage);
-        ShroomActor.OnDeath.AddListener(Freeze);
-        ShroomActor.OnDeath.AddListener(RespawnOnCap);
+       // ShroomActor.OnDeath.AddListener(Freeze);
+        ShroomActor.OnDeath.AddListener(StartDeath);
         OnPickedUpShroom.AddListener(PickupFreeze);
 
 
@@ -98,22 +102,31 @@ public class StoneShroomStateHandler : StateHandler
         WalkChash = Animator.StringToHash("WalkC");
         Defendhash = Animator.StringToHash("Walk");
         WalkBackhash = Animator.StringToHash("WalkBack");
-
+        RessurectHash = Animator.StringToHash("Ressurect");
 
         Diehash = Animator.StringToHash("Die");
         Regenhash = Animator.StringToHash("Regen");
     }
-    public void RespawnOnCap()
+    public void StartDeath()
     {
-        //play repsawn anim here i guess
+        Interrupt(ShroomDie);
+
+    }
+    public void StartRessurect()
+    {
+        //play repsawn anim here i guess//no
         if (!AttackMode)
         {
             return;
         }
         gameObject.SetActive(true);
-        transform.parent.position = new Vector2(CurrentCap.transform.position.x, CurrentCap.transform.position.y);
+        transform.parent.position = new Vector2(CurrentCap.transform.position.x, transform.position.y);
         ShroomActor.HealBackToFull();
-        Freeze(0.5f);
+        Interrupt(ShroomRessurect);
+
+    }
+    public void ReturnToIdle()
+    {
         Interrupt(ShroomIdle);
     }
     public void Enrage()

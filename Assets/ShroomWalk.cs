@@ -29,7 +29,7 @@ public class ShroomWalk : State
         {
             return handler.ShroomNotice;
         }
-        if (Time.time - lastStop >= stopCooldown)
+        if (Time.time - lastStop >= stopCooldown && !handler.AttackMode)
         {
             //set animation to idle 
             handler.Anim.SetTrigger(handler.Idlehash);
