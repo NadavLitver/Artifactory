@@ -16,6 +16,7 @@ public class StoneShroomStateHandler : StateHandler
     public State ShroomThrowWait;
     public State ShroomRessurect;
     public State ShroomDie;
+    public State ShroomTakeDmg;
 
 
     public EnemyLineOfSight ShroomLineOfSight;
@@ -53,7 +54,8 @@ public class StoneShroomStateHandler : StateHandler
     internal int WalkChash;
     internal int Walkhash;
     internal int RessurectHash;
-
+    internal int TakeDamageHash;
+    internal int TakeDamageHashc;
 
     internal int Diehash;
     internal int Regenhash;
@@ -89,7 +91,9 @@ public class StoneShroomStateHandler : StateHandler
     private void Start()
     {
         ShroomActor.TakeDamageGFX.AddListener(Enrage);
-       // ShroomActor.OnDeath.AddListener(Freeze);
+        ShroomActor.OnDamageCalcOver.AddListener(OnHit);
+        ShroomActor.TakeDamageGFX.AddListener(TakeDamageInterrupt);
+        // ShroomActor.OnDeath.AddListener(Freeze);
         ShroomActor.OnDeath.AddListener(StartDeath);
         OnPickedUpShroom.AddListener(PickupFreeze);
 
@@ -100,18 +104,44 @@ public class StoneShroomStateHandler : StateHandler
         Pickuphash = Animator.StringToHash("Pickup");
         Defendhash = Animator.StringToHash("Defend");
         WalkChash = Animator.StringToHash("WalkC");
-        Defendhash = Animator.StringToHash("Walk");
+        Walkhash = Animator.StringToHash("Walk");
         WalkBackhash = Animator.StringToHash("WalkBack");
         RessurectHash = Animator.StringToHash("Ressurect");
+        TakeDamageHash = Animator.StringToHash("Hit");
+        TakeDamageHashc = Animator.StringToHash("HitC");
 
         Diehash = Animator.StringToHash("Die");
         Regenhash = Animator.StringToHash("Regen");
+    } 
+    public void OnHit(DamageHandler dmgHandler)//1
+    {
+        if (dmgHandler.calculateFinalNumberMult() < 1  || dmgHandler.calculateFinalNumberMult() >= ShroomActor.currentHP)
+            return;
+        if (AttackMode)
+        {
+            Anim.SetTrigger(TakeDamageHash);
+        }
+        else
+        {
+            Anim.SetTrigger(TakeDamageHashc);
+        }
+        Interrupt(ShroomTakeDmg);
+
+    }
+    public void TakeDamageInterrupt()//2
+    {
+        if (ShroomActor.currentHP < 1)
+        {
+            ShroomActor.OnDamageCalcOver.RemoveListener(OnHit);
+        }
     }
     public void StartDeath()
     {
         Interrupt(ShroomDie);
 
     }
+         
+    public void AddTakeDamageListenerBack() => ShroomActor.OnDamageCalcOver.AddListener(OnHit);
     public void StartRessurect()
     {
         //play repsawn anim here i guess//no
@@ -121,7 +151,8 @@ public class StoneShroomStateHandler : StateHandler
         }
         gameObject.SetActive(true);
         transform.parent.position = new Vector2(CurrentCap.transform.position.x, transform.position.y);
-        ShroomActor.HealBackToFull();
+        
+        ShroomActor.OnDamageCalcOver.AddListener(OnHit);
         Interrupt(ShroomRessurect);
 
     }

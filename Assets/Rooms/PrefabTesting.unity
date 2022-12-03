@@ -407,6 +407,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2780eef79aa3cb6409463fbcfd02bf8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &193646943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 193646929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa2d064d5e9fcc44e8e0dd950af733aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stunnedDuration: 0.2
 --- !u!1001 &202986022
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1262,6 +1275,10 @@ PrefabInstance:
       propertyPath: ShroomDie
       value: 
       objectReference: {fileID: 193646942}
+    - target: {fileID: 2334491817456721697, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
+      propertyPath: ShroomTakeDmg
+      value: 
+      objectReference: {fileID: 193646943}
     - target: {fileID: 2334491817456721697, guid: 26c4341c5c6e48b4d9cfedda8813cf21, type: 3}
       propertyPath: ShroomRessurect
       value: 
@@ -3106,7 +3123,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3264094432735154402, guid: 877a6add5b775234baa437818e4992dd, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.0024414062
+      value: 0.0029296875
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 877a6add5b775234baa437818e4992dd, type: 3}

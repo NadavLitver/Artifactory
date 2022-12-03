@@ -9,12 +9,13 @@ public class ShroomDie : State
     }
     public override void onStateEnter()
     {
-        handler.Anim.SetTrigger(handler.Diehash);
+        handler.Anim.SetTrigger("Die");
         handler.RB.velocity = Vector3.zero;
         base.onStateEnter();
     }
     public override State RunCurrentState()
     {
+        
         return this;
     }
 }

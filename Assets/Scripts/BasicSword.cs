@@ -64,7 +64,7 @@ public class BasicSword : Weapon
         stringBuilder.Append(attackPrefix);
         stringBuilder.Append(AbilityCombo.GetAbilityIndex().ToString());
         animationString = stringBuilder.ToString();
-        Debug.Log(animationString);
+       // Debug.Log(animationString);
         m_animator.SetTrigger(animationString);
     }
 }

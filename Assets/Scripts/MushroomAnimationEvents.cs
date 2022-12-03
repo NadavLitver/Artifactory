@@ -19,11 +19,13 @@ public class MushroomAnimationEvents : MonoBehaviour
         }
         else
         {
-            handler.RB.gameObject.SetActive(false);
+            handler.RB.gameObject.SetActive(false);//change with on
         }
     }
     public void OnFinishRes()
     {
         handler.ReturnToIdle();
+        handler.ShroomActor.HealBackToFull();
+        handler.AddTakeDamageListenerBack();
     }
 }
