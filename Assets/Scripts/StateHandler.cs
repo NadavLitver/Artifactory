@@ -18,8 +18,10 @@ public class StateHandler : MonoBehaviour
 
         if(currentState != nextState)
         {
+            currentState.onStateExit();
             nextState.onStateEnter();
         }
+        
       
         if(nextState!= null)
         {
@@ -34,6 +36,12 @@ public class StateHandler : MonoBehaviour
     }
     public void Interrupt(State _state)
     {
+       // Debug.Log(_state.GetType().Name);
+        if (currentState != _state)
+        {
+            currentState.onStateExit();
+            _state.onStateEnter();
+        }
         SwitchToState(_state);
     }
    

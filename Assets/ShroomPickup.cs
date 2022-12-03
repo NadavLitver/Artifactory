@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class ShroomPickup : State
 {
-    StoneShroomStateHandler handler;
     [SerializeField] float pickupDuration;
     float counter;
+    StoneShroomStateHandler handler;
     void Start()
     {
         handler = GetComponent<StoneShroomStateHandler>();
     }
     public override void onStateEnter()
     {
-        handler.Anim.SetTrigger(handler.Idlehash);
+        handler.Anim.SetTrigger(handler.Pickuphash);
     }
     public override State RunCurrentState()
     {

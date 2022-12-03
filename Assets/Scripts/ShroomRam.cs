@@ -51,7 +51,10 @@ public class ShroomRam : State
         handler.RamCollider.SetActive(false);
         StartedCharging = false;
     }
-
+    public override void onStateExit()
+    {
+        StopCharge();
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;

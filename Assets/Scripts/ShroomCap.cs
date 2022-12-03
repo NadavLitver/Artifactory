@@ -26,6 +26,7 @@ public class ShroomCap : MonoBehaviour, IDamagable
             RB.velocity = Vector2.zero;
             RB.gravityScale = 0;
         }
+       
     }
 
     public void GetHit(Ability m_ability)

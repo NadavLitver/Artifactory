@@ -5,5 +5,7 @@ using UnityEngine;
 public abstract class State : MonoBehaviour
 {
     public virtual void onStateEnter() { }
+    public virtual void onStateExit() { }
+
     public abstract State RunCurrentState();
 }

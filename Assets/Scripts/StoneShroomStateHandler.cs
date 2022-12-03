@@ -9,17 +9,20 @@ public class StoneShroomStateHandler : StateHandler
     public State ShroomNotice;
     public State ShroomRam;
     public State ShroomThrow;
-    public State ShroomLookForCap;
+    ///public State ShroomLookForCap;
     public State ShroomMoveBackwards;
     public State ShroomWalk;
     public State ShroomPickup;
     public State ShroomThrowWait;
+    public State ShroomRessurect;
+    public State ShroomDie;
+    public State ShroomTakeDmg;
+
 
     public EnemyLineOfSight ShroomLineOfSight;
     public GroundCheckCollection ShroomGroundCheck;
     public Rigidbody2D RB;
     public RigidBodyFlip Flipper;
-    public bool AttackMode;
     public EnemyActor ShroomActor;
     public ShroomCapObjectPool ShroomCapPool;
     public ShroomCap CurrentCap;
@@ -35,6 +38,7 @@ public class StoneShroomStateHandler : StateHandler
     public float ThrowDelay;
     public int PickupFreezeDuration;
     public int MovementDir;
+    public bool AttackMode;
     public bool RequireFlip;
     public bool Enraged;
     public bool stunned;
@@ -49,7 +53,9 @@ public class StoneShroomStateHandler : StateHandler
     internal int Defendhash;
     internal int WalkChash;
     internal int Walkhash;
-
+    internal int RessurectHash;
+    internal int TakeDamageHash;
+    internal int TakeDamageHashc;
 
     internal int Diehash;
     internal int Regenhash;
@@ -85,8 +91,10 @@ public class StoneShroomStateHandler : StateHandler
     private void Start()
     {
         ShroomActor.TakeDamageGFX.AddListener(Enrage);
-        ShroomActor.OnDeath.AddListener(Freeze);
-        ShroomActor.OnDeath.AddListener(RespawnOnCap);
+        ShroomActor.OnDamageCalcOver.AddListener(OnHit);
+        ShroomActor.TakeDamageGFX.AddListener(TakeDamageInterrupt);
+        // ShroomActor.OnDeath.AddListener(Freeze);
+        ShroomActor.OnDeath.AddListener(StartDeath);
         OnPickedUpShroom.AddListener(PickupFreeze);
 
 
@@ -96,24 +104,60 @@ public class StoneShroomStateHandler : StateHandler
         Pickuphash = Animator.StringToHash("Pickup");
         Defendhash = Animator.StringToHash("Defend");
         WalkChash = Animator.StringToHash("WalkC");
-        Defendhash = Animator.StringToHash("Walk");
+        Walkhash = Animator.StringToHash("Walk");
         WalkBackhash = Animator.StringToHash("WalkBack");
-
+        RessurectHash = Animator.StringToHash("Ressurect");
+        TakeDamageHash = Animator.StringToHash("Hit");
+        TakeDamageHashc = Animator.StringToHash("HitC");
 
         Diehash = Animator.StringToHash("Die");
         Regenhash = Animator.StringToHash("Regen");
-    }
-    public void RespawnOnCap()
+    } 
+    public void OnHit(DamageHandler dmgHandler)//1
     {
-        //play repsawn anim here i guess
+        if (dmgHandler.calculateFinalNumberMult() < 1  || dmgHandler.calculateFinalNumberMult() >= ShroomActor.currentHP)
+            return;
+        if (AttackMode)
+        {
+            Anim.SetTrigger(TakeDamageHash);
+        }
+        else
+        {
+            Anim.SetTrigger(TakeDamageHashc);
+        }
+        Interrupt(ShroomTakeDmg);
+
+    }
+    public void TakeDamageInterrupt()//2
+    {
+        if (ShroomActor.currentHP < 1)
+        {
+            ShroomActor.OnDamageCalcOver.RemoveListener(OnHit);
+        }
+    }
+    public void StartDeath()
+    {
+        Interrupt(ShroomDie);
+
+    }
+         
+    public void AddTakeDamageListenerBack() => ShroomActor.OnDamageCalcOver.AddListener(OnHit);
+    public void StartRessurect()
+    {
+        //play repsawn anim here i guess//no
         if (!AttackMode)
         {
             return;
         }
         gameObject.SetActive(true);
-        transform.parent.position = new Vector2(CurrentCap.transform.position.x, CurrentCap.transform.position.y);
-        ShroomActor.HealBackToFull();
-        Freeze(0.5f);
+        transform.parent.position = new Vector2(CurrentCap.transform.position.x, transform.position.y);
+        
+        ShroomActor.OnDamageCalcOver.AddListener(OnHit);
+        Interrupt(ShroomRessurect);
+
+    }
+    public void ReturnToIdle()
+    {
         Interrupt(ShroomIdle);
     }
     public void Enrage()
