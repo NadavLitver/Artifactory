@@ -5,8 +5,9 @@ public class CraftingMap : MonoBehaviour
 {
     [SerializeField] List<CraftingRecipe> knownRecipes = new List<CraftingRecipe>();
     [SerializeField] List<NodeLine> createdLines = new List<NodeLine>();
-    [SerializeField] Transform mapStartingNode;
     [SerializeField] float rotationOffestBetweenLines;
+    [SerializeField] CraftingBaseNode baseNode;
+    float lineLength;
 
     private void Start()
     {
@@ -68,11 +69,14 @@ public class CraftingMap : MonoBehaviour
             //this is a new line
             givenLine.BaseLine = true;
             givenLine.BaseRotation = GetLineBaseRotation();
+            givenLine.LineConnectionPoint = GetConnectionPointFromNode(baseNode);
+            givenLine.BaseRotation = givenLine.LineConnectionPoint.GetRotationFromPoint();
         }
         else
         {
             //this is a continuing line
-            givenLine.BaseRotation = GetLineBaseRotation(givenLine.Nodes[givenLine.Nodes.Count-1].Rotation);
+            givenLine.LineConnectionPoint = GetConnectionPointFromNode(givenLine.Nodes[givenLine.Nodes.Count - 1]);
+            givenLine.BaseRotation = givenLine.LineConnectionPoint.GetRotationFromPoint();
         }
 
 
@@ -85,14 +89,15 @@ public class CraftingMap : MonoBehaviour
             Vector3 lastPos;
             if (i == 0)
             {
-                lastPos = mapStartingNode.localPosition;
+                lastPos = baseNode.transform.localPosition;
             }
             else
             {
                 lastPos = givenLine.Nodes[i - 1].transform.localPosition;
             }
 
-            //rotate line
+            //get the point to rotate to - 
+
             node.RotateLine(givenLine.BaseRotation);
             node.transform.localPosition = lastPos;
             node.transform.localPosition += node.CalacDistanceFromSpriteToConnectionPoint();
@@ -105,25 +110,19 @@ public class CraftingMap : MonoBehaviour
         CraftingMapNode finalNode = CreateNode();
         finalNode.transform.SetParent(transform);
         finalNode.SetUpNode(givenRecipe.CraftedItem.Sprite);
-        finalNode.RotateLine(givenLine.BaseRotation);
+        finalNode.RotateAndSetFinalLine(givenLine.BaseRotation);
         Vector3 pos = givenLine.Nodes[givenLine.Nodes.Count - 1].transform.localPosition;
         finalNode.transform.localPosition = pos;
         finalNode.transform.localPosition += finalNode.CalacDistanceFromSpriteToConnectionPoint();
         givenLine.Nodes.Add(finalNode);
 
-
         createdLines.Add(givenLine);
     }
 
 
-    private float GetLineBaseRotation(float previousBase)
-    {
-        return Random.Range(previousBase - rotationOffestBetweenLines, previousBase + rotationOffestBetweenLines + 1);
-    }
-
     private float GetLineBaseRotation()
     {
-        return Random.Range(0,360);
+        return Random.Range(0, 360);
     }
 
     private CraftingMapNode CreateNode()
@@ -131,8 +130,65 @@ public class CraftingMap : MonoBehaviour
         return Instantiate(GameManager.Instance.assets.craftingMapNode);
     }
 
+    private CraftingNodeConnection GetConnectionPointFromNode(CraftingMapNode node)
+    {
+        List<ConnectionPoints> allowedPoints = node.GetAllowedPoints();
+
+        List<CraftingNodeConnection> possibleConnections = new List<CraftingNodeConnection>();
+        foreach (var item in node.NodeConnections)
+        {
+            if (item.Occupied)
+            {
+                continue;
+            }
+
+            foreach (var point in allowedPoints)
+            {
+                if (item.ConnectionPoint == point)
+                {
+                    possibleConnections.Add(item);
+
+                }
+            }
+        }
+        if (possibleConnections.Count < 1)
+        {
+            return null;
+        }
+        else
+        {
+            CraftingNodeConnection selectedPoint = possibleConnections[Random.Range(0, possibleConnections.Count)];
+            selectedPoint.Occupied = true;
+            return selectedPoint;
+        }
+    }
+    private CraftingNodeConnection GetConnectionPointFromNode(CraftingBaseNode node)
+    {
+        List<CraftingNodeConnection> possibleConnections = new List<CraftingNodeConnection>();
+        foreach (var item in node.NodeConnections)
+        {
+            if (!item.Occupied)
+            {
+                possibleConnections.Add(item);
+            }
+        }
+        if (possibleConnections.Count < 1)
+        {
+            return null;
+        }
+        else
+        {
+            CraftingNodeConnection selectedPoint = possibleConnections[Random.Range(0, possibleConnections.Count)];
+            selectedPoint.Occupied = true;
+            return selectedPoint;
+        }
+    }
+
 
 }
+
+
+
 
 [System.Serializable]
 public class NodeLine
@@ -140,4 +196,5 @@ public class NodeLine
     public List<CraftingMapNode> Nodes = new List<CraftingMapNode>();
     public float BaseRotation;
     public bool BaseLine;
+    public CraftingNodeConnection LineConnectionPoint;
 }
