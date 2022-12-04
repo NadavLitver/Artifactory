@@ -73,11 +73,11 @@ public class PlayerController : MonoBehaviour
     }
     public void GetColliderSizeInformation()
     {
-        BottomRightPoint.x = m_collider.bounds.max.x - 0.4f;
+        BottomRightPoint.x = m_collider.bounds.max.x - 0.6f;
         BottomRightPoint.y = m_collider.bounds.min.y + 0.1f;
         topMidPoint = (Vector2)m_collider.bounds.center + Vector2.up * (m_collider.bounds.size.y * 0.5f);
         BottomLeftPoint.y = m_collider.bounds.min.y + 0.1f;
-        BottomLeftPoint.x = m_collider.bounds.min.x + 0.4f;
+        BottomLeftPoint.x = m_collider.bounds.min.x + 0.6f;
 
     }
     private void JumpPressed()

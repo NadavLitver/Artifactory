@@ -3,16 +3,18 @@ using UnityEngine;
 public class AnimationEventFunctions : MonoBehaviour
 {
     [SerializeField] Animator whooshAnimator;
-    private static int FirstAttackWhooshHash;
-    private static int SecondAttackWhooshHash;
-    private static int ThirdAttackWhooshHash;
-    private static int DashWhooshHash;
-    private static int FirstJumpAttackHash;
-    private static int SecondJumpAttackHash;
-    private static int ThirdJumpAttackHash;
-    private static int FirstRunAttackHash;
-    private static int SecondRunAttackHash;
-
+    private  int FirstAttackWhooshHash;
+    private  int SecondAttackWhooshHash;
+    private  int ThirdAttackWhooshHash;
+    private  int DashWhooshHash;
+    private  int FirstJumpAttackHash;
+    private  int SecondJumpAttackHash;
+    private  int ThirdJumpAttackHash;
+    private  int FirstRunAttackHash;
+    private  int SecondRunAttackHash;
+    private int PickaxeAirAttackWhooshHash;
+    private int PickaxeFirstAttackWhooshHash;
+    private int PickaxeSecondAttackWhooshHash;
 
 
 
@@ -27,8 +29,24 @@ public class AnimationEventFunctions : MonoBehaviour
         ThirdJumpAttackHash = Animator.StringToHash("JumpThirdAttackWhoosh");
         FirstRunAttackHash = Animator.StringToHash("RunFirstAttackWhoosh");
         SecondRunAttackHash = Animator.StringToHash("RunSecondAttackWhoosh");
+        PickaxeAirAttackWhooshHash = Animator.StringToHash("PickaxeAirAttackWhoosh");
+        PickaxeFirstAttackWhooshHash = Animator.StringToHash("PickaxeFirstAttackWhoosh");
+        PickaxeSecondAttackWhooshHash = Animator.StringToHash("PickaxeSecondAttackWhoosh");
 
+    }
+    public void PlayPickaxeSecondAttackWhoosh()
+    {
+        PlayWhooshAnimation(PickaxeSecondAttackWhooshHash);
 
+    }
+    public void PlayPickaxeFirstAttackWhoosh()
+    {
+        PlayWhooshAnimation(PickaxeFirstAttackWhooshHash);
+
+    }
+    public void PlayPickaxeAirAttackWhoosh()
+    {
+        PlayWhooshAnimation(PickaxeAirAttackWhooshHash);
 
     }
     public void PlaySwordFirstAttackWhoosh()
