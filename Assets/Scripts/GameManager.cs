@@ -116,6 +116,8 @@ public class AssetsRefrence
     public Sprite BranchSprite;
     public Sprite RuneSprite;
     public Sprite LeatherSprite;
+    public ItemUiSlot ItemUiSlot;
+    
 
 
 }
