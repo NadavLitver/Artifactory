@@ -15,17 +15,15 @@ public class MushroomAnimationEvents : MonoBehaviour
         if (handler.AttackMode)
         {
             handler.StartRessurect();
-
         }
-        else
+        else 
         {
-            handler.RB.gameObject.SetActive(false);//change with on
+            handler.RB.gameObject.SetActive(false);
         }
     }
     public void OnFinishRes()
     {
         handler.ReturnToIdle();
-        handler.ShroomActor.HealBackToFull();
         handler.AddTakeDamageListenerBack();
     }
 }

@@ -9,6 +9,8 @@ public class ShroomRam : State
     Vector3 currentDest;
     [SerializeField] bool StartedCharging;
     bool tookDamage;
+    [SerializeField] float ramTime;
+    float ramTimeCounter;
 
 
     public override void onStateEnter()
@@ -20,12 +22,14 @@ public class ShroomRam : State
         handler.RamCollider.SetActive(true);
         handler.RB.velocity = new Vector2(ramDir.x * ramSpeed, handler.RB.velocity.y);
         StartedCharging = true;
+        ramTimeCounter = ramTime;
     }
     public override State RunCurrentState()
     {
-       
-        if (GameManager.Instance.generalFunctions.IsInRange(transform.position, currentDest, ramTargetOffset) || handler.CheckForFlip() || tookDamage)
+
+        if (handler.CheckForFlip() || tookDamage || ramTimeCounter <= 0)
         {
+            ramTimeCounter -= Time.deltaTime;
             StopCharge();
             return handler.ShroomWalk;
         }

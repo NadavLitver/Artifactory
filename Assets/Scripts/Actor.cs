@@ -71,7 +71,7 @@ public class Actor : MonoBehaviour, IDamagable
 
     public bool IsInAttackAnim;
 
-    [SerializeField] bool effectable;
+    [SerializeField] protected bool effectable;
 
     public void Awake()
     {

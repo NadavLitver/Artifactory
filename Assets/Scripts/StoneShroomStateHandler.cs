@@ -44,6 +44,7 @@ public class StoneShroomStateHandler : StateHandler
     public bool stunned;
     public bool frozen;
     public bool ReadyToThrow;
+    public bool capDestroyed;
 
     internal int Idlehash;
     internal int Throwhash;
@@ -112,10 +113,10 @@ public class StoneShroomStateHandler : StateHandler
 
         Diehash = Animator.StringToHash("Die");
         Regenhash = Animator.StringToHash("Regen");
-    } 
+    }
     public void OnHit(DamageHandler dmgHandler)//1
     {
-        if (dmgHandler.calculateFinalNumberMult() < 1  || dmgHandler.calculateFinalNumberMult() >= ShroomActor.currentHP)
+        if (dmgHandler.calculateFinalNumberMult() < 1 || dmgHandler.calculateFinalNumberMult() >= ShroomActor.currentHP)
             return;
         if (AttackMode)
         {
@@ -137,21 +138,33 @@ public class StoneShroomStateHandler : StateHandler
     }
     public void StartDeath()
     {
-        Interrupt(ShroomDie);
+        if (!AttackMode)
+        {
+            ShroomActor.currentHP = 1;
+        }
+        else
+        {
+            Interrupt(ShroomDie);
+        }
 
     }
-         
+
+    public void DestoryCap()
+    {
+        capDestroyed = true;
+    }
+
     public void AddTakeDamageListenerBack() => ShroomActor.OnDamageCalcOver.AddListener(OnHit);
     public void StartRessurect()
     {
         //play repsawn anim here i guess//no
-        if (!AttackMode)
+        if (!AttackMode || capDestroyed)
         {
             return;
         }
         gameObject.SetActive(true);
         transform.parent.position = new Vector2(CurrentCap.transform.position.x, transform.position.y);
-        
+        ShroomActor.HealBackToFull();
         ShroomActor.OnDamageCalcOver.AddListener(OnHit);
         Interrupt(ShroomRessurect);
 
@@ -195,6 +208,7 @@ public class StoneShroomStateHandler : StateHandler
     {
         stunned = false;
     }
+
 
     public bool isPlayerWithinDefenseRange()
     {
