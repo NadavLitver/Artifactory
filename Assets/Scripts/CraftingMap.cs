@@ -187,6 +187,44 @@ public class CraftingMap : MonoBehaviour
 
     public void UpdateActivatedLines(List<ItemType> givenItems)
     {
+        TurnOffLines();
+
+        for (int i = 0; i < givenItems.Count; i++)
+        {
+            for (int j = 0; j < createdLines.Count; j++)
+            {
+                if (createdLines[j].Nodes.Count - 1 < i)
+                {
+                    continue;
+                }
+                if (givenItems[i] == createdLines[j].Nodes[i].Mycomponent.itemType && IsLineActiveUpTo(createdLines[j], i))
+                {
+                    createdLines[j].Nodes[i].Line.gameObject.SetActive(true);
+                    if (createdLines[j].Nodes.Count - 2 == i) //if this is the item before last
+                    {
+                        createdLines[j].Nodes[i + 1].Line.gameObject.SetActive(true);
+                    }
+                }
+
+            }
+        }
+    }
+
+    private bool IsLineActiveUpTo(NodeLine givenLine, int index)
+    {
+        for (int i = 0; i < index; i++)
+        {
+            if (!givenLine.Nodes[i].Line.gameObject.activeInHierarchy)
+            {
+                return false;
+            }
+        }
+        return true;
+    }
+
+
+    public void TurnOffLines()
+    {
         foreach (var line in createdLines)
         {
             foreach (var node in line.Nodes)
@@ -195,18 +233,7 @@ public class CraftingMap : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < givenItems.Count; i++)
-        {
-            for (int j = 0; j < createdLines.Count; j++)
-            {
-                if (givenItems[i] == createdLines[j].Nodes[i].Mycomponent.itemType)
-                {
-                    createdLines[j].Nodes[i].Line.gameObject.SetActive(true);
-                }
-            }
-        }
     }
-
 }
 
 
