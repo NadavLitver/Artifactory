@@ -185,6 +185,28 @@ public class CraftingMap : MonoBehaviour
     }
 
 
+    public void UpdateActivatedLines(List<ItemType> givenItems)
+    {
+        foreach (var line in createdLines)
+        {
+            foreach (var node in line.Nodes)
+            {
+                node.Line.gameObject.SetActive(false);
+            }
+        }
+
+        for (int i = 0; i < givenItems.Count; i++)
+        {
+            for (int j = 0; j < createdLines.Count; j++)
+            {
+                if (givenItems[i] == createdLines[j].Nodes[i].Mycomponent.itemType)
+                {
+                    createdLines[j].Nodes[i].Line.gameObject.SetActive(true);
+                }
+            }
+        }
+    }
+
 }
 
 
