@@ -126,6 +126,8 @@ public class BasicPickaxe : Weapon
         Clawed = true;
         moveToPositionForDebug = positionToMoveTo;
         player.canMove = false;
+        airAttacking = false;
+ 
         player.ResetVelocity();
         player.ZeroGravity();
         float Counter = 0;
@@ -194,6 +196,11 @@ public class BasicPickaxe : Weapon
             player.GetRb.velocity = Vector2.down * downForceFromAirAttack;
             yield return new WaitForEndOfFrame();
         }
+        player.canMove = true;
+        airAttacking = false;
+    }
+    private void OnDisable()
+    {
         player.canMove = true;
         airAttacking = false;
     }
