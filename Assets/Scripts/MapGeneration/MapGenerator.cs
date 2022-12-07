@@ -16,6 +16,7 @@ public class MapGenerator : MonoBehaviour
         newTile.CacheRoom(givenRoom);
         createdMapTiles.Add(newTile);
         newTile.transform.SetParent(mapUimanager.LargeMapTransfrom);
+        newTile.SetNodeSize(givenRoom.Size.X, givenRoom.Size.Y);
         PlaceTile(newTile);
         newTile.name = newTile.RefRoom.name + " " + newTile.RefRoom.MyPos.ToString();
     }

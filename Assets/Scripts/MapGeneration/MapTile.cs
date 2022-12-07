@@ -29,4 +29,9 @@ public class MapTile : MonoBehaviour
         }
         return null;
     }
+
+    public void SetNodeSize(int x, int y)
+    {
+        ((RectTransform)mapTileImage.transform).sizeDelta = new Vector2(((RectTransform)mapTileImage.transform).sizeDelta.x * x, ((RectTransform)mapTileImage.transform).sizeDelta.y * y);
+    }
 }

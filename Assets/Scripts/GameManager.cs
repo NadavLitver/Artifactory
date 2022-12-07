@@ -93,6 +93,9 @@ public class AssetsRefrence
     public PlayerActor playerActor;
     public PlayerController PlayerController;
 
+    [Header("LEVEL MANAGER")]
+    public GameObject EmergencyExit;
+
     [Header("RELICS"), Space(10)]
     public Sprite RubberDuck;
     public Sprite LightningEmblem;
