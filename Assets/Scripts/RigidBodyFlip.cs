@@ -12,11 +12,14 @@ public class RigidBodyFlip : MonoBehaviour
     Vector3 negativeVector;
 
     public bool Disabled;
+
+    public bool IsLookingRight;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         positiveVector = transform.localScale;
         negativeVector = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        IsLookingRight = true;
         StartCoroutine(FlipWhenNegative());
     }
 
@@ -25,6 +28,8 @@ public class RigidBodyFlip : MonoBehaviour
         yield return new WaitUntil(() => rb.velocity.x < 0 );
         yield return new WaitUntil(() => !Disabled );
         transform.localScale = negativeVector;
+        IsLookingRight = false;
+
         StartCoroutine(FlipWhenPositive());
     }
     IEnumerator FlipWhenPositive()
@@ -32,6 +37,13 @@ public class RigidBodyFlip : MonoBehaviour
         yield return new WaitUntil(() => rb.velocity.x > 0);
         yield return new WaitUntil(() => !Disabled);
         transform.localScale  = positiveVector;
+        IsLookingRight = true;
         StartCoroutine(FlipWhenNegative());
+    }
+
+    public void Flip()
+    {
+        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+        IsLookingRight = !IsLookingRight;
     }
 }

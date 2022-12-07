@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Cinemachine;
 
 
 [DefaultExecutionOrder(-10)]
@@ -14,6 +13,7 @@ public class GameManager : MonoBehaviour
     public DamageManager DamageManager { get; private set; }
     public DamagePopupManager PopupManager { get; private set; }
     public LevelManager LevelManager { get; private set; }
+    public CraftinManager CraftingManager { get; private set; }
 
     public VfxManager vfxManager { get; private set; }
 
@@ -43,6 +43,7 @@ public class GameManager : MonoBehaviour
         DamageManager = GetComponentInChildren<DamageManager>();
         PopupManager = GetComponentInChildren<DamagePopupManager>();
         LevelManager = GetComponentInChildren<LevelManager>();
+        CraftingManager = GetComponentInChildren<CraftinManager>();
         vfxManager = GetComponentInChildren<VfxManager>();
 
 
@@ -92,6 +93,9 @@ public class AssetsRefrence
     public PlayerActor playerActor;
     public PlayerController PlayerController;
 
+    [Header("LEVEL MANAGER")]
+    public GameObject EmergencyExit;
+
     [Header("RELICS"), Space(10)]
     public Sprite RubberDuck;
     public Sprite LightningEmblem;
@@ -106,13 +110,25 @@ public class AssetsRefrence
     [Header("CANVAS"), Space(10)]
     public BlackFade blackFade;
     public GameObject mobileControls;
+    public MobileControlsHandler mobileButtonHandler;
+    public GameObject endInteractablePanel;
+    public GameObject CraftingPanel;
 
     [Header("Bounder"), Space(10)]
     public Transform BounderScout;
 
     [Header("CraftingUi"), Space(10)]
     public CraftingMapNode craftingMapNode;
+    public Sprite GlimmeringSprite;
+    public Sprite BranchSprite;
+    public Sprite RuneSprite;
+    public Sprite LeatherSprite;
+    public ItemUiSlot ItemUiSlot;
+    
 
+    [Header("Base"), Space(10)]
+    public GameObject baseFatherObject;
+    public GameObject baseSpawnPlayerPositionObject;
 
 }
 public class GeneralFunctions
@@ -127,6 +143,10 @@ public class GeneralFunctions
     {
         return (posA - posB).magnitude;
     }
+    public Vector2 CalcRangeV2(Vector3 posA, Vector3 posB)
+    {
+        return (posA - posB);
+    }
 
     public void ResetScene()
     {
@@ -140,10 +160,10 @@ public class GeneralFunctions
     public void onPlayerDiedActions()
     {
         LeanTween.cancelAll();
-       
+
         LeanTween.delayedCall(1, ResetScene);
     }
-    
+
     public StatusEffect GetStatusFromType(StatusEffectEnum effect)
     {
         switch (effect)
@@ -153,7 +173,7 @@ public class GeneralFunctions
             case StatusEffectEnum.freeze:
                 break;
             case StatusEffectEnum.RubberDuck:
-                return new RubberDuck(); 
+                return new RubberDuck();
             case StatusEffectEnum.LightningEmblem:
                 return new LightningEmblem();
             case StatusEffectEnum.HealingGoblet:
@@ -164,6 +184,24 @@ public class GeneralFunctions
                 break;
         }
         return null;
+    }
+
+
+    public Sprite GetSpriteFromItemType(ItemType givenItem)
+    {
+        switch (givenItem)
+        {
+            case ItemType.Glimmering:
+                return GameManager.Instance.assets.GlimmeringSprite;
+            case ItemType.Branch:
+                return GameManager.Instance.assets.BranchSprite;
+            case ItemType.Rune:
+                return GameManager.Instance.assets.RuneSprite;
+            case ItemType.Leather:
+                return GameManager.Instance.assets.LeatherSprite;
+            default:
+                return null;
+        }
     }
 }
 

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShroomDefense : State
@@ -12,38 +10,46 @@ public class ShroomDefense : State
 
     public override State RunCurrentState()
     {
-        //the shroom will defend if the cooldown permits
-        handler.RB.velocity = Vector2.zero;
+       
         if (Time.time - lastDefended >= defenseCoolDown)
         {
-            handler.Anim.SetTrigger("Defend");
-            Debug.Log("shroom is now defending");
-            handler.ShroomActor.TakeDamageGFX.AddListener(PushBack);
+           // handler.ShroomActor.TakeDamageGFX.AddListener(PushBack);
+            handler.RB.velocity = Vector2.zero;
             handler.ShroomActor.OnStatusEffectRemoved.AddListener(SetDefendingOff);
             handler.ShroomActor.RecieveStatusEffects(StatusEffectEnum.Invulnerability);
             lastDefended = Time.time;
             defending = true;
+            Vector2 playerDir = handler.GetPlayerDirection();
+            if (playerDir.x < 0 && handler.Flipper.IsLookingRight || playerDir.x > 0 && !handler.Flipper.IsLookingRight)
+            {
+                handler.Flipper.Flip();
+            }
+            handler.Anim.SetTrigger("Defend");
+
         }
         if (defending)
         {
             return this;
         }
-        else if(handler.Enraged)
+        else if (handler.Enraged)
         {
+
             return handler.ShroomThrow;
         }
+
         return handler.ShroomNotice;
     }
-   
+
     void Start()
     {
         handler = GetComponent<StoneShroomStateHandler>();
+        lastDefended = defenseCoolDown;
     }
 
 
     public void PushBack()
     {
-        Vector2 pushbackdir = (GameManager.Instance.assets.playerActor.transform.position - transform.position)* -1;
+        Vector2 pushbackdir = (GameManager.Instance.assets.playerActor.transform.position - transform.position) * -1;
         handler.RB.AddForce(new Vector2(pushBackForce * pushbackdir.x, 0), ForceMode2D.Impulse);
         handler.ShroomActor.TakeDamageGFX.RemoveListener(PushBack);
     }

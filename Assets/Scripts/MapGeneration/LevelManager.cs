@@ -13,6 +13,8 @@ public class LevelManager : MonoBehaviour
     [SerializeField] Room firstRoom;
     [SerializeField] int numberOfRooms;
     [SerializeField] MapGenerator mapGenerator;
+    [SerializeField] int maxNuberOfChests;
+    int currentNumberOfChests;
     List<Room> createdRooms = new List<Room>();
     RoomConnectivity roomConnectionCheck = new RoomConnectivity();
     Room active;
@@ -28,7 +30,7 @@ public class LevelManager : MonoBehaviour
     {
         mapGenerator = FindObjectOfType<MapGenerator>();
         InstantiateRooms(firstIsleRooms);
-        LeanTween.delayedCall(0.5f ,AssembleLevel);
+        //  LeanTween.delayedCall(0.5f ,AssembleLevel);
     }
 
     [ContextMenu("Assemble Level")]
@@ -40,6 +42,7 @@ public class LevelManager : MonoBehaviour
     public void ReorderRoomsClear()
     {
         firstRoom = null;
+        currentNumberOfChests = 0;
         currentRunRooms.Clear();
         foreach (var item in createdRooms)
         {
@@ -239,7 +242,7 @@ public class LevelManager : MonoBehaviour
         currentRunRooms.Add(givenConnectionData.PointB.Room);
         UpdateRunSettingsState(givenConnectionData.PointB.Room);
         cachedConnectionDatas.Add(givenConnectionData);
-        Debug.Log("connected rooms " + givenConnectionData.PointA.Room + " " + givenConnectionData.PointB.Room);
+        // Debug.Log("connected rooms " + givenConnectionData.PointA.Room + " " + givenConnectionData.PointB.Room);
     }
 
     public void UpdateRunSettingsState(Room addedRoom)
@@ -321,6 +324,7 @@ public class LevelManager : MonoBehaviour
         foreach (var item in currentRunRooms)
         {
             item.gameObject.SetActive(false);
+            mapGenerator.AddTile(item);
 
             foreach (var exit in item.Exits)
             {
@@ -330,13 +334,53 @@ public class LevelManager : MonoBehaviour
                 }
             }
         }
+
+        foreach (var item in CachedConnectionDatas)
+        {
+            mapGenerator.AddConnection(item);
+        }
+        SetChests();
         CurrentRunRooms[0].gameObject.SetActive(true);
         active = currentRunRooms[0];
         GameManager.Instance.generalFunctions.SpawnObjectAt(GameManager.Instance.assets.Player.gameObject, active.StartPosition.position);
     }
 
+
+    public void SetChests()
+    {
+        foreach (var room in CurrentRunRooms)
+        {
+            if (room.HasChest)
+            {
+                continue;
+            }
+            else if (currentNumberOfChests >= maxNuberOfChests)
+            {
+                break;
+            }
+            if (room.TrySpawnChest())
+            {
+                currentNumberOfChests++;
+            }
+        }
+        List<Room> chestFreeRooms = new List<Room>();
+
+        foreach (var item in currentRunRooms)
+        {
+            if (!item.HasChest && item.ChestSpawnPoints.Count > 0)
+            {
+                chestFreeRooms.Add(item);
+            }
+        }
+
+        chestFreeRooms[Random.Range(0, chestFreeRooms.Count)].TrySpawnChest(GameManager.Instance.assets.EmergencyExit);
+    }
+
+
+
+
     public void MoveToRoom(ExitInteractable givenExit)
-   {
+    {
         active.gameObject.SetActive(false);
         givenExit.OtherExit.MyRoom.gameObject.SetActive(true);
         active = givenExit.OtherExit.MyRoom;

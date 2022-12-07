@@ -19,13 +19,15 @@ public class BasicPickaxe : Weapon
     [SerializeField] private float maxClawTime;
     private Coroutine ClawRoutine;
     private StringBuilder stringBuilder;
+    [SerializeField] private float downForceFromAirAttack;
     private const string attackPrefix = "Attack";
 
-
+    bool airAttacking;
     private void Start()
     {
         //  player = GameManager.Instance.assets.Player.GetComponent<PlayerController>();
         GameManager.Instance.inputManager.onJumpDown.AddListener(WallJump);
+        airAttacking = false;
     }
 
     private void WallJump()
@@ -35,15 +37,15 @@ public class BasicPickaxe : Weapon
 
             player.canMove = true;
             Vector2 wallJumpVelocity = forceForWallJump;
-          
+
             if (playerLookdir == -1 && (player.GetHorInput == -1 || player.GetHorInput == 0))
             {
-                
+
                 wallJumpVelocity = new Vector2(0, forceForWallJump.y);
             }
             else if (playerLookdir == 1 && player.GetHorInput == -1)
             {
-              
+
                 wallJumpVelocity = new Vector2(-forceForWallJump.x, forceForWallJump.y);
             }
             else if (playerLookdir == 1 && (player.GetHorInput == 1 || player.GetHorInput == 0))
@@ -51,7 +53,7 @@ public class BasicPickaxe : Weapon
                 wallJumpVelocity = new Vector2(0, forceForWallJump.y);
 
             }
-        
+
             player.ResetGravity();
             player.ResetVelocity();
             player.RecieveForce(wallJumpVelocity);
@@ -79,7 +81,8 @@ public class BasicPickaxe : Weapon
         }
         else
         {
-            CheckFromWall();
+            m_animator.SetTrigger("Mobility");
+            StartCoroutine(MobilityInAir());
         }
 
     }
@@ -94,6 +97,14 @@ public class BasicPickaxe : Weapon
                 StopCoroutine(ClawRoutine);
             }
             ClawRoutine = StartCoroutine(IEMoveToWall(colliderHit.ClosestPoint(player.transform.position)));
+        }
+    }
+    IEnumerator MobilityInAir()
+    {
+        while (!player.GetIsGrounded && !Clawed)
+        {
+            CheckFromWall();
+            yield return new WaitForEndOfFrame();
         }
     }
     IEnumerator IEJumpFromMobility()
@@ -111,6 +122,7 @@ public class BasicPickaxe : Weapon
     }
     IEnumerator IEMoveToWall(Vector3 positionToMoveTo)
     {
+        m_animator.SetTrigger("Climb");
         Clawed = true;
         moveToPositionForDebug = positionToMoveTo;
         player.canMove = false;
@@ -149,6 +161,16 @@ public class BasicPickaxe : Weapon
     protected override void AttackPerformed()
     {
 
+        if (!player.GetIsGrounded)
+        {
+            if (airAttacking)
+                return;
+
+            m_animator.SetTrigger("Attack1");
+            StartCoroutine(AirAttack());
+            return;
+        }
+
         stringBuilder = new StringBuilder();
         string animationString;
         stringBuilder.Append(attackPrefix);
@@ -157,5 +179,22 @@ public class BasicPickaxe : Weapon
         Debug.Log(animationString);
         m_animator.SetTrigger(animationString);
 
+    }
+
+    private IEnumerator AirAttack()
+    {
+     
+
+        player.ResetVelocity();
+        airAttacking = true;
+        player.canMove = false;
+        yield return new WaitForSeconds(0.1f);
+        while (!player.GetIsGrounded)
+        {
+            player.GetRb.velocity = Vector2.down * downForceFromAirAttack;
+            yield return new WaitForEndOfFrame();
+        }
+        player.canMove = true;
+        airAttacking = false;
     }
 }

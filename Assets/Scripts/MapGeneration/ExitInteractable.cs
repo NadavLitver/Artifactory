@@ -22,6 +22,7 @@ public class ExitInteractable : MonoBehaviour
     [SerializeField] ExitLocationInfo exitLocation = new ExitLocationInfo();
     [SerializeField] bool occupied;
     [SerializeField] ExitInteractable otherExit;
+    [SerializeField] Animator m_animator;
     public Room MyRoom { get => myRoom; set => myRoom = value; }
     public ExitLocationInfo ExitLocation { get => exitLocation; set => exitLocation = value; }
     public bool Occupied { get => occupied;}
@@ -45,8 +46,12 @@ public class ExitInteractable : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
-        {
-            GameManager.Instance.LevelManager.MoveToRoom(this);
+        {// on remember this is good remove comments!!!
+            if (!ReferenceEquals(m_animator, null))
+            {
+                m_animator.SetTrigger("Exited");
+            }
+           GameManager.Instance.LevelManager.MoveToRoom(this);
         }
     }
 }

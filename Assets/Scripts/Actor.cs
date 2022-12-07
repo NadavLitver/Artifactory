@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -66,10 +67,11 @@ public class Actor : MonoBehaviour, IDamagable
     //  public UnityEvent onTakeDamage, onGetHealth, OnDeath;
     [SerializeField] private List<StatusEffect> m_StatusEffects;
 
+    private bool hittable;
 
     public bool IsInAttackAnim;
 
-    [SerializeField] bool effectable;
+    [SerializeField] protected bool effectable;
 
     public void Awake()
     {
@@ -77,6 +79,7 @@ public class Actor : MonoBehaviour, IDamagable
         onTakeDamage = new UnityEvent<DamageHandler>();
         m_StatusEffects = new List<StatusEffect>();
         SetUpCrits();
+        hittable = true;
     }
 
     void SetUpCrits()
@@ -126,6 +129,11 @@ public class Actor : MonoBehaviour, IDamagable
 
     public void GetHit(Ability givenAbility, Actor host)
     {
+        //
+        //return
+        if (!hittable)
+            return;
+        StartCoroutine(HitCooldown());
         if (effectable)
         {
             foreach (var SE in givenAbility.StatusEffects)
@@ -153,11 +161,13 @@ public class Actor : MonoBehaviour, IDamagable
     {
         host.OnDealDamage?.Invoke(dmgHandler, this);
         onTakeDamage?.Invoke(dmgHandler);
+        //
         OnDamageCalcOver?.Invoke(dmgHandler);
         host.OnDealingDamageCalcOver?.Invoke(dmgHandler);
         float finalDamage = dmgHandler.calculateFinalNumberMult();
         currentHP -= finalDamage;
         TakeDamageGFX?.Invoke();
+        Debug.Log(gameObject.name + "Took Damage");
         if (currentHP <= 0)
         {
             onActorDeath();
@@ -169,6 +179,9 @@ public class Actor : MonoBehaviour, IDamagable
 
     public void GetHit(Ability m_ability)
     {
+        if (!hittable)
+            return;
+        StartCoroutine(HitCooldown());
         if (effectable)
         {
             foreach (var SE in m_ability.StatusEffects)
@@ -237,5 +250,15 @@ public class Actor : MonoBehaviour, IDamagable
         float totalCritDamage = critDamage.calculateFinalNumberAdd();
         critDamage.ClearMods();
         return totalCritDamage;
+    }
+    private IEnumerator HitCooldown()
+    {
+        if (!hittable)
+            yield break;
+
+        hittable = false;
+        yield return new WaitForEndOfFrame();
+        hittable = true;
+
     }
 }

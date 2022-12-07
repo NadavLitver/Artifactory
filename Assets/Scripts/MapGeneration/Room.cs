@@ -1,5 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Collections;
 
 public enum RoomType
 {
@@ -22,6 +24,10 @@ public class Room : MonoBehaviour
     [SerializeField] CustomPos myPos;
     [SerializeField] List<CustomPos> occupiedPositions = new List<CustomPos>();
     [SerializeField] Transform startPosition;
+    [SerializeField] List<SpawnPoint> chestSpawnPoints = new List<SpawnPoint>();
+
+    bool hasChest;
+    
     public List<ExitInteractable> Exits { get => exits; }
     public bool IsStartingRoom { get => isStartingRoom; }
     public bool Occupied { get => occupied; set => occupied = value; }
@@ -30,6 +36,8 @@ public class Room : MonoBehaviour
     public CustomPos MyPos { get => myPos; set => myPos = value; }
     public List<CustomPos> OccupiedPositions { get => occupiedPositions; set => occupiedPositions = value; }
     public Transform StartPosition { get => startPosition; set => startPosition = value; }
+    public bool HasChest { get => hasChest; set => hasChest = value; }
+    public List<SpawnPoint> ChestSpawnPoints { get => chestSpawnPoints; set => chestSpawnPoints = value; }
 
     void Awake()
     {
@@ -52,7 +60,7 @@ public class Room : MonoBehaviour
         while (n > 1)
         {
             n--;
-            int k = Random.Range(0, n + 1);
+            int k = UnityEngine.Random.Range(0, n + 1);
             ExitInteractable value = exits[k];
             exits[k] = exits[n];
             exits[n] = value;
@@ -83,6 +91,30 @@ public class Room : MonoBehaviour
             }
         }
     }
+
+    public bool TrySpawnChest()
+    {
+        if (chestSpawnPoints.Count <= 0 )
+        {
+            return false;
+        }
+        chestSpawnPoints[UnityEngine.Random.Range(0, chestSpawnPoints.Count)].SpawnObject();
+        Debug.Log("spawned a chest");
+        hasChest = true;
+        return true;
+    }
+    public bool TrySpawnChest(GameObject obj)
+    {
+        if (chestSpawnPoints.Count <= 0)
+        {
+            return false;
+        }
+        Debug.Log("spawned a protal");
+        chestSpawnPoints[UnityEngine.Random.Range(0, chestSpawnPoints.Count)].SpawnObject(obj);
+        hasChest = true;
+        return true;
+    }
+
 }
 [System.Serializable]
 public class RoomSize

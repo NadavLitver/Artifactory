@@ -8,6 +8,8 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] float moveSpeed;
     [SerializeField] Vector3 startingPos;
     [SerializeField] Vector3 currentDestenation;
+    [SerializeField] SpriteRenderer rend;
+    [SerializeField] Animator anim;
     Transform playerOriginalParent;
     void Start()
     {
@@ -22,6 +24,7 @@ public class MovingPlatform : MonoBehaviour
             playerOriginalParent = collision.transform.parent;
             collision.transform.SetParent(transform, true);
             currentDestenation = destenation.localPosition;
+            anim.SetTrigger("Move");
         }
     }
 
@@ -31,6 +34,7 @@ public class MovingPlatform : MonoBehaviour
         {
             collision.transform.SetParent(playerOriginalParent, true);
             currentDestenation = startingPos;
+            transform.localPosition = startingPos;
         }
     }
 

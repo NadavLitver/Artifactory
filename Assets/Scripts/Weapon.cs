@@ -6,6 +6,7 @@ public class Weapon : MonoBehaviour
     public UnityEvent onHit;
     public UnityEvent<Actor, Ability> OnActorHit;
     [SerializeField] AbilityCombo abilityCombo;
+    public RuntimeAnimatorController runTimeAnimator;
     public AbilityCombo AbilityCombo { get => abilityCombo; set => abilityCombo = value; }
 
     [SerializeField] private Actor host;

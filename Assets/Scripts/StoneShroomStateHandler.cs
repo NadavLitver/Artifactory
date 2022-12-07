@@ -1,4 +1,6 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class StoneShroomStateHandler : StateHandler
 {
@@ -7,14 +9,20 @@ public class StoneShroomStateHandler : StateHandler
     public State ShroomNotice;
     public State ShroomRam;
     public State ShroomThrow;
-    public State ShroomLookForCap;
+    ///public State ShroomLookForCap;
     public State ShroomMoveBackwards;
+    public State ShroomWalk;
+    public State ShroomPickup;
+    public State ShroomThrowWait;
+    public State ShroomRessurect;
+    public State ShroomDie;
+    public State ShroomTakeDmg;
+
 
     public EnemyLineOfSight ShroomLineOfSight;
     public GroundCheckCollection ShroomGroundCheck;
     public Rigidbody2D RB;
     public RigidBodyFlip Flipper;
-    public bool AttackMode;
     public EnemyActor ShroomActor;
     public ShroomCapObjectPool ShroomCapPool;
     public ShroomCap CurrentCap;
@@ -26,12 +34,34 @@ public class StoneShroomStateHandler : StateHandler
     public float DefenseThreshold;
     public float ThrowThreshold;
     public float RamThreshold;
+    public float ThrowForce;
+    public float ThrowDelay;
+    public int PickupFreezeDuration;
     public int MovementDir;
+    public bool AttackMode;
     public bool RequireFlip;
     public bool Enraged;
     public bool stunned;
     public bool frozen;
-    
+    public bool ReadyToThrow;
+    public bool capDestroyed;
+
+    internal int Idlehash;
+    internal int Throwhash;
+    internal int WalkBackhash;
+    internal int Ramhash;
+    internal int Pickuphash;
+    internal int Defendhash;
+    internal int WalkChash;
+    internal int Walkhash;
+    internal int RessurectHash;
+    internal int TakeDamageHash;
+    internal int TakeDamageHashc;
+
+    internal int Diehash;
+    internal int Regenhash;
+    public UnityEvent OnPickedUpShroom;
+    public UnityEvent OnShroomThrown;
     public ShroomCap GetCapToThrow()
     {
         CurrentCap = ShroomCapPool.GetPooledObject();
@@ -40,29 +70,107 @@ public class StoneShroomStateHandler : StateHandler
 
     private void Update()
     {
+
         if (!frozen && !stunned && Bounder.Done)
         {
             RunStateMachine();
-        }
-    }
 
+        }
+        /* else if (frozen)
+         {
+             if (!Anim.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+             {
+                 Anim.Play(Idlehash);
+             }
+
+         }*/
+    }
+    public void PickupInteruption()
+    {
+        Interrupt(ShroomPickup);
+    }
     private void Start()
     {
         ShroomActor.TakeDamageGFX.AddListener(Enrage);
-        ShroomActor.OnDeath.AddListener(Freeze);
-        ShroomActor.OnDeath.AddListener(RespawnOnCap);
+        ShroomActor.OnDamageCalcOver.AddListener(OnHit);
+        ShroomActor.TakeDamageGFX.AddListener(TakeDamageInterrupt);
+        // ShroomActor.OnDeath.AddListener(Freeze);
+        ShroomActor.OnDeath.AddListener(StartDeath);
+        OnPickedUpShroom.AddListener(PickupFreeze);
+
+
+        Idlehash = Animator.StringToHash("Idle");
+        Ramhash = Animator.StringToHash("Ram");
+        Throwhash = Animator.StringToHash("Throw");
+        Pickuphash = Animator.StringToHash("Pickup");
+        Defendhash = Animator.StringToHash("Defend");
+        WalkChash = Animator.StringToHash("WalkC");
+        Walkhash = Animator.StringToHash("Walk");
+        WalkBackhash = Animator.StringToHash("WalkBack");
+        RessurectHash = Animator.StringToHash("Ressurect");
+        TakeDamageHash = Animator.StringToHash("Hit");
+        TakeDamageHashc = Animator.StringToHash("HitC");
+
+        Diehash = Animator.StringToHash("Die");
+        Regenhash = Animator.StringToHash("Regen");
     }
-    public void RespawnOnCap()
+    public void OnHit(DamageHandler dmgHandler)//1
     {
-        //play repsawn anim here i guess
+        if (dmgHandler.calculateFinalNumberMult() < 1 || dmgHandler.calculateFinalNumberMult() >= ShroomActor.currentHP)
+            return;
+        if (AttackMode)
+        {
+            Anim.SetTrigger(TakeDamageHash);
+        }
+        else
+        {
+            Anim.SetTrigger(TakeDamageHashc);
+        }
+        Interrupt(ShroomTakeDmg);
+
+    }
+    public void TakeDamageInterrupt()//2
+    {
+        if (ShroomActor.currentHP < 1)
+        {
+            ShroomActor.OnDamageCalcOver.RemoveListener(OnHit);
+        }
+    }
+    public void StartDeath()
+    {
         if (!AttackMode)
+        {
+            ShroomActor.currentHP = 1;
+        }
+        else
+        {
+            Interrupt(ShroomDie);
+        }
+
+    }
+
+    public void DestoryCap()
+    {
+        capDestroyed = true;
+    }
+
+    public void AddTakeDamageListenerBack() => ShroomActor.OnDamageCalcOver.AddListener(OnHit);
+    public void StartRessurect()
+    {
+        //play repsawn anim here i guess//no
+        if (!AttackMode || capDestroyed)
         {
             return;
         }
         gameObject.SetActive(true);
-        transform.parent.position = new Vector2(CurrentCap.transform.position.x, CurrentCap.transform.position.y);
+        transform.parent.position = new Vector2(CurrentCap.transform.position.x, transform.position.y);
         ShroomActor.HealBackToFull();
-        Freeze(0.5f);
+        ShroomActor.OnDamageCalcOver.AddListener(OnHit);
+        Interrupt(ShroomRessurect);
+
+    }
+    public void ReturnToIdle()
+    {
         Interrupt(ShroomIdle);
     }
     public void Enrage()
@@ -100,6 +208,7 @@ public class StoneShroomStateHandler : StateHandler
     {
         stunned = false;
     }
+
 
     public bool isPlayerWithinDefenseRange()
     {
@@ -159,6 +268,24 @@ public class StoneShroomStateHandler : StateHandler
     }
 
 
+    IEnumerator WaitForAttackMode()
+    {
+        yield return new WaitUntil(() => AttackMode);
+        OnPickedUpShroom?.Invoke();
+        StartCoroutine(WaitForNotAttackMode());
+    }
+
+    IEnumerator WaitForNotAttackMode()
+    {
+        yield return new WaitUntil(() => !AttackMode);
+        OnShroomThrown?.Invoke();
+        StartCoroutine(WaitForAttackMode());
+    }
+
+    private void PickupFreeze()
+    {
+        Freeze(PickupFreezeDuration);
+    }
 
     private void OnDrawGizmos()
     {

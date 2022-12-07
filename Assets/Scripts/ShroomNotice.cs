@@ -1,20 +1,15 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class ShroomNotice : State
 {
     StoneShroomStateHandler handler;
     public override State RunCurrentState()
     {
-        handler.Anim.SetTrigger("Notice");
         if (handler.AttackMode)
         {
-            if (GameManager.Instance.generalFunctions.CalcRange(transform.position, GameManager.Instance.assets.playerActor.transform.position) <= GameManager.Instance.generalFunctions.CalcRange(transform.position, handler.CurrentCap.transform.position) )
+            if (GameManager.Instance.generalFunctions.CalcRange(transform.position, GameManager.Instance.assets.playerActor.transform.position) <= GameManager.Instance.generalFunctions.CalcRange(transform.position, handler.CurrentCap.transform.position))
             {
-                handler.CurrentRamTarget = GameManager.Instance.assets.Player.transform;   
+                handler.CurrentRamTarget = GameManager.Instance.assets.Player.transform;
             }
-            handler.CurrentRamTarget = handler.CurrentCap.transform;
+            handler.CurrentRamTarget = handler.CurrentCap.transform;      
             return handler.ShroomRam;
         }
         else
@@ -31,9 +26,9 @@ public class ShroomNotice : State
             {
                 return handler.ShroomMoveBackwards;
             }
-
         }
-        return handler.ShroomIdle;
+
+        return handler.ShroomWalk;
     }
 
     // Start is called before the first frame update
@@ -42,6 +37,6 @@ public class ShroomNotice : State
         handler = GetComponent<StoneShroomStateHandler>();
     }
 
-   
+
 
 }

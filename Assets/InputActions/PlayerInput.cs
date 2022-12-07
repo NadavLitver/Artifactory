@@ -89,6 +89,15 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Interact"",
+                    ""type"": ""Button"",
+                    ""id"": ""146c291c-8347-42ad-aa0c-4539ee0344e0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -311,6 +320,28 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""TouchPos"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6cc5616c-1dd4-4bba-b446-f583520fb35e"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""36119795-a9a2-456e-9f36-5d0c187ab22d"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interact"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         },
@@ -374,6 +405,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         m_BaseMovement_Ultimate = m_BaseMovement.FindAction("Ultimate", throwIfNotFound: true);
         m_BaseMovement_Touch = m_BaseMovement.FindAction("Touch", throwIfNotFound: true);
         m_BaseMovement_TouchPos = m_BaseMovement.FindAction("TouchPos", throwIfNotFound: true);
+        m_BaseMovement_Interact = m_BaseMovement.FindAction("Interact", throwIfNotFound: true);
         // General
         m_General = asset.FindActionMap("General", throwIfNotFound: true);
         m_General_Reset = m_General.FindAction("Reset", throwIfNotFound: true);
@@ -444,6 +476,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
     private readonly InputAction m_BaseMovement_Ultimate;
     private readonly InputAction m_BaseMovement_Touch;
     private readonly InputAction m_BaseMovement_TouchPos;
+    private readonly InputAction m_BaseMovement_Interact;
     public struct BaseMovementActions
     {
         private @PlayerInput m_Wrapper;
@@ -455,6 +488,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         public InputAction @Ultimate => m_Wrapper.m_BaseMovement_Ultimate;
         public InputAction @Touch => m_Wrapper.m_BaseMovement_Touch;
         public InputAction @TouchPos => m_Wrapper.m_BaseMovement_TouchPos;
+        public InputAction @Interact => m_Wrapper.m_BaseMovement_Interact;
         public InputActionMap Get() { return m_Wrapper.m_BaseMovement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -485,6 +519,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @TouchPos.started -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnTouchPos;
                 @TouchPos.performed -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnTouchPos;
                 @TouchPos.canceled -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnTouchPos;
+                @Interact.started -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnInteract;
+                @Interact.performed -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnInteract;
+                @Interact.canceled -= m_Wrapper.m_BaseMovementActionsCallbackInterface.OnInteract;
             }
             m_Wrapper.m_BaseMovementActionsCallbackInterface = instance;
             if (instance != null)
@@ -510,6 +547,9 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 @TouchPos.started += instance.OnTouchPos;
                 @TouchPos.performed += instance.OnTouchPos;
                 @TouchPos.canceled += instance.OnTouchPos;
+                @Interact.started += instance.OnInteract;
+                @Interact.performed += instance.OnInteract;
+                @Interact.canceled += instance.OnInteract;
             }
         }
     }
@@ -564,6 +604,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
         void OnUltimate(InputAction.CallbackContext context);
         void OnTouch(InputAction.CallbackContext context);
         void OnTouchPos(InputAction.CallbackContext context);
+        void OnInteract(InputAction.CallbackContext context);
     }
     public interface IGeneralActions
     {

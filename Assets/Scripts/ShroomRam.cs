@@ -1,7 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 public class ShroomRam : State
 {
@@ -10,31 +7,33 @@ public class ShroomRam : State
     [SerializeField] float ramRecoveryTime;
     StoneShroomStateHandler handler;
     Vector3 currentDest;
-    bool StartedCharging;
+    [SerializeField] bool StartedCharging;
     bool tookDamage;
+    [SerializeField] float ramTime;
+    float ramTimeCounter;
+
+
+    public override void onStateEnter()
+    {
+        handler.Anim.SetTrigger(handler.Ramhash);
+        handler.ShroomActor.TakeDamageGFX.AddListener(TurnOnTookDamage);
+        currentDest = handler.ClosestPointInsideRange(handler.RamThreshold);
+        Vector2 ramDir = (currentDest - transform.position).normalized;
+        handler.RamCollider.SetActive(true);
+        handler.RB.velocity = new Vector2(ramDir.x * ramSpeed, handler.RB.velocity.y);
+        StartedCharging = true;
+        ramTimeCounter = ramTime;
+    }
     public override State RunCurrentState()
     {
-        Debug.Log("ramming");
-        if (!StartedCharging)
+
+        if (handler.CheckForFlip() || tookDamage || ramTimeCounter <= 0)
         {
-            handler.Anim.SetTrigger("Ram");
-            handler.ShroomActor.TakeDamageGFX.AddListener(TurnOnTookDamage);
-            Vector2 ramDir = (handler.CurrentRamTarget.position - transform.position).normalized;
-            currentDest = handler.ClosestPointInsideRange(handler.RamThreshold);
-            handler.RamCollider.SetActive(true);
-            handler.RB.velocity = new Vector2(ramDir.x * ramSpeed, handler.RB.velocity.y);
-            StartedCharging = true;
+            ramTimeCounter -= Time.deltaTime;
+            StopCharge();
+            return handler.ShroomWalk;
         }
-        if (GameManager.Instance.generalFunctions.IsInRange(transform.position, currentDest, ramTargetOffset) || handler.CheckForFlip() || tookDamage)
-        {
-            handler.ShroomActor.TakeDamageGFX.RemoveListener(TurnOnTookDamage);
-            tookDamage = false;
-            handler.Freeze(ramRecoveryTime);
-            handler.RamCollider.SetActive(false);
-            StartedCharging = false;
-            return handler.ShroomIdle;
-        }
-        return this;       
+        return this;
     }
 
     void Start()
@@ -48,20 +47,18 @@ public class ShroomRam : State
     }
 
 
-    IEnumerator Ram()
+    private void StopCharge()
     {
-        Vector2 ramDir = (GameManager.Instance.assets.playerActor.transform.position - transform.position).normalized;
-        currentDest = handler.ClosestPointInsideRange(handler.RamThreshold);
-        handler.RamCollider.SetActive(true);
-        while (!GameManager.Instance.generalFunctions.IsInRange(transform.position, currentDest, ramTargetOffset) && handler.ShroomGroundCheck.IsEverythingGrounded())
-        {
-            handler.RB.velocity = new Vector2(ramDir.x * ramSpeed, handler.RB.velocity.y);
-            yield return new WaitForEndOfFrame();
-        }
+        handler.ShroomActor.TakeDamageGFX.RemoveListener(TurnOnTookDamage);
+        tookDamage = false;
+     //   handler.Freeze(ramRecoveryTime);
         handler.RamCollider.SetActive(false);
-        handler.stunned = false;
+        StartedCharging = false;
     }
-
+    public override void onStateExit()
+    {
+        StopCharge();
+    }
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.magenta;

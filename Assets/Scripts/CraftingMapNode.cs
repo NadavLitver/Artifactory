@@ -1,21 +1,130 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
+using System.Collections.Generic;
 public class CraftingMapNode : MonoBehaviour
 {
-    [SerializeField] Image image;
+    [SerializeField] Image itemSprite;
     [SerializeField] TextMeshProUGUI textMesh;
     [SerializeField] RecipeCoponent mycomponent;
-    [SerializeField] GameObject line;
-    public RecipeCoponent Mycomponent { get => mycomponent;}
-    public GameObject Line { get => line; }
+    [SerializeField] Image line;
+    [SerializeField] Transform connectionPoint;
+    [SerializeField] GameObject cover;
+    [SerializeField] GameObject finalNodeBackground;
+
+    [SerializeField] List<CraftingNodeConnection> nodeConnections = new List<CraftingNodeConnection>();
+    private CustomPos myPos;
+
+    float rotation;
+    bool discovered;
+    public RecipeCoponent Mycomponent { get => mycomponent; }
+    public Image Line { get => line; }
+    public bool Discovered { get => discovered; set => discovered = value; }
+    public float Rotation { get => rotation; set => rotation = value; }
+    public CustomPos MyPos { get => myPos; }
+    public List<CraftingNodeConnection> NodeConnections { get => nodeConnections; set => nodeConnections = value; }
+
+    public UnityEvent OnDiscovered;
+    private void Start()
+    {
+        OnDiscovered.AddListener(RemoveCover);
+        ShufflePoints();
+    }
+
+    public void ShufflePoints()
+    {
+        int n = nodeConnections.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = Random.Range(0, n + 1);
+            CraftingNodeConnection value = nodeConnections[k];
+            nodeConnections[k] = nodeConnections[n];
+            nodeConnections[n] = value;
+        }
+    }
+
+
+    public void SetPos(CustomPos givenPos)
+    {
+        myPos = givenPos;
+    }
 
     public void SetUpNode(RecipeCoponent givenComp)
     {
         mycomponent = givenComp;
-        //get sprite from gamemanager
+        itemSprite.sprite = GameManager.Instance.generalFunctions.GetSpriteFromItemType(givenComp.itemType);
         textMesh.text = givenComp.amount.ToString();
+        cover.SetActive(false);
+    }
+    public void SetUpNode(Sprite sprite)
+    {
+        itemSprite.sprite = sprite;
+        cover.SetActive(false);
+    }
+
+    public void RotateLine(float givenBaseRotation)
+    {
+        rotation = givenBaseRotation;
+        float finalRot = Random.Range(rotation - 20, rotation + 21);
+        line.transform.rotation = Quaternion.Euler(0f, 0f, finalRot);
+    }
+
+    public void RotateAndSetFinalLine(float givenBaseRotation)
+    {
+        ((RectTransform)line.transform).sizeDelta = new Vector2(((RectTransform)line.transform).sizeDelta.x, ((RectTransform)line.transform).sizeDelta.y * 2);
+        rotation = givenBaseRotation;
+        line.transform.rotation = Quaternion.Euler(0f, 0f, rotation);
+        finalNodeBackground.SetActive(true);
+    }
+    
+
+
+    public List<ConnectionPoints> GetAllowedPoints()
+    {
+        List<ConnectionPoints> allowedPoints = new List<ConnectionPoints>();
+        foreach (var item in nodeConnections)
+        {
+            if (item.Occupied)
+            {
+                continue;
+            }
+            if (transform.localPosition.x > 0)
+            {
+                if (item.ConnectionPoint == ConnectionPoints.Right|| item.ConnectionPoint == ConnectionPoints.LowerRight || item.ConnectionPoint == ConnectionPoints.UpperRight)
+                {
+                    allowedPoints.Add(item.ConnectionPoint);
+                }
+            }
+            else if (transform.localPosition.x < 0)
+            {
+                if (item.ConnectionPoint == ConnectionPoints.Left || item.ConnectionPoint == ConnectionPoints.LowerLeft || item.ConnectionPoint == ConnectionPoints.Left)
+                {
+                    allowedPoints.Add(item.ConnectionPoint);
+                }
+            }
+        }
+
+        return allowedPoints;
+      
     }
 
 
+    public void Discover()
+    {
+        OnDiscovered?.Invoke();
+    }
+
+    public void RemoveCover()
+    {
+        cover.SetActive(false);
+    }
+
+    public Vector3 CalacDistanceFromSpriteToConnectionPoint()
+    {
+        return GameManager.Instance.generalFunctions.CalcRangeV2(transform.position, connectionPoint.transform.position);
+
+    }
 }
+

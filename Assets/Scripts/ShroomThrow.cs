@@ -2,29 +2,34 @@ using UnityEngine;
 
 public class ShroomThrow : State
 {
-    [SerializeField] float throwForce;
-    [SerializeField] float throwDelay;
     StoneShroomStateHandler handler;
-
+    public override void onStateEnter()
+    {
+        handler.Anim.SetTrigger(handler.Throwhash);
+    }
     public override State RunCurrentState()
     {
-        //get a shroom cap from an object pooler
-        //set its position to be equal to yours
-        //add force to it in the direction of the player
-        //return notice
-        handler.Anim.SetTrigger("Throw");
-        handler.Freeze(throwDelay);
+        handler.RB.velocity = Vector2.zero;
+        Vector2 playerDir = handler.GetPlayerDirection();
+        if (playerDir.x < 0 && handler.Flipper.IsLookingRight || playerDir.x > 0 && !handler.Flipper.IsLookingRight)
+        {
+            handler.Flipper.Flip();
+        }
+        if (!handler.ReadyToThrow)
+        {
+            return this;
+        }
+        handler.AttackMode = true;
         ShroomCap cap = handler.GetCapToThrow();
+        cap.OnDeath.AddListener(handler.DestoryCap);
         cap.transform.position = transform.position;
         cap.SetUpPositions(handler.Bounder.MaxPos, handler.Bounder.MinPos);
         cap.gameObject.SetActive(true);
-        cap.Throw(new Vector2(handler.GetPlayerDirection().x * throwForce, 0));
-        handler.AttackMode = true;
-        handler.Freeze(throwDelay);
-        return handler.ShroomNotice;
+        cap.Throw(new Vector2(playerDir.x * handler.ThrowForce, 1));
+        handler.ReadyToThrow = false;
+        return handler.ShroomThrowWait;
     }
 
-    // Start is called before the first frame update
     void Start()
     {
         handler = GetComponent<StoneShroomStateHandler>();
