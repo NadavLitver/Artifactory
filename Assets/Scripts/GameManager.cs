@@ -109,6 +109,7 @@ public class AssetsRefrence
     public GameObject mobileControls;
     public MobileControlsHandler mobileButtonHandler;
     public GameObject endInteractablePanel;
+    public GameObject CraftingPanel;
 
     [Header("Bounder"), Space(10)]
     public Transform BounderScout;

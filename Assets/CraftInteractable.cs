@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CraftInteractable : Interactable
 {
-    [SerializeField] GameObject CraftingPanel;
+    GameObject CraftingPanel => GameManager.Instance.assets.CraftingPanel;
     public override void Interact()
     {
         CraftingPanel.SetActive(true);
