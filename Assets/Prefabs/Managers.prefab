@@ -199,6 +199,54 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isPaused: 0
+--- !u!1 &3091729322126400666
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6949193590038469940}
+  - component: {fileID: 2443271746410904546}
+  m_Layer: 0
+  m_Name: CraftingManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6949193590038469940
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3091729322126400666}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4180575170529028752}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2443271746410904546
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3091729322126400666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d55bc6b594f77f640bcc006f75919087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  craftingPanel: {fileID: 0}
+  map: {fileID: 0}
+  inventorycraftingPanel: {fileID: 0}
+  selectedCraftingPanel: {fileID: 0}
 --- !u!1 &4180575169982807779
 GameObject:
   m_ObjectHideFlags: 0
@@ -302,6 +350,7 @@ Transform:
   - {fileID: 3387252577018232578}
   - {fileID: 1518239165}
   - {fileID: 1513092586}
+  - {fileID: 6949193590038469940}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -329,15 +378,13 @@ MonoBehaviour:
     blackFade: {fileID: 0}
     mobileControls: {fileID: 0}
     mobileButtonHandler: {fileID: 0}
-    endInteractablePanel: {fileID: 0}
-    BounderScout: {fileID: 0}
-    craftingMapNode: {fileID: 0}
-    GlimmeringSprite: {fileID: 0}
-    BranchSprite: {fileID: 0}
-    RuneSprite: {fileID: 0}
-    LeatherSprite: {fileID: 0}
-    baseFatherObject: {fileID: 0}
-    baseSpawnPlayerPositionObject: {fileID: 0}
+    BounderScout: {fileID: 7286397062145270228, guid: 6c38a5c0a53fc5146be94217aa9aef63, type: 3}
+    craftingMapNode: {fileID: 1946464524881845352, guid: b4057901708be3c49843f221eafadf56, type: 3}
+    GlimmeringSprite: {fileID: 21300000, guid: 4855345e26ffcbb41b380e59b5a54ea1, type: 3}
+    BranchSprite: {fileID: 21300000, guid: 99c1c0c5109bc0d49ba0a3816ab995a0, type: 3}
+    RuneSprite: {fileID: 21300000, guid: b11d6b81e7d6dcd459f71e206bd49259, type: 3}
+    LeatherSprite: {fileID: 21300000, guid: 681cdb2853ae7144c815013a86c8da7c, type: 3}
+    ItemUiSlot: {fileID: 1052155130899679002, guid: d0f22065e4078e447bddcdb0b03a269c, type: 3}
 --- !u!1 &4207107459726920179
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   largeMapTransfrom: {fileID: 0}
-  maptilePrefab: {fileID: 0}
+  maptilePrefab: {fileID: 7616976889884587882, guid: 01d23a1d340658c4ea8a9765feac84a5, type: 3}
 --- !u!1 &4698557210947762662
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,13 +548,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7568456704651568653}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d92364c8c09b724684b18c20929649f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   firstIsleRooms:
   - {fileID: 3149440148777350306, guid: 534d9e517b65f134196a20b1014c09ad, type: 3}
+  - {fileID: 184359746, guid: 97f9531a6a1db1a4cac40205d5070749, type: 3}
   - {fileID: 5954773215286868691, guid: 675a6c45376e11f459856379caf1d180, type: 3}
   - {fileID: 1398470984, guid: fb700f8c60a416544ae57319b358ce92, type: 3}
   - {fileID: 2053621644, guid: 3a71c310797a02a468c5c13a2fa4bb10, type: 3}
@@ -594,6 +642,10 @@ PrefabInstance:
     - target: {fileID: 7382524246091496564, guid: a7e966f696a66614f9efc20e8773d2e6, type: 3}
       propertyPath: BaseCritDamage
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382524246091496564, guid: a7e966f696a66614f9efc20e8773d2e6, type: 3}
+      propertyPath: InvlunerabilityDuration
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7382524246091496564, guid: a7e966f696a66614f9efc20e8773d2e6, type: 3}
       propertyPath: LightningEmblemDamageMod

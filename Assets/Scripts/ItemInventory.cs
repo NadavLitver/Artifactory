@@ -18,6 +18,10 @@ public class ItemInventory : MonoBehaviour
         List<RecipeCoponent> itemsByAmount = new List<RecipeCoponent>();
         for (int i = 0; i < Enum.GetNames(typeof(ItemType)).Length; i++)
         {
+            if ((ItemType)i == ItemType.Null)
+            {
+                continue;
+            }
             int counter = 0;
             ItemType currentType = (ItemType)i;
             foreach (var item in items)

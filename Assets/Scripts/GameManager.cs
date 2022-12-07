@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public DamageManager DamageManager { get; private set; }
     public DamagePopupManager PopupManager { get; private set; }
     public LevelManager LevelManager { get; private set; }
+    public CraftinManager CraftingManager { get; private set; }
 
     public VfxManager vfxManager { get; private set; }
 
@@ -42,6 +43,7 @@ public class GameManager : MonoBehaviour
         DamageManager = GetComponentInChildren<DamageManager>();
         PopupManager = GetComponentInChildren<DamagePopupManager>();
         LevelManager = GetComponentInChildren<LevelManager>();
+        CraftingManager = GetComponentInChildren<CraftinManager>();
         vfxManager = GetComponentInChildren<VfxManager>();
 
 
@@ -117,6 +119,8 @@ public class AssetsRefrence
     public Sprite BranchSprite;
     public Sprite RuneSprite;
     public Sprite LeatherSprite;
+    public ItemUiSlot ItemUiSlot;
+    
 
     [Header("Base"), Space(10)]
     public GameObject baseFatherObject;

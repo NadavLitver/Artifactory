@@ -321,6 +321,7 @@ public class LevelManager : MonoBehaviour
         foreach (var item in currentRunRooms)
         {
             item.gameObject.SetActive(false);
+            mapGenerator.AddTile(item);
 
             foreach (var exit in item.Exits)
             {
@@ -329,6 +330,11 @@ public class LevelManager : MonoBehaviour
                     exit.gameObject.SetActive(false);
                 }
             }
+        }
+
+        foreach (var item in CachedConnectionDatas)
+        {
+            mapGenerator.AddConnection(item);
         }
         CurrentRunRooms[0].gameObject.SetActive(true);
         active = currentRunRooms[0];

@@ -8,7 +8,8 @@ public enum ItemType
     Glimmering,
     Branch,
     Rune,
-    Leather
+    Leather,
+    Null
 }
 public class Item : MonoBehaviour
 {

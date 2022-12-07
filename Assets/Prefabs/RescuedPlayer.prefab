@@ -226,6 +226,7 @@ GameObject:
   - component: {fileID: 5508809318791304041}
   - component: {fileID: 840070347042588615}
   - component: {fileID: 3931980451565875648}
+  - component: {fileID: 3271807133343841365}
   m_Layer: 6
   m_Name: RescuedPlayer
   m_TagString: Player
@@ -407,7 +408,7 @@ MonoBehaviour:
   effectable: 0
   m_animator: {fileID: 791565559279450814}
   playerRelicInventory: {fileID: 840070347042588615}
-  playerItemInventory: {fileID: 0}
+  playerItemInventory: {fileID: 3271807133343841365}
 --- !u!114 &840070347042588615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,6 +434,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d40380298f7d504ca729fee6dc53fb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3271807133343841365
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840070347753010964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 562d4a81dc84ac8419b9ba8023dc82fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  items: 
 --- !u!1 &840070348364434354
 GameObject:
   m_ObjectHideFlags: 0
