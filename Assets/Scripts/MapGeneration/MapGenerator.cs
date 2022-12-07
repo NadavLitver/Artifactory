@@ -15,13 +15,14 @@ public class MapGenerator : MonoBehaviour
         MapTile newTile = Instantiate(MapUimanager.MaptilePrefab, MapUimanager.LargeMapTransfrom);
         newTile.CacheRoom(givenRoom);
         createdMapTiles.Add(newTile);
+        newTile.transform.SetParent(mapUimanager.LargeMapTransfrom);
         PlaceTile(newTile);
         newTile.name = newTile.RefRoom.name + " " + newTile.RefRoom.MyPos.ToString();
     }
 
     public void PlaceTile(MapTile givenTile)
     {
-        givenTile.transform.position = new Vector3(givenTile.RefRoom.MyPos.X, givenTile.RefRoom.MyPos.Y, 0) * 10;
+        givenTile.transform.localPosition = new Vector3(givenTile.RefRoom.MyPos.X, givenTile.RefRoom.MyPos.Y, 0) * 130;
     }
 
     public void AddConnection(ConnectionData givenConnectionData)
