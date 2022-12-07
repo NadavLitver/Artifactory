@@ -1,4 +1,4 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -11,7 +11,7 @@ public class WeaponManager : MonoBehaviour
     public Weapon CurrentWeapon { get => currentWeapon; set => currentWeapon = value; }
 
     public UnityEvent OnSwitchWeapon;
-
+    [SerializeField] Animator anim;
     private void Start()
     {
         EquipWeapon(playerWeapons[1]);
@@ -100,6 +100,10 @@ public class WeaponManager : MonoBehaviour
 
         OnSwitchWeapon?.Invoke();
         GameManager.Instance.assets.mobileButtonHandler.SetMobilityOnButton(playerWeapons.IndexOf(givenWeapon));
+        if (!ReferenceEquals(givenWeapon.runTimeAnimator, null)){
+
+            anim.runtimeAnimatorController = givenWeapon.runTimeAnimator;
+        }
         //m_actor.IsInAttackAnim = false;
     }
 
