@@ -7,7 +7,7 @@ public class CloneInteractable : Interactable
     [SerializeField] GameObject CloneTreePanel;
     public override void Interact()
     {
-        
+        Debug.Log("interacted");
         CloneTreePanel.SetActive(true);
 
     }

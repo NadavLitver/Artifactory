@@ -13,8 +13,9 @@ public class MapConnectionPoint : MonoBehaviour
     public void ConnectLine(Transform destenation)
     {
         Vector3 direction = destenation.transform.position - transform.position;
-        RectTransform lineRect = (RectTransform)line.transform.GetChild(0).transform;
-        lineRect.sizeDelta = new Vector2(direction.magnitude, 8);
+        //RectTransform lineRect = (RectTransform)line.transform.GetChild(0).transform;
+        line.gameObject.SetActive(true);
+        Line.sizeDelta = new Vector2(direction.magnitude * 2, 8);
         if (locationInfo.HorizontalPos == ExitLocationHorizontal.LEFT)
         {
             line.transform.rotation = new Quaternion(0, 180, 0, 0);
