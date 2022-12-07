@@ -4,6 +4,7 @@ using UnityEngine;
 public class MapGenerator : MonoBehaviour
 {
     [SerializeField] List<MapTile> createdMapTiles = new List<MapTile>();
+    [SerializeField] List<MapTile> createdMiniMapTiles = new List<MapTile>();
     [SerializeField] MapUIManager mapUimanager;
 
 
@@ -12,6 +13,7 @@ public class MapGenerator : MonoBehaviour
 
     public void AddTile(Room givenRoom)
     {
+        //large map
         MapTile newTile = Instantiate(MapUimanager.MaptilePrefab, MapUimanager.LargeMapTransfrom);
         newTile.CacheRoom(givenRoom);
         createdMapTiles.Add(newTile);
@@ -19,6 +21,11 @@ public class MapGenerator : MonoBehaviour
         newTile.SetNodeSize(givenRoom.Size.X, givenRoom.Size.Y);
         PlaceTile(newTile);
         newTile.name = newTile.RefRoom.name + " " + newTile.RefRoom.MyPos.ToString();
+
+        MapTile newMiniMapTile = CreateMiniMapTile();
+        newMiniMapTile.SetUpFromExistingMapTile(newTile);
+
+
     }
 
     public void PlaceTile(MapTile givenTile)
@@ -50,6 +57,19 @@ public class MapGenerator : MonoBehaviour
             PointA.ConnectLine(PointB.transform);
         }
 
+    }
+
+
+    public void UpdateMiniMap(Room activeRoom)
+    {
+        //recieve active room
+        //clear minimap
+        //put active room at 0.0 in minimap
+    }
+
+    private MapTile CreateMiniMapTile()
+    {
+        return Instantiate(MapUimanager.MiniMapTilePrefab, MapUimanager.MinimapTransform);
     }
 
 }
