@@ -84,7 +84,11 @@ public class WeaponManager : MonoBehaviour
             //currentWeapon.Mobility();
             return;
         }
+        if (!ReferenceEquals(givenWeapon.runTimeAnimator, null))
+        {
 
+            anim.runtimeAnimatorController = givenWeapon.runTimeAnimator;
+        }
         if (currentWeapon != null)
         {
             currentWeapon.UnSubscribe();
@@ -100,10 +104,7 @@ public class WeaponManager : MonoBehaviour
 
         OnSwitchWeapon?.Invoke();
         GameManager.Instance.assets.mobileButtonHandler.SetMobilityOnButton(playerWeapons.IndexOf(givenWeapon));
-        if (!ReferenceEquals(givenWeapon.runTimeAnimator, null)){
-
-            anim.runtimeAnimatorController = givenWeapon.runTimeAnimator;
-        }
+        
         //m_actor.IsInAttackAnim = false;
     }
 

@@ -67,4 +67,10 @@ public class BasicSword : Weapon
        // Debug.Log(animationString);
         m_animator.SetTrigger(animationString);
     }
+    private void OnDisable()
+    {
+        player.canMove = true;
+        isDashing = false;
+        player.ResetGravity();
+    }
 }
