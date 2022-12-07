@@ -205,7 +205,6 @@ public class CraftingMap : MonoBehaviour
                         createdLines[j].Nodes[i + 1].Line.gameObject.SetActive(true);
                     }
                 }
-
             }
         }
     }
