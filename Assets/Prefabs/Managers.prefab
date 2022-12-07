@@ -378,6 +378,7 @@ MonoBehaviour:
     blackFade: {fileID: 0}
     mobileControls: {fileID: 0}
     mobileButtonHandler: {fileID: 0}
+    endInteractablePanel: {fileID: 0}
     BounderScout: {fileID: 7286397062145270228, guid: 6c38a5c0a53fc5146be94217aa9aef63, type: 3}
     craftingMapNode: {fileID: 1946464524881845352, guid: b4057901708be3c49843f221eafadf56, type: 3}
     GlimmeringSprite: {fileID: 21300000, guid: 4855345e26ffcbb41b380e59b5a54ea1, type: 3}
@@ -385,6 +386,8 @@ MonoBehaviour:
     RuneSprite: {fileID: 21300000, guid: b11d6b81e7d6dcd459f71e206bd49259, type: 3}
     LeatherSprite: {fileID: 21300000, guid: 681cdb2853ae7144c815013a86c8da7c, type: 3}
     ItemUiSlot: {fileID: 1052155130899679002, guid: d0f22065e4078e447bddcdb0b03a269c, type: 3}
+    baseFatherObject: {fileID: 0}
+    baseSpawnPlayerPositionObject: {fileID: 0}
 --- !u!1 &4207107459726920179
 GameObject:
   m_ObjectHideFlags: 0
@@ -548,7 +551,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7568456704651568653}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d92364c8c09b724684b18c20929649f, type: 3}
   m_Name: 
@@ -574,8 +577,8 @@ MonoBehaviour:
     Amount: 10
   currentRunState: []
   firstRoom: {fileID: 0}
-  numberOfRooms: 10
-  mapGenerator: {fileID: 0}
+  numberOfRooms: 6
+  mapGenerator: {fileID: 1608005968017932032}
 --- !u!1001 &6662966006180783118
 PrefabInstance:
   m_ObjectHideFlags: 0
