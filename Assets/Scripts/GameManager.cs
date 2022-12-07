@@ -106,6 +106,7 @@ public class AssetsRefrence
     public BlackFade blackFade;
     public GameObject mobileControls;
     public MobileControlsHandler mobileButtonHandler;
+    public GameObject endInteractablePanel;
 
     [Header("Bounder"), Space(10)]
     public Transform BounderScout;
@@ -117,6 +118,9 @@ public class AssetsRefrence
     public Sprite RuneSprite;
     public Sprite LeatherSprite;
 
+    [Header("Base"), Space(10)]
+    public GameObject baseFatherObject;
+    public GameObject baseSpawnPlayerPositionObject;
 
 }
 public class GeneralFunctions
