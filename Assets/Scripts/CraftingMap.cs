@@ -7,8 +7,9 @@ public class CraftingMap : MonoBehaviour
     [SerializeField] List<NodeLine> createdLines = new List<NodeLine>();
     [SerializeField] float rotationOffestBetweenLines;
     [SerializeField] CraftingBaseNode baseNode;
+    [SerializeField] GameObject CraftButton;
+    NodeLine selectedLine;
     float lineLength;
-
     private void Start()
     {
         SetUpMap();
@@ -27,7 +28,7 @@ public class CraftingMap : MonoBehaviour
         //check if the component still exists somewhere in its specific position
         //keep checking until getting a negative answer
         NodeLine line = new NodeLine();
-
+        line.myRecipe = givenRecipe;
         //loop over to get as many nodes that already exist in place
         for (int i = 0; i < givenRecipe.Components.Count; i++)
         {
@@ -205,6 +206,11 @@ public class CraftingMap : MonoBehaviour
                     if (createdLines[j].Nodes.Count - 2 == i) //if this is the item before last
                     {
                         createdLines[j].Nodes[i + 1].Line.gameObject.SetActive(true);
+                        selectedLine = createdLines[j];
+                        CraftButton.SetActive(true);
+                        //craft button turn on
+                        //set this line to be the selected one, 
+                        //on press craft item
                     }
                 }
             }
@@ -233,8 +239,16 @@ public class CraftingMap : MonoBehaviour
                 node.Line.gameObject.SetActive(false);
             }
         }
-
     }
+
+    public void CraftItem()
+    {
+        GameManager.Instance.assets.playerActor.PlayerItemInventory.CraftItem(selectedLine.myRecipe);
+        GameManager.Instance.CraftingManager.SelectedCraftingPanel.ClearPanel();
+        TurnOffLines();
+        CraftButton.SetActive(false);
+    }
+
 }
 
 
@@ -247,4 +261,5 @@ public class NodeLine
     public float BaseRotation;
     public bool BaseLine;
     public CraftingNodeConnection LineConnectionPoint;
+    public CraftingRecipe myRecipe;
 }

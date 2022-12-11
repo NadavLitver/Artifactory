@@ -34,6 +34,7 @@ public class CraftinManager : MonoBehaviour
 
     private void Start()
     {
+        playerInventory.OnCraftItem.AddListener(inventorycraftingPanel.UpdateAmounts);
         LeanTween.delayedCall(2f, SetUpCraftingScreens);
     }
 

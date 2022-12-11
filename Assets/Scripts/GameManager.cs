@@ -97,7 +97,6 @@ public class AssetsRefrence
     public GameObject EmergencyExit;
 
     [Header("RELICS"), Space(10)]
-    public Sprite RubberDuck;
     public Sprite LightningEmblem;
     public Sprite HealingGoblet;
 
@@ -172,8 +171,6 @@ public class GeneralFunctions
                 return new BurnSE();
             case StatusEffectEnum.freeze:
                 break;
-            case StatusEffectEnum.RubberDuck:
-                return new RubberDuck();
             case StatusEffectEnum.LightningEmblem:
                 return new LightningEmblem();
             case StatusEffectEnum.HealingGoblet:
@@ -197,8 +194,6 @@ public class GeneralFunctions
                 return GameManager.Instance.assets.BranchSprite;
             case ItemType.Rune:
                 return GameManager.Instance.assets.RuneSprite;
-            case ItemType.Leather:
-                return GameManager.Instance.assets.LeatherSprite;
             default:
                 return null;
         }

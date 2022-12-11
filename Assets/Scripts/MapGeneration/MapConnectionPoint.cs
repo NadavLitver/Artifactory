@@ -10,7 +10,7 @@ public class MapConnectionPoint : MonoBehaviour
     public ExitLocationInfo LocationInfo { get => locationInfo; set => locationInfo = value; }
     public RectTransform Line { get => line; set => line = value; }
 
-    public void ConnectLine(Transform destenation, float offset = 2)
+    public void ConnectLine(Transform destenation, float offset = 1)
     {
         Vector3 direction = destenation.transform.position - transform.position;
         //RectTransform lineRect = (RectTransform)line.transform.GetChild(0).transform;

@@ -7,7 +7,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] List<MapTile> createdMiniMapTiles = new List<MapTile>();
     [SerializeField] MapUIManager mapUimanager;
     [SerializeField] float miniMapNodeOffset;
-
+    [SerializeField] float largeMapNodeOffsetMod;
 
     public List<MapTile> CreatedMapTiles { get => createdMapTiles; set => createdMapTiles = value; }
     public MapUIManager MapUimanager { get => mapUimanager; set => mapUimanager = value; }
@@ -41,7 +41,7 @@ public class MapGenerator : MonoBehaviour
 
     public void PlaceTile(MapTile givenTile)
     {
-        givenTile.transform.localPosition = new Vector3(givenTile.RefRoom.MyPos.X, givenTile.RefRoom.MyPos.Y, 0) * 130;
+        givenTile.transform.localPosition = new Vector3(givenTile.RefRoom.MyPos.X, givenTile.RefRoom.MyPos.Y, 0) * mapUimanager.LargeMaptileOffset * largeMapNodeOffsetMod;
     }
 
     public void PlaceMinimapTile(MapTile givenTile, CustomPos cacledPos)
@@ -114,15 +114,8 @@ public class MapGenerator : MonoBehaviour
 
             if (pointA != null && pointB != null)
             {
-                pointA.ConnectLine(pointB.transform, 3);
+                pointA.ConnectLine(pointB.transform);
             }
-
-
-
-            //place a node at the right position
-            //get connection point from an occupied exit
-            //get the other connection point from one of the other nodes correct exit
-
         }
     }
 

@@ -9,7 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eecd11d379fcbb049b78a83c911d80e5, type: 3}
-  m_Name: CraftedItemTest 3
+  m_Script: {fileID: 11500000, guid: 757d3b2d1e0d7814790a3d735bb50836, type: 3}
+  m_Name: TurtlePendent
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300004, guid: cea2c9bf87b0c4dfdafb697a3ff00959, type: 3}
+  components:
+  - itemType: 2
+    amount: 1
+  - itemType: 1
+    amount: 1
+  - itemType: 0
+    amount: 1
+  craftedItem: {fileID: 0}

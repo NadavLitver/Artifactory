@@ -1236,7 +1236,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c441ef9275d6c9343953f0eb0c7bd35e, type: 2}
   createdLines: []
   rotationOffestBetweenLines: 20
-  baseNode: {fileID: 943588932}
+  baseNode: {fileID: 0}
+  CraftButton: {fileID: 0}
 --- !u!1 &4478811590127944951
 GameObject:
   m_ObjectHideFlags: 0
@@ -1448,7 +1449,6 @@ GameObject:
   - component: {fileID: 4478811590673190446}
   - component: {fileID: 4478811590673190444}
   - component: {fileID: 4478811590673190445}
-  - component: {fileID: 943588932}
   m_Layer: 5
   m_Name: MapBase
   m_TagString: Untagged
@@ -1515,27 +1515,6 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &943588932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4478811590673190447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 54d2f9cc43f30704d980348310fa89e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  nodeConnections:
-  - {fileID: 3941527980916968176}
-  - {fileID: 504282346470291402}
-  - {fileID: 7481630081335123756}
-  - {fileID: 636069915994174103}
-  - {fileID: 3692515635069153645}
-  - {fileID: 8309315297992137227}
-  - {fileID: 8785247276231854700}
-  - {fileID: 7799146299812599646}
 --- !u!1 &5549960300273111282
 GameObject:
   m_ObjectHideFlags: 0
