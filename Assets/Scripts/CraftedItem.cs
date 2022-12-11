@@ -1,8 +1,11 @@
 using UnityEngine;
-[CreateAssetMenu(fileName = "New Crafted Item", menuName = "Crafted Item")]
-public class CraftedItem : ScriptableObject
+public abstract class CraftedItem : ScriptableObject
 {
-    [SerializeField] Sprite sprite;
+    [SerializeField] protected Sprite sprite;
 
     public Sprite Sprite { get => sprite; }
+
+    public abstract void SetUp();
+
+    public abstract void Obtain();
 }

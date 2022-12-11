@@ -23,7 +23,6 @@ public enum StatusEffectEnum
 {
     burn,
     freeze,
-    RubberDuck,
     LightningEmblem,
     HealingGoblet,
     Invulnerability

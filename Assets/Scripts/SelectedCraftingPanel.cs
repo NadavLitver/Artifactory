@@ -64,6 +64,15 @@ public class SelectedCraftingPanel : ItemPanel
         }
         UpdateCraftingMap();
     }
+
+    public void ClearPanel()
+    {
+        foreach (var item in selectedSlots)
+        {
+            item.slot.ResetSlot();
+            item.Occupied = false;
+        }
+    }
 }
 
 

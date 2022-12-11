@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ItemInventory : MonoBehaviour
 {
     [SerializeField] List<ItemType> items = new List<ItemType>();
+    public UnityEvent <List<RecipeCoponent>>OnCraftItem;
 
     public List<ItemType> Items { get => items; }
 
@@ -51,4 +53,15 @@ public class ItemInventory : MonoBehaviour
         }
         return false;
     }
+
+    public void CraftItem(CraftingRecipe givenRecipe)
+    {
+        foreach (var comp in givenRecipe.Components)
+        {
+            items.Remove(comp.itemType);
+        }
+        OnCraftItem?.Invoke(GetEachItemByAmount());
+        givenRecipe.CraftedItem.Obtain();
+    }
+
 }

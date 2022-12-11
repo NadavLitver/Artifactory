@@ -15,4 +15,7 @@ public class MapUIManager : MonoBehaviour
     public RectTransform MinimapTransform { get => minimapTransform; set => minimapTransform = value; }
     public MapTile MiniMapTilePrefab { get => miniMapTilePrefab; set => miniMapTilePrefab = value; }
     public MapTile MiniMapCenterNode { get => miniMapCenterNode; set => miniMapCenterNode = value; }
+
+    public float LargeMaptileOffset => ((RectTransform)maptilePrefab.transform).sizeDelta.x;
+
 }
