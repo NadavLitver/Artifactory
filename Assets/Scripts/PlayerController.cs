@@ -245,7 +245,20 @@ public class PlayerController : MonoBehaviour
             m_rb.velocity = velocity + externalForces;
     }
    
-    
+    public void SetOnDandilion(bool onDandilion)
+    {
+        if (onDandilion)
+        {
+            Animator.SetTrigger("Dand");
+            Animator.SetBool("OnDandilion", onDandilion);
+
+        }
+        else
+        {
+            Animator.SetBool("OnDandilion", onDandilion);
+
+        }
+    }
     public void RecieveForce(Vector2 force)
     {
         GetExternalForces += force;

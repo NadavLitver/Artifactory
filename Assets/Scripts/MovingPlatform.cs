@@ -11,6 +11,7 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] SpriteRenderer rend;
     [SerializeField] Animator anim;
     Transform playerOriginalParent;
+    bool controllingPlayer;
     void Start()
     {
         startingPos = transform.localPosition;
@@ -21,10 +22,18 @@ public class MovingPlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            if (controllingPlayer)
+                return;
+
             playerOriginalParent = collision.transform.parent;
             collision.transform.SetParent(transform, true);
             currentDestenation = destenation.localPosition;
             anim.SetTrigger("Move");
+            controllingPlayer = true;
+            GameManager.Instance.assets.PlayerController.canMove = false;
+            GameManager.Instance.assets.PlayerController.SetOnDandilion(controllingPlayer);
+
+
         }
     }
 
@@ -32,10 +41,23 @@ public class MovingPlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.transform.SetParent(playerOriginalParent, true);
+            ReleasePlayer();
+
+        }
+    }
+    private void ReleasePlayer()
+    {
+        if (controllingPlayer)
+        {
+            GameManager.Instance.assets.Player.transform.SetParent(playerOriginalParent, true);
             currentDestenation = startingPos;
             transform.localPosition = startingPos;
+            GameManager.Instance.assets.PlayerController.canMove = true;
+            controllingPlayer = false;
+            GameManager.Instance.assets.PlayerController.SetOnDandilion(controllingPlayer);
+
         }
+
     }
 
     public void MoveTowardsDestenation()
@@ -44,6 +66,10 @@ public class MovingPlatform : MonoBehaviour
         {
             Vector3 direction = (currentDestenation - transform.localPosition).normalized;
             transform.position += direction * moveSpeed * Time.deltaTime;
+        }
+        else
+        {
+            ReleasePlayer();
         }
     }
 

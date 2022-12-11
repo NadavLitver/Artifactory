@@ -34,7 +34,7 @@ public class BasicPickaxe : Weapon
     {
         if (Clawed)
         {
-
+            player.Animator.SetBool("Climb", false);
             player.canMove = true;
             Vector2 wallJumpVelocity = forceForWallJump;
 
@@ -131,7 +131,7 @@ public class BasicPickaxe : Weapon
         moveToPositionForDebug = positionToMoveTo;
         player.canMove = false;
         airAttacking = false;
- 
+        player.Animator.SetBool("Climb", true);
         player.ResetVelocity();
         player.ZeroGravity();
         float Counter = 0;
@@ -145,6 +145,7 @@ public class BasicPickaxe : Weapon
         }
         Debug.Log("PickaxeReached");
         yield return new WaitForSeconds(maxClawTime);
+        player.Animator.SetBool("Climb", false);
         Clawed = false;
         player.canMove = true;
         player.ResetGravity();
