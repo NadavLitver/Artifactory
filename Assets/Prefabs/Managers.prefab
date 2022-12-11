@@ -370,9 +370,9 @@ MonoBehaviour:
     Player: {fileID: 0}
     playerActor: {fileID: 0}
     PlayerController: {fileID: 0}
-    RubberDuck: {fileID: 21300000, guid: 5e90b84ce22ce87448f6d2d0a6c2575d, type: 3}
-    LightningEmblem: {fileID: 21300000, guid: 40731a68def4cf14482ccaf0ac902a71, type: 3}
-    HealingGoblet: {fileID: 21300000, guid: 07733e9e87e4ca74db3578d683acc9a3, type: 3}
+    EmergencyExit: {fileID: 6844410114324268182, guid: 3f8bb36e10475414f9c1b52245f894b1, type: 3}
+    LightningEmblem: {fileID: 21300000, guid: f85c32f8393145d4490fbb794ef75d5a, type: 3}
+    HealingGoblet: {fileID: 21300000, guid: fe4a173f80ba0da409911bb0b7cedd77, type: 3}
     camPositionSetter: {fileID: 0}
     CubePool: {fileID: 0}
     blackFade: {fileID: 0}
@@ -382,9 +382,9 @@ MonoBehaviour:
     CraftingPanel: {fileID: 0}
     BounderScout: {fileID: 7286397062145270228, guid: 6c38a5c0a53fc5146be94217aa9aef63, type: 3}
     craftingMapNode: {fileID: 1946464524881845352, guid: b4057901708be3c49843f221eafadf56, type: 3}
-    GlimmeringSprite: {fileID: 21300000, guid: 4855345e26ffcbb41b380e59b5a54ea1, type: 3}
-    BranchSprite: {fileID: 21300000, guid: 99c1c0c5109bc0d49ba0a3816ab995a0, type: 3}
-    RuneSprite: {fileID: 21300000, guid: b11d6b81e7d6dcd459f71e206bd49259, type: 3}
+    GlimmeringSprite: {fileID: 21300000, guid: 66a3d44b669a40942bbc63810551d001, type: 3}
+    BranchSprite: {fileID: 21300000, guid: fa91225964ff1234ea62b1d40b743f2f, type: 3}
+    RuneSprite: {fileID: 21300000, guid: 73a165a53d281ee4a88b8372312ffe7b, type: 3}
     LeatherSprite: {fileID: 21300000, guid: 681cdb2853ae7144c815013a86c8da7c, type: 3}
     ItemUiSlot: {fileID: 1052155130899679002, guid: d0f22065e4078e447bddcdb0b03a269c, type: 3}
     baseFatherObject: {fileID: 0}
@@ -435,7 +435,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   createdMapTiles: []
+  createdMiniMapTiles: []
   mapUimanager: {fileID: 2903121433711285556}
+  miniMapNodeOffset: 120
+  largeMapNodeOffsetMod: 1.3
 --- !u!114 &2903121433711285556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,7 +452,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   largeMapTransfrom: {fileID: 0}
+  minimapTransform: {fileID: 0}
   maptilePrefab: {fileID: 7616976889884587882, guid: 01d23a1d340658c4ea8a9765feac84a5, type: 3}
+  miniMapTilePrefab: {fileID: 7616976889884587882, guid: 6b1b71f5b682d874daa0ed8725ad8b11, type: 3}
+  miniMapCenterNode: {fileID: 0}
 --- !u!1 &4698557210947762662
 GameObject:
   m_ObjectHideFlags: 0
@@ -580,6 +586,7 @@ MonoBehaviour:
   firstRoom: {fileID: 0}
   numberOfRooms: 6
   mapGenerator: {fileID: 1608005968017932032}
+  maxNuberOfChests: 1
 --- !u!1001 &6662966006180783118
 PrefabInstance:
   m_ObjectHideFlags: 0
