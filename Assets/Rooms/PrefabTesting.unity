@@ -138,9 +138,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1552156841735031463, guid: 675a6c45376e11f459856379caf1d180, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7429974436715017481, guid: 675a6c45376e11f459856379caf1d180, type: 3}
       propertyPath: m_TagString
       value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 7626438206103176287, guid: 675a6c45376e11f459856379caf1d180, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8275583653438716160, guid: 675a6c45376e11f459856379caf1d180, type: 3}
       propertyPath: m_RootOrder
@@ -275,11 +283,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8895932958031719467, guid: fe83519093277c44eaf4d40aba01a972, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 60.26
+      value: 67.27
       objectReference: {fileID: 0}
     - target: {fileID: 8895932958031719467, guid: fe83519093277c44eaf4d40aba01a972, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 99.61
+      value: 106.22
       objectReference: {fileID: 0}
     - target: {fileID: 8895932958031719467, guid: fe83519093277c44eaf4d40aba01a972, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1628,6 +1636,7 @@ MonoBehaviour:
     y: 0
   occupiedPositions: []
   startPosition: {fileID: 0}
+  chestSpawnPoints: []
 --- !u!1001 &1306513243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1726,11 +1735,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 840070347753010960, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 60.26
+      value: 67.27
       objectReference: {fileID: 0}
     - target: {fileID: 840070347753010960, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 98.61
+      value: 105.22
       objectReference: {fileID: 0}
     - target: {fileID: 840070347753010960, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1953,6 +1962,7 @@ MonoBehaviour:
     y: 0
   occupiedPositions: []
   startPosition: {fileID: 0}
+  chestSpawnPoints: []
 --- !u!114 &1639669619 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8895932958570241757, guid: fe83519093277c44eaf4d40aba01a972, type: 3}
@@ -2446,11 +2456,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b9a8bb1876350d64bab951e1b8ade821, type: 3}
---- !u!224 &1973595218 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 1973595218, guid: 877a6add5b775234baa437818e4992dd, type: 3}
-  m_PrefabInstance: {fileID: 1905663005272034993}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1993527065
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3240,7 +3245,7 @@ PrefabInstance:
     - target: {fileID: 2903121433711285556, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
       propertyPath: largeMapTransfrom
       value: 
-      objectReference: {fileID: 1973595218}
+      objectReference: {fileID: 0}
     - target: {fileID: 4180575170529028752, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
       propertyPath: m_RootOrder
       value: 2
