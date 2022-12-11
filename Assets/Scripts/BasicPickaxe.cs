@@ -75,6 +75,10 @@ public class BasicPickaxe : Weapon
     }
     public override void Mobility()
     {
+        if (Clawed)
+        {
+            return;
+        }
         if (player.GetIsGrounded)
         {
             StartCoroutine(IEJumpFromMobility());
