@@ -43,6 +43,8 @@ public class CraftingMap : MonoBehaviour
             }
         }
 
+        TurnOffLines();
+
 
     }
 

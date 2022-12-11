@@ -22,8 +22,8 @@ public class MapGenerator : MonoBehaviour
         PlaceTile(newTile);
         newTile.name = newTile.RefRoom.name + " " + newTile.RefRoom.MyPos.ToString();
 
-        MapTile newMiniMapTile = CreateMiniMapTile();
-        newMiniMapTile.SetUpFromExistingMapTile(newTile);
+       // MapTile newMiniMapTile = CreateMiniMapTile();
+        //newMiniMapTile.SetUpFromExistingMapTile(newTile);
 
 
     }
