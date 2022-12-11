@@ -6,6 +6,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] List<MapTile> createdMapTiles = new List<MapTile>();
     [SerializeField] List<MapTile> createdMiniMapTiles = new List<MapTile>();
     [SerializeField] MapUIManager mapUimanager;
+    [SerializeField] float miniMapNodeOffset;
 
 
     public List<MapTile> CreatedMapTiles { get => createdMapTiles; set => createdMapTiles = value; }
@@ -41,6 +42,11 @@ public class MapGenerator : MonoBehaviour
     public void PlaceTile(MapTile givenTile)
     {
         givenTile.transform.localPosition = new Vector3(givenTile.RefRoom.MyPos.X, givenTile.RefRoom.MyPos.Y, 0) * 130;
+    }
+
+    public void PlaceMinimapTile(MapTile givenTile, CustomPos cacledPos)
+    {
+        givenTile.transform.localPosition = new Vector3(cacledPos.X, cacledPos.Y, 0) * miniMapNodeOffset;
     }
 
     public void AddConnection(ConnectionData givenConnectionData)
@@ -81,7 +87,10 @@ public class MapGenerator : MonoBehaviour
             item.gameObject.SetActive(false);
         }
         mapUimanager.MiniMapCenterNode.CacheRoom(activeRoom);
-
+        foreach (var item in MapUimanager.MiniMapCenterNode.TileConnectionPoints)
+        {
+            item.gameObject.SetActive(false);
+        }
 
         MapConnectionPoint pointA;
         MapConnectionPoint pointB;
@@ -94,14 +103,21 @@ public class MapGenerator : MonoBehaviour
             }
 
             pointA = mapUimanager.MiniMapCenterNode.GetConnectionPointFromExitLocation(exit.ExitLocation);
+            pointA.gameObject.SetActive(true);
             MapTile nextMiniMapTile = createdMiniMapTiles[counter];
+            nextMiniMapTile.CacheRoom(exit.OtherExit.MyRoom);
             pointB = nextMiniMapTile.GetConnectionPointFromExitLocation(exit.OtherExit.ExitLocation);
             counter++;
+            CustomPos newTilePos = new CustomPos() { X = nextMiniMapTile.RefRoom.MyPos.X - activeRoom.MyPos.X, Y = nextMiniMapTile.RefRoom.MyPos.Y - activeRoom.MyPos.Y };
+            nextMiniMapTile.gameObject.SetActive(true);
+            PlaceMinimapTile(nextMiniMapTile, newTilePos);
 
             if (pointA != null && pointB != null)
             {
-                pointA.ConnectLine(pointB.transform);
+                pointA.ConnectLine(pointB.transform, 3);
             }
+
+
 
             //place a node at the right position
             //get connection point from an occupied exit
