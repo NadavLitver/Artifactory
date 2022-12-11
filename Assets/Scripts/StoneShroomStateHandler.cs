@@ -9,7 +9,6 @@ public class StoneShroomStateHandler : StateHandler
     public State ShroomNotice;
     public State ShroomRam;
     public State ShroomThrow;
-    ///public State ShroomLookForCap;
     public State ShroomMoveBackwards;
     public State ShroomWalk;
     public State ShroomPickup;

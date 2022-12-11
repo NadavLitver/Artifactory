@@ -34,9 +34,4 @@ public class MapTile : MonoBehaviour
     {
         ((RectTransform)mapTileImage.transform).sizeDelta = new Vector2(((RectTransform)mapTileImage.transform).sizeDelta.x * x, ((RectTransform)mapTileImage.transform).sizeDelta.y * y);
     }
-
-    public void SetUpFromExistingMapTile(MapTile givenTile)
-    {
-        CacheRoom(givenTile.RefRoom);
-    }
 }
