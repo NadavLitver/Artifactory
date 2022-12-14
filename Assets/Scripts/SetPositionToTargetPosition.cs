@@ -9,7 +9,7 @@ public class SetPositionToTargetPosition : MonoBehaviour
     {
         transform.parent = null;
     }
-    public void Update()
+    public void LateUpdate()
     {
         transform.position = Target.position;
     }

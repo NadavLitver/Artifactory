@@ -31,7 +31,7 @@ public class SelectedCraftingPanel : ItemPanel
         {
             if (!selectedSlot.Occupied)
             {
-                selectedSlot.slot.SetUpSlot(givenSlot);
+                selectedSlot.slot.SetUpSlot(givenSlot, Color.white);
                 selectedSlot.Occupied = true;
                 UpdateCraftingMap();
                 //send itemtype and index, loop over crafting map, unlock all lines that match up to the items selected
