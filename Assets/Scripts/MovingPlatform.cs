@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
@@ -25,6 +23,8 @@ public class MovingPlatform : MonoBehaviour
             if (controllingPlayer)
                 return;
 
+            GameManager.Instance.inputManager.onJumpDown.AddListener(JumpFromFlower);
+            GameManager.Instance.assets.PlayerController.ResetVelocity();
             playerOriginalParent = collision.transform.parent;
             collision.transform.SetParent(transform, true);
             currentDestenation = destenation.localPosition;
@@ -42,8 +42,15 @@ public class MovingPlatform : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             ReleasePlayer();
-
+            GameManager.Instance.inputManager.onJumpDown.RemoveListener(JumpFromFlower);
         }
+    }
+
+    private void JumpFromFlower()
+    {
+        Debug.Log("tried to jump");
+        ReleasePlayer();
+        GameManager.Instance.assets.PlayerController.ExteriorJump();
     }
     private void ReleasePlayer()
     {
@@ -55,9 +62,7 @@ public class MovingPlatform : MonoBehaviour
             GameManager.Instance.assets.PlayerController.canMove = true;
             controllingPlayer = false;
             GameManager.Instance.assets.PlayerController.SetOnDandilion(controllingPlayer);
-
         }
-
     }
 
     public void MoveTowardsDestenation()

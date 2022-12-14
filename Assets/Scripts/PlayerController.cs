@@ -94,7 +94,14 @@ public class PlayerController : MonoBehaviour
         {
             Jumping = false;
         }
+    }
 
+    public void ExteriorJump()
+    {
+        Jumping = true;
+        velocity.y = jumpForce;
+        isGrounded = false;
+        m_animator.SetTrigger("Jump");
     }
     IEnumerator JumpApexWait()
     {
