@@ -23,6 +23,13 @@ public class ItemUiSlot : MonoBehaviour
         itemSprite.sprite = GameManager.Instance.generalFunctions.GetSpriteFromItemType(MyItemType);
     }
 
+    public void SetUpSlot(ItemUiSlot givenSlot, Color givenColor)
+    {
+        myItemType = givenSlot.myItemType;
+        itemSprite.sprite = GameManager.Instance.generalFunctions.GetSpriteFromItemType(MyItemType);
+        itemSprite.color = givenColor;
+    }
+
     public void SetUpSlot(ItemType giveItem)
     {
         myItemType = giveItem;

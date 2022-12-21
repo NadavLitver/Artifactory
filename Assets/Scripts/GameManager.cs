@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
 
 
     public SoundManager soundManager { get; private set; }
+    public DialogueExecuter dialogueExecuter { get; private set; }
+
 
     [SerializeField] internal AssetsRefrence assets;
     private void Awake()
@@ -45,6 +47,7 @@ public class GameManager : MonoBehaviour
         LevelManager = GetComponentInChildren<LevelManager>();
         CraftingManager = GetComponentInChildren<CraftinManager>();
         vfxManager = GetComponentInChildren<VfxManager>();
+        dialogueExecuter = GetComponentInChildren<DialogueExecuter>();
 
 
 
