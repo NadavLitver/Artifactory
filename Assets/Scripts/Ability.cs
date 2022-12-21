@@ -14,6 +14,8 @@ public class Ability : ScriptableObject
     [SerializeField] float knockbackForce;
     [SerializeField] float critHitChace;
     [SerializeField] float critHitDamage = 1;
+    [SerializeField] bool isMelee;
+    [SerializeField] bool isRanged;
     Vector2 forceDircetion;
     public bool RollForStatusActivation(StatusEffectActivatonData givenStatus)
     {
@@ -37,6 +39,8 @@ public class Ability : ScriptableObject
     public float KnockbackForce { get => knockbackForce; set => knockbackForce = value; }
     public float CritHitChace { get => critHitChace; set => critHitChace = value; }
     public float CritHitDamage { get => critHitDamage; set => critHitDamage = value; }
+    public bool IsMelee { get => isMelee; }
+    public bool IsRanged { get => isRanged; }
 
     public void CacheForceDirection(Vector2 givenDirection)
     {

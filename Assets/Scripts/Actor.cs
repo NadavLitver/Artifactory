@@ -38,9 +38,9 @@ public class Actor : MonoBehaviour, IDamagable
     /// </summary>
     public UnityEvent<DamageHandler> OnTakeCriticalDamage;
     /// <summary>
-    /// invoked when this actor is hit by another actor
+    /// invoked when this actor is hit 
     /// </summary>
-    public UnityEvent<Ability, Actor> OnHitByActor;
+    public UnityEvent<Ability> OnGetHit;
     /// <summary>
     /// invoked when this actor kills another one
     /// </summary>
@@ -61,6 +61,22 @@ public class Actor : MonoBehaviour, IDamagable
     /// invoked when this actor is healed
     /// </summary>
     public UnityEvent<DamageHandler> OnRecieveHealth;
+    /// <summary>
+    /// Invoked when this actor lands an attack with a melee weapon
+    /// </summary>
+    public UnityEvent<Ability> OnHitMeleeAttack;
+    /// <summary>
+    /// Invoked when this actor lands an attack with a ranged weapon
+    /// </summary>
+    public UnityEvent<Ability> OnHitRangedAttack;
+    /// <summary>
+    /// Invoked when this actor is hit by a ranged attack
+    /// </summary>
+    public UnityEvent<Ability> OnGetHitByRangedAttack;
+    /// <summary>
+    /// Invoked when this actor is hit by a Melee attack
+    /// </summary>
+    public UnityEvent<Ability> OnGetHitByMeleeAttack;
     public UnityEvent TakeDamageGFX, OnDeath;
     public UnityEvent OnHealGFX;
 
@@ -152,7 +168,17 @@ public class Actor : MonoBehaviour, IDamagable
             OnTakeCriticalDamage?.Invoke(givenAbility.DamageHandler);
             givenAbility.DamageHandler.AddModifier(host.CalcCritDamage(givenAbility));
         }
-        host.OnHitByActor?.Invoke(givenAbility, this);
+        OnGetHit?.Invoke(givenAbility);
+        if (givenAbility.IsMelee)
+        {
+            OnGetHitByMeleeAttack?.Invoke(givenAbility);
+            host.OnHitMeleeAttack?.Invoke(givenAbility);
+        }
+        if (givenAbility.IsRanged)
+        {
+            OnGetHitByRangedAttack?.Invoke(givenAbility);
+            host.OnHitRangedAttack?.Invoke(givenAbility);
+        }
         //invoking the hit event on the actor that hit me
         TakeDamage(givenAbility.DamageHandler, host);
     }

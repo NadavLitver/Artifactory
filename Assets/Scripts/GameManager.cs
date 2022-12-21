@@ -102,6 +102,9 @@ public class AssetsRefrence
     [Header("RELICS"), Space(10)]
     public Sprite LightningEmblem;
     public Sprite HealingGoblet;
+    public Sprite WindChimes;
+    public Sprite KnifeOfTheHunter;
+    public Sprite TurtlePendant;
 
     [Header("CAMERA"), Space(10)]
     public CamPositionSetter camPositionSetter;
@@ -180,6 +183,12 @@ public class GeneralFunctions
                 return new HealingGoblet();
             case StatusEffectEnum.Invulnerability:
                 return new Invulnerability();
+            case StatusEffectEnum.KnifeOfTheHunter:
+                return new KnifeOfTheHunter();
+            case StatusEffectEnum.WindChimes:
+                return new RubberDuck();
+            case StatusEffectEnum.TurtlePendant:
+                return new TurtlePendant();
             default:
                 break;
         }

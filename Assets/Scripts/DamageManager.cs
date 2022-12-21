@@ -23,4 +23,12 @@ public class DamageManager : MonoBehaviour
     [Header("Healing Goblet Properties"), Space(10)]
     [Range(0.1f, 1f)] public float HealingGobletLifeStealPercentage;
 
+    [Header("Knife of the hunter Properties"), Space(10)]
+    [Range(1f, 2f)] public float KnifeOfTheHunterDamageMod;
+        
+
+    [Header("Turtle Pendant Propeties"), Space(10)]
+    [Range(0f, 1f)] public float TurtleBlockPower;
+    [Range(0f, 1f)] public float TurtleBlockTreshold;
+
 }
