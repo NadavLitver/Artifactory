@@ -6,12 +6,12 @@ public class TurtlePendant : StatusEffect
 {
     public override void ActivateEffect()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void Reset()
     {
-        throw new System.NotImplementedException();
+
     }
 
     public override void Unsubscribe()

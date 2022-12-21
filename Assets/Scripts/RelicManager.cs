@@ -7,7 +7,7 @@ public class RelicManager : MonoBehaviour
     //once the player picks up a relic add it here
     //once a relic drop is created it will recieve a type thats not cached here
     private List<Relic> takenRelics = new List<Relic>();
-    private List<Relic> freeRelics = new List<Relic>();
+    [SerializeField] private List<Relic> freeRelics = new List<Relic>();
 
     public List<Relic> TakenRelics { get => takenRelics; }
     public List<Relic> FreeRelics { get => freeRelics; }
@@ -33,7 +33,9 @@ public class RelicManager : MonoBehaviour
             Debug.LogError("out of relics");
             return null;
         }
-        return FreeRelics[Random.Range(0, FreeRelics.Count)];
+        Relic relic = FreeRelics[Random.Range(0, FreeRelics.Count)];
+        takenRelics.Add(relic);
+        return relic;
     }
 
     public Sprite GetRelicSpriteFromRelic(Relic givenRelic)

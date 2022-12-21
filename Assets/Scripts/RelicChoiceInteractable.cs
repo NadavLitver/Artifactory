@@ -1,7 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using Sirenix.OdinInspector;
+using UnityEngine;
 using UnityEngine.Events;
 
 public class RelicChoiceInteractable : Interactable
@@ -24,7 +22,8 @@ public class RelicChoiceInteractable : Interactable
 
     public override void Interact()
     {
-        Instantiate(GameManager.Instance.assets.relicDropPrefab, transform.position, Quaternion.identity, transform);
+        RelicDrop drop = Instantiate(GameManager.Instance.assets.relicDropPrefab, transform.position, Quaternion.identity, transform);
+        drop.CacheRelic(myRelic);
         OnSelectedRelic?.Invoke();
     }
 

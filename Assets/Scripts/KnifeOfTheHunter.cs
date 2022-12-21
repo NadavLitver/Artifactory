@@ -7,12 +7,10 @@ public class KnifeOfTheHunter : StatusEffect
     bool buffed;
     public override void ActivateEffect()
     {
-        throw new System.NotImplementedException();
     }
 
     public override void Reset()
     {
-        throw new System.NotImplementedException();
     }
 
     public override void Unsubscribe()

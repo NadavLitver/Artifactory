@@ -2,7 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Relic : MonoBehaviour
+[CreateAssetMenu(fileName = "New Relic", menuName = "Relic")]
+public class Relic : ScriptableObject
 {
     [SerializeField] StatusEffectEnum myEffect;
 
