@@ -81,6 +81,7 @@ public class BasicPickaxe : Weapon
         }
         if (player.GetIsGrounded)
         {
+            m_animator.SetTrigger("Mobility");
             StartCoroutine(IEJumpFromMobility());
         }
         else

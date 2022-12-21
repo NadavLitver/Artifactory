@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using UnityEditor;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
@@ -25,18 +26,24 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool CoyoteAvailable;
     [SerializeField] float acceleration;
     [SerializeField] Animator m_animator;
-   // [SerializeField] PlayerGroundCheck m_groundCheck;
+    private float currentSpeed;
+    private float currentAccel;
+
+    // [SerializeField] PlayerGroundCheck m_groundCheck;
 
 
     [Header("Editable Properties"), Space(10)]
     [SerializeField, Range(0, 100)] float maxGravity;
     [SerializeField, Range(0, 100)] float GravityScale;
-    [Range(0, 100), SerializeField, Tooltip("Increasing Acceleration Speed will Decrease the time the player takes to reach max speed")]
-    float accelerationSpeed;
+    [Range(0, 100), SerializeField, Tooltip("Increasing Acceleration Speed will Decrease the time the player takes to reach max speed")] float accelerationSpeed;
+    [Range(0, 100), SerializeField, Tooltip("Increasing deacceleration Speed will Decrease the time the player takes to reach zero speed on x")] float deaccelerationSpeed;
+
     [SerializeField, Tooltip("What is Ground?")] LayerMask GroundLayerMask;
     [Range(0, 100), SerializeField, Tooltip("Maximum Speed player can reach ")] float speed;
-    [Range(0, 1), SerializeField, Tooltip("how much time AFTER the player leaves a ground can the player jump, like a grace time ")]
-    float CoyoteTime;
+    [Range(0, 100), SerializeField, Tooltip("Maximum Speed player can reach ")] float AirSpeed;
+
+    [Range(0, 1), SerializeField, Tooltip("how much time AFTER the player leaves a ground can the player jump, like a grace time ")] float CoyoteTime;
+
     [Range(0, 100), SerializeField, Tooltip("Increasing this number will increase the height the player jump to")] float jumpForce;
     [Range(0, 1), SerializeField, Tooltip("Raycast range to check ground probably no need to change anything")] float groundCheckDistance;
     [Range(0, 1), SerializeField, Tooltip("How much time does the gravity change apply after hitting apex in jump")] float apexAirTimeGravityChange;
@@ -69,6 +76,7 @@ public class PlayerController : MonoBehaviour
     {
         canMove = true;
         velocity = Vector2.zero;
+     
 
     }
     public void GetColliderSizeInformation()
@@ -155,10 +163,6 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            //if (!wasGrounded)
-            //{
-            //    m_animator.SetTrigger("Land");
-            //}
             velocity.y = Mathf.MoveTowards(velocity.y, 0, GravityScale * Time.deltaTime);
             Jumping = false;
             
@@ -204,9 +208,13 @@ public class PlayerController : MonoBehaviour
 
                 }
             }
-            float accelGoal = horInput == 0 ? 0 : 1;
-            acceleration = Mathf.MoveTowards(acceleration, accelGoal, accelerationSpeed * Time.deltaTime);
-            velocity.x = Mathf.MoveTowards(velocity.x, horInput == 0 ? 0 : horInput * speed * acceleration, accelerationSpeed * Time.deltaTime);
+            bool noInput = horInput == 0;
+            float accelGoal = noInput ? 0 : 1;
+            currentSpeed = isGrounded ? speed : AirSpeed;
+            currentAccel = noInput ? deaccelerationSpeed : accelerationSpeed;
+
+            acceleration = Mathf.MoveTowards(acceleration, accelGoal, currentAccel * Time.deltaTime);
+            velocity.x = Mathf.MoveTowards(velocity.x, horInput == 0 ? 0 : horInput * currentSpeed * acceleration, currentAccel * Time.deltaTime);
             externalForces = Vector2.MoveTowards(externalForces, Vector2.zero, accelerationSpeed * Time.deltaTime);
 
         }
