@@ -111,7 +111,7 @@ public class PlayerController : MonoBehaviour
         isGrounded = false;
         m_animator.SetTrigger("Jump");
     }
-    IEnumerator JumpApexWait()
+    public IEnumerator JumpApexWait()
     {
         yield return new WaitUntil(() => isFalling == true);
         GravityScale = apexGravityScale;
@@ -271,7 +271,6 @@ public class PlayerController : MonoBehaviour
         else
         {
             Animator.SetBool("OnDandilion", onDandilion);
-
         }
     }
     public void RecieveForce(Vector2 force)
@@ -286,7 +285,25 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawRay(BottomLeftPoint, Vector2.down * groundCheckDistance);
         Gizmos.color = CheckIsCeiling() ? Color.green : Color.red;
         Gizmos.DrawRay(topMidPoint, Vector2.up * groundCheckDistance);
+    }
 
+    public IEnumerator FreezePlayerForDuration(float time)
+    {
+        ResetVelocity();
+        canMove = false;
+        ZeroGravity();
+        yield return new WaitForSecondsRealtime(time);
+        canMove = true;
+        ResetGravity();
+    }
 
+    public IEnumerator FreezePlayerForDuration(float time, float gravityScale)
+    {
+        ResetVelocity();
+        canMove = false;
+        GravityScale = gravityScale;
+        yield return new WaitForSecondsRealtime(time);
+        canMove = true;
+        ResetGravity();
     }
 }
