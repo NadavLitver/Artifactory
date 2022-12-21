@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 [DefaultExecutionOrder(-10)]
 public class GameManager : MonoBehaviour
 {
-
     public static GameManager Instance { get; private set; }
     public InputManager inputManager { get; private set; }
     public GeneralFunctions generalFunctions { get; private set; }
@@ -14,6 +13,7 @@ public class GameManager : MonoBehaviour
     public DamagePopupManager PopupManager { get; private set; }
     public LevelManager LevelManager { get; private set; }
     public CraftinManager CraftingManager { get; private set; }
+    public RelicManager RelicManager { get; private set; }
 
     public VfxManager vfxManager { get; private set; }
 
@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
             Instance = this;
         }
 
-        //non mono
+        //monot
         generalFunctions = new GeneralFunctions();
         //mono
         inputManager = GetComponentInChildren<InputManager>();
@@ -48,9 +48,7 @@ public class GameManager : MonoBehaviour
         CraftingManager = GetComponentInChildren<CraftinManager>();
         vfxManager = GetComponentInChildren<VfxManager>();
         dialogueExecuter = GetComponentInChildren<DialogueExecuter>();
-
-
-
+        RelicManager = GetComponentInChildren<RelicManager>();
     }
     private void Start()
     {
@@ -79,12 +77,10 @@ public class GameManager : MonoBehaviour
         UnityEditor.EditorApplication.isPlaying = false;
 #endif
         Application.Quit();
-
     }
     public void LoadMainMenu()
     {
         SceneManager.LoadScene("MainMenu");
-
     }
 }
 
@@ -105,6 +101,8 @@ public class AssetsRefrence
     public Sprite WindChimes;
     public Sprite KnifeOfTheHunter;
     public Sprite TurtlePendant;
+
+    public RelicDrop relicDropPrefab;
 
     [Header("CAMERA"), Space(10)]
     public CamPositionSetter camPositionSetter;

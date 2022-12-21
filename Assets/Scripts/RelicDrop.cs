@@ -12,5 +12,8 @@ public class RelicDrop : DragToPlayer
         gameObject.SetActive(false);
     }
 
-
+    public void CacheRelic(Relic givenRelic)
+    {
+        myRelic = givenRelic;
+    }
 }
