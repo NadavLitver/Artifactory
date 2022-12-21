@@ -8,7 +8,8 @@ public enum RoomType
     EASY,
     MEDIUM,
     HARD,
-    BOSS
+    BOSS,
+    SPECIAL
     //can add more types in the future - merchant, rest etc...
 }
 
