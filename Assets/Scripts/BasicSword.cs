@@ -15,7 +15,9 @@ public class BasicSword : Weapon
     private const string attackPrefix = "Attack";
     private StringBuilder stringBuilder;
     [SerializeField] private LayerMask groundLayer;
- 
+    [SerializeField] float floatTimeInAirBeforeDash = 0.12f;
+    [SerializeField] float GravityScaleBeforeDash;
+
     public override void Mobility()
     {
         if (Time.time - lastDash >= dashCooldown)
@@ -24,7 +26,7 @@ public class BasicSword : Weapon
 
     IEnumerator IEDash()
     {
-        
+        yield return player.FreezePlayerForDuration(floatTimeInAirBeforeDash, GravityScaleBeforeDash);
         lastDash = Time.time;
         player.canMove = false;
         isDashing = true;

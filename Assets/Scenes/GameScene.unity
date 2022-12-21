@@ -1247,6 +1247,10 @@ PrefabInstance:
       value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 840070347753010961, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
+      propertyPath: AirSpeed
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 840070347753010961, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
       propertyPath: speedAir
       value: 5
       objectReference: {fileID: 0}
@@ -1298,6 +1302,18 @@ PrefabInstance:
       propertyPath: m_Offset.y
       value: -0.16066194
       objectReference: {fileID: 0}
+    - target: {fileID: 840070348364434380, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
+      propertyPath: gravityScale
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 840070348364434380, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
+      propertyPath: slowDuration
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 840070348364434380, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
+      propertyPath: gravityScaleOnShoot
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3271807133343841365, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
       propertyPath: items.Array.size
       value: 8
@@ -1341,6 +1357,14 @@ PrefabInstance:
     - target: {fileID: 8006054158216643493, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
       propertyPath: groundLayer.m_Bits
       value: 128
+      objectReference: {fileID: 0}
+    - target: {fileID: 8006054158216643493, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
+      propertyPath: GravityScaleBeforeDash
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8006054158216643493, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
+      propertyPath: floatTimeInAirBeforeDash
+      value: 0.2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
