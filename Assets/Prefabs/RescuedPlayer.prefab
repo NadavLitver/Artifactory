@@ -154,7 +154,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 1, y: 0}
   serializedVersion: 2
-  m_Radius: 1.5
+  m_Radius: 1
 --- !u!114 &840070347747206294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,8 +178,8 @@ MonoBehaviour:
   host: {fileID: 0}
   radiusForWallCheck: 0.5
   distaceFromPlayerToCheck: 0.5
-  JumpToClawForce: {x: 12, y: 20}
-  forceForWallJump: {x: 10, y: 20}
+  JumpToClawForce: {x: 3.5, y: 18}
+  forceForWallJump: {x: 3.5, y: 23}
   contactFilter:
     serializedVersion: 2
     m_Bits: 32768
@@ -323,20 +323,20 @@ MonoBehaviour:
   CoyoteAvailable: 0
   acceleration: 0
   m_animator: {fileID: 791565559279450814}
-  maxGravity: 25
-  GravityScale: 50
-  accelerationSpeed: 30
-  deaccelerationSpeed: 55
+  maxGravity: 17
+  GravityScale: 60
+  accelerationSpeed: 21
+  deaccelerationSpeed: 62
   GroundLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  speed: 10
-  AirSpeed: 7
+  speed: 7
+  AirSpeed: 6
   CoyoteTime: 0.1
   jumpForce: 20
   groundCheckDistance: 0.25
   apexAirTimeGravityChange: 0.1
-  apexGravityScale: 10
+  apexGravityScale: 5
   ceilingCheckDistance: 1
 --- !u!114 &5508809318791304041
 MonoBehaviour:
@@ -512,7 +512,7 @@ MonoBehaviour:
   muzzle: {fileID: 5508809318916323046}
   chargeDuration: 1
   timeTillFade: 10
-  jumpForce: 14
+  jumpForce: 17
   cannonGlow: {fileID: 0}
   slowDuration: 0.2
   gravityScaleOnShoot: 5
@@ -635,8 +635,8 @@ MonoBehaviour:
   host: {fileID: 0}
   isDashing: 0
   dashDuration: 0.35
-  dashCooldown: 0.5
-  dashForce: 20
+  dashCooldown: 1
+  dashForce: 25
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
