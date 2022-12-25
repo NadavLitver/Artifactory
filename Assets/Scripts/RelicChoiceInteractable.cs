@@ -1,0 +1,34 @@
+using Sirenix.OdinInspector;
+using UnityEngine;
+using UnityEngine.Events;
+
+public class RelicChoiceInteractable : Interactable
+{
+    public UnityEvent OnSelectedRelic;
+
+    [SerializeField, ReadOnly] private Relic myRelic;
+    [SerializeField] private SpriteRenderer relicSprite;
+
+    private void Start()
+    {
+        SetUp();
+    }
+
+    public void SetUp()
+    {
+        myRelic = GameManager.Instance.RelicManager.GetFreeRelic();
+        relicSprite.sprite = GameManager.Instance.RelicManager.GetRelicSpriteFromRelic(myRelic);
+    }
+
+    public override void Interact()
+    {
+        RelicDrop drop = Instantiate(GameManager.Instance.assets.relicDropPrefab, transform.position, Quaternion.identity, transform);
+        drop.CacheRelic(myRelic);
+        OnSelectedRelic?.Invoke();
+    }
+
+    public void HideRelicSprite()
+    {
+        relicSprite.enabled = false;
+    }
+}

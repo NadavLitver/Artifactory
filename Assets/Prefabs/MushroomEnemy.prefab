@@ -55,7 +55,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -75,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2069616245
   m_SortingLayer: 3
-  m_SortingOrder: 0
+  m_SortingOrder: 11
   m_Sprite: {fileID: 1606638617, guid: 3d590df7151db124ba81c18222483164, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -271,7 +271,7 @@ MonoBehaviour:
     m_Bits: 128
   rightGetter: {fileID: 0}
   leftGetter: {fileID: 0}
-  scoutMs: 5
+  scoutMs: 10
   getter: 0
   timeOut: 1
   Done: 0
@@ -468,7 +468,7 @@ MonoBehaviour:
   OnTakeCriticalDamage:
     m_PersistentCalls:
       m_Calls: []
-  OnHitByActor:
+  OnGetHit:
     m_PersistentCalls:
       m_Calls: []
   OnKill:
@@ -484,6 +484,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnRecieveHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHitMeleeAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHitRangedAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGetHitByRangedAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGetHitByMeleeAttack:
     m_PersistentCalls:
       m_Calls: []
   TakeDamageGFX:
@@ -638,6 +650,9 @@ GameObject:
   - component: {fileID: 1703560641}
   - component: {fileID: 1703560642}
   - component: {fileID: 1703560643}
+  - component: {fileID: 2246256595170711637}
+  - component: {fileID: 8023643334726134857}
+  - component: {fileID: 8942174230672528984}
   m_Layer: 12
   m_Name: StateHandler
   m_TagString: Untagged
@@ -678,16 +693,17 @@ MonoBehaviour:
   ShroomNotice: {fileID: 2334491817456721699}
   ShroomRam: {fileID: 2334491817456721711}
   ShroomThrow: {fileID: 2334491817456721710}
-  ShroomLookForCap: {fileID: 0}
   ShroomMoveBackwards: {fileID: 2334491817456721705}
   ShroomWalk: {fileID: 1703560641}
   ShroomPickup: {fileID: 1703560642}
   ShroomThrowWait: {fileID: 1703560643}
+  ShroomRessurect: {fileID: 2246256595170711637}
+  ShroomDie: {fileID: 8023643334726134857}
+  ShroomTakeDmg: {fileID: 8942174230672528984}
   ShroomLineOfSight: {fileID: 2334491817340363321}
   ShroomGroundCheck: {fileID: 2334491816039330442}
   RB: {fileID: 2334491817139954400}
   Flipper: {fileID: 2334491817139954404}
-  AttackMode: 0
   ShroomActor: {fileID: 2334491817139954406}
   ShroomCapPool: {fileID: 2334491817191552497}
   CurrentCap: {fileID: 0}
@@ -702,11 +718,13 @@ MonoBehaviour:
   ThrowDelay: 1
   PickupFreezeDuration: 0
   MovementDir: 1
+  AttackMode: 0
   RequireFlip: 0
   Enraged: 0
   stunned: 0
   frozen: 0
   ReadyToThrow: 0
+  capDestroyed: 0
   OnPickedUpShroom:
     m_PersistentCalls:
       m_Calls: []
@@ -767,7 +785,8 @@ MonoBehaviour:
   ramSpeed: 4
   ramTargetOffset: 0.76
   ramRecoveryTime: 1
-  StartedCharging: 0
+  ramTime: 2
+  ramCD: 5
 --- !u!114 &2334491817456721710
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -836,6 +855,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ThrowRecovery: 1
+--- !u!114 &2246256595170711637
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2334491817456721702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1394f1c23667e2343b4d9c0d5cf837e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8023643334726134857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2334491817456721702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2780eef79aa3cb6409463fbcfd02bf8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8942174230672528984
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2334491817456721702}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa2d064d5e9fcc44e8e0dd950af733aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stunnedDuration: 0.1
 --- !u!1001 &2334491817592321804
 PrefabInstance:
   m_ObjectHideFlags: 0

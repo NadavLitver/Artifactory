@@ -9,7 +9,7 @@ public class DialogueExecuter : MonoBehaviour
     [SerializeField] TextMeshProUGUI m_text;
     [SerializeField] Image speakerImage;
 
-    [SerializeField] float typeSpeed;
+    [SerializeField] float typeIntervals;
     [SerializeField] float timeBetweenLines;
     bool typing;
 
@@ -55,7 +55,7 @@ public class DialogueExecuter : MonoBehaviour
         foreach (char ot in Line)
         {
             m_text.text += ot;
-            yield return new WaitForSeconds(typeSpeed);
+            yield return new WaitForSeconds(typeIntervals);
         }
     }
 }

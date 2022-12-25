@@ -5,12 +5,13 @@ public class MainMenuFunctions : MonoBehaviour
 {
     public void LoadNextScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+      LeanTween.delayedCall( 1 ,() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
     }
     public void LoadPrevScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        LeanTween.delayedCall(1, () => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1));
     }
+    
     public void QuitGame()
     {
 
