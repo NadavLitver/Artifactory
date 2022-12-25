@@ -5,6 +5,7 @@ public class Weapon : MonoBehaviour
     protected Animator m_animator;
     public UnityEvent onHit;
     public UnityEvent<Actor, Ability> OnActorHit;
+    public UnityEvent OnGroundAttack;
     [SerializeField] AbilityCombo abilityCombo;
     public RuntimeAnimatorController runTimeAnimator;
     public AbilityCombo AbilityCombo { get => abilityCombo; set => abilityCombo = value; }

@@ -344,6 +344,7 @@ public class LevelManager : MonoBehaviour
         active = currentRunRooms[0];
         GameManager.Instance.generalFunctions.SpawnObjectAt(GameManager.Instance.assets.Player.gameObject, active.StartPosition.position);
         mapGenerator.UpdateMiniMap(active);
+        GameManager.Instance.assets.baseFatherObject.SetActive(false);
     }
 
 
