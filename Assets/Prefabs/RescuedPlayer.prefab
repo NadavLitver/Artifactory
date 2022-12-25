@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1832014675}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.025, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -99,7 +99,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.3333335, y: 5.3333335}
+  m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -154,7 +154,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 1, y: 0}
   serializedVersion: 2
-  m_Radius: 1
+  m_Radius: 1.5
 --- !u!114 &840070347747206294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,8 +178,8 @@ MonoBehaviour:
   host: {fileID: 0}
   radiusForWallCheck: 0.5
   distaceFromPlayerToCheck: 0.5
-  JumpToClawForce: {x: 3.5, y: 18}
-  forceForWallJump: {x: 3.5, y: 23}
+  JumpToClawForce: {x: 12, y: 20}
+  forceForWallJump: {x: 10, y: 20}
   contactFilter:
     serializedVersion: 2
     m_Bits: 32768
@@ -323,15 +323,15 @@ MonoBehaviour:
   CoyoteAvailable: 0
   acceleration: 0
   m_animator: {fileID: 791565559279450814}
-  maxGravity: 17
-  GravityScale: 60
-  accelerationSpeed: 21
-  deaccelerationSpeed: 62
+  maxGravity: 25
+  GravityScale: 50
+  accelerationSpeed: 30
+  deaccelerationSpeed: 55
   GroundLayerMask:
     serializedVersion: 2
     m_Bits: 128
-  speed: 7
-  AirSpeed: 6
+  speed: 10
+  AirSpeed: 7
   CoyoteTime: 0.1
   jumpForce: 20
   groundCheckDistance: 0.25
