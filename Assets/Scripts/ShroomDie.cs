@@ -15,7 +15,6 @@ public class ShroomDie : State
     }
     public override State RunCurrentState()
     {
-        
         return this;
     }
 }

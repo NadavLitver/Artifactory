@@ -16,7 +16,6 @@ public class StoneShroomIdle : State
         counter = 0;
         if (handler.ShroomLineOfSight.CanSeePlayer())
         {
-           
             return handler.ShroomNotice;
         }
         return handler.ShroomWalk;

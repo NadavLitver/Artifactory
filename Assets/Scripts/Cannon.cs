@@ -12,10 +12,14 @@ public class Cannon : Weapon
     bool isCharging;
     bool jumped;
     [SerializeField] float jumpForce;
+    [SerializeField] Light cannonGlow;
+    [SerializeField] float slowDuration;
+    [SerializeField] float gravityScaleOnShoot;
 
     private void OnEnable()
     {
         isCharging = false;
+        StartCoroutine(StartCharging());
     }
     private void Start()
     {
@@ -28,11 +32,6 @@ public class Cannon : Weapon
 
     protected override void Attack()
     {
-        if (!isLoaded && !isCharging)
-        {
-            StartCoroutine(StartCharging());
-        }
-        CheckBulletFade();
         if (isLoaded)
         {
             FireBullet();
@@ -71,6 +70,7 @@ public class Cannon : Weapon
             GameManager.Instance.assets.PlayerController.ResetVelocity();
             GameManager.Instance.assets.PlayerController.RecieveForce(new Vector2(velocity.x, jumpForce));
             jumped = true;
+            GameManager.Instance.assets.PlayerController.StartCoroutine(GameManager.Instance.assets.PlayerController.JumpApexWait());
             StartCoroutine(waitForGrounded());
         }
     }
@@ -85,14 +85,17 @@ public class Cannon : Weapon
 
     private void FireBullet()
     {
+        StartCoroutine(GameManager.Instance.assets.PlayerController.FreezePlayerForDuration(slowDuration, gravityScaleOnShoot));
         GameObject bullet = bulletPool.GetPooledObject();
         bullet.transform.position = muzzle.position;
         bullet.gameObject.SetActive(true);
         isLoaded = false;
+        StartCoroutine(StartCharging());
     }
     private void OnDisable()
     {
         jumped = false;
+        isLoaded = false;
     }
 
 }

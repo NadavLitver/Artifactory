@@ -27,7 +27,6 @@ public class ShroomNotice : State
                 return handler.ShroomMoveBackwards;
             }
         }
-
         return handler.ShroomWalk;
     }
 

@@ -77,10 +77,11 @@ public class CamPositionSetter : MonoBehaviour
         finalPoint = new Vector2((smallestPoint.x + biggestPoint.x + playerTransform.position.x) / 3, (smallestPoint.y + biggestPoint.y + playerTransform.position.y) /3);
         
     }
-    public void FixedUpdate()
+    public void LateUpdate()
     {
         if (follow)
         {
+            transform.parent.position = playerTransform.position;
             collidersFound = Physics2D.OverlapCircleAll(playerTransform.position, checkRadius, layerToCheck);
             CalcPoints();
             transform.position = Vector2.MoveTowards(transform.position, finalPoint, Time.deltaTime);

@@ -7,14 +7,22 @@ public class ShroomRam : State
     [SerializeField] float ramRecoveryTime;
     StoneShroomStateHandler handler;
     Vector3 currentDest;
-    [SerializeField] bool StartedCharging;
+    bool StartedCharging;
     bool tookDamage;
     [SerializeField] float ramTime;
+    [SerializeField] float ramCD;
+    private float lastRammed;
     float ramTimeCounter;
+
+
 
 
     public override void onStateEnter()
     {
+        if (StartedCharging || Time.time - lastRammed < ramCD)
+        {
+            return;
+        }
         handler.Anim.SetTrigger(handler.Ramhash);
         handler.ShroomActor.TakeDamageGFX.AddListener(TurnOnTookDamage);
         currentDest = handler.ClosestPointInsideRange(handler.RamThreshold);
@@ -26,13 +34,16 @@ public class ShroomRam : State
     }
     public override State RunCurrentState()
     {
-
         if (handler.CheckForFlip() || tookDamage || ramTimeCounter <= 0)
         {
-            ramTimeCounter -= Time.deltaTime;
             StopCharge();
+            StartedCharging = false;
+            tookDamage = false;
+            lastRammed = Time.time;
+            handler.ShroomActor.TakeDamageGFX.RemoveListener(TurnOnTookDamage);
             return handler.ShroomWalk;
         }
+        ramTimeCounter -= Time.deltaTime;
         return this;
     }
 
@@ -51,7 +62,7 @@ public class ShroomRam : State
     {
         handler.ShroomActor.TakeDamageGFX.RemoveListener(TurnOnTookDamage);
         tookDamage = false;
-     //   handler.Freeze(ramRecoveryTime);
+        //   handler.Freeze(ramRecoveryTime);
         handler.RamCollider.SetActive(false);
         StartedCharging = false;
     }

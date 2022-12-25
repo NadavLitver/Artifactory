@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MovingPlatform : MonoBehaviour
@@ -11,6 +9,7 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] SpriteRenderer rend;
     [SerializeField] Animator anim;
     Transform playerOriginalParent;
+    bool controllingPlayer;
     void Start()
     {
         startingPos = transform.localPosition;
@@ -21,10 +20,20 @@ public class MovingPlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            if (controllingPlayer)
+                return;
+
+            GameManager.Instance.inputManager.onJumpDown.AddListener(JumpFromFlower);
+            GameManager.Instance.assets.PlayerController.ResetVelocity();
             playerOriginalParent = collision.transform.parent;
             collision.transform.SetParent(transform, true);
             currentDestenation = destenation.localPosition;
             anim.SetTrigger("Move");
+            controllingPlayer = true;
+            GameManager.Instance.assets.PlayerController.canMove = false;
+            GameManager.Instance.assets.PlayerController.SetOnDandilion(controllingPlayer);
+
+
         }
     }
 
@@ -32,9 +41,27 @@ public class MovingPlatform : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            collision.transform.SetParent(playerOriginalParent, true);
+            ReleasePlayer();
+            GameManager.Instance.inputManager.onJumpDown.RemoveListener(JumpFromFlower);
+        }
+    }
+
+    private void JumpFromFlower()
+    {
+        Debug.Log("tried to jump");
+        ReleasePlayer();
+        GameManager.Instance.assets.PlayerController.ExteriorJump();
+    }
+    private void ReleasePlayer()
+    {
+        if (controllingPlayer)
+        {
+            GameManager.Instance.assets.Player.transform.SetParent(playerOriginalParent, true);
             currentDestenation = startingPos;
             transform.localPosition = startingPos;
+            GameManager.Instance.assets.PlayerController.canMove = true;
+            controllingPlayer = false;
+            GameManager.Instance.assets.PlayerController.SetOnDandilion(controllingPlayer);
         }
     }
 
@@ -44,6 +71,10 @@ public class MovingPlatform : MonoBehaviour
         {
             Vector3 direction = (currentDestenation - transform.localPosition).normalized;
             transform.position += direction * moveSpeed * Time.deltaTime;
+        }
+        else
+        {
+            ReleasePlayer();
         }
     }
 

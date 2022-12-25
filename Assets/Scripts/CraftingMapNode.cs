@@ -55,7 +55,7 @@ public class CraftingMapNode : MonoBehaviour
     {
         mycomponent = givenComp;
         itemSprite.sprite = GameManager.Instance.generalFunctions.GetSpriteFromItemType(givenComp.itemType);
-        textMesh.text = givenComp.amount.ToString();
+       // textMesh.text = givenComp.amount.ToString();
         cover.SetActive(false);
     }
     public void SetUpNode(Sprite sprite)
@@ -73,7 +73,7 @@ public class CraftingMapNode : MonoBehaviour
 
     public void RotateAndSetFinalLine(float givenBaseRotation)
     {
-        ((RectTransform)line.transform).sizeDelta = new Vector2(((RectTransform)line.transform).sizeDelta.x, ((RectTransform)line.transform).sizeDelta.y * 2);
+        ((RectTransform)line.transform).sizeDelta = new Vector2(((RectTransform)line.transform).sizeDelta.x, ((RectTransform)line.transform).sizeDelta.y * 1.2f);
         rotation = givenBaseRotation;
         line.transform.rotation = Quaternion.Euler(0f, 0f, rotation);
         finalNodeBackground.SetActive(true);

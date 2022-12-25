@@ -61,6 +61,55 @@ MonoBehaviour:
   pooledObjects: []
   PrefabToPool: {fileID: 4588843092609352554, guid: 12eb162b40717e14bbfba8954b2b1c12, type: 3}
   NumToPool: 20
+--- !u!1 &1017730314
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1017730315}
+  - component: {fileID: 1017730316}
+  m_Layer: 0
+  m_Name: dialogueExecuter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1017730315
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017730314}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4180575170529028752}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1017730316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1017730314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a2ad485bad17f54aaaa6b663df89e2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_panel: {fileID: 0}
+  m_text: {fileID: 0}
+  speakerImage: {fileID: 0}
+  typeSpeed: 0.1
+  timeBetweenLines: 1
 --- !u!1 &1513092585
 GameObject:
   m_ObjectHideFlags: 0
@@ -154,6 +203,50 @@ MonoBehaviour:
     effectPrefab: {fileID: 100000, guid: f06e78284f831ae469c74624ab5d513b, type: 3}
   - m_effect: 1
     effectPrefab: {fileID: 100000, guid: b32b78afc1b8d214aaa1be115ba87621, type: 3}
+--- !u!1 &1877112336
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1877112337}
+  - component: {fileID: 1877112338}
+  m_Layer: 0
+  m_Name: RelicManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1877112337
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877112336}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4180575170529028752}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1877112338
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1877112336}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de749552017674e47925a4776d060998, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2023060717
 GameObject:
   m_ObjectHideFlags: 0
@@ -351,6 +444,8 @@ Transform:
   - {fileID: 1518239165}
   - {fileID: 1513092586}
   - {fileID: 6949193590038469940}
+  - {fileID: 1017730315}
+  - {fileID: 1877112337}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -370,9 +465,13 @@ MonoBehaviour:
     Player: {fileID: 0}
     playerActor: {fileID: 0}
     PlayerController: {fileID: 0}
-    RubberDuck: {fileID: 21300000, guid: 5e90b84ce22ce87448f6d2d0a6c2575d, type: 3}
-    LightningEmblem: {fileID: 21300000, guid: 40731a68def4cf14482ccaf0ac902a71, type: 3}
-    HealingGoblet: {fileID: 21300000, guid: 07733e9e87e4ca74db3578d683acc9a3, type: 3}
+    EmergencyExit: {fileID: 6844410114324268182, guid: 3f8bb36e10475414f9c1b52245f894b1, type: 3}
+    LightningEmblem: {fileID: 21300000, guid: f85c32f8393145d4490fbb794ef75d5a, type: 3}
+    HealingGoblet: {fileID: 21300000, guid: fe4a173f80ba0da409911bb0b7cedd77, type: 3}
+    WindChimes: {fileID: 0}
+    KnifeOfTheHunter: {fileID: 0}
+    TurtlePendant: {fileID: 0}
+    relicDropPrefab: {fileID: 437440526707936933, guid: 4a49ca5b1ebf92948a2d0b8c980df404, type: 3}
     camPositionSetter: {fileID: 0}
     CubePool: {fileID: 0}
     blackFade: {fileID: 0}
@@ -382,9 +481,9 @@ MonoBehaviour:
     CraftingPanel: {fileID: 0}
     BounderScout: {fileID: 7286397062145270228, guid: 6c38a5c0a53fc5146be94217aa9aef63, type: 3}
     craftingMapNode: {fileID: 1946464524881845352, guid: b4057901708be3c49843f221eafadf56, type: 3}
-    GlimmeringSprite: {fileID: 21300000, guid: 4855345e26ffcbb41b380e59b5a54ea1, type: 3}
-    BranchSprite: {fileID: 21300000, guid: 99c1c0c5109bc0d49ba0a3816ab995a0, type: 3}
-    RuneSprite: {fileID: 21300000, guid: b11d6b81e7d6dcd459f71e206bd49259, type: 3}
+    GlimmeringSprite: {fileID: 21300000, guid: 66a3d44b669a40942bbc63810551d001, type: 3}
+    BranchSprite: {fileID: 21300000, guid: fa91225964ff1234ea62b1d40b743f2f, type: 3}
+    RuneSprite: {fileID: 21300000, guid: 73a165a53d281ee4a88b8372312ffe7b, type: 3}
     LeatherSprite: {fileID: 21300000, guid: 681cdb2853ae7144c815013a86c8da7c, type: 3}
     ItemUiSlot: {fileID: 1052155130899679002, guid: d0f22065e4078e447bddcdb0b03a269c, type: 3}
     baseFatherObject: {fileID: 0}
@@ -435,7 +534,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   createdMapTiles: []
+  createdMiniMapTiles: []
   mapUimanager: {fileID: 2903121433711285556}
+  miniMapNodeOffset: 120
+  largeMapNodeOffsetMod: 1.2
 --- !u!114 &2903121433711285556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -449,7 +551,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   largeMapTransfrom: {fileID: 0}
+  minimapTransform: {fileID: 0}
   maptilePrefab: {fileID: 7616976889884587882, guid: 01d23a1d340658c4ea8a9765feac84a5, type: 3}
+  miniMapTilePrefab: {fileID: 7616976889884587882, guid: 6b1b71f5b682d874daa0ed8725ad8b11, type: 3}
+  miniMapCenterNode: {fileID: 0}
 --- !u!1 &4698557210947762662
 GameObject:
   m_ObjectHideFlags: 0
@@ -558,12 +663,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstIsleRooms:
+  - {fileID: 8044641725427839896, guid: 69d3a6677bdb11541af07c28fbd6d133, type: 3}
   - {fileID: 3149440148777350306, guid: 534d9e517b65f134196a20b1014c09ad, type: 3}
-  - {fileID: 184359746, guid: 97f9531a6a1db1a4cac40205d5070749, type: 3}
   - {fileID: 5954773215286868691, guid: 675a6c45376e11f459856379caf1d180, type: 3}
   - {fileID: 1398470984, guid: fb700f8c60a416544ae57319b358ce92, type: 3}
-  - {fileID: 2053621644, guid: 3a71c310797a02a468c5c13a2fa4bb10, type: 3}
-  - {fileID: 1060796543, guid: 44608926081bcaf448e299905ea80743, type: 3}
+  - {fileID: 1540893921, guid: 33ba45dd60c907f46abe419c97a3b5ff, type: 3}
   secondIsleRooms: []
   thirdIsleRooms: []
   currentRunRooms: []
@@ -576,10 +680,13 @@ MonoBehaviour:
     Amount: 10
   - RoomType: 3
     Amount: 10
+  - RoomType: 4
+    Amount: 10
   currentRunState: []
   firstRoom: {fileID: 0}
-  numberOfRooms: 6
+  numberOfRooms: 5
   mapGenerator: {fileID: 1608005968017932032}
+  maxNuberOfChests: 1
 --- !u!1001 &6662966006180783118
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -648,12 +755,24 @@ PrefabInstance:
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7382524246091496564, guid: a7e966f696a66614f9efc20e8773d2e6, type: 3}
+      propertyPath: TurtleBlockPower
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382524246091496564, guid: a7e966f696a66614f9efc20e8773d2e6, type: 3}
+      propertyPath: TurtleBlockTreshold
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382524246091496564, guid: a7e966f696a66614f9efc20e8773d2e6, type: 3}
       propertyPath: InvlunerabilityDuration
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7382524246091496564, guid: a7e966f696a66614f9efc20e8773d2e6, type: 3}
       propertyPath: LightningEmblemDamageMod
       value: 1.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7382524246091496564, guid: a7e966f696a66614f9efc20e8773d2e6, type: 3}
+      propertyPath: KnifeOfTheHunterDamageMod
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 7382524246091496564, guid: a7e966f696a66614f9efc20e8773d2e6, type: 3}
       propertyPath: RubberDuckDamageBlockChance

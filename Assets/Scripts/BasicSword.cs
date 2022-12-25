@@ -15,10 +15,8 @@ public class BasicSword : Weapon
     private const string attackPrefix = "Attack";
     private StringBuilder stringBuilder;
     [SerializeField] private LayerMask groundLayer;
-   /* private void Start()
-    {
-        player = GameManager.Instance.assets.Player.GetComponent<PlayerController>();
-    }*/
+    [SerializeField] float floatTimeInAirBeforeDash = 0.12f;
+    [SerializeField] float GravityScaleBeforeDash;
 
     public override void Mobility()
     {
@@ -28,6 +26,7 @@ public class BasicSword : Weapon
 
     IEnumerator IEDash()
     {
+        yield return player.FreezePlayerForDuration(floatTimeInAirBeforeDash, GravityScaleBeforeDash);
         lastDash = Time.time;
         player.canMove = false;
         isDashing = true;
@@ -42,9 +41,7 @@ public class BasicSword : Weapon
         player.canMove = true;
         isDashing = false;
         player.ResetGravity();
-/*        player.GetRb.velocity = player.transform.forward;
-        yield return new WaitForSeconds(dashCooldown);
-        CanDash = true;*/
+
     }
 
     protected override void Ultimate()
