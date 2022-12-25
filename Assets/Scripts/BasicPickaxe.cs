@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Text;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class BasicPickaxe : Weapon
 {
@@ -22,6 +23,7 @@ public class BasicPickaxe : Weapon
     [SerializeField] private float downForceFromAirAttack;
     private const string attackPrefix = "Attack";
 
+    [SerializeField] private float groundedAttackTime;
     bool airAttacking;
     private void Start()
     {
@@ -114,7 +116,6 @@ public class BasicPickaxe : Weapon
     }
     IEnumerator IEJumpFromMobility()
     {
-
         player.ResetVelocity();
         player.RecieveForce(jumpToClawForce);
 
@@ -168,7 +169,6 @@ public class BasicPickaxe : Weapon
     }
     protected override void AttackPerformed()
     {
-
         if (!player.GetIsGrounded)
         {
             if (airAttacking)
@@ -186,13 +186,11 @@ public class BasicPickaxe : Weapon
         animationString = stringBuilder.ToString();
         Debug.Log(animationString);
         m_animator.SetTrigger(animationString);
-
+        OnGroundAttack?.Invoke();
     }
 
     private IEnumerator AirAttack()
     {
-     
-
         player.ResetVelocity();
         airAttacking = true;
         player.canMove = false;
@@ -209,5 +207,24 @@ public class BasicPickaxe : Weapon
     {
         player.canMove = true;
         airAttacking = false;
+        OnGroundAttack.RemoveListener(StopPlayerWhileGroundAttacking);
+    }
+
+    private void OnEnable()
+    {
+        OnGroundAttack.AddListener(StopPlayerWhileGroundAttacking);
+    }
+
+    private void StopPlayerWhileGroundAttacking()
+    {
+        StartCoroutine(StopPlayer());
+    }
+
+    private IEnumerator StopPlayer()
+    {
+        player.ResetVelocity();
+        player.canMove = false;
+        yield return new WaitForSeconds(groundedAttackTime);
+        player.canMove = true;
     }
 }

@@ -11,11 +11,12 @@ public class BasicSword : Weapon
     private float lastDash;
     private float counter = 0;
     public float dashForce;
+
     private PlayerController player => GameManager.Instance.assets.PlayerController;
     private const string attackPrefix = "Attack";
     private StringBuilder stringBuilder;
     [SerializeField] private LayerMask groundLayer;
- 
+
     public override void Mobility()
     {
         if (Time.time - lastDash >= dashCooldown)
@@ -24,7 +25,6 @@ public class BasicSword : Weapon
 
     IEnumerator IEDash()
     {
-        
         lastDash = Time.time;
         player.canMove = false;
         isDashing = true;
@@ -36,10 +36,10 @@ public class BasicSword : Weapon
         Vector2 dashVelocity = dashForce * dir;
         player.GetRb.velocity = dashVelocity;
         yield return new WaitForSeconds(dashDuration);
+        player.ResetGravity();
+        StartCoroutine(player.JumpApexWait());
         player.canMove = true;
         isDashing = false;
-        player.ResetGravity();
-
     }
 
     protected override void Ultimate()
@@ -59,7 +59,7 @@ public class BasicSword : Weapon
         stringBuilder.Append(attackPrefix);
         stringBuilder.Append(AbilityCombo.GetAbilityIndex().ToString());
         animationString = stringBuilder.ToString();
-       // Debug.Log(animationString);
+        // Debug.Log(animationString);
         m_animator.SetTrigger(animationString);
     }
     private void OnDisable()

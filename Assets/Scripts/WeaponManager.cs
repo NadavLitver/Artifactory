@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using System.Collections;
 public class WeaponManager : MonoBehaviour
 {
     [SerializeField] List<Weapon> playerWeapons = new List<Weapon>();
@@ -21,6 +22,7 @@ public class WeaponManager : MonoBehaviour
             Debug.LogError("Ability Combo on" + gameObject.name + " is Null");
         }
         OnSwitchWeapon.AddListener(m_actor.DisableOnInAnim);
+        OnSwitchWeapon.AddListener(ResetPlayerController);
     }
 
 
@@ -55,8 +57,6 @@ public class WeaponManager : MonoBehaviour
         }
 
         return null;
-
-
     }
 
     private Weapon GetPreviousWeapon()
@@ -104,8 +104,6 @@ public class WeaponManager : MonoBehaviour
 
         OnSwitchWeapon?.Invoke();
         GameManager.Instance.assets.mobileButtonHandler.SetMobilityOnButton(playerWeapons.IndexOf(givenWeapon));
-        
-        //m_actor.IsInAttackAnim = false;
     }
 
 
@@ -120,4 +118,9 @@ public class WeaponManager : MonoBehaviour
         m_actor.EnableOnInAnim();   
     }
 
+    private void ResetPlayerController()
+    {
+        GameManager.Instance.assets.PlayerController.ResetVelocity();
+        GameManager.Instance.assets.PlayerController.ResetGravity();
+    }
 }

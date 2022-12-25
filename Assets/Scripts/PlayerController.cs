@@ -114,12 +114,19 @@ public class PlayerController : MonoBehaviour
     public IEnumerator JumpApexWait()
     {
         yield return new WaitUntil(() => isFalling == true);
+        Debug.Log("apexing");
         GravityScale = apexGravityScale;
         yield return new WaitForSeconds(apexAirTimeGravityChange);
+        Debug.Log("apex done");
         GravityScale = startingGravityScale;
-
     }
-
+    public IEnumerator JumpApexWait(float duration, float scale)
+    {
+        yield return new WaitUntil(() => isFalling == true);
+        GravityScale = scale;
+        yield return new WaitForSeconds(duration);
+        GravityScale = startingGravityScale;
+    }
     void Update()
     {
         SetVelocity();
@@ -187,7 +194,6 @@ public class PlayerController : MonoBehaviour
         horInput = GameManager.Instance.inputManager.GetMoveVector().x;
         if (canMove)
         {
-
             if (horInput > 0)
             {
                 if (!isLookingRight)
