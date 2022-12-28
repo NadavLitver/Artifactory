@@ -127,7 +127,9 @@ public class AssetsRefrence
     public Sprite RuneSprite;
     public Sprite LeatherSprite;
     public ItemUiSlot ItemUiSlot;
-    
+
+    [Header("Crafting"), Space(10)]
+    public ItemPickup ItemPickUpPrefab;
 
     [Header("Base"), Space(10)]
     public GameObject baseFatherObject;
