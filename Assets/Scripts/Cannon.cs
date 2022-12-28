@@ -73,6 +73,7 @@ public class Cannon : Weapon
         if (!jumped)
         {
             m_animator.SetTrigger(MobilityHash);
+           // GameManager.Instance.vfxManager.Play(VisualEffect.CannonJumpEffect,GameManager.Instance.assets.PlayerController)
             Vector2 velocity = GameManager.Instance.assets.PlayerController.GetVelocity;
             GameManager.Instance.assets.PlayerController.ResetVelocity();
             GameManager.Instance.assets.PlayerController.RecieveForce(new Vector2(velocity.x, jumpForce));
