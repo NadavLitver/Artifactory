@@ -16,6 +16,8 @@ public class Cannon : Weapon
     [SerializeField] float slowDuration;
     [SerializeField] float gravityScaleOnShoot;
     private int AttackHash;
+    private int MobilityHash;
+
     public bool ShootFlag;
     private void OnEnable()
     {
@@ -26,6 +28,7 @@ public class Cannon : Weapon
     private void Start()
     {
         AttackHash = Animator.StringToHash("Attack");
+        MobilityHash = Animator.StringToHash("Mobility");
         foreach (var item in bulletPool.pooledObjects)
         {
             Bullet bullet = item.GetComponent<Bullet>();
@@ -69,6 +72,7 @@ public class Cannon : Weapon
     {
         if (!jumped)
         {
+            m_animator.SetTrigger(MobilityHash);
             Vector2 velocity = GameManager.Instance.assets.PlayerController.GetVelocity;
             GameManager.Instance.assets.PlayerController.ResetVelocity();
             GameManager.Instance.assets.PlayerController.RecieveForce(new Vector2(velocity.x, jumpForce));
