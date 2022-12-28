@@ -16,7 +16,8 @@ public class VfxManager : MonoBehaviour
 
     public void Play(VisualEffect _effect, Vector2 worldPos)
     {
-        Instantiate(GetEffectByEnum(_effect), worldPos, Quaternion.identity);
+        GameObject effect = GetEffectByEnum(_effect);
+        Instantiate(effect, worldPos, effect.transform.rotation);
     }
     public void Play(VisualEffect _effect, Vector2 worldPos, Quaternion rotation)
     {
