@@ -25,6 +25,8 @@ public class BasicPickaxe : Weapon
 
     [SerializeField] private float groundedAttackTime;
     bool airAttacking;
+
+    GameObject clawEffect;
     private void Start()
     {
         //  player = GameManager.Instance.assets.Player.GetComponent<PlayerController>();
@@ -146,12 +148,23 @@ public class BasicPickaxe : Weapon
             yield return new WaitForEndOfFrame();
         }
         Debug.Log("PickaxeReached");
+        TurnOnClawEffect();
         yield return new WaitForSeconds(maxClawTime);
         player.Animator.SetBool("Climb", false);
         Clawed = false;
         player.canMove = true;
         player.ResetGravity();
 
+    }
+
+    private void TurnOnClawEffect()
+    {
+        if (ReferenceEquals(clawEffect, null))
+        {
+            clawEffect = GameManager.Instance.vfxManager.PlayAndGet(VisualEffect.ClawEffect);
+        }
+        clawEffect.transform.position = GameManager.Instance.assets.PlayerController.ClawEffectPoint.position;
+        clawEffect.SetActive(true);
     }
     protected override void Ultimate()
     {
