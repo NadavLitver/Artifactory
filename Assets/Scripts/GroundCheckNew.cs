@@ -1,11 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class GroundCheckNew : MonoBehaviour
 {
     [SerializeField] List<GroundCheckSensor> sensors = new List<GroundCheckSensor>();
     [SerializeField] LayerMask hitLayer;
+
+    public UnityEvent OnGrounded;
+    public UnityEvent OnNotGrounded;
+
+    private void Start()
+    {
+        StartCoroutine(WaitForGrounded());
+    }
+
     public bool IsAllGrounded()
     {
         foreach (var item in sensors)
@@ -40,6 +50,20 @@ public class GroundCheckNew : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    IEnumerator WaitForGrounded()
+    {
+        yield return new WaitUntil(() => IsGrounded());
+        OnGrounded?.Invoke();
+        StartCoroutine(WaitForNotGrounded());
+    }
+    IEnumerator WaitForNotGrounded()
+    {
+        yield return new WaitUntil(() => !IsGrounded());
+        OnNotGrounded?.Invoke();
+        StartCoroutine(WaitForGrounded());
+
     }
 
     private void OnDrawGizmosSelected()

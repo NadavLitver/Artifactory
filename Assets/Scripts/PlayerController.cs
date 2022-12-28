@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 
@@ -29,7 +30,12 @@ public class PlayerController : MonoBehaviour
     private float currentSpeed;
     private float currentAccel;
 
-    // [SerializeField] PlayerGroundCheck m_groundCheck;
+    private GameObject jumpEffect;
+    private GameObject landEffect;
+
+    [SerializeField] private Transform jumpEffectPoint;
+
+    [SerializeField] private GroundCheckNew OnsGroundCheck;
 
 
     [Header("Editable Properties"), Space(10)]
@@ -70,7 +76,8 @@ public class PlayerController : MonoBehaviour
         StartingScale = transform.localScale;
         startingGravityScale = GravityScale;
         isLookingRight = true;
-
+        OnsGroundCheck.OnNotGrounded.AddListener(TurnOnJumpEffect);
+        OnsGroundCheck.OnGrounded.AddListener(TurnOnLandEffect);
     }
     void OnEnable()
     {
@@ -97,6 +104,7 @@ public class PlayerController : MonoBehaviour
             isGrounded = false;
             m_animator.SetTrigger("Jump");
             StartCoroutine(JumpApexWait());
+          //  TurnOnJumpEffect();
         }
         else if (isFalling)
         {
@@ -172,7 +180,6 @@ public class PlayerController : MonoBehaviour
         {
             velocity.y = Mathf.MoveTowards(velocity.y, 0, GravityScale * Time.deltaTime);
             Jumping = false;
-            
         }
     }
     IEnumerator SetCoyoteForTime()
@@ -311,5 +318,26 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSecondsRealtime(time);
         canMove = true;
         ResetGravity();
+    }
+
+    private void TurnOnJumpEffect()
+    {
+        if (ReferenceEquals(jumpEffect, null))
+        {
+            jumpEffect = GameManager.Instance.vfxManager.PlayAndGet(VisualEffect.JumpEffect);
+        }
+        jumpEffect.transform.position = jumpEffectPoint.position;
+        jumpEffect.SetActive(true);
+    }
+
+    private void TurnOnLandEffect()
+    {
+        Debug.Log("landed");
+        if (ReferenceEquals(landEffect, null))
+        {
+            landEffect = GameManager.Instance.vfxManager.PlayAndGet(VisualEffect.LandEffect);
+        }
+        landEffect.transform.position = jumpEffectPoint.position;
+        landEffect.SetActive(true);
     }
 }

@@ -11,7 +11,8 @@ public class BasicSword : Weapon
     private float lastDash;
     private float counter = 0;
     public float dashForce;
-
+    [SerializeField] float floatTimeInAirBeforeDash = 0.12f;
+    [SerializeField] float GravityScaleBeforeDash;
     private PlayerController player => GameManager.Instance.assets.PlayerController;
     private const string attackPrefix = "Attack";
     private StringBuilder stringBuilder;
@@ -25,6 +26,7 @@ public class BasicSword : Weapon
 
     IEnumerator IEDash()
     {
+        yield return player.FreezePlayerForDuration(floatTimeInAirBeforeDash, GravityScaleBeforeDash);
         lastDash = Time.time;
         player.canMove = false;
         isDashing = true;
