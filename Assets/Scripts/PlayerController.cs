@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Vector2 topMidPoint;
     [SerializeField] float horInput;
     [SerializeField] float startingGravityScale;
-    [SerializeField] bool isGrounded;
+    //[SerializeField] bool isGrounded;
     [SerializeField] bool isLookingRight;
     [SerializeField] bool isFalling;
     [SerializeField] Collider2D m_collider;
@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     private GameObject landEffect;
 
     [SerializeField] private Transform jumpEffectPoint;
+    [SerializeField] private Transform clawEffectPoint;
 
     [SerializeField] private GroundCheckNew OnsGroundCheck;
 
@@ -61,12 +62,13 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D GetRb { get => m_rb; set => m_rb = value; }
     public Vector2 GetVelocity { get => velocity; set => velocity = value; }
     public bool GetIsLookingRight { get => isLookingRight; set => isLookingRight = value; }
-    public bool GetIsGrounded { get => isGrounded; set => isGrounded = value; }
+    public bool GetIsGrounded { get => OnsGroundCheck.IsGrounded(); }
     public bool GetIsFalling { get => isFalling; set => isFalling = value; }
     public bool GetIsJumping { get => Jumping; set => Jumping = value; }
     public Vector2 GetExternalForces { get => externalForces; set => externalForces = value; }
     public bool GetCoyoteAvailable { get => CoyoteAvailable; set => CoyoteAvailable = value; }
     public Animator Animator { get => m_animator; set => m_animator = value; }
+    public Transform ClawEffectPoint { get => clawEffectPoint; set => clawEffectPoint = value; }
 
     private void Awake()
     {
@@ -97,11 +99,11 @@ public class PlayerController : MonoBehaviour
     }
     private void JumpPressed()
     {
-        if ((isGrounded || CoyoteAvailable) && GameManager.Instance.inputManager.JumpDown() && canMove)
+        if ((OnsGroundCheck.IsGrounded()|| CoyoteAvailable) && GameManager.Instance.inputManager.JumpDown() && canMove)
         {
             Jumping = true;
             velocity.y = jumpForce;
-            isGrounded = false;
+            //isGrounded = false;
             m_animator.SetTrigger("Jump");
             StartCoroutine(JumpApexWait());
           //  TurnOnJumpEffect();
@@ -116,7 +118,6 @@ public class PlayerController : MonoBehaviour
     {
         Jumping = true;
         velocity.y = jumpForce;
-        isGrounded = false;
         m_animator.SetTrigger("Jump");
     }
     public IEnumerator JumpApexWait()
@@ -164,10 +165,9 @@ public class PlayerController : MonoBehaviour
 
     private void GetCoyoteAndSetGrounded()
     {
-        bool wasGrounded = isGrounded;
-        isGrounded = CheckIsGround();
+        bool wasGrounded = GetIsGrounded;
 
-        if (!isGrounded)
+        if (!OnsGroundCheck.IsGrounded())
         {
             velocity.y = Mathf.MoveTowards(velocity.y, -maxGravity, GravityScale * Time.deltaTime);
             if (wasGrounded && !Jumping)
@@ -191,9 +191,9 @@ public class PlayerController : MonoBehaviour
     void SetAnimatorParameters()
     {
 
-        m_animator.SetBool("Grounded", isGrounded);
-        m_animator.SetBool("Running", (horInput != 0 && isGrounded));
-        isFalling = (!isGrounded && velocity.y < -1f);
+        m_animator.SetBool("Grounded", GetIsGrounded);
+        m_animator.SetBool("Running", (horInput != 0 && GetIsGrounded));
+        isFalling = (!GetIsGrounded && velocity.y < -1f);
         m_animator.SetBool("Falling", isFalling);
     }
     private void SetVelocity()
@@ -223,7 +223,7 @@ public class PlayerController : MonoBehaviour
             }
             bool noInput = horInput == 0;
             float accelGoal = noInput ? 0 : 1;
-            currentSpeed = isGrounded ? speed : AirSpeed;
+            currentSpeed = GetIsGrounded ? speed : AirSpeed;
             currentAccel = noInput ? deaccelerationSpeed : accelerationSpeed;
 
             acceleration = Mathf.MoveTowards(acceleration, accelGoal, currentAccel * Time.deltaTime);
@@ -260,13 +260,13 @@ public class PlayerController : MonoBehaviour
 
         return false;
     }
-    public bool CheckIsGround()
+   /* public bool CheckIsGround()
     {
         bool bottomRightRay = Physics2D.Raycast(BottomRightPoint, Vector2.down, groundCheckDistance, GroundLayerMask);
         bool bottomLeftRay = Physics2D.Raycast(BottomLeftPoint, Vector2.down, groundCheckDistance, GroundLayerMask);
        
         return bottomRightRay || bottomLeftRay;
-    }
+    }*/
     private void FixedUpdate()
     {
         if (canMove)
@@ -292,7 +292,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        Gizmos.color = isGrounded ? Color.green : Color.red;
+        Gizmos.color = GetIsGrounded ? Color.green : Color.red;
         Gizmos.DrawRay(BottomRightPoint, Vector2.down * groundCheckDistance);
 
         Gizmos.DrawRay(BottomLeftPoint, Vector2.down * groundCheckDistance);
