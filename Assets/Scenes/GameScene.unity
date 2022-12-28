@@ -123,6 +123,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &417043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 417044}
+  m_Layer: 6
+  m_Name: JumpPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &417044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417043}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.09, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1388797333}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &25285287 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 25285287, guid: 877a6add5b775234baa437818e4992dd, type: 3}
@@ -236,6 +267,42 @@ PrefabInstance:
       propertyPath: speakerImage
       value: 
       objectReference: {fileID: 1807146379}
+    - target: {fileID: 1518239166, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
+      propertyPath: visualEffectDatas.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518239166, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
+      propertyPath: visualEffectDatas.Array.data[2].m_effect
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518239166, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
+      propertyPath: visualEffectDatas.Array.data[3].m_effect
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518239166, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
+      propertyPath: visualEffectDatas.Array.data[4].m_effect
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518239166, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
+      propertyPath: visualEffectDatas.Array.data[5].m_effect
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1518239166, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
+      propertyPath: visualEffectDatas.Array.data[2].effectPrefab
+      value: 
+      objectReference: {fileID: 100000, guid: 4022f81d133bcc749b5f9b59700a4b06, type: 3}
+    - target: {fileID: 1518239166, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
+      propertyPath: visualEffectDatas.Array.data[3].effectPrefab
+      value: 
+      objectReference: {fileID: 100000, guid: 4dfdcea65c3ebe14a9be2d2e64f378ac, type: 3}
+    - target: {fileID: 1518239166, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
+      propertyPath: visualEffectDatas.Array.data[4].effectPrefab
+      value: 
+      objectReference: {fileID: 1040608886635896, guid: 889a3adaee382214da7e7e33527f6442, type: 3}
+    - target: {fileID: 1518239166, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
+      propertyPath: visualEffectDatas.Array.data[5].effectPrefab
+      value: 
+      objectReference: {fileID: 6351007847618363293, guid: 5a7d06d3022ff084db13a72f9a67ee92, type: 3}
     - target: {fileID: 1877112338, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
       propertyPath: freeRelics.Array.size
       value: 5
@@ -767,6 +834,38 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 7735722681560481761, guid: 877a6add5b775234baa437818e4992dd, type: 3}
   m_PrefabInstance: {fileID: 1840812752}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1388797332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1388797333}
+  m_Layer: 6
+  m_Name: VFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1388797333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388797332}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 417044}
+  m_Father: {fileID: 2138488578}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1732684267 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7616976889394686459, guid: 877a6add5b775234baa437818e4992dd, type: 3}
@@ -1295,6 +1394,14 @@ PrefabInstance:
       value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 840070347753010961, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
+      propertyPath: OnsGroundCheck
+      value: 
+      objectReference: {fileID: 2138488584}
+    - target: {fileID: 840070347753010961, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
+      propertyPath: jumpEffectPoint
+      value: 
+      objectReference: {fileID: 417044}
+    - target: {fileID: 840070347753010961, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
       propertyPath: accelerationSpeed
       value: 30
       objectReference: {fileID: 0}
@@ -1471,6 +1578,42 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 840070347753010964, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
   m_PrefabInstance: {fileID: 2138488568}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &2138488578 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 840070347753010960, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
+  m_PrefabInstance: {fileID: 2138488568}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2138488584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2138488577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6193962b013a7cb4593f05fbab66e330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensors:
+  - Direcion: {x: 0, y: -1}
+    Offset: {x: -0.27, y: -0.92}
+    Range: 0.3
+  - Direcion: {x: 0, y: -1}
+    Offset: {x: 0.3, y: -0.92}
+    Range: 0.3
+  - Direcion: {x: 0, y: -1}
+    Offset: {x: 0, y: -1.05}
+    Range: 0.25
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  OnGrounded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNotGrounded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &9046812149282889914
 PrefabInstance:
   m_ObjectHideFlags: 0
