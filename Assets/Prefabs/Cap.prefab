@@ -89,7 +89,7 @@ MonoBehaviour:
   OnTakeCriticalDamage:
     m_PersistentCalls:
       m_Calls: []
-  OnHitByActor:
+  OnGetHit:
     m_PersistentCalls:
       m_Calls: []
   OnKill:
@@ -105,6 +105,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnRecieveHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHitMeleeAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHitRangedAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGetHitByRangedAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGetHitByMeleeAttack:
     m_PersistentCalls:
       m_Calls: []
   TakeDamageGFX:
@@ -144,7 +156,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -257,6 +269,12 @@ MonoBehaviour:
   hitLayer:
     serializedVersion: 2
     m_Bits: 128
+  OnGrounded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNotGrounded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &7410975208765541923
 BoxCollider2D:
   m_ObjectHideFlags: 0
