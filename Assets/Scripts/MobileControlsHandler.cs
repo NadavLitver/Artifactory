@@ -10,7 +10,7 @@ public class MobileControlsHandler : MonoBehaviour
     //[SerializeField] private RectTransform mobilityButtonRef;
     [SerializeField] private RectTransform AttackButton;
     [SerializeField] private RectTransform InteractButton;
-
+    
     bool isAttackOn = true;
 
     public void SetMobilityOnButton(int index)
