@@ -113,6 +113,14 @@ public class Cannon : Weapon
         StartCoroutine(GameManager.Instance.assets.PlayerController.FreezePlayerForDuration(slowDuration, gravityScaleOnShoot));
         GameObject bullet = bulletPool.GetPooledObject();
         bullet.transform.position = muzzle.position;
+        if (!GameManager.Instance.assets.PlayerController.GetIsLookingRight)
+        {
+            bullet.transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            bullet.transform.localScale = Vector3.one;
+        }
         bullet.gameObject.SetActive(true);
         ShootFlag = false;
         StartCoroutine(StartCharging());
