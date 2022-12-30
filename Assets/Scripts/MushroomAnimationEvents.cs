@@ -12,7 +12,7 @@ public class MushroomAnimationEvents : MonoBehaviour
     }
     public void OnFinishDie()
     {
-        if (handler.AttackMode)
+        if (!handler.capDestroyed)
         {
             handler.StartRessurect();
         }

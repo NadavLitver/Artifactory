@@ -38,6 +38,7 @@ public class CinemachineShake : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
         camNoise.m_AmplitudeGain = 0;
+        cam.transform.parent.eulerAngles = Vector3.zero;
     }
 
 }

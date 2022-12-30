@@ -65,6 +65,7 @@ public class ShroomRam : State
         //   handler.Freeze(ramRecoveryTime);
         handler.RamCollider.SetActive(false);
         StartedCharging = false;
+        ramTimeCounter = ramTime;
     }
     public override void onStateExit()
     {

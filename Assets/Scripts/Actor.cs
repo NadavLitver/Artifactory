@@ -132,7 +132,7 @@ public class Actor : MonoBehaviour, IDamagable
     {
         foreach (var item in ActorStatusEffects)
         {
-            if (item.GetType().Equals(givenEffect.GetType()))
+            if (item.GetType() == (givenEffect.GetType()))
             {
                 //duplicate type already exists
                 ActorStatusEffects.Remove(item);
@@ -149,7 +149,12 @@ public class Actor : MonoBehaviour, IDamagable
         //return
         if (!hittable)
             return;
-        StartCoroutine(HitCooldown());
+
+        if (givenAbility.IsMelee)
+        {
+            StartCoroutine(HitCooldown());
+        }
+
         if (effectable)
         {
             foreach (var SE in givenAbility.StatusEffects)
@@ -207,7 +212,11 @@ public class Actor : MonoBehaviour, IDamagable
     {
         if (!hittable)
             return;
-        StartCoroutine(HitCooldown());
+
+        if (m_ability.IsMelee)
+        {
+            StartCoroutine(HitCooldown());
+        }
         if (effectable)
         {
             foreach (var SE in m_ability.StatusEffects)
@@ -262,14 +271,14 @@ public class Actor : MonoBehaviour, IDamagable
         critHit.AddModifier(givenAbility.CritHitChace);
         float crit = critHit.calculateFinalNumberAdd();
         critHit.ClearMods();
-        if (Random.Range(1, 100) <= crit *100)
+        if (Random.Range(1, 100) <= crit * 100)
         {
             Debug.Log("Crit!");
             return true;
         }
         return false;
     }
-     
+
     public float CalcCritDamage(Ability givenAbility)
     {
         critDamage.AddModifier(givenAbility.CritHitDamage);

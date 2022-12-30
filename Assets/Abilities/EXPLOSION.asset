@@ -14,9 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   damageHandler:
-    amount: 100
+    amount: 20
     myDmgType: 1
-  statusEffectsData: []
+  statusEffectsData:
+  - chance: 50
+    StatusType: 0
   statusActivationBaseChance: 1
   useBaseChanceForStatuses: 0
   knockbackForce: 0
+  critHitChace: 0.2
+  critHitDamage: 1
+  isMelee: 0
+  isRanged: 1

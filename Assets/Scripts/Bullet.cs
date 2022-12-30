@@ -37,13 +37,12 @@ public class Bullet : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //the impact of the bullet itself.
-        Debug.Log(collision.gameObject.name);
         Actor actor = collision.gameObject.GetComponent<Actor>();
         if (!ReferenceEquals(actor, null))
         {
             actor.GetHit(impactAbility, source.Host);
-            Explode();
         }
+        Explode();
     }
 
     private void Explode()

@@ -16,9 +16,15 @@ public class ShroomMoveBackwards : State
         handler.Anim.SetTrigger(handler.WalkBackhash);
     }
 
+    public override void onStateExit()
+    {
+        handler.Flipper.Disabled = false; 
+    }
+
+
     //basing back movement distance on duration and not range because we dont want to get the enemy stuck at a certain distance
-    
-    
+
+
     public override State RunCurrentState()
     {
 

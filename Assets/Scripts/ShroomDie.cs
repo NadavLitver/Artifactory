@@ -12,6 +12,7 @@ public class ShroomDie : State
         handler.Anim.SetTrigger("Die");
         handler.RB.velocity = Vector3.zero;
         base.onStateEnter();
+        handler.ShroomActor.RecieveStatusEffects(StatusEffectEnum.Invulnerability);
     }
     public override State RunCurrentState()
     {
