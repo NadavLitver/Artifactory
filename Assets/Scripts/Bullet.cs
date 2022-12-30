@@ -57,7 +57,7 @@ public class Bullet : MonoBehaviour
         rb.velocity = Vector2.zero;
         exploded = true;
         Explosion.gameObject.SetActive(true);
-        LeanTween.delayedCall(1f, TurnOff);
+        LeanTween.delayedCall(0.2f, TurnOff);
     }
 
     private void TurnOff()
