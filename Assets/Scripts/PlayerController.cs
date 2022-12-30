@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private Transform jumpEffectPoint;
     [SerializeField] private Transform clawEffectPoint;
+    [SerializeField] private ObjectPool jumpEffectPool;
+    [SerializeField] private ObjectPool landEffectPool;
 
     [SerializeField] private GroundCheckNew OnsGroundCheck;
 
@@ -322,21 +324,14 @@ public class PlayerController : MonoBehaviour
 
     private void TurnOnJumpEffect()
     {
-        if (ReferenceEquals(jumpEffect, null))
-        {
-            jumpEffect = GameManager.Instance.vfxManager.PlayAndGet(VisualEffect.JumpEffect);
-        }
+        jumpEffect = jumpEffectPool.GetPooledObject();
         jumpEffect.transform.position = jumpEffectPoint.position;
         jumpEffect.SetActive(true);
     }
 
     private void TurnOnLandEffect()
     {
-        Debug.Log("landed");
-        if (ReferenceEquals(landEffect, null))
-        {
-            landEffect = GameManager.Instance.vfxManager.PlayAndGet(VisualEffect.LandEffect);
-        }
+        landEffect = landEffectPool.GetPooledObject();
         landEffect.transform.position = jumpEffectPoint.position;
         landEffect.SetActive(true);
     }
