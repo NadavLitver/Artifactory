@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Text;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class BasicPickaxe : Weapon
 {
@@ -27,11 +26,15 @@ public class BasicPickaxe : Weapon
     bool airAttacking;
 
     GameObject clawEffect;
+    [SerializeField] ObjectPool clawEffectPool;
+    Vector3 originaClawEffectlRot;
     private void Start()
     {
         //  player = GameManager.Instance.assets.Player.GetComponent<PlayerController>();
         GameManager.Instance.inputManager.onJumpDown.AddListener(WallJump);
         airAttacking = false;
+        originaClawEffectlRot = clawEffectPool.GetPooledObject().transform.eulerAngles;
+        Debug.Log(originaClawEffectlRot);
     }
 
     private void WallJump()
@@ -159,9 +162,11 @@ public class BasicPickaxe : Weapon
 
     private void TurnOnClawEffect()
     {
-        if (ReferenceEquals(clawEffect, null))
+        clawEffect = clawEffectPool.GetPooledObject();
+        clawEffect.transform.eulerAngles = originaClawEffectlRot;
+        if (!GameManager.Instance.assets.PlayerController.GetIsLookingRight)
         {
-            clawEffect = GameManager.Instance.vfxManager.PlayAndGet(VisualEffect.ClawEffect);
+            clawEffect.transform.eulerAngles = new Vector3(originaClawEffectlRot.x, originaClawEffectlRot.y, originaClawEffectlRot.z * -1); ;
         }
         clawEffect.transform.position = GameManager.Instance.assets.PlayerController.ClawEffectPoint.position;
         clawEffect.SetActive(true);
