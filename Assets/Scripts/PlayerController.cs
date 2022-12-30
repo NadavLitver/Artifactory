@@ -70,7 +70,8 @@ public class PlayerController : MonoBehaviour
     public Vector2 GetExternalForces { get => externalForces; set => externalForces = value; }
     public bool GetCoyoteAvailable { get => CoyoteAvailable; set => CoyoteAvailable = value; }
     public Animator Animator { get => m_animator; set => m_animator = value; }
-    public Transform ClawEffectPoint { get => clawEffectPoint; set => clawEffectPoint = value; }
+    public Transform ClawEffectPoint { get => clawEffectPoint;}
+    public Transform JumpEffectPoint { get => jumpEffectPoint;}
 
     private void Awake()
     {
@@ -262,13 +263,6 @@ public class PlayerController : MonoBehaviour
 
         return false;
     }
-   /* public bool CheckIsGround()
-    {
-        bool bottomRightRay = Physics2D.Raycast(BottomRightPoint, Vector2.down, groundCheckDistance, GroundLayerMask);
-        bool bottomLeftRay = Physics2D.Raycast(BottomLeftPoint, Vector2.down, groundCheckDistance, GroundLayerMask);
-       
-        return bottomRightRay || bottomLeftRay;
-    }*/
     private void FixedUpdate()
     {
         if (canMove)

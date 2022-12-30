@@ -13,7 +13,7 @@ public class AbilityCombo : MonoBehaviour
     public AbilityComboData CurrentAbilityData { get => currentAbilityCombo; set => currentAbilityCombo = value; }
     public Ability CurrentAbility { get => currentAbilityCombo.Ability; }
     public bool CanAttack { get => canAttack; set => canAttack = value; }
-    [SerializeField, Range(0.1f, 1)] float clickGraceTime;
+    [SerializeField, Range(0.1f, 2)] float clickGraceTime;
     float lastAttackTime;
     public UnityEvent OnAttackPerformed;
 

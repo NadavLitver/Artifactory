@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3322618}
   - component: {fileID: 3322619}
-  m_Layer: 13
+  m_Layer: 12
   m_Name: Feet
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -58,7 +58,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 892493604}
-  m_Layer: 13
+  m_Layer: 12
   m_Name: Eyes
   m_TagString: Untagged
   m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
@@ -80,6 +80,69 @@ Transform:
   m_Father: {fileID: 6728404320883149186}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1022993770394903742
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7014117264390620811}
+  - component: {fileID: 7085321848985353094}
+  - component: {fileID: 1276163799654919236}
+  m_Layer: 13
+  m_Name: Shell
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7014117264390620811
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022993770394903742}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6728404320883149186}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7085321848985353094
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022993770394903742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e461ea02d641f264883fd7355c216109, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyAbility: {fileID: 11400000, guid: 652a9f131cb6aa74f8f3ae6d74c20635, type: 2}
+  host: {fileID: 8148802219243712764}
+--- !u!58 &1276163799654919236
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1022993770394903742}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 1.5}
+  serializedVersion: 2
+  m_Radius: 1
 --- !u!1 &6728404320829621123
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,7 +161,7 @@ GameObject:
   - component: {fileID: 1154823760}
   - component: {fileID: 1154823762}
   - component: {fileID: 1154823763}
-  m_Layer: 13
+  m_Layer: 12
   m_Name: StateHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -290,10 +353,9 @@ GameObject:
   - component: {fileID: 6728404320883149197}
   - component: {fileID: 1367142806}
   - component: {fileID: 1367142808}
-  - component: {fileID: 1489497844601875327}
   - component: {fileID: 8148802219243712764}
   - component: {fileID: 378837385}
-  m_Layer: 13
+  m_Layer: 12
   m_Name: Spiked Frog
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -317,6 +379,7 @@ Transform:
   - {fileID: 3322618}
   - {fileID: 5184906304668462053}
   - {fileID: 1279974855012235335}
+  - {fileID: 7014117264390620811}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -369,20 +432,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d40380298f7d504ca729fee6dc53fb5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1489497844601875327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6728404320883149187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e461ea02d641f264883fd7355c216109, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyAbility: {fileID: 11400000, guid: 652a9f131cb6aa74f8f3ae6d74c20635, type: 2}
-  host: {fileID: 8148802219243712764}
 --- !u!114 &8148802219243712764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -414,7 +463,7 @@ MonoBehaviour:
   OnTakeCriticalDamage:
     m_PersistentCalls:
       m_Calls: []
-  OnHitByActor:
+  OnGetHit:
     m_PersistentCalls:
       m_Calls: []
   OnKill:
@@ -430,6 +479,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnRecieveHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHitMeleeAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHitRangedAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGetHitByRangedAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGetHitByMeleeAttack:
     m_PersistentCalls:
       m_Calls: []
   TakeDamageGFX:
@@ -494,7 +555,7 @@ GameObject:
   - component: {fileID: 3236287938443897728}
   - component: {fileID: 9189810574590924089}
   - component: {fileID: 1745476001}
-  m_Layer: 13
+  m_Layer: 12
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -627,11 +688,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 274741794317759784, guid: 279fb23e8cfae8a448620d2e62822451, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1009286471326854565, guid: 279fb23e8cfae8a448620d2e62822451, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1915266538777141937, guid: 279fb23e8cfae8a448620d2e62822451, type: 3}
       propertyPath: m_RootOrder
@@ -683,7 +744,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1915266538777141938, guid: 279fb23e8cfae8a448620d2e62822451, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 1915266538777141951, guid: 279fb23e8cfae8a448620d2e62822451, type: 3}
       propertyPath: actor
@@ -691,15 +752,15 @@ PrefabInstance:
       objectReference: {fileID: 8148802219243712764}
     - target: {fileID: 3917068982780745306, guid: 279fb23e8cfae8a448620d2e62822451, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 8128097064966062345, guid: 279fb23e8cfae8a448620d2e62822451, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 9067406826037331735, guid: 279fb23e8cfae8a448620d2e62822451, type: 3}
       propertyPath: m_Layer
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 279fb23e8cfae8a448620d2e62822451, type: 3}

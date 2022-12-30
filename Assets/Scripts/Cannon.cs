@@ -15,14 +15,20 @@ public class Cannon : Weapon
     [SerializeField] Light cannonGlow;
     [SerializeField] float slowDuration;
     [SerializeField] float gravityScaleOnShoot;
+    private int AttackHash;
+    private int MobilityHash;
 
+    public bool ShootFlag;
     private void OnEnable()
     {
         isCharging = false;
         StartCoroutine(StartCharging());
+
     }
     private void Start()
     {
+        AttackHash = Animator.StringToHash("Attack");
+        MobilityHash = Animator.StringToHash("Mobility");
         foreach (var item in bulletPool.pooledObjects)
         {
             Bullet bullet = item.GetComponent<Bullet>();
@@ -66,6 +72,8 @@ public class Cannon : Weapon
     {
         if (!jumped)
         {
+            m_animator.SetTrigger(MobilityHash);
+            GameManager.Instance.vfxManager.Play(VisualEffect.CannonJumpEffect, GameManager.Instance.assets.PlayerController.JumpEffectPoint.position);
             Vector2 velocity = GameManager.Instance.assets.PlayerController.GetVelocity;
             GameManager.Instance.assets.PlayerController.ResetVelocity();
             GameManager.Instance.assets.PlayerController.RecieveForce(new Vector2(velocity.x, jumpForce));
@@ -85,11 +93,19 @@ public class Cannon : Weapon
 
     private void FireBullet()
     {
+        m_animator.SetTrigger(AttackHash);
+        StartCoroutine(IEFireBullet());
+
+    }
+    public IEnumerator IEFireBullet()
+    {
+        yield return new WaitUntil(() => ShootFlag);
         StartCoroutine(GameManager.Instance.assets.PlayerController.FreezePlayerForDuration(slowDuration, gravityScaleOnShoot));
         GameObject bullet = bulletPool.GetPooledObject();
         bullet.transform.position = muzzle.position;
         bullet.gameObject.SetActive(true);
         isLoaded = false;
+        ShootFlag = false;
         StartCoroutine(StartCharging());
     }
     private void OnDisable()
