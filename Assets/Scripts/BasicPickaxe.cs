@@ -27,6 +27,7 @@ public class BasicPickaxe : Weapon
     bool airAttacking;
 
     GameObject clawEffect;
+    [SerializeField] ObjectPool clawEffectPool;
     private void Start()
     {
         //  player = GameManager.Instance.assets.Player.GetComponent<PlayerController>();
@@ -159,10 +160,11 @@ public class BasicPickaxe : Weapon
 
     private void TurnOnClawEffect()
     {
-        if (ReferenceEquals(clawEffect, null))
+        clawEffect = clawEffectPool.GetPooledObject();
+        /*if (ReferenceEquals(clawEffect, null))
         {
             clawEffect = GameManager.Instance.vfxManager.PlayAndGet(VisualEffect.ClawEffect);
-        }
+        }*/
         clawEffect.transform.position = GameManager.Instance.assets.PlayerController.ClawEffectPoint.position;
         clawEffect.SetActive(true);
     }

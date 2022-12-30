@@ -1,5 +1,116 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &417043
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 417044}
+  m_Layer: 6
+  m_Name: JumpPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &417044
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 417043}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1.09, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1388797333}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1388797332
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1388797333}
+  - component: {fileID: 1388797334}
+  m_Layer: 6
+  m_Name: VFX
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1388797333
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388797332}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 417044}
+  - {fileID: 1720240842}
+  m_Father: {fileID: 840070347753010960}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1388797334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388797332}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9620412430c40f4e97693b92b5a3084, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  objectToPool: {fileID: 1040608886635896, guid: 889a3adaee382214da7e7e33527f6442, type: 3}
+  amountToPool: 3
+--- !u!1 &1720240841
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1720240842}
+  m_Layer: 6
+  m_Name: ClawPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1720240842
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720240841}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.7, y: 0.35, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1388797333}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1832014675
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +210,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.12, y: 5.12}
+  m_Size: {x: 5.3333335, y: 5.3333335}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -173,6 +284,9 @@ MonoBehaviour:
   OnActorHit:
     m_PersistentCalls:
       m_Calls: []
+  OnGroundAttack:
+    m_PersistentCalls:
+      m_Calls: []
   abilityCombo: {fileID: 840070346641518068}
   runTimeAnimator: {fileID: 9100000, guid: 3eb4068e4fe87e04e99d7209d2434d7a, type: 2}
   host: {fileID: 0}
@@ -185,6 +299,8 @@ MonoBehaviour:
     m_Bits: 32768
   maxClawTime: 10
   downForceFromAirAttack: 10
+  groundedAttackTime: 0.1
+  clawEffectPool: {fileID: 1388797334}
 --- !u!114 &840070346641518068
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -229,6 +345,7 @@ GameObject:
   - component: {fileID: 840070347042588615}
   - component: {fileID: 3931980451565875648}
   - component: {fileID: 3271807133343841365}
+  - component: {fileID: 2138488584}
   m_Layer: 6
   m_Name: RescuedPlayer
   m_TagString: Player
@@ -253,6 +370,7 @@ Transform:
   - {fileID: 5508809317102165000}
   - {fileID: 7792121383410523594}
   - {fileID: 1467768457}
+  - {fileID: 1388797333}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -315,7 +433,6 @@ MonoBehaviour:
   topMidPoint: {x: 0, y: 0}
   horInput: 0
   startingGravityScale: 0
-  isGrounded: 0
   isLookingRight: 0
   isFalling: 0
   m_collider: {fileID: 0}
@@ -323,6 +440,9 @@ MonoBehaviour:
   CoyoteAvailable: 0
   acceleration: 0
   m_animator: {fileID: 791565559279450814}
+  jumpEffectPoint: {fileID: 417044}
+  clawEffectPoint: {fileID: 1720240842}
+  OnsGroundCheck: {fileID: 2138488584}
   maxGravity: 25
   GravityScale: 50
   accelerationSpeed: 30
@@ -466,6 +586,37 @@ MonoBehaviour:
   OnCraftItem:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &2138488584
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840070347753010964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6193962b013a7cb4593f05fbab66e330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensors:
+  - Direcion: {x: 0, y: -1}
+    Offset: {x: -0.27, y: -0.92}
+    Range: 0.3
+  - Direcion: {x: 0, y: -1}
+    Offset: {x: 0.3, y: -0.92}
+    Range: 0.3
+  - Direcion: {x: 0, y: -1}
+    Offset: {x: 0, y: -1.05}
+    Range: 0.25
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  OnGrounded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNotGrounded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &840070348364434354
 GameObject:
   m_ObjectHideFlags: 0
@@ -515,6 +666,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   OnActorHit:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGroundAttack:
     m_PersistentCalls:
       m_Calls: []
   abilityCombo: {fileID: 0}
@@ -642,6 +796,9 @@ MonoBehaviour:
   OnActorHit:
     m_PersistentCalls:
       m_Calls: []
+  OnGroundAttack:
+    m_PersistentCalls:
+      m_Calls: []
   abilityCombo: {fileID: 7729859463431324916}
   runTimeAnimator: {fileID: 9100000, guid: 82a846ca4cc37004881f30bc16b90075, type: 2}
   host: {fileID: 0}
@@ -649,11 +806,11 @@ MonoBehaviour:
   dashDuration: 0.35
   dashCooldown: 1
   dashForce: 25
+  floatTimeInAirBeforeDash: 0.2
+  GravityScaleBeforeDash: 5
   groundLayer:
     serializedVersion: 2
     m_Bits: 128
-  floatTimeInAirBeforeDash: 0.2
-  GravityScaleBeforeDash: 5
 --- !u!1 &841067442087295126
 GameObject:
   m_ObjectHideFlags: 0
