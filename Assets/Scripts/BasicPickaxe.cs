@@ -84,6 +84,9 @@ public class BasicPickaxe : Weapon
     {
         if (Clawed)
         {
+           
+            m_animator.SetTrigger("Mobility");
+            StartCoroutine(IEJumpFromClawedWithMobility());
             return;
         }
         if (player.GetIsGrounded)
@@ -125,11 +128,21 @@ public class BasicPickaxe : Weapon
         player.RecieveForce(jumpToClawForce);
 
         yield return new WaitUntil(() => player.GetIsFalling == true);
-        while (!player.GetIsGrounded && !Clawed)
-        {
-            CheckFromWall();
-            yield return new WaitForEndOfFrame();
-        }
+        yield return MobilityInAir();
+        //while (!player.GetIsGrounded && !Clawed)
+        //{
+        //    CheckFromWall();
+        //    yield return new WaitForEndOfFrame();
+        //}
+    }
+    IEnumerator IEJumpFromClawedWithMobility()
+    {
+        //player.ResetVelocity();
+        //player.RecieveForce(jumpToClawForce);
+        WallJump();
+        yield return new WaitForSeconds(0.2f);
+        yield return new WaitUntil(() => player.GetIsFalling == true);
+        yield return MobilityInAir();
     }
     IEnumerator IEMoveToWall(Vector3 positionToMoveTo)
     {
