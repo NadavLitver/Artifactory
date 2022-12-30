@@ -11,15 +11,16 @@ public class ShroomCap : Actor, IDamagable
     [SerializeField] Vector2 minPoint;
     [SerializeField] float pickupCd;
     bool dealtDamage;
-    float LastThrown;
+    float lastThrown;
     float startingGrav;
 
     [SerializeField] GroundCheckNew groundCheck;
 
     public GroundCheckNew GroundCheck { get => groundCheck; }
-
-
-    
+    public float PickupCd { get => pickupCd; set => pickupCd = value; }
+    public bool DealtDamage { get => dealtDamage; set => dealtDamage = value; }
+    public float LastThrown { get => lastThrown; set => lastThrown = value; }
+    public float StartingGrav { get => startingGrav; set => startingGrav = value; }
 
     private void Update()
     {
@@ -43,37 +44,11 @@ public class ShroomCap : Actor, IDamagable
 
     private void OnEnable()
     {
-        LastThrown = Time.time;
+        lastThrown = Time.time;
         startingGrav = RB.gravityScale;
 
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player") && !dealtDamage)
-        {
-            //calc direction
-            Vector2 forceDir = GameManager.Instance.assets.playerActor.transform.position - transform.position;
-            ShroomCapAbility.CacheForceDirection(forceDir);
-            GameManager.Instance.assets.playerActor.GetHit(ShroomCapAbility);
-            dealtDamage = true;
-            return;
-        }
-    }
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        if (Time.time - LastThrown >= pickupCd)
-        {
-            StoneShroomStateHandler handler = collision.GetComponentInChildren<StoneShroomStateHandler>();
-            if (!ReferenceEquals(handler, null) && handler.AttackMode)
-            {
-                Debug.Log("picked up");
-                handler.PickupInteruption();
-                handler.Anim.SetTrigger(handler.Pickuphash);
-                handler.AttackMode = false;
-                gameObject.SetActive(false);
-            }
-        }
-    }
+    
     private void OnDisable()
     {
         dealtDamage = false;

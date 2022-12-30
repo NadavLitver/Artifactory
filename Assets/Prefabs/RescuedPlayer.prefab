@@ -291,7 +291,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.3333335, y: 5.3333335}
+  m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 0
@@ -426,7 +426,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 32768
   maxClawTime: 10
-  downForceFromAirAttack: 10
+  downForceFromAirAttack: 18
   groundedAttackTime: 0.1
   clawEffectPool: {fileID: 542825379}
 --- !u!114 &840070346641518068
@@ -474,6 +474,7 @@ GameObject:
   - component: {fileID: 3931980451565875648}
   - component: {fileID: 3271807133343841365}
   - component: {fileID: 2138488584}
+  - component: {fileID: 1821338504468990725}
   m_Layer: 6
   m_Name: RescuedPlayer
   m_TagString: Player
@@ -572,7 +573,7 @@ MonoBehaviour:
   clawEffectPoint: {fileID: 1720240842}
   jumpEffectPool: {fileID: 79925628}
   landEffectPool: {fileID: 1948557292}
-  OnsGroundCheck: {fileID: 2138488584}
+  OnsGroundCheck: {fileID: 1821338504468990725}
   maxGravity: 25
   GravityScale: 50
   accelerationSpeed: 30
@@ -747,6 +748,37 @@ MonoBehaviour:
   OnNotGrounded:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1821338504468990725
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840070347753010964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6193962b013a7cb4593f05fbab66e330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensors:
+  - Direcion: {x: 0, y: -1}
+    Offset: {x: -0.27, y: -0.92}
+    Range: 0.3
+  - Direcion: {x: 0, y: -1}
+    Offset: {x: 0.3, y: -0.92}
+    Range: 0.3
+  - Direcion: {x: 0, y: -1}
+    Offset: {x: 0, y: -1.05}
+    Range: 0.25
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 128
+  OnGrounded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNotGrounded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &840070348364434354
 GameObject:
   m_ObjectHideFlags: 0
@@ -812,6 +844,7 @@ MonoBehaviour:
   cannonGlow: {fileID: 0}
   slowDuration: 0.2
   gravityScaleOnShoot: 5
+  ShootFlag: 0
 --- !u!114 &840070348364434383
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -988,7 +1021,7 @@ Animator:
   m_GameObject: {fileID: 841067442087295126}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3eb4068e4fe87e04e99d7209d2434d7a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4d1f3fe276d17884cbc07f3195ae71a4, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1060,12 +1093,12 @@ SpriteRenderer:
   m_SortingLayerID: -2069616245
   m_SortingLayer: 3
   m_SortingOrder: 5
-  m_Sprite: {fileID: -2116238186, guid: 885e8f77a837fad4d88537865ec8c4df, type: 3}
+  m_Sprite: {fileID: 1883508514, guid: 0de4057198c2d0d48aa35b13f7310dbb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 10.24, y: 10.24}
+  m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1

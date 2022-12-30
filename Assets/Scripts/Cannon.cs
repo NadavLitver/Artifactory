@@ -18,6 +18,8 @@ public class Cannon : Weapon
     private int AttackHash;
     private int MobilityHash;
 
+    Coroutine shootingRoutine;
+
     public bool ShootFlag;
     private void OnEnable()
     {
@@ -80,6 +82,10 @@ public class Cannon : Weapon
             jumped = true;
             GameManager.Instance.assets.PlayerController.StartCoroutine(GameManager.Instance.assets.PlayerController.JumpApexWait());
             StartCoroutine(waitForGrounded());
+            if (!isLoaded && !isCharging)
+            {
+                StartCoroutine(StartCharging());
+            }
         }
     }
 
@@ -94,17 +100,20 @@ public class Cannon : Weapon
     private void FireBullet()
     {
         m_animator.SetTrigger(AttackHash);
-        StartCoroutine(IEFireBullet());
-
+        if (!ReferenceEquals(shootingRoutine, null))
+        {
+            StopCoroutine(shootingRoutine);
+        }
+        shootingRoutine = StartCoroutine(IEFireBullet());
     }
     public IEnumerator IEFireBullet()
     {
+        isLoaded = false;
         yield return new WaitUntil(() => ShootFlag);
         StartCoroutine(GameManager.Instance.assets.PlayerController.FreezePlayerForDuration(slowDuration, gravityScaleOnShoot));
         GameObject bullet = bulletPool.GetPooledObject();
         bullet.transform.position = muzzle.position;
         bullet.gameObject.SetActive(true);
-        isLoaded = false;
         ShootFlag = false;
         StartCoroutine(StartCharging());
     }
@@ -112,6 +121,8 @@ public class Cannon : Weapon
     {
         jumped = false;
         isLoaded = false;
+        GameManager.Instance.assets.PlayerController.canMove = true;
+        GameManager.Instance.assets.PlayerController.ResetGravity();
     }
 
 }

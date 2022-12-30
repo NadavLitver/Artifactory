@@ -41,7 +41,7 @@ public class EnemyBounder : MonoBehaviour
 
     IEnumerator GetLeftPoint()
     {
-        startTime = Time.time;
+        float startTime = Time.time;
         while (!foundLeft || Time.time - startTime >= timeOut)
         {
             RaycastHit2D downHit = Physics2D.Raycast(leftGetter.position, Vector2.down, rayLength, layer);
@@ -63,18 +63,18 @@ public class EnemyBounder : MonoBehaviour
     private void SetLeftPoint()
     {
         foundLeft = true;
-        minPos = new Vector2(lastLeftHit.x + 1, lastLeftHit.y);
+        minPos = leftGetter.position;
     }
 
     private void SetRightPoint()
     {
         foundRight = true;
-        maxPos = new Vector2(lastRightHit.x - 1, lastRightHit.y);
+        maxPos = rightGetter.position;
     }
 
     IEnumerator GetRightPoint()
     {
-        startTime = Time.time;
+        float startTime = Time.time;
         while (!foundRight || Time.time - startTime >= timeOut)
         {
             RaycastHit2D downHit = Physics2D.Raycast(rightGetter.position, Vector2.down, rayLength, layer);

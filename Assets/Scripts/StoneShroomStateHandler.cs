@@ -115,7 +115,7 @@ public class StoneShroomStateHandler : StateHandler
     }
     public void OnHit(DamageHandler dmgHandler)//1
     {
-        if (dmgHandler.calculateFinalNumberMult() < 1 || dmgHandler.calculateFinalNumberMult() >= ShroomActor.currentHP)
+        if (dmgHandler.calculateFinalNumberMult() < 1 || dmgHandler.calculateFinalNumberMult() >= ShroomActor.currentHP || ShroomActor.currentHP < 1)
             return;
         if (AttackMode)
         {
@@ -139,6 +139,7 @@ public class StoneShroomStateHandler : StateHandler
     {
         if (!AttackMode)
         {
+            //death called is still called 
             ShroomActor.currentHP = 1;
         }
         else

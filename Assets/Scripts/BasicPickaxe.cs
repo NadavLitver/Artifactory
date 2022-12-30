@@ -34,7 +34,6 @@ public class BasicPickaxe : Weapon
         GameManager.Instance.inputManager.onJumpDown.AddListener(WallJump);
         airAttacking = false;
         originaClawEffectlRot = clawEffectPool.GetPooledObject().transform.eulerAngles;
-        Debug.Log(originaClawEffectlRot);
     }
 
     private void WallJump()
