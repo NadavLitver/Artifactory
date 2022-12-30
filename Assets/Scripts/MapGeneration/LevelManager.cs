@@ -330,7 +330,7 @@ public class LevelManager : MonoBehaviour
             {
                 if (ReferenceEquals(exit.OtherExit, null))
                 {
-                    exit.gameObject.SetActive(false);
+                    exit.SetOffExit();
                 }
             }
         }

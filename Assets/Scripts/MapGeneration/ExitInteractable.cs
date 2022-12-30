@@ -23,6 +23,10 @@ public class ExitInteractable : MonoBehaviour
     [SerializeField] bool occupied;
     [SerializeField] ExitInteractable otherExit;
     [SerializeField] Animator m_animator;
+
+    [SerializeField] Collider2D exitCollider;
+    [SerializeField] GameObject spikes;
+    [SerializeField] GameObject gfx;
     public Room MyRoom { get => myRoom; set => myRoom = value; }
     public ExitLocationInfo ExitLocation { get => exitLocation; set => exitLocation = value; }
     public bool Occupied { get => occupied;}
@@ -53,6 +57,13 @@ public class ExitInteractable : MonoBehaviour
             }
            GameManager.Instance.LevelManager.MoveToRoom(this);
         }
+    }
+
+    public void SetOffExit()
+    {
+        exitCollider.enabled = false;
+        spikes.SetActive(true);
+        gfx.SetActive(false);
     }
 }
 
