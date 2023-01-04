@@ -11,7 +11,7 @@ public class JumpPlatform : MonoBehaviour
 
     private Vector2 dir;
     private int JumpTriggerHash;
-
+    private bool playerIn;
     private Animator m_animator;
     private void Start()
     {
@@ -23,16 +23,29 @@ public class JumpPlatform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player") && playerControllerRef.transform.position.y - transform.position.y > 1 && playerControllerRef.GetIsGrounded && !playerControllerRef.GetIsJumping)
         {
+            playerIn = true;
             m_animator.SetTrigger(JumpTriggerHash);
         }
     }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            playerIn = false;
 
+         
+        }
+    }
     private void GivePlayerForce()
     {
-        playerControllerRef.ResetVelocity();
-        playerControllerRef.RecieveForce(dir * force);
+        if (playerIn)
+        {
+            playerControllerRef.ResetVelocity();
+            playerControllerRef.RecieveForce(dir * force);
+        }
+     
     }
 
     private void OnDrawGizmosSelected()

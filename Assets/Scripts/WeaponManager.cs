@@ -22,7 +22,7 @@ public class WeaponManager : MonoBehaviour
             Debug.LogError("Ability Combo on" + gameObject.name + " is Null");
         }
         OnSwitchWeapon.AddListener(m_actor.DisableOnInAnim);
-        OnSwitchWeapon.AddListener(ResetPlayerController);
+       // OnSwitchWeapon.AddListener(ResetPlayerController);
     }
 
 
