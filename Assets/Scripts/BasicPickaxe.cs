@@ -83,7 +83,7 @@ public class BasicPickaxe : Weapon
     {
         if (Clawed)
         {
-           
+
             m_animator.SetTrigger("Mobility");
             StartCoroutine(IEJumpFromClawedWithMobility());
             return;
@@ -124,10 +124,12 @@ public class BasicPickaxe : Weapon
     IEnumerator IEJumpFromMobility()
     {
         player.ResetVelocity();
+        StartCoroutine(player.TogglePlayingTraversal());
         player.RecieveForce(jumpToClawForce);
 
         yield return new WaitUntil(() => player.GetIsFalling == true);
         yield return MobilityInAir();
+
         //while (!player.GetIsGrounded && !Clawed)
         //{
         //    CheckFromWall();

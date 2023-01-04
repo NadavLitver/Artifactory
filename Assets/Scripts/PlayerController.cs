@@ -1,8 +1,6 @@
 using System;
 using System.Collections;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 
@@ -32,6 +30,9 @@ public class PlayerController : MonoBehaviour
 
     private GameObject jumpEffect;
     private GameObject landEffect;
+
+    private bool playingTraversal;
+    [SerializeField] private float traversalTime;
 
     [SerializeField] private Transform jumpEffectPoint;
     [SerializeField] private Transform clawEffectPoint;
@@ -70,8 +71,8 @@ public class PlayerController : MonoBehaviour
     public Vector2 GetExternalForces { get => externalForces; set => externalForces = value; }
     public bool GetCoyoteAvailable { get => CoyoteAvailable; set => CoyoteAvailable = value; }
     public Animator Animator { get => m_animator; set => m_animator = value; }
-    public Transform ClawEffectPoint { get => clawEffectPoint;}
-    public Transform JumpEffectPoint { get => jumpEffectPoint;}
+    public Transform ClawEffectPoint { get => clawEffectPoint; }
+    public Transform JumpEffectPoint { get => jumpEffectPoint; }
 
     private void Awake()
     {
@@ -88,7 +89,7 @@ public class PlayerController : MonoBehaviour
     {
         canMove = true;
         velocity = Vector2.zero;
-     
+
 
     }
     public void GetColliderSizeInformation()
@@ -102,19 +103,26 @@ public class PlayerController : MonoBehaviour
     }
     private void JumpPressed()
     {
-        if ((OnsGroundCheck.IsGrounded()|| CoyoteAvailable) && GameManager.Instance.inputManager.JumpDown() && canMove)
+        if ((OnsGroundCheck.IsGrounded() || CoyoteAvailable) && GameManager.Instance.inputManager.JumpDown() && canMove && !playingTraversal)
         {
             Jumping = true;
             velocity.y = jumpForce;
             //isGrounded = false;
             m_animator.SetTrigger("Jump");
             StartCoroutine(JumpApexWait());
-          //  TurnOnJumpEffect();
+            //  TurnOnJumpEffect();
         }
         else if (isFalling)
         {
             Jumping = false;
         }
+    }
+
+    public IEnumerator TogglePlayingTraversal()
+    {
+        playingTraversal = true;
+        yield return new WaitForSecondsRealtime(traversalTime);
+        playingTraversal = false;
     }
 
     public void ExteriorJump()
@@ -126,10 +134,10 @@ public class PlayerController : MonoBehaviour
     public IEnumerator JumpApexWait()
     {
         yield return new WaitUntil(() => isFalling == true);
-        
+
         GravityScale = apexGravityScale;
         yield return new WaitForSeconds(apexAirTimeGravityChange);
-        
+
         GravityScale = startingGravityScale;
     }
     public IEnumerator JumpApexWait(float duration, float scale)
@@ -156,7 +164,7 @@ public class PlayerController : MonoBehaviour
         {
             if (m_rb.velocity.y > 0)
             {
-               // ResetVelocity();
+                // ResetVelocity();
                 velocity.y = 0;
                 m_rb.velocity = new Vector2(m_rb.velocity.x, 0);
                 externalForces.y = 0;
@@ -268,7 +276,7 @@ public class PlayerController : MonoBehaviour
         if (canMove)
             m_rb.velocity = velocity + externalForces;
     }
-   
+
     public void SetOnDandilion(bool onDandilion)
     {
         if (onDandilion)
