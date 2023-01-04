@@ -38,7 +38,7 @@ public class JumpPlatform : MonoBehaviour
          
         }
     }
-    private void GivePlayerForce()
+    private void GivePlayerForce()//animation event
     {
         if (playerIn)
         {
