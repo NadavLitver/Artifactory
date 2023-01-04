@@ -284,7 +284,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 490901113
-  m_SortingLayer: 4
+  m_SortingLayer: 5
   m_SortingOrder: 10
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -473,8 +473,7 @@ GameObject:
   - component: {fileID: 840070347042588615}
   - component: {fileID: 3931980451565875648}
   - component: {fileID: 3271807133343841365}
-  - component: {fileID: 2138488584}
-  - component: {fileID: 1821338504468990725}
+  - component: {fileID: 7347479043507101585}
   m_Layer: 6
   m_Name: RescuedPlayer
   m_TagString: Player
@@ -573,7 +572,7 @@ MonoBehaviour:
   clawEffectPoint: {fileID: 1720240842}
   jumpEffectPool: {fileID: 79925628}
   landEffectPool: {fileID: 1948557292}
-  OnsGroundCheck: {fileID: 1821338504468990725}
+  OnsGroundCheck: {fileID: 0}
   maxGravity: 25
   GravityScale: 50
   accelerationSpeed: 30
@@ -717,38 +716,7 @@ MonoBehaviour:
   OnCraftItem:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2138488584
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 840070347753010964}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6193962b013a7cb4593f05fbab66e330, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sensors:
-  - Direcion: {x: 0, y: -1}
-    Offset: {x: -0.27, y: -0.92}
-    Range: 0.3
-  - Direcion: {x: 0, y: -1}
-    Offset: {x: 0.3, y: -0.92}
-    Range: 0.3
-  - Direcion: {x: 0, y: -1}
-    Offset: {x: 0, y: -1.05}
-    Range: 0.25
-  hitLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  OnGrounded:
-    m_PersistentCalls:
-      m_Calls: []
-  OnNotGrounded:
-    m_PersistentCalls:
-      m_Calls: []
---- !u!114 &1821338504468990725
+--- !u!114 &7347479043507101585
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1091,7 +1059,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2069616245
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 5
   m_Sprite: {fileID: 1883508514, guid: 0de4057198c2d0d48aa35b13f7310dbb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -1588,7 +1588,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1832014677, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
       propertyPath: m_SortingLayer
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1832014677, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
       propertyPath: m_SortingOrder
@@ -1931,11 +1931,10 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 840070347753010964, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
   m_PrefabInstance: {fileID: 2138488568}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2138488584
+--- !u!114 &2138488584 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 7347479043507101585, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
+  m_PrefabInstance: {fileID: 2138488568}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2138488577}
   m_Enabled: 1
@@ -1943,25 +1942,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6193962b013a7cb4593f05fbab66e330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sensors:
-  - Direcion: {x: 0, y: -1}
-    Offset: {x: -0.27, y: -0.92}
-    Range: 0.3
-  - Direcion: {x: 0, y: -1}
-    Offset: {x: 0.3, y: -0.92}
-    Range: 0.3
-  - Direcion: {x: 0, y: -1}
-    Offset: {x: 0, y: -1.05}
-    Range: 0.25
-  hitLayer:
-    serializedVersion: 2
-    m_Bits: 128
-  OnGrounded:
-    m_PersistentCalls:
-      m_Calls: []
-  OnNotGrounded:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1001 &9046812149282889914
 PrefabInstance:
   m_ObjectHideFlags: 0

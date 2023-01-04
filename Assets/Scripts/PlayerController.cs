@@ -126,10 +126,10 @@ public class PlayerController : MonoBehaviour
     public IEnumerator JumpApexWait()
     {
         yield return new WaitUntil(() => isFalling == true);
-        Debug.Log("apexing");
+        
         GravityScale = apexGravityScale;
         yield return new WaitForSeconds(apexAirTimeGravityChange);
-        Debug.Log("apex done");
+        
         GravityScale = startingGravityScale;
     }
     public IEnumerator JumpApexWait(float duration, float scale)
