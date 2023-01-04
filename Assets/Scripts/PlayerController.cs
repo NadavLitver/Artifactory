@@ -201,7 +201,6 @@ public class PlayerController : MonoBehaviour
     }
     void SetAnimatorParameters()
     {
-
         m_animator.SetBool("Grounded", GetIsGrounded);
         m_animator.SetBool("Running", (horInput != 0 && GetIsGrounded));
         isFalling = (!GetIsGrounded && velocity.y < -1f);
