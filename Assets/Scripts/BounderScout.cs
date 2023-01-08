@@ -8,7 +8,7 @@ public class BounderScout : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private GroundCheckNew frontSensor;
     [SerializeField] private GroundCheckNew downSensor;
-    [SerializeField] private float speed;
+    [SerializeField, Range(1,10)] private float speed = 10;
     public bool reached;
 
     public IEnumerator flyTowards(Vector3 direction, float timeOut)
