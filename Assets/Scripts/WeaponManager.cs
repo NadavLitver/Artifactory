@@ -15,7 +15,7 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] Animator anim;
     private void Start()
     {
-        EquipWeapon(playerWeapons[1]);
+        EquipWeapon(playerWeapons[0]);
         m_actor = GetComponentInParent<Actor>();
         if (ReferenceEquals(m_actor, null))
         {
