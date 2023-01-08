@@ -118,7 +118,7 @@ public class AssetsRefrence
     public GameObject CraftingPanel;
 
     [Header("Bounder"), Space(10)]
-    public Transform BounderScout;
+    public BounderScout BounderScout;
 
     [Header("CraftingUi"), Space(10)]
     public CraftingMapNode craftingMapNode;
