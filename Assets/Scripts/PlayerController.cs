@@ -72,6 +72,8 @@ public class PlayerController : MonoBehaviour
     private int FallingHash;
     private int GroundedHash;
     private int RunningHash;
+    private int OnDandilionHash;
+    private int DandTriggerHash;
     private void Awake()
     {
         m_rb = GetComponent<Rigidbody2D>();
@@ -88,6 +90,9 @@ public class PlayerController : MonoBehaviour
         FallingHash = Animator.StringToHash("Falling");
         GroundedHash = Animator.StringToHash("Grounded");
         RunningHash = Animator.StringToHash("Running");
+        OnDandilionHash = Animator.StringToHash("OnDandilion");
+        DandTriggerHash = Animator.StringToHash("Dand");
+
 
     }
     void OnEnable()
@@ -274,13 +279,13 @@ public class PlayerController : MonoBehaviour
     {
         if (onDandilion)
         {
-            Animator.SetTrigger("Dand");
-            Animator.SetBool("OnDandilion", onDandilion);
+            Animator.SetTrigger(DandTriggerHash);
+            Animator.SetBool(OnDandilionHash, onDandilion);
 
         }
         else
         {
-            Animator.SetBool("OnDandilion", onDandilion);
+            Animator.SetBool(OnDandilionHash, onDandilion);
         }
     }
     public void RecieveForce(Vector2 force)
