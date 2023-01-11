@@ -12,15 +12,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Vector2 velocity;
     [SerializeField] private Vector2 externalForces;
     [SerializeField] Vector2 StartingScale;
-    [SerializeField] Vector2 BottomRightPoint;
-    [SerializeField] Vector2 BottomLeftPoint;
-    [SerializeField] private Vector2 topMidPoint;
     [SerializeField] float horInput;
     [SerializeField] float startingGravityScale;
-    //[SerializeField] bool isGrounded;
     [SerializeField] bool isLookingRight;
     [SerializeField] bool isFalling;
-    [SerializeField] Collider2D m_collider;
     [SerializeField] bool Jumping;
     [SerializeField] bool CoyoteAvailable;
     [SerializeField] float acceleration;
@@ -74,16 +69,26 @@ public class PlayerController : MonoBehaviour
     public Transform ClawEffectPoint { get => clawEffectPoint; }
     public Transform JumpEffectPoint { get => jumpEffectPoint; }
 
+    private int FallingHash;
+    private int GroundedHash;
+    private int RunningHash;
     private void Awake()
     {
         m_rb = GetComponent<Rigidbody2D>();
-        m_collider = GetComponent<Collider2D>();
         m_animator = GetComponentInChildren<Animator>();
         StartingScale = transform.localScale;
         startingGravityScale = GravityScale;
         isLookingRight = true;
         OnsGroundCheck.OnNotGrounded.AddListener(TurnOnJumpEffect);
         OnsGroundCheck.OnGrounded.AddListener(TurnOnLandEffect);
+        SetHashes();
+    }
+    private void SetHashes()
+    {
+        FallingHash = Animator.StringToHash("Falling");
+        GroundedHash = Animator.StringToHash("Grounded");
+        RunningHash = Animator.StringToHash("Running");
+
     }
     void OnEnable()
     {
@@ -92,25 +97,15 @@ public class PlayerController : MonoBehaviour
 
 
     }
-    public void GetColliderSizeInformation()
-    {
-        BottomRightPoint.x = m_collider.bounds.max.x - 0.6f;
-        BottomRightPoint.y = m_collider.bounds.min.y + 0.1f;
-        topMidPoint = (Vector2)m_collider.bounds.center + Vector2.up * (m_collider.bounds.size.y * 0.5f);
-        BottomLeftPoint.y = m_collider.bounds.min.y + 0.1f;
-        BottomLeftPoint.x = m_collider.bounds.min.x + 0.6f;
-
-    }
+   
     private void JumpPressed()
     {
         if ((OnsGroundCheck.IsGrounded() || CoyoteAvailable) && GameManager.Instance.inputManager.JumpDown() && canMove && !playingTraversal)
         {
             Jumping = true;
             velocity.y = jumpForce;
-            //isGrounded = false;
             m_animator.SetTrigger("Jump");
             StartCoroutine(JumpApexWait());
-            //  TurnOnJumpEffect();
         }
         else if (isFalling)
         {
@@ -150,7 +145,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         SetVelocity();
-        GetColliderSizeInformation();
         GetCoyoteAndSetGrounded();
         JumpPressed();
         Ceiling();
@@ -164,7 +158,6 @@ public class PlayerController : MonoBehaviour
         {
             if (m_rb.velocity.y > 0)
             {
-                // ResetVelocity();
                 velocity.y = 0;
                 m_rb.velocity = new Vector2(m_rb.velocity.x, 0);
                 externalForces.y = 0;
@@ -202,10 +195,10 @@ public class PlayerController : MonoBehaviour
     void SetAnimatorParameters()
     {
 
-        m_animator.SetBool("Grounded", GetIsGrounded);
-        m_animator.SetBool("Running", (horInput != 0 && GetIsGrounded));
+        m_animator.SetBool(GroundedHash, GetIsGrounded);
+        m_animator.SetBool(RunningHash, (horInput != 0 && GetIsGrounded));
         isFalling = (!GetIsGrounded && velocity.y < -1f);
-        m_animator.SetBool("Falling", isFalling);
+        m_animator.SetBool(FallingHash, isFalling);
     }
     private void SetVelocity()
     {
@@ -260,7 +253,7 @@ public class PlayerController : MonoBehaviour
     }
     public bool CheckIsCeiling()
     {
-        RaycastHit2D ceilingCheckRay = Physics2D.Raycast(BottomRightPoint, Vector2.up, ceilingCheckDistance, GroundLayerMask);
+        RaycastHit2D ceilingCheckRay = Physics2D.Raycast(transform.position, Vector2.up, ceilingCheckDistance, GroundLayerMask);
         if (ceilingCheckRay)
         {
             if (ceilingCheckRay.collider.CompareTag("Block"))
@@ -296,12 +289,9 @@ public class PlayerController : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-        Gizmos.color = GetIsGrounded ? Color.green : Color.red;
-        Gizmos.DrawRay(BottomRightPoint, Vector2.down * groundCheckDistance);
-
-        Gizmos.DrawRay(BottomLeftPoint, Vector2.down * groundCheckDistance);
+       
         Gizmos.color = CheckIsCeiling() ? Color.green : Color.red;
-        Gizmos.DrawRay(topMidPoint, Vector2.up * groundCheckDistance);
+        Gizmos.DrawRay(transform.position, Vector2.up * groundCheckDistance);
     }
 
     public IEnumerator FreezePlayerForDuration(float time)
