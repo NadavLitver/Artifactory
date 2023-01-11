@@ -10,6 +10,8 @@ public class CoRoutineStateHandler : MonoBehaviour
     private Coroutine mainRoutine;
     private bool active;
 
+    public Actor Actor { get => m_actor;}
+
     private IEnumerator RunStateMachine()
     {
         while (active)
