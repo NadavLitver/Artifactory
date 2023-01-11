@@ -21,7 +21,10 @@ public class Weapon : MonoBehaviour
         {
             abilityCombo.OnAttackPerformed.AddListener(AttackPerformed);
         }
+        GameManager.Instance.inputManager.onMobilityDown.AddListener(host.DisableOnInAnim);
+
     }
+
     protected virtual void Attack()
     {
         abilityCombo.PlayNextAbility();
@@ -34,7 +37,6 @@ public class Weapon : MonoBehaviour
 
     public virtual void Mobility()
     {
-
     }
     protected virtual void Ultimate()
     {

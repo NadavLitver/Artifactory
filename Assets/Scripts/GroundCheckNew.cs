@@ -66,6 +66,11 @@ public class GroundCheckNew : MonoBehaviour
 
     }
 
+    public void AddSensor(GroundCheckSensor givenSensor)
+    {
+        sensors.Add(givenSensor);
+    }
+
     private void OnDrawGizmosSelected()
     {
         foreach (var item in sensors)

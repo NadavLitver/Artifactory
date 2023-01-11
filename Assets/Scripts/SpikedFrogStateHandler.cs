@@ -10,15 +10,18 @@ public class SpikedFrogStateHandler : StateHandler
     public State SpikedFrogJumpToPlayer;
     public State SpikedFrogChase;
     public State SpikedFrogFinalJump;
+    public State SpikedFrogDeath;
     public EnemyRayData rayData;
     public GroundCheck spikedFrogGroundCheck;
     public Rigidbody2D RB;
     bool frozen;
+    public EnemyActor actor;
     [SerializeField] float freezeDuration;
 
     private void Start()
     {
         launcher.LandedEvent.AddListener(Freeze);
+        actor.OnDeath.AddListener(Die);
     }
 
     private void Update()
@@ -54,5 +57,10 @@ public class SpikedFrogStateHandler : StateHandler
         frozen = false;
     }
 
+    private void Die()
+    {
+        actor.RecieveStatusEffects(StatusEffectEnum.Invulnerability);
+        Interrupt(SpikedFrogDeath);
+    }
 
 }

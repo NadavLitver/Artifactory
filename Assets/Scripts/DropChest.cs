@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DropChest : Interactable
+public class DropChest : Actor
 {
     [SerializeField] DragToPlayer myDrop;
 
-    public override void Interact()
+    public void Open()
     {
         Instantiate(myDrop, transform.position, Quaternion.identity);
         gameObject.SetActive(false);
     }
-
-
 }

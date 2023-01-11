@@ -6,9 +6,8 @@ public class EnemyBounder : MonoBehaviour
     [SerializeField] private Vector2 minPos;
     [SerializeField] float rayLength;
     [SerializeField] LayerMask layer;
-    [SerializeField] Transform rightGetter;
-    [SerializeField] Transform leftGetter;
-    [SerializeField] float scoutMs;
+    [SerializeField] BounderScout rightGetter;
+    [SerializeField] BounderScout leftGetter;
     [SerializeField] bool getter;
     [SerializeField] float timeOut;
     float startTime;
@@ -27,9 +26,9 @@ public class EnemyBounder : MonoBehaviour
         {
             rightGetter = Instantiate(GameManager.Instance.assets.BounderScout, transform.position, Quaternion.identity);
             leftGetter = Instantiate(GameManager.Instance.assets.BounderScout, transform.position, Quaternion.identity);
+            StartCoroutine(rightGetter.flyTowards(Vector3.right, timeOut));
+            StartCoroutine(leftGetter.flyTowards(Vector3.left, timeOut));
             StartCoroutine(WaitUntilDone());
-            StartCoroutine(GetLeftPoint());
-            StartCoroutine(GetRightPoint());
         }
     }
 
@@ -39,63 +38,24 @@ public class EnemyBounder : MonoBehaviour
         minPos = min;
     }
 
-    IEnumerator GetLeftPoint()
-    {
-        float startTime = Time.time;
-        while (!foundLeft || Time.time - startTime >= timeOut)
-        {
-            RaycastHit2D downHit = Physics2D.Raycast(leftGetter.position, Vector2.down, rayLength, layer);
-            RaycastHit2D frontHit = Physics2D.Raycast(leftGetter.position, Vector2.left, rayLength, layer);
-            if (ReferenceEquals(downHit.collider, null) || !ReferenceEquals(frontHit.collider, null))
-            {
-                break;
-            }
-            else
-            {
-                lastLeftHit = downHit.point;
-                leftGetter.Translate(Vector2.left * scoutMs * Time.deltaTime);
-            }
-            yield return new WaitForEndOfFrame();
-        }
-        SetLeftPoint();
-    }
 
     private void SetLeftPoint()
     {
         foundLeft = true;
-        minPos = leftGetter.position;
+        minPos = leftGetter.transform.position;
     }
 
     private void SetRightPoint()
     {
         foundRight = true;
-        maxPos = rightGetter.position;
-    }
-
-    IEnumerator GetRightPoint()
-    {
-        float startTime = Time.time;
-        while (!foundRight || Time.time - startTime >= timeOut)
-        {
-            RaycastHit2D downHit = Physics2D.Raycast(rightGetter.position, Vector2.down, rayLength, layer);
-            RaycastHit2D frontHit = Physics2D.Raycast(rightGetter.position, Vector2.right, rayLength, layer);
-            if (ReferenceEquals(downHit.collider, null) || !ReferenceEquals(frontHit.collider, null))
-            {
-                break;
-            }
-            else
-            {
-                lastRightHit = downHit.point;
-                rightGetter.Translate(Vector2.right * scoutMs * Time.deltaTime);
-            }
-            yield return new WaitForEndOfFrame();
-        }
-        SetRightPoint();
+        maxPos = rightGetter.transform.position;
     }
 
     IEnumerator WaitUntilDone()
     {
-        yield return new WaitUntil(() => foundRight && foundLeft);
+        yield return new WaitUntil(() => rightGetter.reached && leftGetter.reached);
+        SetRightPoint();
+        SetLeftPoint();
         Done = true;
     }
 

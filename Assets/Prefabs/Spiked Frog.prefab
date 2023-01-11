@@ -161,6 +161,7 @@ GameObject:
   - component: {fileID: 1154823760}
   - component: {fileID: 1154823762}
   - component: {fileID: 1154823763}
+  - component: {fileID: 777980893}
   m_Layer: 12
   m_Name: StateHandler
   m_TagString: Untagged
@@ -313,9 +314,11 @@ MonoBehaviour:
   SpikedFrogJumpToPlayer: {fileID: 1154823753}
   SpikedFrogChase: {fileID: 1154823762}
   SpikedFrogFinalJump: {fileID: 1154823763}
+  SpikedFrogDeath: {fileID: 777980893}
   rayData: {fileID: 6728404320829621133}
   spikedFrogGroundCheck: {fileID: 3322619}
   RB: {fileID: 6728404320883149197}
+  actor: {fileID: 8148802219243712764}
   freezeDuration: 1.5
 --- !u!114 &1154823762
 MonoBehaviour:
@@ -339,6 +342,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: baab335218eb2b246bc9ab59e7fad3be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &777980893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6728404320829621123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05473fab88d0f5146a0181c3b7f3b085, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6728404320883149187
@@ -498,31 +513,7 @@ MonoBehaviour:
       m_Calls: []
   OnDeath:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1154823760}
-        m_TargetAssemblyTypeName: SpikedFrogStateHandler, Assembly-CSharp
-        m_MethodName: Freeze
-        m_Mode: 4
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 3
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 9189810574590924089}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: FrogDeath
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   OnHealGFX:
     m_PersistentCalls:
       m_Calls: []
