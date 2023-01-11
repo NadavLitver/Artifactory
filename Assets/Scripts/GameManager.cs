@@ -135,6 +135,9 @@ public class AssetsRefrence
     public GameObject baseFatherObject;
     public GameObject baseSpawnPlayerPositionObject;
 
+    [Header("Mushroom"), Space(10)]
+    public ShroomCapObjectPool CapPool;
+
 }
 public class GeneralFunctions
 {
