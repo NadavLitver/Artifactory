@@ -23,24 +23,32 @@ public class BasicPickaxe : Weapon
     private const string attackPrefix = "Attack";
 
     [SerializeField] private float groundedAttackTime;
+    [SerializeField] private float mobilityCD;
     bool airAttacking;
-
+    private bool canMobility;
     GameObject clawEffect;
     [SerializeField] ObjectPool clawEffectPool;
     Vector3 originaClawEffectlRot;
+
+    private int ClimbHash;
+    private int MobilityHash;
     private void Start()
     {
         //  player = GameManager.Instance.assets.Player.GetComponent<PlayerController>();
         GameManager.Instance.inputManager.onJumpDown.AddListener(WallJump);
         airAttacking = false;
         originaClawEffectlRot = clawEffectPool.GetPooledObject().transform.eulerAngles;
+        ClimbHash = Animator.StringToHash("Climb");
+        MobilityHash = Animator.StringToHash("Mobility");
+        canMobility = true;
     }
 
     private void WallJump()
     {
+        
         if (Clawed)
         {
-            player.Animator.SetBool("Climb", false);
+            player.Animator.SetBool(ClimbHash, false);
             player.canMove = true;
             Vector2 wallJumpVelocity = forceForWallJump;
 
@@ -81,23 +89,27 @@ public class BasicPickaxe : Weapon
     }
     public override void Mobility()
     {
+        if (!canMobility)
+            return;
+
         if (Clawed)
         {
 
-            m_animator.SetTrigger("Mobility");
+            m_animator.SetTrigger(MobilityHash);
             StartCoroutine(IEJumpFromClawedWithMobility());
             return;
         }
         if (player.GetIsGrounded)
         {
-            m_animator.SetTrigger("Mobility");
+            m_animator.SetTrigger(MobilityHash);
             StartCoroutine(IEJumpFromMobility());
         }
         else
         {
-            m_animator.SetTrigger("Mobility");
+            m_animator.SetTrigger(MobilityHash);
             StartCoroutine(MobilityInAir());
         }
+        StartCoroutine(IEMobilityCD());
 
     }
 
@@ -135,6 +147,15 @@ public class BasicPickaxe : Weapon
         //    CheckFromWall();
         //    yield return new WaitForEndOfFrame();
         //}
+    }
+    IEnumerator IEMobilityCD()
+    {
+        if (!canMobility)
+        yield break;
+
+        canMobility = false;
+        yield return new WaitForSeconds(mobilityCD);
+        canMobility = true;
     }
     IEnumerator IEJumpFromClawedWithMobility()
     {
