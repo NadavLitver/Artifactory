@@ -14,26 +14,13 @@ public class ShroomCap : Actor, IDamagable
     float lastThrown;
     float startingGrav;
 
-    [SerializeField] GroundCheckNew groundCheck;
+    [SerializeField] SensorGroup groundCheck;
 
-    public GroundCheckNew GroundCheck { get => groundCheck; }
+    public SensorGroup GroundCheck { get => groundCheck; }
     public float PickupCd { get => pickupCd; set => pickupCd = value; }
     public bool DealtDamage { get => dealtDamage; set => dealtDamage = value; }
     public float LastThrown { get => lastThrown; set => lastThrown = value; }
     public float StartingGrav { get => startingGrav; set => startingGrav = value; }
-
-    private void Update()
-    {
-        if (groundCheck.IsGrounded())
-        {
-            dealtDamage = true;
-            RB.velocity = Vector2.zero;
-            RB.gravityScale = 0;
-        }
-       
-    }
-
-  
 
     void Start()
     {
@@ -46,14 +33,12 @@ public class ShroomCap : Actor, IDamagable
     {
         lastThrown = Time.time;
         startingGrav = RB.gravityScale;
-
     }
-    
+
     private void OnDisable()
     {
         dealtDamage = false;
         RB.gravityScale = startingGrav;
-
     }
 
     public void SetUpPositions(Vector2 max, Vector2 min)
@@ -65,15 +50,22 @@ public class ShroomCap : Actor, IDamagable
 
     public void Throw(Vector3 calculatedForce)
     {
-
         RB.AddForce(calculatedForce, ForceMode2D.Impulse);
         StartCoroutine(KeepToBounries());
+        groundCheck.OnGrounded.AddListener(LandedReset);
+    }
+
+    private void LandedReset()
+    {
+        dealtDamage = true;
+        RB.velocity = Vector2.zero;
+        RB.gravityScale = 0;
+        groundCheck.OnGrounded.RemoveListener(LandedReset);
     }
 
     IEnumerator KeepToBounries()
     {
         yield return new WaitUntil(() => transform.position.x > maxPoint.x || transform.position.x < minPoint.x);
-        Debug.Log("found");
         if (RB.velocity.x > 0)
         {
             transform.position = new Vector2(maxPoint.x - 1, maxPoint.y);

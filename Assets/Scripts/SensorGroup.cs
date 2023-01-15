@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GroundCheckNew : MonoBehaviour
+public class SensorGroup : MonoBehaviour
 {
     [SerializeField] List<GroundCheckSensor> sensors = new List<GroundCheckSensor>();
     [SerializeField] LayerMask hitLayer;

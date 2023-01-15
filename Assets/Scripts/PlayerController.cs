@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private ObjectPool jumpEffectPool;
     [SerializeField] private ObjectPool landEffectPool;
 
-    [SerializeField] private GroundCheckNew OnsGroundCheck;
+    [SerializeField] private SensorGroup OnsGroundCheck;
 
 
     [Header("Editable Properties"), Space(10)]

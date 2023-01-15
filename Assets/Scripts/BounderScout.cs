@@ -6,8 +6,8 @@ using System;
 public class BounderScout : MonoBehaviour
 {
     [SerializeField] private Rigidbody2D rb;
-    [SerializeField] private GroundCheckNew frontSensor;
-    [SerializeField] private GroundCheckNew downSensor;
+    [SerializeField] private SensorGroup frontSensor;
+    [SerializeField] private SensorGroup downSensor;
     [SerializeField, Range(1,10)] private float speed = 10;
     public bool reached;
 
@@ -19,10 +19,6 @@ public class BounderScout : MonoBehaviour
         {
             rb.velocity = direction * speed;
             yield return new WaitForEndOfFrame();
-            if (direction == Vector3.right)
-            {
-                Debug.Log(transform.position);
-            }
         }
         rb.velocity = Vector3.zero;
         reached = true;

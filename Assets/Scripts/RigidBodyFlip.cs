@@ -8,19 +8,32 @@ public class RigidBodyFlip : MonoBehaviour
     // Start is called before the first frame update
 
     Rigidbody2D rb;
-    Vector3 positiveVector;
-    Vector3 negativeVector;
+    [SerializeField] private Vector3 positiveVector;
+    [SerializeField] private Vector3 negativeVector;
 
     public bool Disabled;
-
     public bool IsLookingRight;
+
+    [SerializeField] private bool StartLeft;
+
+    Coroutine activeRoutine;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        positiveVector = transform.localScale;
-        negativeVector = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-        IsLookingRight = true;
-        StartCoroutine(FlipWhenNegative());
+        if (StartLeft)
+        {
+            activeRoutine = StartCoroutine(FlipWhenPositive());
+            negativeVector = transform.localScale;
+            positiveVector = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+            IsLookingRight = false;
+        }
+        else
+        {
+            activeRoutine = StartCoroutine(FlipWhenNegative());
+            positiveVector = transform.localScale;
+            negativeVector = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+            IsLookingRight = true;
+        }
     }
 
     IEnumerator FlipWhenNegative()
@@ -30,7 +43,7 @@ public class RigidBodyFlip : MonoBehaviour
         transform.localScale = negativeVector;
         IsLookingRight = false;
 
-        StartCoroutine(FlipWhenPositive());
+        activeRoutine = StartCoroutine(FlipWhenPositive());
     }
     IEnumerator FlipWhenPositive()
     {
@@ -38,7 +51,7 @@ public class RigidBodyFlip : MonoBehaviour
         yield return new WaitUntil(() => !Disabled);
         transform.localScale  = positiveVector;
         IsLookingRight = true;
-        StartCoroutine(FlipWhenNegative());
+        activeRoutine = StartCoroutine(FlipWhenNegative());
     }
 
     public void Flip()
@@ -46,4 +59,42 @@ public class RigidBodyFlip : MonoBehaviour
         transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
         IsLookingRight = !IsLookingRight;
     }
+
+    public void FlipLeft()
+    {
+        if (!ReferenceEquals(activeRoutine, null))
+        {
+            StopCoroutine(activeRoutine);
+        }
+        if (StartLeft)
+        {
+            transform.localScale = positiveVector;
+            activeRoutine = StartCoroutine(FlipWhenNegative());
+        }
+        else
+        {
+            transform.localScale = negativeVector;
+            activeRoutine = StartCoroutine(FlipWhenPositive());
+        }
+    }
+
+    public void FlipRight()
+    {
+        if (!ReferenceEquals(activeRoutine, null))
+        {
+            StopCoroutine(activeRoutine);
+            activeRoutine = StartCoroutine(FlipWhenNegative());
+        }
+        activeRoutine = StartCoroutine(FlipWhenNegative());
+        if (StartLeft)
+        {
+            transform.localScale = negativeVector;
+            activeRoutine = StartCoroutine(FlipWhenPositive());
+        }
+        else
+        {
+            transform.localScale = positiveVector;
+        }
+    }
+
 }
