@@ -9,7 +9,6 @@ public class ShroomIdleD : BaseShroomDState
     public override IEnumerator StateRoutine()
     {
         lastStopped = Time.time;
-        //handler.Anim.Play("Idle");
         handler.Rb.velocity = Vector2.zero;
         yield return new WaitForSeconds(stopDuration);
     }

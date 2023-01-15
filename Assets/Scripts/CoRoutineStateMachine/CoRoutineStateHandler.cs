@@ -40,8 +40,16 @@ public class CoRoutineStateHandler : MonoBehaviour
     {
         SortStates();
         active = true;
-        mainRoutine = StartCoroutine(RunStateMachine());
+        StartCoroutine(WaitForSetup());
     }
+
+    private IEnumerator WaitForSetup()
+    {
+        yield return new WaitForSeconds(0.1f);
+        mainRoutine = StartCoroutine(RunStateMachine());
+
+    }
+
     [ContextMenu("Sort")]
     private void SortStates()
     {

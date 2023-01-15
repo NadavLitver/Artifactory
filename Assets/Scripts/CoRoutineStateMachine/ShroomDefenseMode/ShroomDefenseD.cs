@@ -10,12 +10,21 @@ public class ShroomDefenseD : BaseShroomDState
     bool buffOver;
     public override IEnumerator StateRoutine()
     {
+        handler.Anim.SetBool("Defend", true);
+        handler.LookTowardsPlayer();
+        lastPerformedDefense = Time.time;
         buffOver = false;
         handler.Actor.OnStatusEffectRemoved.AddListener(FlagBuffOver);
         handler.Actor.RecieveStatusEffects(StatusEffectEnum.Invulnerability);
         yield return new WaitUntil(() => buffOver);
         buffOver = false;
         handler.Actor.OnStatusEffectRemoved.RemoveListener(FlagBuffOver);
+        handler.Anim.SetBool("Defend", false);
+    }
+
+    private void Start()
+    {
+        lastPerformedDefense = defenseCoolDown * -1;
     }
 
     internal override bool myCondition()
@@ -33,5 +42,10 @@ public class ShroomDefenseD : BaseShroomDState
         {
             buffOver = true;
         }
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawWireSphere(transform.position, defenseThreshold);
     }
 }
