@@ -83,6 +83,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentHP: 0
   maxHP: 100
+  baseCritHit: 0
+  baseCritDamage: 0
   OnDealDamage:
     m_PersistentCalls:
       m_Calls: []
@@ -92,7 +94,13 @@ MonoBehaviour:
   OnDealingDamageCalcOver:
     m_PersistentCalls:
       m_Calls: []
-  OnHit:
+  OnDealCriticalDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnTakeCriticalDamage:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGetHit:
     m_PersistentCalls:
       m_Calls: []
   OnKill:
@@ -101,7 +109,25 @@ MonoBehaviour:
   OnApplyStatusEffect:
     m_PersistentCalls:
       m_Calls: []
+  OnRecieveStatusEffect:
+    m_PersistentCalls:
+      m_Calls: []
+  OnStatusEffectRemoved:
+    m_PersistentCalls:
+      m_Calls: []
   OnRecieveHealth:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHitMeleeAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  OnHitRangedAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGetHitByRangedAttack:
+    m_PersistentCalls:
+      m_Calls: []
+  OnGetHitByMeleeAttack:
     m_PersistentCalls:
       m_Calls: []
   TakeDamageGFX:
@@ -113,11 +139,9 @@ MonoBehaviour:
   OnHealGFX:
     m_PersistentCalls:
       m_Calls: []
-  m_StatusEffects: []
   IsInAttackAnim: 0
-  references:
-    version: 2
-    RefIds: []
+  effectable: 0
+  hitself: {fileID: 0}
 --- !u!114 &321636085908948049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -188,8 +212,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5f7fa9a7940a64e79b5a42d9f661d42c, type: 3}
-  m_Color: {r: 0.8679245, g: 0.28166604, b: 0.28166604, a: 1}
+  m_Sprite: {fileID: 21300000, guid: d0f6db69ff5937e448d09a9f81481cd8, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -216,7 +240,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.56, y: 2.56}
+    oldSize: {x: 10.24, y: 9}
     newSize: {x: 0.82, y: 0.78}
     adaptiveTilingThreshold: 0.5
     drawMode: 0

@@ -35,14 +35,18 @@ public class BasicPickaxe : Weapon
     private void Start()
     {
         //  player = GameManager.Instance.assets.Player.GetComponent<PlayerController>();
-        GameManager.Instance.inputManager.onJumpDown.AddListener(WallJump);
+        GameManager.Instance.inputManager.onJumpDown.AddListener(CallWallJump);
         airAttacking = false;
         originaClawEffectlRot = clawEffectPool.GetPooledObject().transform.eulerAngles;
         ClimbHash = Animator.StringToHash("Climb");
         MobilityHash = Animator.StringToHash("Mobility");
         canMobility = true;
     }
-
+    public void CallWallJump()
+    {
+        canMobility = true;
+        WallJump();
+    }
     private void WallJump()
     {
         
@@ -51,7 +55,7 @@ public class BasicPickaxe : Weapon
             player.Animator.SetBool(ClimbHash, false);
             player.canMove = true;
             Vector2 wallJumpVelocity = forceForWallJump;
-
+            
             if (playerLookdir == -1 && (player.GetHorInput == -1 || player.GetHorInput == 0))
             {
 
