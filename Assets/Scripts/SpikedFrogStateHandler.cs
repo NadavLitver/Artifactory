@@ -17,11 +17,20 @@ public class SpikedFrogStateHandler : StateHandler
     bool frozen;
     public EnemyActor actor;
     [SerializeField] float freezeDuration;
-
+    private int jumpingHash;
+    internal int FrogJumpAttackHash;
+    internal int FrogNoticeHash;
+    internal int FrogIdleHash;
+    internal int FrogDeathHash;
     private void Start()
     {
         launcher.LandedEvent.AddListener(Freeze);
         actor.OnDeath.AddListener(Die);
+        jumpingHash = Animator.StringToHash("Jumping");
+        FrogJumpAttackHash = Animator.StringToHash("FrogJumpAttack");
+        FrogNoticeHash = Animator.StringToHash("FrogNotice");
+        FrogIdleHash = Animator.StringToHash("FrogIdleJump");
+        FrogDeathHash = Animator.StringToHash("FrogDeath");
     }
 
     private void Update()
@@ -30,7 +39,7 @@ public class SpikedFrogStateHandler : StateHandler
         {
             RunStateMachine();
         }
-        m_animator.SetBool("Jumping", launcher.IsJumping);
+        m_animator.SetBool(jumpingHash, launcher.IsJumping);
             
     }
 

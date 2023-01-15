@@ -12,7 +12,7 @@ public class SpikedFrogDeath : State
 
     public override void onStateEnter()
     {
-        handler.m_animator.Play("FrogDeath");
+        handler.m_animator.Play(handler.FrogDeathHash);
     }
     public override State RunCurrentState()
     {

@@ -8,7 +8,7 @@ public class SpikedFrogNoticePlayer : State
             return this;
         }
 
-        handler.m_animator.Play("FrogNotice");
+        handler.m_animator.Play(handler.FrogNoticeHash);
         handler.Freeze(0.5f);
         if (handler.rayData.isPointInBoxButNotInCollider(GameManager.Instance.assets.Player.transform.position))
         {   //enemy is in range to jump

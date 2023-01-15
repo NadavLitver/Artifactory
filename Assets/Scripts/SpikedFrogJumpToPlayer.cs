@@ -15,7 +15,7 @@ public class SpikedFrogJumpToPlayer : State
             if (hit && handler.rayData.isPointInBoxButNotInCollider(hit.point))
             {
                 handler.launcher.Launch(handler.rayData.GetClosestPointToPoint(hit.point));
-                handler.m_animator.Play("FrogJumpAttack");
+                handler.m_animator.Play(handler.FrogJumpAttackHash);
             }
             enteredState = true;
             return this;

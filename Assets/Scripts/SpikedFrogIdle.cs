@@ -18,7 +18,7 @@ public class SpikedFrogIdle : State
         if (!handler.launcher.IsJumping)  
         {
             handler.launcher.Launch(handler.rayData.GetRandomPos());
-            handler.m_animator.Play("FrogIdleJump");
+            handler.m_animator.Play(handler.FrogIdleHash);
         }
 
         if (handler.lineOfSight.CanSeePlayer())
