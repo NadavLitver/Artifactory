@@ -5,6 +5,7 @@ public class RelicDrop : DragToPlayer
 {
     [SerializeField] Relic myRelic;
     public Relic MyRelic { get => myRelic; }
+    [SerializeField] SpriteRenderer m_spriteRenderer;
 
     public override void OnDragEnd()
     {
@@ -15,5 +16,6 @@ public class RelicDrop : DragToPlayer
     public void CacheRelic(Relic givenRelic)
     {
         myRelic = givenRelic;
+        m_spriteRenderer.sprite = GameManager.Instance.RelicManager.GetRelicSpriteFromRelic(myRelic);
     }
 }

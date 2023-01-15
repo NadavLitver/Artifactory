@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 
 public class WheelOfFortuneManager : MonoBehaviour//not a real "Manager"
 {
@@ -6,8 +7,12 @@ public class WheelOfFortuneManager : MonoBehaviour//not a real "Manager"
     [SerializeField] float spinAmountMin, SpinAmountMax;
     private float currentAmount => Random.Range(spinAmountMin, SpinAmountMax);
     private float currentDuration => Random.Range(spinDurationMin, SpinDurationMax);
-
+    public UnityEvent<int> OnSpinOverWithWinnerIndex;
     public RectTransform[] sections;
+
+
+   
+
     [ContextMenu("Start Random Spin")]
     public void RandomSpin()
     {
@@ -64,7 +69,7 @@ public class WheelOfFortuneManager : MonoBehaviour//not a real "Manager"
     }
     public void CheckWinningSection()
     {
-      
+        int WinningIndex = 0;
         float highestHeight = sections[0].position.y;
         RectTransform highestRect = sections[0];
         for (int i = 0; i < sections.Length; i++)
@@ -72,14 +77,16 @@ public class WheelOfFortuneManager : MonoBehaviour//not a real "Manager"
             Debug.Log(sections[i].position);
             if(sections[i].position.y > highestHeight)
             {
+                WinningIndex = i;
                 highestHeight = sections[i].position.y;
                 highestRect = sections[i];
             }
         }
-
+        OnSpinOverWithWinnerIndex.Invoke(WinningIndex);
         Debug.Log("Highest Height is " + highestHeight + "Section is" + highestRect.gameObject.name);
 
     }
+   
     bool inBetween(float numToCheck,float min, float max)
     {
         if(numToCheck >= min && numToCheck <= max)

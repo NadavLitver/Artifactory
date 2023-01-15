@@ -26,7 +26,7 @@ public class DialogueExecuter : MonoBehaviour
             StartCoroutine(Type(dialogue));
         }
     }
-    IEnumerator Type(Dialogue dialogue)
+    internal IEnumerator Type(Dialogue dialogue)
     {
         typing = true;
         m_panel.SetActive(true);

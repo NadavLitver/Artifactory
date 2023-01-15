@@ -7,8 +7,6 @@ public class MobileControlsHandler : MonoBehaviour
 {
     [SerializeField] private RectTransform[] weaponButtons;
     [SerializeField] private RectTransform mobilityButton;
-    // [SerializeField] private MobilityButton mobilityButtonRef;
-    //[SerializeField] private RectTransform mobilityButtonRef;
     [SerializeField] private RectTransform AttackButton;
     [SerializeField] private RectTransform InteractButton;
     [SerializeField] private Sprite[] MobilitySprites;
@@ -19,7 +17,6 @@ public class MobileControlsHandler : MonoBehaviour
     {
 
         mobilityButton.position = weaponButtons[index].position;
-        // mobilityButtonRef.ChangeSpriteByIndex(index);
         MobilityImageRef.sprite = MobilitySprites[index];
         for (int i = 0; i < weaponButtons.Length; i++)
             weaponButtons[i].gameObject.SetActive(index != i);
