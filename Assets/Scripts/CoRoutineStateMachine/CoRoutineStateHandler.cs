@@ -10,7 +10,7 @@ public class CoRoutineStateHandler : MonoBehaviour
     private Coroutine mainRoutine;
     private bool active;
 
-    public Actor Actor { get => m_actor;}
+    public Actor Actor { get => m_actor; }
 
     private IEnumerator RunStateMachine()
     {
@@ -32,11 +32,11 @@ public class CoRoutineStateHandler : MonoBehaviour
             StopCoroutine(mainRoutine);
         }
         runningStateRoutine = givenState.StateRoutine();
-        yield return runningStateRoutine;   
+        yield return runningStateRoutine;
         mainRoutine = StartCoroutine(RunStateMachine());
     }
 
-    void OnEnable()
+    protected virtual void OnEnable()
     {
         SortStates();
         active = true;

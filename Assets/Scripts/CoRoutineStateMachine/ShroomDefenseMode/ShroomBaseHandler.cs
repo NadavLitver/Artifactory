@@ -20,7 +20,13 @@ public class ShroomBaseHandler : CoRoutineStateHandler
 
     private void Start()
     {
-        Actor.TakeDamageGFX.AddListener(InterruptTakeDamage);   
+        Actor.OnDamageCalcOver.AddListener(InterruptTakeDamage);   
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+        ResetAnim();
     }
     public bool IsWithinRangeToBounder(float range)
     {
@@ -61,9 +67,13 @@ public class ShroomBaseHandler : CoRoutineStateHandler
         }
 
     }
-
-
-    public void InterruptTakeDamage()
+    public virtual void InterruptTakeDamage(DamageHandler givenDamage)
+    {
+        ResetAnim();
+        Interrupt(takeDamageState);   
+    }
+    
+    private void ResetAnim()
     {
         foreach (var item in anim.parameters)
         {
@@ -72,6 +82,6 @@ public class ShroomBaseHandler : CoRoutineStateHandler
                 anim.SetBool(item.name, false);
             }
         }
-        Interrupt(takeDamageState);   
     }
+
 }
