@@ -9,7 +9,9 @@ public class ShroomBaseHandler : CoRoutineStateHandler
     [SerializeField] private Animator anim;
     [SerializeField] private RigidBodyFlip flipper;
     [SerializeField] private CoRoutineState takeDamageState;
+    [SerializeField] private ShroomBaseHandler otherMode;
     private ShroomCap currentCap;
+    private bool capDestroyed;
     public Rigidbody2D Rb { get => rb; }
     public SensorGroup LineOfSight { get => lineOfSight; }
     public SensorGroup GroundCheck { get => groundCheck; }
@@ -17,8 +19,9 @@ public class ShroomBaseHandler : CoRoutineStateHandler
     public Animator Anim { get => anim; }
     public ShroomCap CurrentCap { get => currentCap; set => currentCap = value; }
     public RigidBodyFlip Flipper { get => flipper; }
+    public bool CapDestroyed { get => capDestroyed; set => capDestroyed = value; }
 
-    private void Start()
+    protected virtual void Start()
     {
         Actor.OnDamageCalcOver.AddListener(InterruptTakeDamage);   
     }
@@ -73,7 +76,7 @@ public class ShroomBaseHandler : CoRoutineStateHandler
         Interrupt(takeDamageState);   
     }
     
-    private void ResetAnim()
+    public void ResetAnim()
     {
         foreach (var item in anim.parameters)
         {
@@ -84,4 +87,14 @@ public class ShroomBaseHandler : CoRoutineStateHandler
         }
     }
 
+    public Vector2 GetCurrectCapDirection()
+    {
+        return (currentCap.transform.position - transform.position).normalized;
+    }
+    public void SwitchToOtherMode()
+    {
+        otherMode.currentCap = currentCap;
+        otherMode.gameObject.SetActive(true);
+        gameObject.SetActive(false);
+    }
 }

@@ -20,15 +20,11 @@ public class ShroomCapHitCollider : MonoBehaviour
     {
         if (Time.time - cap.LastThrown >= cap.PickupCd)
         {
-            StoneShroomStateHandler handler = collision.GetComponentInChildren<StoneShroomStateHandler>();
-            if (!ReferenceEquals(handler, null) && handler.AttackMode)
+            ShroomBaseHandler handler = collision.GetComponentInChildren<ShroomBaseHandler>();
+            if (!ReferenceEquals(handler, null))
             {
-                Debug.Log("picked up");
-                handler.PickupInteruption();
-                handler.Anim.SetTrigger(handler.Pickuphash);
-                handler.AttackMode = false;
                 transform.parent.gameObject.SetActive(false);
-                Debug.Log("shroom picked up cap");
+                cap.OnPickedUp?.Invoke();
             }
         }
     }

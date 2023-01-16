@@ -108,8 +108,8 @@ MonoBehaviour:
   m_panel: {fileID: 0}
   m_text: {fileID: 0}
   speakerImage: {fileID: 0}
-  typeIntervals: 0
-  timeBetweenLines: 1
+  typeIntervals: 0.1
+  timeBetweenLines: 1.5
 --- !u!1 &1513092585
 GameObject:
   m_ObjectHideFlags: 0
@@ -460,6 +460,7 @@ Transform:
   - {fileID: 6949193590038469940}
   - {fileID: 1017730315}
   - {fileID: 1877112337}
+  - {fileID: 1078534446947263185}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -493,15 +494,17 @@ MonoBehaviour:
     mobileButtonHandler: {fileID: 0}
     endInteractablePanel: {fileID: 0}
     CraftingPanel: {fileID: 0}
-    BounderScout: {fileID: 7286397062145270228, guid: 6c38a5c0a53fc5146be94217aa9aef63, type: 3}
+    BounderScout: {fileID: 8467794796436600464, guid: 1ec8468c7beb4c54582ca1c7171703da, type: 3}
     craftingMapNode: {fileID: 1946464524881845352, guid: b4057901708be3c49843f221eafadf56, type: 3}
     GlimmeringSprite: {fileID: 21300000, guid: 66a3d44b669a40942bbc63810551d001, type: 3}
     BranchSprite: {fileID: 21300000, guid: fa91225964ff1234ea62b1d40b743f2f, type: 3}
     RuneSprite: {fileID: 21300000, guid: 73a165a53d281ee4a88b8372312ffe7b, type: 3}
     LeatherSprite: {fileID: 21300000, guid: 681cdb2853ae7144c815013a86c8da7c, type: 3}
     ItemUiSlot: {fileID: 1052155130899679002, guid: d0f22065e4078e447bddcdb0b03a269c, type: 3}
+    ItemPickUpPrefab: {fileID: 1370576873857019599, guid: dccd0e3c00ef4894a95b1f6652bb72a7, type: 3}
     baseFatherObject: {fileID: 0}
     baseSpawnPlayerPositionObject: {fileID: 0}
+    CapPool: {fileID: 5111662350817070084}
 --- !u!1 &4207107459726920179
 GameObject:
   m_ObjectHideFlags: 0
@@ -632,6 +635,53 @@ MonoBehaviour:
   pooledObjects: []
   objectToPool: {fileID: 0}
   amountToPool: 0
+--- !u!1 &7028819647897419526
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1078534446947263185}
+  - component: {fileID: 5111662350817070084}
+  m_Layer: 0
+  m_Name: ObjectPools
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1078534446947263185
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7028819647897419526}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4180575170529028752}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5111662350817070084
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7028819647897419526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72c26786dd7c1694a8761d3f094ca4c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  PrefabToPool: {fileID: 800068218782913412, guid: 8eb96fa6730adeb41b59afd425f5d01e, type: 3}
+  NumToPool: 10
 --- !u!1 &7568456704651568653
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,10 +727,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   firstIsleRooms:
-  - {fileID: 8044641725427839896, guid: 69d3a6677bdb11541af07c28fbd6d133, type: 3}
   - {fileID: 3149440148777350306, guid: 534d9e517b65f134196a20b1014c09ad, type: 3}
   - {fileID: 5954773215286868691, guid: 675a6c45376e11f459856379caf1d180, type: 3}
-  - {fileID: 1398470984, guid: fb700f8c60a416544ae57319b358ce92, type: 3}
+  - {fileID: 1540893921, guid: 797e3e271029f2d44be6a5e1580fbc7c, type: 3}
   - {fileID: 1540893921, guid: 33ba45dd60c907f46abe419c97a3b5ff, type: 3}
   secondIsleRooms: []
   thirdIsleRooms: []
@@ -698,7 +747,7 @@ MonoBehaviour:
     Amount: 10
   currentRunState: []
   firstRoom: {fileID: 0}
-  numberOfRooms: 5
+  numberOfRooms: 4
   mapGenerator: {fileID: 1608005968017932032}
   maxNuberOfChests: 1
 --- !u!1001 &6662966006180783118

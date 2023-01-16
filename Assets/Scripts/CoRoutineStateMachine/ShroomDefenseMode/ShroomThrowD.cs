@@ -17,9 +17,8 @@ public class ShroomThrowD : BaseShroomDState
         handler.CurrentCap.transform.position = new Vector3(transform.position.x, transform.position.y + 0.8f);
         handler.CurrentCap.SetUpPositions(handler.Bounder.MaxPos, handler.Bounder.MinPos);
         handler.CurrentCap.Throw(handler.GetPlayerDirection() * throwForce);
-        //enter evil mode
-        //gameObject.SetActive(false);
-        //gameobject inactive?
+        yield return new WaitForEndOfFrame();
+        handler.SwitchToOtherMode();
     }
 
     internal override bool myCondition()

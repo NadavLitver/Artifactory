@@ -70,7 +70,10 @@ public class CoRoutineStateHandler : MonoBehaviour
 
     public void Interrupt(CoRoutineState givenState)
     {
-        StartCoroutine(RunStateMachine(givenState));
+        if (gameObject.activeInHierarchy)
+        {
+            StartCoroutine(RunStateMachine(givenState));
+        }
     }
     //this is the lambda voodoo magic above
     // states.Sort(SortByPriority);

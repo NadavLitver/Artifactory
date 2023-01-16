@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class ShroomCap : Actor, IDamagable
@@ -13,9 +14,11 @@ public class ShroomCap : Actor, IDamagable
     bool dealtDamage;
     float lastThrown;
     float startingGrav;
+    public bool Destroyed;
 
     [SerializeField] SensorGroup groundCheck;
 
+    public UnityEvent OnPickedUp;
     public SensorGroup GroundCheck { get => groundCheck; }
     public float PickupCd { get => pickupCd; set => pickupCd = value; }
     public bool DealtDamage { get => dealtDamage; set => dealtDamage = value; }
@@ -33,6 +36,9 @@ public class ShroomCap : Actor, IDamagable
     {
         lastThrown = Time.time;
         startingGrav = RB.gravityScale;
+        Heal(new DamageHandler() { amount = maxHP });
+        Destroyed = false;
+        OnDeath.AddListener(DestroyedOn);
     }
 
     private void OnDisable()
@@ -61,6 +67,11 @@ public class ShroomCap : Actor, IDamagable
         RB.velocity = Vector2.zero;
         RB.gravityScale = 0;
         groundCheck.OnGrounded.RemoveListener(LandedReset);
+    }
+    
+    public void DestroyedOn()
+    {
+        Destroyed = true;
     }
 
     IEnumerator KeepToBounries()

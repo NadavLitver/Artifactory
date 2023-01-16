@@ -1,7 +1,8 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class ShroomTakeDamageD : BaseShroomDState
+public class ShroomTakeDamageA : ShroomBaseStateA
 {
     [SerializeField] private float stunDuration;
     [SerializeField] private float knockBackForce;
