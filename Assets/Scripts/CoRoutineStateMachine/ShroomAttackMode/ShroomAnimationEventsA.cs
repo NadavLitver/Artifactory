@@ -21,4 +21,9 @@ public class ShroomAnimationEventsA : MonoBehaviour
         handler.startRamming = true;
     }
 
+    public void PickupFlag()
+    {
+        handler.PickedUp = true;
+    }
+
 }

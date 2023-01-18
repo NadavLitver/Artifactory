@@ -18,6 +18,10 @@ public class ShroomSateHandlerA : ShroomBaseHandler
     {
         base.Start();
         Actor.OnDeath.AddListener(AdressDeath);
+        if (!ReferenceEquals(CurrentCap, null))
+        {
+            CurrentCap.OnPickedUp.AddListener(InterruptPickup);
+        }
     }
 
     private void AdressDeath()
