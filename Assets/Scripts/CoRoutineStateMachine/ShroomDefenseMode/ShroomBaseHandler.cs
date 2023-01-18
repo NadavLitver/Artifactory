@@ -76,7 +76,7 @@ public class ShroomBaseHandler : CoRoutineStateHandler
         Interrupt(takeDamageState);   
     }
     
-    public void ResetAnim()
+    public virtual void ResetAnim()
     {
         foreach (var item in anim.parameters)
         {

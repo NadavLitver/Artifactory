@@ -7,6 +7,7 @@ public class ShroomSateHandlerA : ShroomBaseHandler
     public bool PickedUp;
     public bool DoneRessurecting;
     public bool DoneDying;
+    public bool startRamming;
 
     [SerializeField] ShroomBaseStateA pickUpState;
     [SerializeField] ShroomBaseStateA deathState;
@@ -45,5 +46,14 @@ public class ShroomSateHandlerA : ShroomBaseHandler
     {
         ResetAnim();
         Interrupt(ressurectState);
+    }
+
+    public override void ResetAnim()
+    {
+        base.ResetAnim();
+        PickedUp = false;
+        startRamming = false;
+        DoneRessurecting = false;
+        DoneDying = false;
     }
 }

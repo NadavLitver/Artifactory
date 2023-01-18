@@ -16,4 +16,9 @@ public class ShroomAnimationEventsA : MonoBehaviour
         handler.DoneRessurecting = true;
     }
 
+    public void StartRamming()
+    {
+        handler.startRamming = true;
+    }
+
 }

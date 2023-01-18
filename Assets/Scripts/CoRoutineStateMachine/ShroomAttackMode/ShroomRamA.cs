@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShroomRamA : ShroomBaseStateA
@@ -14,17 +13,23 @@ public class ShroomRamA : ShroomBaseStateA
     public override IEnumerator StateRoutine()
     {
         float counter = 0;
+        handler.Anim.SetTrigger("StartRam");
         handler.Anim.SetBool("Ram", true);
+        yield return new WaitUntil(() => handler.startRamming);
+        handler.startRamming = false;
         handler.ramCollider.SetActive(true);
+        Vector2 dir = new Vector2(handler.GetPlayerDirection().x * ramSpeed, 0);
         while (counter < ramDuration && !handler.IsWithinRangeToBounder(bounderOffest))
         {
-            handler.Rb.velocity = new Vector2(handler.GetPlayerDirection().x * ramSpeed, 0);
+            handler.Rb.velocity = dir;
             counter += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        Debug.Log("done ramming");
         handler.ramCollider.SetActive(false);
         handler.Anim.SetBool("Ram", false);
         handler.Rb.velocity = Vector3.zero;
+        lastRammed = Time.time;
     }
 
     private void Start()
