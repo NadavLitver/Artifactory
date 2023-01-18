@@ -7,6 +7,7 @@ public class ShroomSateHandlerA : ShroomBaseHandler
     public bool PickedUp;
     public bool DoneRessurecting;
     public bool DoneDying;
+    public bool startRamming;
 
     [SerializeField] ShroomBaseStateA pickUpState;
     [SerializeField] ShroomBaseStateA deathState;
@@ -17,6 +18,10 @@ public class ShroomSateHandlerA : ShroomBaseHandler
     {
         base.Start();
         Actor.OnDeath.AddListener(AdressDeath);
+        if (!ReferenceEquals(CurrentCap, null))
+        {
+            CurrentCap.OnPickedUp.AddListener(InterruptPickup);
+        }
     }
 
     private void AdressDeath()
@@ -45,5 +50,14 @@ public class ShroomSateHandlerA : ShroomBaseHandler
     {
         ResetAnim();
         Interrupt(ressurectState);
+    }
+
+    public override void ResetAnim()
+    {
+        base.ResetAnim();
+        PickedUp = false;
+        startRamming = false;
+        DoneRessurecting = false;
+        DoneDying = false;
     }
 }

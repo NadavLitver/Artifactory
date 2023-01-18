@@ -641,7 +641,7 @@ MonoBehaviour:
   anim: {fileID: 2962744240795717380}
   flipper: {fileID: 2962744240544369506}
   takeDamageState: {fileID: 2962744242088939598}
-  otherMode: {fileID: 2962744242505823919}
+  otherMode: {fileID: 6973081568470684432}
   throwFlag: 0
   isEnraged: 0
 --- !u!114 &2962744242088939593
@@ -790,6 +790,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   states:
   - {fileID: 8123589712327772313}
+  - {fileID: 5717363680691226278}
   m_actor: {fileID: 2962744240544369504}
   rb: {fileID: 2962744240544369519}
   lineOfSight: {fileID: 2962744241433431909}
@@ -798,10 +799,11 @@ MonoBehaviour:
   anim: {fileID: 3314009879725532973}
   flipper: {fileID: 2962744240544369506}
   takeDamageState: {fileID: 8053518562303579834}
-  otherMode: {fileID: 2962744242088939958}
+  otherMode: {fileID: 2962744242088939594}
   PickedUp: 0
   DoneRessurecting: 0
   DoneDying: 0
+  startRamming: 0
   pickUpState: {fileID: 6053797303516809870}
   deathState: {fileID: 5851949567077389279}
   ressurectState: {fileID: 6579637478158748564}
@@ -833,9 +835,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 1
   ramCoolDown: 10
-  ramDuration: 3
+  ramDuration: 5
   bounderOffest: 2
-  ramSpeed: 3
+  ramSpeed: 6
   RamThreshold: 4.5
 --- !u!114 &5717363680691226278
 MonoBehaviour:
@@ -849,10 +851,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2628641480f7b0048897b4567d8df1da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 5
+  priority: 2
   walkDuration: 2
   walkSpeed: 1.5
-  walkCoolDown: 0
 --- !u!114 &5851949567077389279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -892,8 +893,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  stunDuration: 0
-  knockBackForce: 0
+  stunDuration: 0.1
+  knockBackForce: 1
 --- !u!1 &7706441859698970193
 GameObject:
   m_ObjectHideFlags: 0
