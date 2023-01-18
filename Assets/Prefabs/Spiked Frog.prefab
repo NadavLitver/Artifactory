@@ -533,8 +533,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 260220feca668bd418b158dcffc82824, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  positiveVector: {x: 0, y: 0, z: 0}
+  negativeVector: {x: 0, y: 0, z: 0}
   Disabled: 0
   IsLookingRight: 0
+  StartLeft: 0
 --- !u!1 &7329605738004119608
 GameObject:
   m_ObjectHideFlags: 0
@@ -610,7 +613,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2069616245
   m_SortingLayer: 4
-  m_SortingOrder: 4
+  m_SortingOrder: 15
   m_Sprite: {fileID: -2095066785, guid: d37961e6a717cb34cb4edf6920fc3ebf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
