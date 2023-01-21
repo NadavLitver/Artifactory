@@ -11,6 +11,7 @@ public class ShroomWalkA : ShroomBaseStateA
     {
         float counter = 0;
         handler.Anim.SetBool("Walk", true);
+        handler.Flipper.Disabled = false;
         while (counter < walkDuration)
         {
             if (handler.IsWithinRangeToBounder(2f))
