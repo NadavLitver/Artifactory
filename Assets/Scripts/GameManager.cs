@@ -175,7 +175,7 @@ public class GeneralFunctions
     public void onPlayerDiedActions()
     {
         LeanTween.cancelAll();
-
+        GameManager.Instance.assets.mobileControls.SetActive(false);
         LeanTween.delayedCall(1, ResetScene);
     }
 
