@@ -78,7 +78,7 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
         MoveTowardsDestenation();
     }
