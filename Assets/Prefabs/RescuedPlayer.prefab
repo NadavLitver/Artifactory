@@ -218,7 +218,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1832014675}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -283,9 +283,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 490901113
-  m_SortingLayer: 5
-  m_SortingOrder: 10
+  m_SortingLayerID: -2069616245
+  m_SortingLayer: 4
+  m_SortingOrder: 5
   m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -420,14 +420,15 @@ MonoBehaviour:
   host: {fileID: 0}
   radiusForWallCheck: 0.5
   distaceFromPlayerToCheck: 0.5
-  JumpToClawForce: {x: 12, y: 20}
-  forceForWallJump: {x: 10, y: 20}
+  JumpToClawForce: {x: 0, y: 20}
+  forceForWallJump: {x: 5, y: 20}
   contactFilter:
     serializedVersion: 2
     m_Bits: 32768
   maxClawTime: 10
   downForceFromAirAttack: 18
   groundedAttackTime: 0.1
+  mobilityCD: 1
   clawEffectPool: {fileID: 542825379}
 --- !u!114 &840070346641518068
 MonoBehaviour:
@@ -556,27 +557,24 @@ MonoBehaviour:
   velocity: {x: 0, y: 0}
   externalForces: {x: 0, y: 0}
   StartingScale: {x: 0, y: 0}
-  BottomRightPoint: {x: 0, y: 0}
-  BottomLeftPoint: {x: 0, y: 0}
-  topMidPoint: {x: 0, y: 0}
   horInput: 0
   startingGravityScale: 0
   isLookingRight: 0
   isFalling: 0
-  m_collider: {fileID: 0}
   Jumping: 0
   CoyoteAvailable: 0
   acceleration: 0
   m_animator: {fileID: 791565559279450814}
+  traversalTime: 0.4
   jumpEffectPoint: {fileID: 417044}
   clawEffectPoint: {fileID: 1720240842}
   jumpEffectPool: {fileID: 79925628}
   landEffectPool: {fileID: 1948557292}
-  OnsGroundCheck: {fileID: 0}
+  OnsGroundCheck: {fileID: 7347479043507101585}
   maxGravity: 25
   GravityScale: 50
-  accelerationSpeed: 30
-  deaccelerationSpeed: 55
+  accelerationSpeed: 21.7
+  deaccelerationSpeed: 65.1
   GroundLayerMask:
     serializedVersion: 2
     m_Bits: 128
@@ -808,7 +806,7 @@ MonoBehaviour:
   muzzle: {fileID: 5508809318916323046}
   chargeDuration: 1
   timeTillFade: 10
-  jumpForce: 17
+  jumpForce: 21
   cannonGlow: {fileID: 0}
   slowDuration: 0.2
   gravityScaleOnShoot: 5
@@ -1060,7 +1058,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -2069616245
   m_SortingLayer: 4
-  m_SortingOrder: 5
+  m_SortingOrder: 10
   m_Sprite: {fileID: 1883508514, guid: 0de4057198c2d0d48aa35b13f7310dbb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1163,7 +1161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b999e005466d58438b18927d2c506cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayBetweenUpdates: 0.5
+  delayBetweenUpdates: 0.25
   checkRadius: 2.5
   closestInteractable: {fileID: 0}
   layerToCheck:
