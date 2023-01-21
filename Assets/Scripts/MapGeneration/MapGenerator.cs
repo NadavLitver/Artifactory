@@ -6,7 +6,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] List<MapTile> createdMapTiles = new List<MapTile>();
     [SerializeField] List<MapTile> createdMiniMapTiles = new List<MapTile>();
     [SerializeField] MapUIManager mapUimanager;
-    [SerializeField] float miniMapNodeOffset;
+    [SerializeField] Vector2 miniMapNodeOffset;
     [SerializeField] float largeMapNodeOffsetMod;
 
     public List<MapTile> CreatedMapTiles { get => createdMapTiles; set => createdMapTiles = value; }
@@ -37,10 +37,20 @@ public class MapGenerator : MonoBehaviour
         newTile.SetNodeSize(givenRoom.Size.X, givenRoom.Size.Y);
         PlaceTile(newTile);
         newTile.name = newTile.RefRoom.name + " " + newTile.RefRoom.MyPos.ToString();
-        if (givenRoom.HasChest || givenRoom.HasPortal || givenRoom is NpcRoom || givenRoom is RelicRoom)
+    }
+
+    public void StartRun()
+    {
+        foreach (var item in createdMapTiles)
         {
-            newTile.SpecialRoomIcon.SetActive(true);
+            if (item.RefRoom.HasChest || item.RefRoom.HasPortal || item.RefRoom is NpcRoom || item.RefRoom is RelicRoom)
+            {
+                item.OnEnterSub();
+                item.SpecialRoomIcon.SetActive(true);
+            }
         }
+
+        MapUimanager.MiniMapCenterNode.PlayerVisualsOn();
     }
 
     public void PlaceTile(MapTile givenTile)
@@ -85,6 +95,7 @@ public class MapGenerator : MonoBehaviour
         //recieve active room
         //clear minimap
         //put active room at 0.0 in minimap
+        ActivePlayerLocation(activeRoom);
         foreach (var item in createdMiniMapTiles)
         {
             item.transform.localPosition = Vector3.zero;
@@ -111,6 +122,7 @@ public class MapGenerator : MonoBehaviour
             pointA = mapUimanager.MiniMapCenterNode.GetConnectionPointFromExitLocation(exit.ExitLocation);
             pointA.gameObject.SetActive(true);
             MapTile nextMiniMapTile = createdMiniMapTiles[counter];
+            nextMiniMapTile.DisableIcons();
             nextMiniMapTile.CacheRoom(exit.OtherExit.MyRoom);
             pointB = nextMiniMapTile.GetConnectionPointFromExitLocation(exit.OtherExit.ExitLocation);
             counter++;
@@ -121,7 +133,16 @@ public class MapGenerator : MonoBehaviour
             if (pointA != null && pointB != null)
             {
                 pointA.ConnectLine(pointB.transform);
+                if (nextMiniMapTile.RefRoom.Visited)
+                {
+                    nextMiniMapTile.UpdateIconsOnEnter();
+                }
+                else if (nextMiniMapTile.RefRoom.HasChest || nextMiniMapTile.RefRoom.HasPortal || nextMiniMapTile.RefRoom is NpcRoom || nextMiniMapTile.RefRoom is RelicRoom)
+                {
+                    nextMiniMapTile.SpecialRoomIcon.SetActive(true);
+                }
             }
+
         }
     }
 

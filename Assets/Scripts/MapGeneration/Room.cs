@@ -105,7 +105,6 @@ public class Room : MonoBehaviour
             return false;
         }
         chestSpawnPoints[UnityEngine.Random.Range(0, chestSpawnPoints.Count)].SpawnObject();
-        Debug.Log("spawned a chest");
         hasChest = true;
         return true;
     }
@@ -115,7 +114,6 @@ public class Room : MonoBehaviour
         {
             return false;
         }
-        Debug.Log("spawned a protal");
         chestSpawnPoints[UnityEngine.Random.Range(0, chestSpawnPoints.Count)].SpawnObject(obj);
         hasPortal = true;
         return true;

@@ -24,18 +24,12 @@ public class MapTile : MonoBehaviour
     public GameObject NpcIcon { get => npcIcon; }
     public GameObject ChestIcon { get => chestIcon; }
 
-    private void Start()
-    {
-        //playerFaceIcon.SetActive(false);
-        specialRoomIcon.SetActive(false);
-        emergencyExitIcon.SetActive(false);
-        npcIcon.SetActive(false);
-        chestIcon.SetActive(false);
-    }
-
     public void CacheRoom(Room givenRoom)
     {
         refRoom = givenRoom;
+    }
+    public void OnEnterSub()
+    {
         RefRoom.OnEntered.AddListener(UpdateIconsOnEnter);
     }
     public MapConnectionPoint GetConnectionPointFromExitLocation(ExitLocationInfo givenLocation)
@@ -57,6 +51,8 @@ public class MapTile : MonoBehaviour
 
     public void UpdateIconsOnEnter()
     {
+        DisableIcons();
+
         if (refRoom.HasChest)
         {
             specialRoomIcon.SetActive(false);
@@ -74,6 +70,13 @@ public class MapTile : MonoBehaviour
         }
     }
 
+    public void DisableIcons()
+    {
+        chestIcon.SetActive(false);
+        emergencyExitIcon.SetActive(false);
+        npcIcon.SetActive(false);
+    }
+
     public void PlayerVisualsOn()
     {
         playerFaceIcon.SetActive(true);
@@ -85,5 +88,4 @@ public class MapTile : MonoBehaviour
         playerFaceIcon.SetActive(false);
         mapTileImage.sprite = regBorder;
     }
-
 }

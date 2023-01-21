@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class DropChest : Actor
 {
-    [SerializeField] DragToPlayer myDrop;
-
+    [SerializeField] RelicDrop myDrop;
+    [SerializeField] private Animator anim;
     public void Open()
     {
-        Instantiate(myDrop, transform.position, Quaternion.identity);
-        gameObject.SetActive(false);
+        anim.Play("Open");
+    }
+
+    public void DoneOpening()
+    {
+        myDrop = Instantiate(GameManager.Instance.assets.relicDropPrefab, transform.position, transform.rotation);
+        myDrop.CacheRelic(GameManager.Instance.RelicManager.GetFreeRelic());
     }
 }
