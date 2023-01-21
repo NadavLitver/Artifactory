@@ -196,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.392}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.8627451}
   m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -576,8 +576,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 48
+  m_fontSizeBase: 48
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -612,7 +612,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 392.4577, y: 17.572998, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1652,8 +1652,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -411.59, y: -78.649}
-  m_SizeDelta: {x: 226.0228, y: 226.0228}
+  m_AnchoredPosition: {x: -336, y: 54}
+  m_SizeDelta: {x: 1024, y: 1024}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1807146380
 CanvasRenderer:
@@ -9071,6 +9071,18 @@ PrefabInstance:
     - target: {fileID: 203197491343374954, guid: b0fe097c84e84a1448dfceeb37f4373c, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 203197491739812148, guid: b0fe097c84e84a1448dfceeb37f4373c, type: 3}
+      propertyPath: SpinDurationMax
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 203197491739812148, guid: b0fe097c84e84a1448dfceeb37f4373c, type: 3}
+      propertyPath: spinDurationMin
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 203197491739812148, guid: b0fe097c84e84a1448dfceeb37f4373c, type: 3}
+      propertyPath: AmountMultiplier
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 203197491739812150, guid: b0fe097c84e84a1448dfceeb37f4373c, type: 3}
       propertyPath: m_Sprite
