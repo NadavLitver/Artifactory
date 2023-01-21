@@ -4,7 +4,11 @@ using UnityEngine;
 
 public class TuffInteractionHandler : Interactable
 {
-    [SerializeField] Dialogue m_dialogue;
+    [SerializeField] Dialogue startingDialogue;
+    [SerializeField] Dialogue endingDialogue;
+    [SerializeField] Dialogue endingDialogueWithLegs;
+
+    public bool didPlayerGetLegs;
     GameObject WheelOfFortuneScreen;
     bool interacted;
     private void Start()
@@ -14,8 +18,10 @@ public class TuffInteractionHandler : Interactable
     }
     public override void Interact()
     {
-        if(!interacted)
-         StartCoroutine(InteractionRoutine());
+        if (!interacted)
+            StartCoroutine(InteractionRoutine());
+        else 
+            StartCoroutine(GameManager.Instance.dialogueExecuter.Type(didPlayerGetLegs ? endingDialogueWithLegs : endingDialogue));
 
        
 
@@ -24,7 +30,7 @@ public class TuffInteractionHandler : Interactable
     IEnumerator InteractionRoutine()
     {
         interacted = true;
-        yield return  GameManager.Instance.dialogueExecuter.Type(m_dialogue);
+        yield return  GameManager.Instance.dialogueExecuter.Type(startingDialogue);
         WheelOfFortuneScreen.SetActive(true);
     }
 }

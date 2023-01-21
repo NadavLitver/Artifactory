@@ -20,23 +20,29 @@ public class WheelOfFortunePrizes : MonoBehaviour
     }
     private void GivePrize(int index)
     {
+        StartCoroutine(GivePrizeRoutine(index));
+    }
+    IEnumerator GivePrizeRoutine(int index)
+    {
+        yield return new WaitForSeconds(2);
+
         switch (index)
         {
             case 0:
                 if (GameManager.Instance.RelicManager.isRelicTaken(StatusEffectEnum.LightningEmblem))
-                    return;
+                    yield break;
                 RelicDrop lightEmblem = Instantiate(GameManager.Instance.assets.relicDropPrefab, GameManager.Instance.assets.tuffRef.transform.position, Quaternion.identity);
                 lightEmblem.CacheRelic(GameManager.Instance.RelicManager.GetRelic(StatusEffectEnum.LightningEmblem));
                 break;
             case 1:
                 if (GameManager.Instance.RelicManager.isRelicTaken(StatusEffectEnum.HealingGoblet))
-                    return;
+                    yield break;
                 RelicDrop goblet = Instantiate(GameManager.Instance.assets.relicDropPrefab, GameManager.Instance.assets.tuffRef.transform.position, Quaternion.identity);
                 goblet.CacheRelic(GameManager.Instance.RelicManager.GetRelic(StatusEffectEnum.HealingGoblet));
                 break;
             case 2:
                 DropResource(ItemType.Rune);
-               
+
                 break;
             case 3:
                 DropResource(ItemType.Branch);
@@ -46,13 +52,16 @@ public class WheelOfFortunePrizes : MonoBehaviour
                 GameManager.Instance.assets.playerActor.Heal(new DamageHandler() { amount = GameManager.Instance.assets.playerActor.maxHP }); ;
                 break;
             case 5:
+                GameManager.Instance.assets.tuffRef.didPlayerGetLegs = true;
                 //Ragain Golem legs
                 break;
             default:
                 break;
         }
-        fatherGO.SetActive(false);
+        TurnOfScreen();
+        
     }
+    public void TurnOfScreen() =>  fatherGO.SetActive(false);
     private void DropResource()
     {
       

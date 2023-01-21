@@ -14,6 +14,8 @@ GameObject:
   - component: {fileID: 8169779743971955134}
   - component: {fileID: 8169779743971955106}
   - component: {fileID: 373276883}
+  - component: {fileID: 123511200}
+  - component: {fileID: 123511199}
   m_Layer: 9
   m_Name: Tuff
   m_TagString: Interactable
@@ -100,7 +102,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab7ee24de8d21ac4facb864498c29c31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_dialogue: {fileID: 8169779743971955134}
+  startingDialogue: {fileID: 8169779743971955134}
+  endingDialogue: {fileID: 123511199}
+  endingDialogueWithLegs: {fileID: 123511200}
+  didPlayerGetLegs: 0
 --- !u!114 &8169779743971955134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,11 +119,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lines:
-  - Im Tuff
-  - You get one chance to spin the wheel
-  - you might win a nice prize
-  - I wish I had legs
-  - Legs are awsome
+  - Ahh.. Hello there,
+  - I lost my legs, maybe you can help me rebuild them?
+  - " If I\u2019m lucky\u2026"
   m_sprite: {fileID: 8169779743971955104}
 --- !u!61 &8169779743971955106
 BoxCollider2D:
@@ -166,3 +169,33 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &123511200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8169779743971955133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4610090048ce3de44827f5aacdf870de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lines:
+  - Thank you! I'll use them later..
+  m_sprite: {fileID: 8169779743971955104}
+--- !u!114 &123511199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8169779743971955133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4610090048ce3de44827f5aacdf870de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lines:
+  - Hmm.. no legs today. Enjoy your prize
+  m_sprite: {fileID: 8169779743971955104}
