@@ -19,8 +19,7 @@ public class EnemyBounder : MonoBehaviour
 
     public Vector2 MaxPos { get => maxPos; }
     public Vector2 MinPos { get => minPos; }
-
-    private void OnEnable()
+    public void StartBounder()
     {
         if (!getter && !Done)
         {
@@ -31,6 +30,7 @@ public class EnemyBounder : MonoBehaviour
             StartCoroutine(WaitUntilDone());
         }
     }
+
 
     public void CachePoints(Vector2 max, Vector2 min)
     {
