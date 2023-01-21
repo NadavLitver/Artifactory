@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8737215547446601800}
   - component: {fileID: 5733220871907969267}
   - component: {fileID: 651791407}
+  - component: {fileID: 1679879890067717159}
   m_Layer: 12
   m_Name: Chest
   m_TagString: Untagged
@@ -119,6 +120,7 @@ MonoBehaviour:
   IsInAttackAnim: 0
   effectable: 0
   myDrop: {fileID: 8784087849715783756, guid: 681b00428bd7dd947b1f70348dc77662, type: 3}
+  anim: {fileID: 1679879890067717159}
 --- !u!212 &5733220871907969267
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -160,8 +162,8 @@ SpriteRenderer:
   m_SortingLayerID: 490901113
   m_SortingLayer: 5
   m_SortingOrder: 1
-  m_Sprite: {fileID: 7482667652216324306, guid: 48e93eef0688c4a259cb0eddcd8661f7, type: 3}
-  m_Color: {r: 0.7830189, g: 0.34349412, b: 0.34349412, a: 1}
+  m_Sprite: {fileID: 762109899, guid: 80e4577298aaade4396df907b68b9213, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -187,8 +189,8 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    pivot: {x: 0.50097847, y: 0.35546875}
+    oldSize: {x: 5.11, y: 5.12}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -197,3 +199,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &1679879890067717159
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4694302363693926822}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 8cf5d7f67cdccc643ae3707427b9e003, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0

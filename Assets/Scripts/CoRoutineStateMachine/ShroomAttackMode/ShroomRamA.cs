@@ -16,6 +16,7 @@ public class ShroomRamA : ShroomBaseStateA
         handler.Anim.SetTrigger("StartRam");
         handler.Anim.SetBool("Ram", true);
         handler.Flipper.Disabled = false;
+        handler.Rb.velocity = Vector3.zero;
         yield return new WaitUntil(() => handler.startRamming);
         handler.startRamming = false;
         handler.ramCollider.SetActive(true);

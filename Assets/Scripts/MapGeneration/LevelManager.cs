@@ -343,8 +343,10 @@ public class LevelManager : MonoBehaviour
         CurrentRunRooms[0].gameObject.SetActive(true);
         active = currentRunRooms[0];
         GameManager.Instance.generalFunctions.SpawnObjectAt(GameManager.Instance.assets.Player.gameObject, active.StartPosition.position);
+        mapGenerator.StartRun();
         mapGenerator.UpdateMiniMap(active);
         GameManager.Instance.assets.baseFatherObject.SetActive(false);
+        active.OnEntered?.Invoke();
     }
 
 
@@ -388,5 +390,6 @@ public class LevelManager : MonoBehaviour
         active = givenExit.OtherExit.MyRoom;
         GameManager.Instance.generalFunctions.SpawnObjectAt(GameManager.Instance.assets.Player.gameObject, givenExit.OtherExit.transform.position);
         mapGenerator.UpdateMiniMap(Active);
+        givenExit.OtherExit.MyRoom.OnEntered?.Invoke();
     }
 }
