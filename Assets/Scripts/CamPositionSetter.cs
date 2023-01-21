@@ -27,9 +27,10 @@ public class CamPositionSetter : MonoBehaviour
     {
         follow = true;
         playerTransform = GameManager.Instance.assets.Player.transform;
-        GameManager.Instance.assets.playerActor.OnDeath.AddListener(OnPlayerDeathCamBehave);
-       
         framingTransposer = virtualCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        if(!GameManager.Instance.isTutorial)
+             GameManager.Instance.assets.playerActor.OnDeath.AddListener(OnPlayerDeathCamBehave);
+       
     }
 
     private void OnPlayerDeathCamBehave()
@@ -48,6 +49,10 @@ public class CamPositionSetter : MonoBehaviour
             counter += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
+        //
+
+
+
     }
     void CalcPoints()
     {
