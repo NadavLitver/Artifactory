@@ -140,6 +140,11 @@ public class AssetsRefrence
     [Header("Mushroom"), Space(10)]
     public ShroomCapObjectPool CapPool;
 
+    [Header("Tuff")]
+    public TuffInteractionHandler tuffRef;
+    public WheelOfFortuneManager wheelOfFortuneManager;
+    public WheelOfFortunePrizes wheelOfFortunePrizes;
+
 }
 public class GeneralFunctions
 {

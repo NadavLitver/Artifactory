@@ -9,7 +9,7 @@ public class WheelOfFortuneManager : MonoBehaviour//not a real "Manager"
     private float currentDuration => Random.Range(spinDurationMin, SpinDurationMax);
     public UnityEvent<int> OnSpinOverWithWinnerIndex;
     public RectTransform[] sections;
-
+    [SerializeField] int AmountMultiplier;
 
    
 
@@ -28,42 +28,42 @@ public class WheelOfFortuneManager : MonoBehaviour//not a real "Manager"
         if (inBetween(result, 0, 0.19f))
         {
             Debug.Log("First Win");
-            LeanTween.rotateZ(gameObject, transform.rotation.z + 720, currentDuration).setOnComplete(() => CheckWinningSection());
+            LeanTween.rotateZ(gameObject, transform.rotation.z + (2160 ), currentDuration).setOnComplete(() => CheckWinningSection());
 
         }
         else if (inBetween(result, 0.19f, 0.38f))
         {
             Debug.Log("Second Win");
 
-            LeanTween.rotateZ(gameObject, transform.rotation.z + 780, currentDuration).setOnComplete(() => CheckWinningSection());
+            LeanTween.rotateZ(gameObject, transform.rotation.z + (2220 ), currentDuration).setOnComplete(() => CheckWinningSection());
 
         }
         else if(inBetween(result, 0.38f, 0.57f))
         {
             Debug.Log("Third Win");
 
-            LeanTween.rotateZ(gameObject, transform.rotation.z + 840, currentDuration).setOnComplete(() => CheckWinningSection());
+            LeanTween.rotateZ(gameObject, transform.rotation.z + (2280 ), currentDuration).setOnComplete(() => CheckWinningSection());
 
         }
         else if (inBetween(result, 0.57f, 0.76f))
         {
             Debug.Log("Fourth Win");
 
-            LeanTween.rotateZ(gameObject, transform.rotation.z + 900, currentDuration).setOnComplete(() => CheckWinningSection());
+            LeanTween.rotateZ(gameObject, transform.rotation.z + (2340 ), currentDuration).setOnComplete(() => CheckWinningSection());
 
         }
         else if (inBetween(result, 0.76f, 0.95f))
         {
             Debug.Log("Fifth Win");
 
-            LeanTween.rotateZ(gameObject, transform.rotation.z + 960, currentDuration).setOnComplete(() => CheckWinningSection());
+            LeanTween.rotateZ(gameObject, transform.rotation.z + (2400), currentDuration).setOnComplete(() => CheckWinningSection());
 
         }
         else if (inBetween(result, 0.95f, 1f))
         {
             Debug.Log("Six Win");
 
-            LeanTween.rotateZ(gameObject, transform.rotation.z + 1020, currentDuration).setOnComplete(() => CheckWinningSection());
+            LeanTween.rotateZ(gameObject, transform.rotation.z + (2460), currentDuration).setOnComplete(() => CheckWinningSection());
 
         }
     }

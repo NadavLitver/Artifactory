@@ -13,6 +13,9 @@ GameObject:
   - component: {fileID: 8169779743971955135}
   - component: {fileID: 8169779743971955134}
   - component: {fileID: 8169779743971955106}
+  - component: {fileID: 373276883}
+  - component: {fileID: 123511200}
+  - component: {fileID: 123511199}
   m_Layer: 9
   m_Name: Tuff
   m_TagString: Interactable
@@ -29,7 +32,7 @@ Transform:
   m_GameObject: {fileID: 8169779743971955133}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -14.872938, y: -2.99, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -76,7 +79,7 @@ SpriteRenderer:
   m_SortingLayerID: -2069616245
   m_SortingLayer: 4
   m_SortingOrder: 6
-  m_Sprite: {fileID: 21300000, guid: c1a1ed8dc8ccee94dbd7d34d85e2b5dd, type: 3}
+  m_Sprite: {fileID: 584846428, guid: 69231e69d30ed5d46b994cafb38ac661, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -99,8 +102,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab7ee24de8d21ac4facb864498c29c31, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_dialogue: {fileID: 8169779743971955134}
-  WheelOfFortuneScreen: {fileID: 0}
+  startingDialogue: {fileID: 8169779743971955134}
+  endingDialogue: {fileID: 123511199}
+  endingDialogueWithLegs: {fileID: 123511200}
+  didPlayerGetLegs: 0
 --- !u!114 &8169779743971955134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -114,11 +119,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lines:
-  - Im Tuff
-  - You get one chance to spin the wheel
-  - you might win a nice prize
-  - I wish I had legs
-  - Legs are awsome
+  - Ahh.. Hello there. My name is Tuff
+  - I lost my legs, maybe you can help me rebuild them?
+  - " If I\u2019m lucky\u2026"
   m_sprite: {fileID: 8169779743971955104}
 --- !u!61 &8169779743971955106
 BoxCollider2D:
@@ -133,10 +136,10 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
+    pivot: {x: 0.46875, y: 0.33398438}
     oldSize: {x: 5.12, y: 5.12}
     newSize: {x: 5.12, y: 5.12}
     adaptiveTilingThreshold: 0.5
@@ -144,5 +147,55 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4, y: 4}
+  m_Size: {x: 2, y: 2}
   m_EdgeRadius: 0
+--- !u!95 &373276883
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8169779743971955133}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 77a7e4528ed5c0d4dbca4003c26723eb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &123511200
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8169779743971955133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4610090048ce3de44827f5aacdf870de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lines:
+  - Thank you! I'll use them later..
+  m_sprite: {fileID: 8169779743971955104}
+--- !u!114 &123511199
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8169779743971955133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4610090048ce3de44827f5aacdf870de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lines:
+  - Hmm.. no legs today. Enjoy your prize
+  m_sprite: {fileID: 8169779743971955104}
