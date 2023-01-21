@@ -19,15 +19,15 @@ public class WheelOfFortunePrizes : MonoBehaviour
         switch (index)
         {
             case 0:
-                RelicDrop drop = Instantiate(GameManager.Instance.assets.relicDropPrefab, transform.position, Quaternion.identity, transform);
-                drop.CacheRelic(GameManager.Instance.RelicManager.GetFreeRelic());
+                //RelicDrop drop = Instantiate(GameManager.Instance.assets.relicDropPrefab, transform.position, Quaternion.identity, transform);
+                //drop.CacheRelic(GameManager.Instance.RelicManager.GetFreeRelic());
                 break;
             case 1:
-                DropResource();
+              //  DropResource();
                 break;
             case 2:
-                DropResource();
-                DropResource();
+                //DropResource();
+                //DropResource();
                 break;
             case 3:
                 GameManager.Instance.assets.playerActor.Heal(m_dmgHandler);
