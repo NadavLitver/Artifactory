@@ -37,7 +37,28 @@ public class RelicManager : MonoBehaviour
         takenRelics.Add(relic);
         return relic;
     }
-
+    public Relic GetRelic(StatusEffectEnum requestedRelicEnum)
+    {
+        foreach (var relic in FreeRelics)
+        {
+            if (relic.MyEffectEnum == requestedRelicEnum)
+            {
+                return relic;
+            }
+        }
+        return null;
+    }
+    public bool isRelicTaken(StatusEffectEnum relicEnum)
+    {
+        foreach (var relic in TakenRelics)
+        {
+            if (relic.MyEffectEnum == relicEnum)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     public Sprite GetRelicSpriteFromRelic(Relic givenRelic)
     {
         switch (givenRelic.MyEffectEnum)

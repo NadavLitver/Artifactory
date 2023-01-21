@@ -8,7 +8,8 @@ public class WheelOfFortunePrizes : MonoBehaviour
 {
     [SerializeField] WheelOfFortuneManager fortuneManager;
     [SerializeField, Range(1, 100)] int HealAmount;
-    [SerializeField] DamageHandler m_dmgHandler;
+    [SerializeField] GameObject fatherGO;
+    
     void Start()
     {
         fortuneManager.OnSpinOverWithWinnerIndex.AddListener(GivePrize);
@@ -19,21 +20,27 @@ public class WheelOfFortunePrizes : MonoBehaviour
         switch (index)
         {
             case 0:
-                //RelicDrop drop = Instantiate(GameManager.Instance.assets.relicDropPrefab, transform.position, Quaternion.identity, transform);
-                //drop.CacheRelic(GameManager.Instance.RelicManager.GetFreeRelic());
+                if (GameManager.Instance.RelicManager.isRelicTaken(StatusEffectEnum.LightningEmblem))
+                    return;
+                RelicDrop lightEmblem = Instantiate(GameManager.Instance.assets.relicDropPrefab, GameManager.Instance.assets.tuffRef.transform.position, Quaternion.identity);
+                lightEmblem.CacheRelic(GameManager.Instance.RelicManager.GetRelic(StatusEffectEnum.LightningEmblem));
                 break;
             case 1:
-              //  DropResource();
+                if (GameManager.Instance.RelicManager.isRelicTaken(StatusEffectEnum.HealingGoblet))
+                    return;
+                RelicDrop goblet = Instantiate(GameManager.Instance.assets.relicDropPrefab, GameManager.Instance.assets.tuffRef.transform.position, Quaternion.identity);
+                goblet.CacheRelic(GameManager.Instance.RelicManager.GetRelic(StatusEffectEnum.HealingGoblet));
                 break;
             case 2:
-                //DropResource();
-                //DropResource();
+                DropResource(ItemType.Rune);
+               
                 break;
             case 3:
-                GameManager.Instance.assets.playerActor.Heal(m_dmgHandler);
+                DropResource(ItemType.Branch);
+                DropResource(ItemType.Glimmering);
                 break;
             case 4:
-                
+                GameManager.Instance.assets.playerActor.Heal(new DamageHandler() { amount = GameManager.Instance.assets.playerActor.maxHP }); ;
                 break;
             case 5:
                 //Ragain Golem legs
@@ -41,12 +48,20 @@ public class WheelOfFortunePrizes : MonoBehaviour
             default:
                 break;
         }
+        fatherGO.SetActive(false);
     }
     private void DropResource()
     {
       
-        ItemPickup pickup = Instantiate(GameManager.Instance.assets.ItemPickUpPrefab, transform.position, Quaternion.identity);
+        ItemPickup pickup = Instantiate(GameManager.Instance.assets.ItemPickUpPrefab, GameManager.Instance.assets.tuffRef.transform.position, Quaternion.identity);
         pickup.CacheItemType(GetItem());
+
+    }
+    private void DropResource(ItemType item)
+    {
+
+        ItemPickup pickup = Instantiate(GameManager.Instance.assets.ItemPickUpPrefab, GameManager.Instance.assets.tuffRef.transform.position, Quaternion.identity);
+        pickup.CacheItemType(item);
 
     }
 

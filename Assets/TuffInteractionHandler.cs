@@ -7,6 +7,10 @@ public class TuffInteractionHandler : Interactable
     [SerializeField] Dialogue m_dialogue;
     [SerializeField] GameObject WheelOfFortuneScreen;
     bool interacted;
+    private void Start()
+    {
+        GameManager.Instance.assets.tuffRef = this;
+    }
     public override void Interact()
     {
         if(!interacted)
