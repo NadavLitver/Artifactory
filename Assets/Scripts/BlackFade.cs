@@ -7,7 +7,7 @@ public class BlackFade : MonoBehaviour
     Image m_image;
     [SerializeField] AnimationCurve fadeToBlackCurve;
     [SerializeField] AnimationCurve fadeFromBlackCurve;
-
+  
     private void Start()
     {
         m_image = GetComponent<Image>();
@@ -33,6 +33,7 @@ public class BlackFade : MonoBehaviour
             counter += Time.deltaTime / 2;
             yield return new WaitForEndOfFrame();
         }
+        GameManager.Instance.assets.mobileControls.SetActive(true);
     }
     
 }
