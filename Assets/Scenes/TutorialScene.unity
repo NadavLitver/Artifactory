@@ -255,9 +255,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fortuneManager: {fileID: 179149109}
   HealAmount: 0
-  m_dmgHandler:
-    amount: 0
-    myDmgType: 0
+  fatherGO: {fileID: 0}
 --- !u!114 &185032142 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1905663005313485359, guid: 877a6add5b775234baa437818e4992dd, type: 3}
@@ -1009,6 +1007,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 650883686}
+    - target: {fileID: 1905663004961695735, guid: 877a6add5b775234baa437818e4992dd, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1905663005313485357, guid: 877a6add5b775234baa437818e4992dd, type: 3}
       propertyPath: m_IsActive
       value: 0
