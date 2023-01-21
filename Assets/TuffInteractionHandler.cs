@@ -5,11 +5,12 @@ using UnityEngine;
 public class TuffInteractionHandler : Interactable
 {
     [SerializeField] Dialogue m_dialogue;
-    [SerializeField] GameObject WheelOfFortuneScreen;
+    GameObject WheelOfFortuneScreen;
     bool interacted;
     private void Start()
     {
         GameManager.Instance.assets.tuffRef = this;
+        WheelOfFortuneScreen = GameManager.Instance.assets.wheelOfFortunePrizes.GetFather();
     }
     public override void Interact()
     {

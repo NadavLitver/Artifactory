@@ -14,7 +14,10 @@ public class WheelOfFortunePrizes : MonoBehaviour
     {
         fortuneManager.OnSpinOverWithWinnerIndex.AddListener(GivePrize);
     }
-
+    public GameObject GetFather()
+    {
+        return fatherGO;
+    }
     private void GivePrize(int index)
     {
         switch (index)

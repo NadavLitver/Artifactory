@@ -142,6 +142,8 @@ public class AssetsRefrence
 
     [Header("Tuff")]
     public TuffInteractionHandler tuffRef;
+    public WheelOfFortuneManager wheelOfFortuneManager;
+    public WheelOfFortunePrizes wheelOfFortunePrizes;
 
 }
 public class GeneralFunctions
