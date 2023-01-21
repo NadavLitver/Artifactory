@@ -136,7 +136,11 @@ MonoBehaviour:
   maxPoint: {x: 0, y: 0}
   minPoint: {x: 0, y: 0}
   pickupCd: 1.2
+  Destroyed: 0
   groundCheck: {fileID: 3784262483702370431}
+  OnPickedUp:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!212 &800068218782913415
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -178,7 +182,7 @@ SpriteRenderer:
   m_SortingLayerID: -2069616245
   m_SortingLayer: 4
   m_SortingOrder: 3
-  m_Sprite: {fileID: 1030165819, guid: 3d590df7151db124ba81c18222483164, type: 3}
+  m_Sprite: {fileID: 955601012, guid: 61c7602ba13f31a448cc02ca158aba66, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
