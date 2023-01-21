@@ -15,6 +15,7 @@ public class ShroomRamA : ShroomBaseStateA
         float counter = 0;
         handler.Anim.SetTrigger("StartRam");
         handler.Anim.SetBool("Ram", true);
+        handler.Flipper.Disabled = false;
         yield return new WaitUntil(() => handler.startRamming);
         handler.startRamming = false;
         handler.ramCollider.SetActive(true);
@@ -23,7 +24,7 @@ public class ShroomRamA : ShroomBaseStateA
         {
             handler.Rb.velocity = dir;
             counter += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
         Debug.Log("done ramming");
         handler.ramCollider.SetActive(false);

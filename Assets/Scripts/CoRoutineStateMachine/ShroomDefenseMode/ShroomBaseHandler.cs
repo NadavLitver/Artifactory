@@ -23,7 +23,8 @@ public class ShroomBaseHandler : CoRoutineStateHandler
 
     protected virtual void Start()
     {
-        Actor.OnDamageCalcOver.AddListener(InterruptTakeDamage);   
+        Actor.OnDamageCalcOver.AddListener(InterruptTakeDamage);
+        groundCheck.OnGrounded.AddListener(bounder.StartBounder);
     }
 
     protected override void OnEnable()

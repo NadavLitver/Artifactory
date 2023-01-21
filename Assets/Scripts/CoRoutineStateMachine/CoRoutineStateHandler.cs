@@ -17,7 +17,6 @@ public class CoRoutineStateHandler : MonoBehaviour
         while (active)
         {
             runningStateRoutine = GetNextState().StateRoutine();
-            Debug.Log(GetNextState().GetType());
             yield return runningStateRoutine;
         }
     }
