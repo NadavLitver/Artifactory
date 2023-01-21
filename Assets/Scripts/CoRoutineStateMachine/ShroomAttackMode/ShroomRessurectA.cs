@@ -6,13 +6,15 @@ public class ShroomRessurectA : ShroomBaseStateA
 {
     public override IEnumerator StateRoutine()
     {
-        handler.Anim.SetTrigger("Ressurect");
+        handler.Actor.RecieveStatusEffects(StatusEffectEnum.Invulnerability);
+        handler.Anim.Play("Ressurect");
         handler.Rb.velocity = Vector2.zero;
+        handler.Actor.Heal(new DamageHandler() { amount = handler.Actor.maxHP });
         transform.parent.transform.position = handler.CurrentCap.transform.position;
         yield return new WaitUntil(() => handler.DoneRessurecting);
+        handler.Actor.RemoveStatusEffect(new Invulnerability());
         handler.DoneRessurecting = false;
         handler.CurrentCap.gameObject.SetActive(false);
-        handler.Actor.Heal(new DamageHandler() { amount = handler.Actor.maxHP });
         handler.SwitchToOtherMode();
     }
 
