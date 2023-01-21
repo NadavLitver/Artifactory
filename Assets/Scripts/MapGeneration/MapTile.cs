@@ -26,7 +26,7 @@ public class MapTile : MonoBehaviour
 
     private void Start()
     {
-        playerFaceIcon.SetActive(false);
+        //playerFaceIcon.SetActive(false);
         specialRoomIcon.SetActive(false);
         emergencyExitIcon.SetActive(false);
         npcIcon.SetActive(false);
@@ -57,9 +57,6 @@ public class MapTile : MonoBehaviour
 
     public void UpdateIconsOnEnter()
     {
-        playerFaceIcon.SetActive(true);
-        mapTileImage.sprite = playerBorder;
-
         if (refRoom.HasChest)
         {
             specialRoomIcon.SetActive(false);
@@ -77,7 +74,13 @@ public class MapTile : MonoBehaviour
         }
     }
 
-    public void ResetBorder()
+    public void PlayerVisualsOn()
+    {
+        playerFaceIcon.SetActive(true);
+        mapTileImage.sprite = playerBorder;
+
+    }
+    public void PlayerVisualsOff()
     {
         playerFaceIcon.SetActive(false);
         mapTileImage.sprite = regBorder;

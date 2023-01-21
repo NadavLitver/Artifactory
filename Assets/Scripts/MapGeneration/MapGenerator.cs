@@ -89,9 +89,10 @@ public class MapGenerator : MonoBehaviour
         {
             item.transform.localPosition = Vector3.zero;
             item.gameObject.SetActive(false);
-            item.ResetBorder();
+            item.PlayerVisualsOff();
         }
         mapUimanager.MiniMapCenterNode.CacheRoom(activeRoom);
+        mapUimanager.MiniMapCenterNode.UpdateIconsOnEnter();
         foreach (var item in MapUimanager.MiniMapCenterNode.TileConnectionPoints)
         {
             item.gameObject.SetActive(false);
@@ -124,7 +125,19 @@ public class MapGenerator : MonoBehaviour
         }
     }
 
-    
+
+    public void ActivePlayerLocation(Room active)
+    {
+        foreach (var item in createdMapTiles)
+        {
+            item.PlayerVisualsOff();
+            if (ReferenceEquals(item.RefRoom, active))
+            {
+                item.PlayerVisualsOn();
+            }
+        }
+    }
+
     private MapTile CreateMiniMapTile()
     {
         return Instantiate(MapUimanager.MiniMapTilePrefab, MapUimanager.MinimapTransform);
