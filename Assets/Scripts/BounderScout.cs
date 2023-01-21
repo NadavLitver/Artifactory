@@ -18,7 +18,7 @@ public class BounderScout : MonoBehaviour
         while (!frontSensor.IsGrounded() && downSensor.IsGrounded())
         {
             rb.velocity = direction * speed;
-            yield return new WaitForEndOfFrame();
+            yield return new WaitForFixedUpdate();
         }
         rb.velocity = Vector3.zero;
         reached = true;

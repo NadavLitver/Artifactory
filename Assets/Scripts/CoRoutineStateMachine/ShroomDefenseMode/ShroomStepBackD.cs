@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ShroomStepBackD : BaseShroomDState
@@ -12,6 +11,7 @@ public class ShroomStepBackD : BaseShroomDState
         float counter = 0;
         handler.isEnraged = true;
         handler.Anim.SetBool("StepBack", true);
+        handler.Flipper.Disabled = true;
         while (counter < stepBackDuration)
         {
             if (GameManager.Instance.generalFunctions.IsInRange(transform.position, GameManager.Instance.assets.playerActor.transform.position, stopSteppingBackThreshold))
@@ -20,7 +20,6 @@ public class ShroomStepBackD : BaseShroomDState
                 yield break;
             }
             counter += Time.deltaTime;
-            handler.Flipper.Disabled = true;
             Vector2 playerDir = (GameManager.Instance.assets.playerActor.transform.position - transform.position).normalized;
             handler.Rb.velocity = new Vector2(playerDir.x * stepBackSpeed * -1, 0);
             yield return new WaitForEndOfFrame();

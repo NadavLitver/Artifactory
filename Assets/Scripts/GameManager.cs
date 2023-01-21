@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     public VfxManager vfxManager { get; private set; }
 
 
+    public bool isTutorial;
     public SoundManager soundManager { get; private set; }
     public DialogueExecuter dialogueExecuter { get; private set; }
 
@@ -54,7 +55,8 @@ public class GameManager : MonoBehaviour
     {
         inputManager.inputs.General.Quit.canceled += QuitGame;
         inputManager.inputs.General.Reset.canceled += ResetScene;
-        assets.playerActor.OnDeath.AddListener(generalFunctions.onPlayerDiedActions);
+        if(!isTutorial)
+            assets.playerActor.OnDeath.AddListener(generalFunctions.onPlayerDiedActions);
     }
     private void ResetScene(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
