@@ -20,7 +20,7 @@ public class MapGenerator : MonoBehaviour
 
     private void SetUpMiniMap()
     {
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < 5; i++)
         {
             createdMiniMapTiles.Add(CreateMiniMapTile());
         }
@@ -37,6 +37,10 @@ public class MapGenerator : MonoBehaviour
         newTile.SetNodeSize(givenRoom.Size.X, givenRoom.Size.Y);
         PlaceTile(newTile);
         newTile.name = newTile.RefRoom.name + " " + newTile.RefRoom.MyPos.ToString();
+        if (givenRoom.HasChest || givenRoom.HasPortal || givenRoom is NpcRoom || givenRoom is RelicRoom)
+        {
+            newTile.SpecialRoomIcon.SetActive(true);
+        }
     }
 
     public void PlaceTile(MapTile givenTile)
@@ -85,6 +89,7 @@ public class MapGenerator : MonoBehaviour
         {
             item.transform.localPosition = Vector3.zero;
             item.gameObject.SetActive(false);
+            item.ResetBorder();
         }
         mapUimanager.MiniMapCenterNode.CacheRoom(activeRoom);
         foreach (var item in MapUimanager.MiniMapCenterNode.TileConnectionPoints)
@@ -120,7 +125,6 @@ public class MapGenerator : MonoBehaviour
     }
 
     
-
     private MapTile CreateMiniMapTile()
     {
         return Instantiate(MapUimanager.MiniMapTilePrefab, MapUimanager.MinimapTransform);

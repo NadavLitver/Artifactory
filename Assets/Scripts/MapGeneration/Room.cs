@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
-using System;
-using System.Collections;
+using UnityEngine.Events;
 
 public enum RoomType
 {
@@ -26,9 +25,12 @@ public class Room : MonoBehaviour
     [SerializeField] List<CustomPos> occupiedPositions = new List<CustomPos>();
     [SerializeField] Transform startPosition;
     [SerializeField] List<SpawnPoint> chestSpawnPoints = new List<SpawnPoint>();
+    public UnityEvent OnEntered;
 
-    bool hasChest;
-    
+    private bool hasChest;
+    private bool hasPortal;
+    private bool visited;
+
     public List<ExitInteractable> Exits { get => exits; }
     public bool IsStartingRoom { get => isStartingRoom; }
     public bool Occupied { get => occupied; set => occupied = value; }
@@ -39,6 +41,8 @@ public class Room : MonoBehaviour
     public Transform StartPosition { get => startPosition; set => startPosition = value; }
     public bool HasChest { get => hasChest; set => hasChest = value; }
     public List<SpawnPoint> ChestSpawnPoints { get => chestSpawnPoints; set => chestSpawnPoints = value; }
+    public bool Visited { get => visited; }
+    public bool HasPortal { get => hasPortal; }
 
     void Awake()
     {
@@ -54,6 +58,7 @@ public class Room : MonoBehaviour
         }
 
         ShuffleExits();
+        OnEntered.AddListener(FirstVisit);
     }
     public void ShuffleExits()
     {
@@ -95,7 +100,7 @@ public class Room : MonoBehaviour
 
     public bool TrySpawnChest()
     {
-        if (chestSpawnPoints.Count <= 0 )
+        if (chestSpawnPoints.Count <= 0)
         {
             return false;
         }
@@ -112,10 +117,17 @@ public class Room : MonoBehaviour
         }
         Debug.Log("spawned a protal");
         chestSpawnPoints[UnityEngine.Random.Range(0, chestSpawnPoints.Count)].SpawnObject(obj);
-        hasChest = true;
+        hasPortal = true;
         return true;
     }
 
+    private void FirstVisit()
+    {
+        if (!visited)
+        {
+            visited = true;
+        }
+    }
 }
 [System.Serializable]
 public class RoomSize

@@ -388,5 +388,6 @@ public class LevelManager : MonoBehaviour
         active = givenExit.OtherExit.MyRoom;
         GameManager.Instance.generalFunctions.SpawnObjectAt(GameManager.Instance.assets.Player.gameObject, givenExit.OtherExit.transform.position);
         mapGenerator.UpdateMiniMap(Active);
+        givenExit.MyRoom.OnEntered?.Invoke();
     }
 }
