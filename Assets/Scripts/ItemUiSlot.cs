@@ -40,7 +40,12 @@ public class ItemUiSlot : MonoBehaviour
         itemSprite.sprite = null;
         myItemType = ItemType.Null;
     }
-
+    public void ResetSlot(Sprite givenSprite)
+    {
+        itemSprite.sprite = givenSprite;
+        itemSprite.color = new Color(0, 0, 0, 0);
+        myItemType = ItemType.Null;
+    }
     public void SetUpAmount(int amount)
     {
         this.amount = amount;

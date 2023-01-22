@@ -5,11 +5,12 @@ public class SelectedCraftingPanel : ItemPanel
 {
     //panel at the bottom right corner of the screen. shows the 3 currently selected items in order
     [SerializeField] List<SelectedSlot> selectedSlots = new List<SelectedSlot>();
+    [SerializeField] private Sprite basicSprite;
     public override void SubscribeSlots()
     {
         foreach (var item in selectedSlots)
         {
-            item.slot.ResetSlot();
+            item.slot.ResetSlot(basicSprite);
             item.slot.OnSelected.AddListener(RemoveFromPanel);
         }
     }
@@ -57,7 +58,7 @@ public class SelectedCraftingPanel : ItemPanel
         {
             if (item.slot.MyItemType == givenSlot.MyItemType)
             {
-                item.slot.ResetSlot();
+                item.slot.ResetSlot(basicSprite);
                 item.Occupied = false;
                 break;
             }
@@ -69,7 +70,7 @@ public class SelectedCraftingPanel : ItemPanel
     {
         foreach (var item in selectedSlots)
         {
-            item.slot.ResetSlot();
+            item.slot.ResetSlot(basicSprite);
             item.Occupied = false;
         }
     }
