@@ -7,7 +7,7 @@ public class MapGenerator : MonoBehaviour
     [SerializeField] List<MapTile> createdMiniMapTiles = new List<MapTile>();
     [SerializeField] MapUIManager mapUimanager;
     [SerializeField] Vector2 miniMapNodeOffset;
-    [SerializeField] float largeMapNodeOffsetMod;
+    [SerializeField] Vector2 largeMapNodeOffsetMod;
 
     public List<MapTile> CreatedMapTiles { get => createdMapTiles; set => createdMapTiles = value; }
     public MapUIManager MapUimanager { get => mapUimanager; set => mapUimanager = value; }
@@ -164,6 +164,20 @@ public class MapGenerator : MonoBehaviour
         return Instantiate(MapUimanager.MiniMapTilePrefab, MapUimanager.MinimapTransform);
     }
 
+    public void ClearCreatedTiles()
+    {
+        return;
+        for (int i = 0; i < createdMapTiles.Count; i++)
+        {
+            Destroy(createdMapTiles[0]);
+        }
+        for (int i = 0; i < createdMiniMapTiles.Count; i++)
+        {
+            Destroy(createdMiniMapTiles[0]);
+        }
+        createdMiniMapTiles.Clear();
+        createdMapTiles.Clear();
+    }
 }
 
 

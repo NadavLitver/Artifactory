@@ -17,11 +17,11 @@ public class MapConnectionPoint : MonoBehaviour
         line.gameObject.SetActive(true);
         Line.sizeDelta = new Vector2(direction.magnitude * offset, 8);
         Debug.Log(direction.magnitude);
-        if (locationInfo.HorizontalPos == ExitLocationHorizontal.LEFT)
+       /* if (locationInfo.HorizontalPos == ExitLocationHorizontal.LEFT)
         {
             line.transform.rotation = new Quaternion(0, 180, 0, 0);
-        }
+        }*/
         float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-        line.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        line.parent.transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
     }
 }

@@ -49,6 +49,7 @@ public class LevelManager : MonoBehaviour
             Destroy(item.gameObject);
         }
         createdRooms.Clear();
+        mapGenerator.ClearCreatedTiles();
         InstantiateRooms(firstIsleRooms);
     }
 
