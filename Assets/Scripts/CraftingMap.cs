@@ -203,10 +203,10 @@ public class CraftingMap : MonoBehaviour
                 }
                 if (givenItems[i] == createdLines[j].Nodes[i].Mycomponent.itemType && IsLineActiveUpTo(createdLines[j], i))
                 {
-                    createdLines[j].Nodes[i].Line.gameObject.SetActive(true);
+                    createdLines[j].Nodes[i]/*.Line*/.gameObject.SetActive(true);
                     if (createdLines[j].Nodes.Count - 2 == i) //if this is the item before last
                     {
-                        createdLines[j].Nodes[i + 1].Line.gameObject.SetActive(true);
+                        createdLines[j].Nodes[i + 1]/*.Line*/.gameObject.SetActive(true);
                         selectedLine = createdLines[j];
                         CraftButton.SetActive(true);
                         //craft button turn on
@@ -237,12 +237,12 @@ public class CraftingMap : MonoBehaviour
         {
             foreach (var node in line.Nodes)
             {
-                node.Line.gameObject.SetActive(false);
+                node./*Line.*/gameObject.SetActive(false);
             }
         }
     }
 
-    public void CraftItem()
+    public void CraftItem() //called from button
     {
         GameManager.Instance.assets.playerActor.PlayerItemInventory.CraftItem(selectedLine.myRecipe);
         GameManager.Instance.CraftingManager.SelectedCraftingPanel.ClearPanel();
