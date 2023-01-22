@@ -134,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 627728345}
   - component: {fileID: 627728346}
-  - component: {fileID: 853079695}
+  - component: {fileID: 1916950746}
   m_Layer: 7
   m_Name: Dash Icon
   m_TagString: Untagged
@@ -209,7 +209,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &853079695
+--- !u!114 &1916950746
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -218,12 +218,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 627728344}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d83ffb168d312e944bb60d2d76d022bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 842f4f38c1ee89b4db5ae0a39a8d25e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorOne: {r: 1, g: 1, b: 1, a: 0.5019608}
-  colorTwo: {r: 1, g: 1, b: 1, a: 1}
-  m_renderer: {fileID: 627728346}
+  m_renderer: {fileID: 5013780304087969014}
   pace: 1.5
 --- !u!1 &848503426
 GameObject:
@@ -9268,7 +9266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8353253693312049980}
   - component: {fileID: 6547731934230147021}
-  - component: {fileID: 134294773}
+  - component: {fileID: 1916950745}
   m_Layer: 0
   m_Name: Jump_Button
   m_TagString: Untagged
@@ -9343,7 +9341,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &134294773
+--- !u!114 &1916950745
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9352,12 +9350,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1862512979294372797}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d83ffb168d312e944bb60d2d76d022bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 842f4f38c1ee89b4db5ae0a39a8d25e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorOne: {r: 1, g: 1, b: 1, a: 0.5019608}
-  colorTwo: {r: 1, g: 1, b: 1, a: 1}
-  m_renderer: {fileID: 6547731934230147021}
+  m_renderer: {fileID: 5013780304087969014}
   pace: 1.5
 --- !u!1 &1884292272382877864
 GameObject:
@@ -11802,7 +11798,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5882092187204343858}
   - component: {fileID: 5013780304087969014}
-  - component: {fileID: 960096400}
+  - component: {fileID: 1916950744}
   m_Layer: 7
   m_Name: Attack Icon
   m_TagString: Untagged
@@ -11877,7 +11873,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &960096400
+--- !u!114 &1916950744
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -11886,11 +11882,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3117195045501437884}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d83ffb168d312e944bb60d2d76d022bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 842f4f38c1ee89b4db5ae0a39a8d25e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  colorOne: {r: 1, g: 1, b: 1, a: 0.5019608}
-  colorTwo: {r: 1, g: 1, b: 1, a: 1}
   m_renderer: {fileID: 5013780304087969014}
   pace: 1.5
 --- !u!1 &3154554825341593866
@@ -37541,15 +37535,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2706448201579363496, guid: 7915310fd3972cd45b65ecc84f31dc99, type: 3}
       propertyPath: m_LocalAABB.m_Center.y
-      value: -34.183758
+      value: -34.178738
       objectReference: {fileID: 0}
     - target: {fileID: 2706448201579363496, guid: 7915310fd3972cd45b65ecc84f31dc99, type: 3}
       propertyPath: m_LocalAABB.m_Extent.x
-      value: 2.700016
+      value: 2.200016
       objectReference: {fileID: 0}
     - target: {fileID: 2706448201579363496, guid: 7915310fd3972cd45b65ecc84f31dc99, type: 3}
       propertyPath: m_LocalAABB.m_Extent.y
-      value: 6.083762
+      value: 5.578742
       objectReference: {fileID: 0}
     - target: {fileID: 2706448201579363496, guid: 7915310fd3972cd45b65ecc84f31dc99, type: 3}
       propertyPath: m_Sprites.Array.data[0]
@@ -39073,15 +39067,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2706448201579363496, guid: 7915310fd3972cd45b65ecc84f31dc99, type: 3}
       propertyPath: m_LocalAABB.m_Center.y
-      value: -34.183758
+      value: -34.178738
       objectReference: {fileID: 0}
     - target: {fileID: 2706448201579363496, guid: 7915310fd3972cd45b65ecc84f31dc99, type: 3}
       propertyPath: m_LocalAABB.m_Extent.x
-      value: 2.700016
+      value: 2.200016
       objectReference: {fileID: 0}
     - target: {fileID: 2706448201579363496, guid: 7915310fd3972cd45b65ecc84f31dc99, type: 3}
       propertyPath: m_LocalAABB.m_Extent.y
-      value: 6.083762
+      value: 5.578742
       objectReference: {fileID: 0}
     - target: {fileID: 2706448201579363496, guid: 7915310fd3972cd45b65ecc84f31dc99, type: 3}
       propertyPath: m_Sprites.Array.data[0]
@@ -40424,15 +40418,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2706448201579363496, guid: 7915310fd3972cd45b65ecc84f31dc99, type: 3}
       propertyPath: m_LocalAABB.m_Center.y
-      value: -34.183758
+      value: -34.178738
       objectReference: {fileID: 0}
     - target: {fileID: 2706448201579363496, guid: 7915310fd3972cd45b65ecc84f31dc99, type: 3}
       propertyPath: m_LocalAABB.m_Extent.x
-      value: 2.700016
+      value: 2.200016
       objectReference: {fileID: 0}
     - target: {fileID: 2706448201579363496, guid: 7915310fd3972cd45b65ecc84f31dc99, type: 3}
       propertyPath: m_LocalAABB.m_Extent.y
-      value: 6.083762
+      value: 5.578742
       objectReference: {fileID: 0}
     - target: {fileID: 2706448201579363496, guid: 7915310fd3972cd45b65ecc84f31dc99, type: 3}
       propertyPath: m_Sprites.Array.data[0]

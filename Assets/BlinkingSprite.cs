@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class BlinkingSprite : MonoBehaviour
 {
-    [SerializeField] Color colorOne;
-    [SerializeField] Color colorTwo;
+     Color colorOne = new Color(1,1,1,0.5f);
+     Color colorTwo = new Color(1,1,1,1);
     Color Alpha;
     [SerializeField] SpriteRenderer m_renderer;
     [SerializeField] float pace = 1.5f;
 
-  
-  
+    private void Start()
+    {
+        m_renderer = GetComponent<SpriteRenderer>();
+    }
+
     void Update()
     {
       
