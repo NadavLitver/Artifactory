@@ -92,11 +92,12 @@ public class CraftingMap : MonoBehaviour
             Vector3 lastPos;
             if (i == 0)
             {
-                lastPos = baseNode.transform.localPosition;
+                lastPos = baseNode.transform.localPosition + baseNode.GetConnectionPoint(givenLine.LineConnectionPoint.ConnectionPoint).localPosition;
             }
             else
             {
-                lastPos = givenLine.Nodes[i - 1].transform.localPosition;
+                lastPos = givenLine.Nodes[i - 1].transform.localPosition + givenLine.Nodes[i - 1].GetConnectionPoint(givenLine.LineConnectionPoint.ConnectionPoint).localPosition;
+                //lastPos = givenLine.Nodes[i - 1].GetConnectionPoint(givenLine.LineConnectionPoint.ConnectionPoint).localPosition;
             }
 
             //get the point to rotate to - 
@@ -114,7 +115,7 @@ public class CraftingMap : MonoBehaviour
         finalNode.transform.SetParent(transform);
         finalNode.SetUpNode(givenRecipe.CraftedItem.Sprite);
         finalNode.RotateAndSetFinalLine(givenLine.BaseRotation);
-        Vector3 pos = givenLine.Nodes[givenLine.Nodes.Count - 1].transform.localPosition;
+        Vector3 pos = givenLine.Nodes[givenLine.Nodes.Count - 1].transform.localPosition + givenLine.Nodes[givenLine.Nodes.Count - 1].GetConnectionPoint(givenLine.LineConnectionPoint.ConnectionPoint).localPosition;
         finalNode.transform.localPosition = pos;
         finalNode.transform.localPosition += finalNode.CalacDistanceFromSpriteToConnectionPoint();
         givenLine.Nodes.Add(finalNode);

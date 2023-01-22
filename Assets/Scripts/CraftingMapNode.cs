@@ -12,6 +12,7 @@ public class CraftingMapNode : MonoBehaviour
     [SerializeField] Transform connectionPoint;
     [SerializeField] GameObject cover;
     [SerializeField] GameObject finalNodeBackground;
+    [SerializeField] Image circle;
 
     [SerializeField] List<CraftingNodeConnection> nodeConnections = new List<CraftingNodeConnection>();
     private CustomPos myPos;
@@ -77,9 +78,20 @@ public class CraftingMapNode : MonoBehaviour
         rotation = givenBaseRotation;
         line.transform.rotation = Quaternion.Euler(0f, 0f, rotation);
         finalNodeBackground.SetActive(true);
+        circle.gameObject.SetActive(false);
     }
     
-
+    public Transform GetConnectionPoint(ConnectionPoints givenPoint)
+    {
+        foreach (var item in nodeConnections)
+        {
+            if (givenPoint == item.ConnectionPoint)
+            {
+                return item.transform;
+            }
+        }
+        return null;
+    }
 
     public List<ConnectionPoints> GetAllowedPoints()
     {
