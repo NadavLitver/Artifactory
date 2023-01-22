@@ -43,6 +43,7 @@ public class ShroomSateHandlerA : ShroomBaseHandler
     }
     public void InterruptDeath()
     {
+        OnDeath?.Invoke();
         ResetAnim();
         Interrupt(deathState);
     }

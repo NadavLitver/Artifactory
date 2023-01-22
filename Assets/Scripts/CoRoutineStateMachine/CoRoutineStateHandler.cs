@@ -5,12 +5,12 @@ using UnityEngine;
 public class CoRoutineStateHandler : MonoBehaviour
 {
     [SerializeField] List<CoRoutineState> states;
-    [SerializeField] Actor m_actor;
+    [SerializeField] EnemyActor m_actor;
     private IEnumerator runningStateRoutine;
     private Coroutine mainRoutine;
     private bool active;
 
-    public Actor Actor { get => m_actor; }
+    public EnemyActor Actor { get => m_actor; }
 
     private IEnumerator RunStateMachine()
     {

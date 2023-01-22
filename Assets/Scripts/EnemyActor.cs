@@ -6,13 +6,16 @@ public class EnemyActor : Actor
 
     [SerializeField, Range(0, 100)] private float dropChance;
     [SerializeField] private ItemType item;
-
+    [SerializeField] private bool dropOnDeath;
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         SetUpItemDrop();
-        OnDeath.AddListener(DropResource);
+        if (dropOnDeath)
+        {
+            OnDeath.AddListener(DropResource);
+        }
     }
 
     public override void RecieveForce()
@@ -25,8 +28,9 @@ public class EnemyActor : Actor
         Heal(new DamageHandler() { amount = maxHP, myDmgType = DamageType.heal });
     }
 
-    private void DropResource()
+    public void DropResource()
     {
+        Debug.Log("Dropping");
         if (UnityEngine.Random.Range(0, 100) > dropChance)
         {
             return;
