@@ -10,7 +10,7 @@ public class CamPositionSetter : MonoBehaviour
     [SerializeField] float delayBetweenUpdates;
     [SerializeField] float checkRadius;
     [SerializeField] LayerMask layerToCheck;
-    [SerializeField] Vector3 offset;
+    [SerializeField] Vector2 offset;
     public bool follow;
 
     [SerializeField] CinemachineVirtualCamera virtualCamera;
@@ -80,7 +80,7 @@ public class CamPositionSetter : MonoBehaviour
         }
        
         finalPoint = new Vector2((smallestPoint.x + biggestPoint.x + playerTransform.position.x) / 3, (smallestPoint.y + biggestPoint.y + playerTransform.position.y) /3);
-        
+        finalPoint += offset;
     }
     public void LateUpdate()
     {

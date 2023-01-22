@@ -52,6 +52,19 @@ public class LevelManager : MonoBehaviour
         mapGenerator.ClearCreatedTiles();
         InstantiateRooms(firstIsleRooms);
     }
+    public void ClearRooms()
+    {
+
+        firstRoom = null;
+        currentNumberOfChests = 0;
+        currentRunRooms.Clear();
+        foreach (var item in createdRooms)
+        {
+            Destroy(item.gameObject);
+        }
+        createdRooms.Clear();
+        mapGenerator.ClearCreatedTiles();
+    }
 
     public void OrderRooms(List<Room> givenRoomList)
     {

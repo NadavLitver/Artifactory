@@ -9,6 +9,8 @@ public class EndInteractablePanelHandler : MonoBehaviour
         GameManager.Instance.assets.blackFade.FadeToBlack();
         LeanTween.delayedCall(1f, PutPlayerInBase);
         LeanTween.delayedCall(2f, GameManager.Instance.assets.blackFade.FadeFromBlack);
+        GameManager.Instance.assets.baseFatherObject.SetActive(true);
+        GameManager.Instance.LevelManager.ClearRooms();
         this.gameObject.SetActive(false);
     }
     public void PutPlayerInBase()
