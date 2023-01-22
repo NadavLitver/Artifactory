@@ -57,6 +57,7 @@ public class GameManager : MonoBehaviour
         inputManager.inputs.General.Reset.canceled += ResetScene;
         if(!isTutorial)
             assets.playerActor.OnDeath.AddListener(generalFunctions.onPlayerDiedActions);
+        Screen.SetResolution(1920, 1080, true, 120);
     }
     private void ResetScene(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
