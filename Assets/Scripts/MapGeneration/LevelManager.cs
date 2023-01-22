@@ -64,6 +64,7 @@ public class LevelManager : MonoBehaviour
         }
         createdRooms.Clear();
         mapGenerator.ClearCreatedTiles();
+        GameManager.Instance.assets.CraftingPanel.SetActive(false);
     }
 
     public void OrderRooms(List<Room> givenRoomList)
