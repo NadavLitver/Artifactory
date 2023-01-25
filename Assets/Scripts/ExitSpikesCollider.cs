@@ -12,7 +12,7 @@ public class ExitSpikesCollider : MonoBehaviour
             GameManager.Instance.assets.PlayerController.ResetVelocity();
             GameManager.Instance.assets.PlayerController.RecieveForce(new Vector2(direction.x * knockBackForce, 0));
             Debug.Log(new Vector2(direction.x * knockBackForce, 0));
-            GameManager.Instance.assets.playerActor.GetHit(ability);
+            //GameManager.Instance.assets.playerActor.GetHit(ability);
         }
     }
 
