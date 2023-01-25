@@ -15,6 +15,7 @@ public class CombatRoom : Room
     public UnityEvent OnSpawnedEnemiesDead;
     public UnityEvent AllWavesOver;
     int waveIndex;
+    [SerializeField] GameObject[] ExitClosers;
     private void Start()
     {
         spawnPointsForWaves = GetComponentsInChildren<SpawnPoint>();
@@ -25,12 +26,15 @@ public class CombatRoom : Room
         AllWavesOver.AddListener(OnAllWavesOver);
         m_dropChest.onTakeDamage.AddListener(StartEvent);
         dropChestCollider = m_dropChest.GetComponent<Collider2D>();
+        TurnOffOnExitClosers(false);
 
     }
     public void OnAllWavesOver()
     {
         Debug.Log("WavesDone");
         dropChestCollider.enabled = true;
+        TurnOffOnExitClosers(false);
+
     }
     private void StartEvent(DamageHandler damageHandler)
     {
@@ -38,7 +42,17 @@ public class CombatRoom : Room
         SpawnEnemies();
         dropChestCollider.enabled = false;
         m_dropChest.onTakeDamage.RemoveListener(StartEvent);
+        TurnOffOnExitClosers(true);
     }
+
+    private void TurnOffOnExitClosers(bool isOn)
+    {
+        foreach (GameObject go in ExitClosers)
+        {
+            go.SetActive(isOn);
+        }
+    }
+
     public void ShuffleWaves()
     {
         int n = waves.Count;
