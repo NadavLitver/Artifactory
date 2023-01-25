@@ -70,6 +70,8 @@ public class SpikedFrogStateHandler : StateHandler
     {
         actor.RecieveStatusEffects(StatusEffectEnum.Invulnerability);
         Interrupt(SpikedFrogDeath);
+        RB.velocity = Vector3.zero;
+        RB.gravityScale = 0;
     }
 
 }
