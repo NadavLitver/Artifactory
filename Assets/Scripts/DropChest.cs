@@ -6,6 +6,7 @@ public class DropChest : Actor
 {
     [SerializeField] RelicDrop myDrop;
     [SerializeField] private Animator anim;
+    
     public void Open()
     {
         anim.Play("Open");
