@@ -66,11 +66,11 @@ public class ShroomBaseHandler : CoRoutineStateHandler
     {
         if (transform.position.x <= GameManager.Instance.assets.playerActor.transform.position.x)
         {
-            flipper.FlipLeft();
+            flipper.FlipRight();
         }
         else
         {
-            flipper.FlipRight();
+            flipper.FlipLeft();
         }
 
     }

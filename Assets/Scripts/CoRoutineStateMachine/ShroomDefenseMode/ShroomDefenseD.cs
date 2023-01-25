@@ -11,6 +11,7 @@ public class ShroomDefenseD : BaseShroomDState
     public override IEnumerator StateRoutine()
     {
         handler.Anim.SetBool("Defend", true);
+        handler.Rb.velocity = Vector3.zero;
         handler.LookTowardsPlayer();
         lastPerformedDefense = Time.time;
         buffOver = false;

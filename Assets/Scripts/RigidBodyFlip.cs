@@ -60,7 +60,7 @@ public class RigidBodyFlip : MonoBehaviour
         IsLookingRight = !IsLookingRight;
     }
 
-    public void FlipLeft()
+    public void FlipRight()
     {
         if (!ReferenceEquals(activeRoutine, null))
         {
@@ -78,14 +78,12 @@ public class RigidBodyFlip : MonoBehaviour
         }
     }
 
-    public void FlipRight()
+    public void FlipLeft()
     {
         if (!ReferenceEquals(activeRoutine, null))
         {
             StopCoroutine(activeRoutine);
-            activeRoutine = StartCoroutine(FlipWhenNegative());
         }
-        activeRoutine = StartCoroutine(FlipWhenNegative());
         if (StartLeft)
         {
             transform.localScale = negativeVector;
