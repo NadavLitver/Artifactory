@@ -128,6 +128,7 @@ public class AssetsRefrence
     public Sprite GlimmeringSprite;
     public Sprite BranchSprite;
     public Sprite RuneSprite;
+    public Sprite TuffCointSprite;
     public Sprite LeatherSprite;
     public ItemUiSlot ItemUiSlot;
 
@@ -200,6 +201,8 @@ public class GeneralFunctions
                 return new RubberDuck();
             case StatusEffectEnum.TurtlePendant:
                 return new TurtlePendant();
+            case StatusEffectEnum.Legendary:
+                return new LegendaryStatus();
             default:
                 break;
         }
@@ -217,6 +220,8 @@ public class GeneralFunctions
                 return GameManager.Instance.assets.BranchSprite;
             case ItemType.Rune:
                 return GameManager.Instance.assets.RuneSprite;
+            case ItemType.TuffCoin:
+                return GameManager.Instance.assets.TuffCointSprite;
             default:
                 return null;
         }

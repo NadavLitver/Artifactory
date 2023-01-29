@@ -44,7 +44,7 @@ public class Actor : MonoBehaviour, IDamagable
     /// <summary>
     /// invoked when this actor kills another one
     /// </summary>
-    public UnityEvent<Actor> OnKill;
+    public UnityEvent<Actor, DamageHandler> OnKill;
     /// <summary>
     /// invoked when this actor applys a status effect to another one
     /// </summary>
@@ -201,7 +201,7 @@ public class Actor : MonoBehaviour, IDamagable
         if (currentHP <= 0)
         {
             onActorDeath();
-            host.OnKill?.Invoke(this);
+            host.OnKill?.Invoke(this, dmgHandler);
         }
         dmgHandler.ClearMods();
         ClampHP();

@@ -32,7 +32,7 @@ public class LightningEmblem : StatusEffect
         }
     }
 
-    public void ActivateBuff(Actor actor)
+    public void ActivateBuff(Actor actor, DamageHandler givenDamage)
     {
         buffActive = true;
     }
