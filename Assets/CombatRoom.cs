@@ -16,9 +16,11 @@ public class CombatRoom : Room
     public UnityEvent AllWavesOver;
     int waveIndex;
     [SerializeField] GameObject[] ExitClosers;
+    [SerializeField] Cinemachine.CinemachineVirtualCamera m_VCam;
     private void Start()
     {
         spawnPointsForWaves = GetComponentsInChildren<SpawnPoint>();
+        m_VCam.Priority = 0;
         waveIndex = waves.Count-1;
         OnSpawnedEnemiesDead.AddListener(SpawnEnemies);
         ShuffleWaves();
@@ -34,10 +36,12 @@ public class CombatRoom : Room
         Debug.Log("WavesDone");
         dropChestCollider.enabled = true;
         TurnOffOnExitClosers(false);
+        m_VCam.Priority = 0;
 
     }
     private void StartEvent(DamageHandler damageHandler)
     {
+        m_VCam.Priority = GameManager.Instance.assets.mainVCam.Priority + 10;
         damageHandler.AddModifier(0);
         SpawnEnemies();
         dropChestCollider.enabled = false;
