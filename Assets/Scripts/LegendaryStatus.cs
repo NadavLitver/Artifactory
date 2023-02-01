@@ -19,6 +19,7 @@ public class LegendaryStatus : StatusEffect
         host.maxHP /= GameManager.Instance.DamageManager.MaxHPIncreaseMod;
         host.OnKill.RemoveListener(HealOnKill);
         host.OnDeath.RemoveListener(StartSpinningWheel);
+        ((PlayerActor)host).DisableLegendaryActorVFX();
     }
 
     protected override void Subscribe()
@@ -26,6 +27,7 @@ public class LegendaryStatus : StatusEffect
         host.maxHP *= GameManager.Instance.DamageManager.MaxHPIncreaseMod;
         host.OnKill.AddListener(HealOnKill);
         host.OnDeath.AddListener(StartSpinningWheel);
+        ((PlayerActor)host).EnableLegendaryActorVFX();
     }
 
     private void HealOnKill(Actor target, DamageHandler givenDamage)
