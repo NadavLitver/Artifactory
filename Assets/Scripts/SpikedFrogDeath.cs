@@ -13,6 +13,8 @@ public class SpikedFrogDeath : State
     public override void onStateEnter()
     {
         handler.m_animator.Play(handler.FrogDeathHash);
+        SoundManager.Play(SoundManager.Sound.SpikedFrogDeath, handler.m_audioSource);
+
     }
     public override State RunCurrentState()
     {

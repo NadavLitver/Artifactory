@@ -20,6 +20,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool CoyoteAvailable;
     [SerializeField] float acceleration;
     [SerializeField] Animator m_animator;
+    [SerializeField] AudioSource m_audioSource;
     private float currentSpeed;
     private float currentAccel;
 

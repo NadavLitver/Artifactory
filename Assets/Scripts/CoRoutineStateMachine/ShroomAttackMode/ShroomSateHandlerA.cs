@@ -13,6 +13,7 @@ public class ShroomSateHandlerA : ShroomBaseHandler
     [SerializeField] ShroomBaseStateA deathState;
     [SerializeField] ShroomBaseStateA ressurectState;
     public GameObject ramCollider;
+    public AudioSource m_audioSource;
 
     protected override void Start()
     {

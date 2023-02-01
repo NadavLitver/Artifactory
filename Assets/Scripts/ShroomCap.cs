@@ -5,6 +5,7 @@ using UnityEngine.Events;
 [RequireComponent(typeof(Rigidbody2D))]
 public class ShroomCap : Actor, IDamagable
 {
+    public AudioSource m_audioSource;
     public Rigidbody2D RB;
     public Ability ShroomCapAbility;
     bool landed;
@@ -73,7 +74,13 @@ public class ShroomCap : Actor, IDamagable
     {
         Destroyed = true;
     }
+    public void PlayOnGroundedSound()
+    {
+        SoundManager.Play(SoundManager.Sound.MushroomEnemyCapHitGround, m_audioSource);
 
+
+
+    }
     IEnumerator KeepToBounries()
     {
         yield return new WaitUntil(() => transform.position.x > maxPoint.x || transform.position.x < minPoint.x);

@@ -10,6 +10,7 @@ public class Explosion : MonoBehaviour
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius, HitLayer);
         Debug.Log(colliders.Length);
+        
         foreach (var item in colliders)
         {
             Actor actor = item.GetComponent<Actor>();
