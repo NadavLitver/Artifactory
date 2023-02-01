@@ -6,13 +6,44 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
 
-    public SoundAudioClip[] clips;
+    public List<SoundAudioClip> clips;
     public float DeactivateAudioObjectsTime;
 
     public ObjectPool m_pool;
     public enum Sound
     {
+        PlayerJump,
+        PlayerLand,
+        PlayerRun1,
+        PlayerRun2,
+        PlayerRun3,
+        PlayerRun4,
+        PlayerGainResources,
+        BasicGunShoot,
+        BasicGunShoot2,
+        BasicGunCharged,
+        BasicGunExplosion,
+        BasicGunMobility,
+        BasicPickaxeHit1,BasicPickaxeHit2,BasicPickaxeHit3,
+        BasicPickaxeAirAttack,BasicPickaxeClimb,
+        BasicPickaxeSwing,BasicPickaxeSwing2,
+        BasicSwordDash,
+        BasicSwordHit1,BasicSwordHit2,BasicSwordHit3,
+        BasicSwordSwing1, BasicSwordSwing2, BasicSwordSwing3,
+        MushroomEnemyRevive,MushroomEnemyBlocked, MushroomEnemyDead,MushroomEnemyCapHitPlayer, MushroomEnemyCapHitGround, MushroomEnemyRamHit, 
+        NebulaFlowerPopped,BellFlowerBelling,NearNebulaFlower,
+        OnDandilion,OnJumpPlatform,
+        SpikedFromJump,SpikedFrogDeath
 
+    }
+    [ContextMenu("Reset List")]
+    private void ResetClipListBasedOnExistingSoundEnum()
+    {
+        clips.Clear();
+        foreach (Sound item in Enum.GetValues(typeof(Sound)))
+        {
+            clips.Add(new SoundAudioClip(item));
+        }
     }
 
     public static void Play(Sound sound)
@@ -163,6 +194,14 @@ public class SoundManager : MonoBehaviour
 [Serializable]
 public class SoundAudioClip
 {
+    public SoundAudioClip()
+    {
+
+    }
+   public SoundAudioClip(SoundManager.Sound _sound)
+    {
+        m_Sound = _sound;
+    }
     public SoundManager.Sound m_Sound;
     public AudioClip m_AudioClip;
 }

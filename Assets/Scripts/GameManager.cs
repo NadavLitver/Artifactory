@@ -109,6 +109,7 @@ public class AssetsRefrence
 
     [Header("CAMERA"), Space(10)]
     public CamPositionSetter camPositionSetter;
+    public Cinemachine.CinemachineVirtualCamera mainVCam;
 
     [Header("HEALTH BAR"), Space(10)]
     public ObjectPool CubePool;
