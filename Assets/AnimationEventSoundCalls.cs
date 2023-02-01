@@ -5,12 +5,15 @@ using UnityEngine;
 public class AnimationEventSoundCalls : MonoBehaviour
 {
     [SerializeField] BasicSword swordRef;
+    [SerializeField] BasicPickaxe pickaxeRef;
+
 
 
     [SerializeField] AudioSource m_audioSource;
     private void Start()
     {
         swordRef.onHit.AddListener(CallSwordHitRandom);
+        pickaxeRef.onHit.AddListener(CallPickaxeHitRandom);
     }
     public void CallPlayerJump() => CallSound(SoundManager.Sound.PlayerJump);
     public void CallPlayerLand() => CallSound(SoundManager.Sound.PlayerLand);
@@ -28,6 +31,17 @@ public class AnimationEventSoundCalls : MonoBehaviour
     public void CallSwordSwing2() => CallSound(SoundManager.Sound.BasicSwordSwing2);
     public void CallSwordSwing3() => CallSound(SoundManager.Sound.BasicSwordSwing3);
     public void CallSwordDash() => CallSound(SoundManager.Sound.BasicSwordDash);
+    public void CallPickaxeHit1() => CallSound(SoundManager.Sound.BasicPickaxeHit1);
+    public void CallPickaxeHit2() => CallSound(SoundManager.Sound.BasicPickaxeHit2);
+    public void CallPickaxeHit3() => CallSound(SoundManager.Sound.BasicPickaxeHit3);
+    public void CallPickaxeSwing() => CallSound(SoundManager.Sound.BasicPickaxeSwing);
+    public void CallPickaxeSwing2() => CallSound(SoundManager.Sound.BasicPickaxeSwing2);
+    public void CallPickaxeAirAttack() => CallSound(SoundManager.Sound.BasicPickaxeAirAttack);
+    public void CallPickaxeClimb() => CallSound(SoundManager.Sound.BasicPickaxeClimb);
+
+
+
+
 
     public void CallSwordHitRandom()
     {
@@ -41,9 +55,27 @@ public class AnimationEventSoundCalls : MonoBehaviour
             CallSwordHit2();
 
         }
-        else if(value < 0.4f)
+        else
         {
             CallSwordHit3();
+
+        }
+    }
+    public void CallPickaxeHitRandom()
+    {
+        float value = Random.value;
+        if (value > 0.7f)
+        {
+            CallPickaxeHit1();
+        }
+        else if (value > 0.4f)
+        {
+            CallPickaxeHit2();
+
+        }
+        else
+        {
+            CallPickaxeHit3();
 
         }
     }

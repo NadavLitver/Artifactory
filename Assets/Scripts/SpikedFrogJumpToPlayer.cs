@@ -10,6 +10,7 @@ public class SpikedFrogJumpToPlayer : State
     {
         if (!enteredState)
         {
+            SoundManager.Play(SoundManager.Sound.SpikedFromJump, handler.m_audioSource);
             Vector2 rayOriginPoint = new Vector3(GameManager.Instance.assets.Player.transform.position.x, GameManager.Instance.assets.Player.transform.position.y + 10);
             RaycastHit2D hit = Physics2D.Raycast(rayOriginPoint, Vector2.down, groundLayer);
             if (hit && handler.rayData.isPointInBoxButNotInCollider(hit.point))

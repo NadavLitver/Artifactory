@@ -13,6 +13,7 @@ public class JumpPlatform : MonoBehaviour
     private int JumpTriggerHash;
     private bool playerIn;
     private Animator m_animator;
+    [SerializeField] AudioSource m_audioSource;
     private void Start()
     {
         dir = new Vector2(x, y);
@@ -27,6 +28,7 @@ public class JumpPlatform : MonoBehaviour
         {
             playerIn = true;
             m_animator.SetTrigger(JumpTriggerHash);
+           
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
@@ -44,6 +46,7 @@ public class JumpPlatform : MonoBehaviour
         {
             playerControllerRef.ResetVelocity();
             playerControllerRef.RecieveForce(dir * force);
+            SoundManager.Play(SoundManager.Sound.OnJumpPlatform, m_audioSource);
         }
      
     }
