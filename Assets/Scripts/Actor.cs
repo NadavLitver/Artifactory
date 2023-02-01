@@ -9,6 +9,7 @@ public class Actor : MonoBehaviour, IDamagable
     public float maxHP;
     [SerializeField] float baseCritHit;
     [SerializeField] float baseCritDamage;
+    [SerializeField] bool deathEffectsOnHp;
     DamageHandler critHit;
     DamageHandler critDamage;
     public List<StatusEffect> ActorStatusEffects { get => m_StatusEffects; set => m_StatusEffects = value; }
@@ -198,7 +199,7 @@ public class Actor : MonoBehaviour, IDamagable
         currentHP -= finalDamage;
         TakeDamageGFX?.Invoke();
         Debug.Log(gameObject.name + "Took Damage");
-        if (currentHP <= 0)
+        if (currentHP <= 0 && deathEffectsOnHp)
         {
             onActorDeath();
             host.OnKill?.Invoke(this, dmgHandler);
@@ -236,7 +237,7 @@ public class Actor : MonoBehaviour, IDamagable
         float finalDamage = dmgHandler.calculateFinalNumberMult();
         currentHP -= finalDamage;
         TakeDamageGFX?.Invoke();
-        if (currentHP <= 0)
+        if (currentHP <= 0 && deathEffectsOnHp)
         {
             onActorDeath();
         }
