@@ -22,6 +22,7 @@ public class SpikedFrogStateHandler : StateHandler
     internal int FrogNoticeHash;
     internal int FrogIdleHash;
     internal int FrogDeathHash;
+    public AudioSource m_audioSource;
     private void Start()
     {
         launcher.LandedEvent.AddListener(Freeze);

@@ -6,10 +6,18 @@ public class DropChest : Actor
 {
     [SerializeField] RelicDrop myDrop;
     [SerializeField] private Animator anim;
-    
+    public AudioSource m_audioSource;
+    private int OpenHash;
+
+    private void Start()
+    {
+        OpenHash = Animator.StringToHash("Open");
+    }
     public void Open()
     {
-        anim.Play("Open");
+        anim.Play(OpenHash);
+        SoundManager.Play(SoundManager.Sound.NebulaFlowerPopped, m_audioSource);
+
     }
 
     public void DoneOpening()

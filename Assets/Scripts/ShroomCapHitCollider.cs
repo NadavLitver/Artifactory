@@ -11,7 +11,9 @@ public class ShroomCapHitCollider : MonoBehaviour
         if (collision.gameObject.CompareTag("Player") && !cap.GroundCheck.IsGrounded())
         {
             //calc direction
-            Vector2 forceDir = GameManager.Instance.assets.playerActor.transform.position - transform.position;
+            SoundManager.Play(SoundManager.Sound.MushroomEnemyCapHitPlayer, cap.m_audioSource);
+
+           // Vector2 forceDir = GameManager.Instance.assets.playerActor.transform.position - transform.position;
             GameManager.Instance.assets.playerActor.GetHit(cap.ShroomCapAbility);
             return;
         }

@@ -11,6 +11,7 @@ public class ShroomRessurectA : ShroomBaseStateA
         handler.Rb.velocity = Vector2.zero;
         handler.Actor.Heal(new DamageHandler() { amount = handler.Actor.maxHP });
         transform.parent.transform.position = handler.CurrentCap.transform.position;
+        SoundManager.Play(SoundManager.Sound.MushroomEnemyRevive, handler.m_audioSource);
         yield return new WaitUntil(() => handler.DoneRessurecting);
         handler.Actor.RemoveStatusEffect(new Invulnerability());
         handler.DoneRessurecting = false;

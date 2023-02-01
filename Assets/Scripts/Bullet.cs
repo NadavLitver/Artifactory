@@ -47,14 +47,15 @@ public class Bullet : MonoBehaviour
 
     private void Explode()
     {
-       /* if (exploded || !explosive)
-        {
-        
-            rb.velocity = Vector2.zero;
-            exploded = true;
-            TurnOff();
-            return;
-        }*/
+        /* if (exploded || !explosive)
+         {
+
+             rb.velocity = Vector2.zero;
+             exploded = true;
+             TurnOff();
+             return;
+         }*/
+        SoundManager.Play(SoundManager.Sound.BasicGunExplosion, transform.position);
         rb.velocity = Vector2.zero;
         exploded = true;
         Explosion.gameObject.SetActive(true);

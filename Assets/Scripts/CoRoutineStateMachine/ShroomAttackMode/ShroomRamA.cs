@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -10,6 +11,7 @@ public class ShroomRamA : ShroomBaseStateA
     [SerializeField] private float RamThreshold;
     private float lastRammed;
 
+
     public override IEnumerator StateRoutine()
     {
         float counter = 0;
@@ -19,6 +21,7 @@ public class ShroomRamA : ShroomBaseStateA
         handler.Rb.velocity = Vector3.zero;
         yield return new WaitUntil(() => handler.startRamming);
         handler.startRamming = false;
+        handler.Actor.OnDealDamage.AddListener(OnRamHit);
         handler.ramCollider.SetActive(true);
         Vector2 dir = new Vector2(handler.GetPlayerDirection().x * ramSpeed, 0);
         while (counter < ramDuration && !handler.IsWithinRangeToBounder(bounderOffest))
@@ -27,11 +30,17 @@ public class ShroomRamA : ShroomBaseStateA
             counter += Time.deltaTime;
             yield return new WaitForFixedUpdate();
         }
+        handler.Actor.OnDealDamage.RemoveListener(OnRamHit);
         Debug.Log("done ramming");
         handler.ramCollider.SetActive(false);
         handler.Anim.SetBool("Ram", false);
         handler.Rb.velocity = Vector3.zero;
         lastRammed = Time.time;
+    }
+
+    private void OnRamHit(DamageHandler _dmgHandler, Actor _actor)
+    {
+        SoundManager.Play(SoundManager.Sound.MushroomEnemyRamHit, handler.m_audioSource);
     }
 
     private void Start()

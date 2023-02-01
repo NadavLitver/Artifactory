@@ -8,6 +8,7 @@ public class MovingPlatform : MonoBehaviour
     [SerializeField] Vector3 currentDestenation;
     [SerializeField] SpriteRenderer rend;
     [SerializeField] Animator anim;
+    [SerializeField] AudioSource m_audioSource;
     Transform playerOriginalParent;
     bool controllingPlayer;
     void Start()
@@ -30,6 +31,7 @@ public class MovingPlatform : MonoBehaviour
             currentDestenation = destenation.localPosition;
             anim.SetTrigger("Move");
             controllingPlayer = true;
+            SoundManager.Play(SoundManager.Sound.OnDandilion, m_audioSource);
             GameManager.Instance.assets.PlayerController.canMove = false;
             GameManager.Instance.assets.PlayerController.SetOnDandilion(controllingPlayer);
 
