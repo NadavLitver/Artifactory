@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Range(0, 100)] float maxGravity;
     [SerializeField, Range(0, 100)] float GravityScale;
     [Range(0, 100), SerializeField, Tooltip("Increasing Acceleration Speed will Decrease the time the player takes to reach max speed")] float accelerationSpeed;
+    [Range(0, 100), SerializeField, Tooltip("Increasing Acceleration Speed will Decrease the time the player takes to reach max speed")] float AirAccelerationSpeed;
+
     [Range(0, 100), SerializeField, Tooltip("Increasing deacceleration Speed will Decrease the time the player takes to reach zero speed on x")] float deaccelerationSpeed;
 
     [SerializeField, Tooltip("What is Ground?")] LayerMask GroundLayerMask;
@@ -235,14 +237,24 @@ public class PlayerController : MonoBehaviour
             bool noInput = horInput == 0;
             float accelGoal = noInput ? 0 : 1;
 
-            //You shouldn't change velocity immidiatly
+            // this just sets maxSpeed;
             currentSpeed = GetIsGrounded ? speed : AirSpeed;
-            currentAccel = noInput ? deaccelerationSpeed : accelerationSpeed;
+
+            if (GetIsGrounded)
+            {
+                currentAccel = noInput ? deaccelerationSpeed : accelerationSpeed;
+            }
+            else
+            {
+                currentAccel = noInput ? deaccelerationSpeed : AirAccelerationSpeed;
+
+            }
+         
 
             acceleration = Mathf.MoveTowards(acceleration, accelGoal, currentAccel * Time.deltaTime);
 
-            //not good
-            velocity.x = Mathf.MoveTowards(velocity.x, horInput == 0 ? 0 : horInput * currentSpeed * acceleration, currentAccel * Time.deltaTime);
+            //not good//y?
+            velocity.x = Mathf.MoveTowards(velocity.x, noInput ? 0 : horInput * currentSpeed * acceleration, currentAccel * Time.deltaTime);
             externalForces = Vector2.MoveTowards(externalForces, Vector2.zero, accelerationSpeed * Time.deltaTime);
 
         }

@@ -23,7 +23,7 @@ public class ShroomThrowD : BaseShroomDState
 
     internal override bool myCondition()
     {
-        if (handler.IsPlayerWithinThreshold(throwThreshold) && handler.isEnraged)
+        if (handler.IsPlayerWithinThreshold(throwThreshold))
         {
             return true;
         }
