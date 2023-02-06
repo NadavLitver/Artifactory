@@ -7,6 +7,7 @@ public class EnemyActor : Actor
     [SerializeField, Range(0, 100)] private float dropChance;
     [SerializeField] private ItemType item;
     [SerializeField] private bool dropOnDeath;
+    [SerializeField] private CatchHandler catchHandler;
 
     private void Start()
     {
@@ -44,5 +45,13 @@ public class EnemyActor : Actor
     {
         int temp = UnityEngine.Random.Range(0, Enum.GetNames(typeof(ItemType)).Length - 1);
         item = (ItemType)temp;
+    }
+
+    private void AttemptCatching()
+    {
+        if (catchHandler.TryCatchingMonster())
+        {
+
+        }
     }
 }

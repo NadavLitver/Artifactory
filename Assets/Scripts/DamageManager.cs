@@ -31,4 +31,9 @@ public class DamageManager : MonoBehaviour
     [Range(0f, 1f)] public float TurtleBlockPower;
     [Range(0f, 1f)] public float TurtleBlockTreshold;
 
+
+    [Header("Legendary Clone Properties"), Space(10)]
+    public float MaxHPIncreaseMod;
+    public float HealOnKillMod;
+
 }

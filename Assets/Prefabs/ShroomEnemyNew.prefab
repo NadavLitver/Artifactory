@@ -59,6 +59,7 @@ MonoBehaviour:
   maxHP: 100
   baseCritHit: 0
   baseCritDamage: 0
+  deathEffectsOnHp: 0
   OnDealDamage:
     m_PersistentCalls:
       m_Calls: []
@@ -118,6 +119,7 @@ MonoBehaviour:
   dropChance: 100
   item: 0
   dropOnDeath: 0
+  catchHandler: {fileID: 0}
 --- !u!50 &2962744240544369519
 Rigidbody2D:
   serializedVersion: 4
@@ -687,8 +689,6 @@ GameObject:
   - component: {fileID: 2962744242088939593}
   - component: {fileID: 2962744242088939592}
   - component: {fileID: 2962744242088939595}
-  - component: {fileID: 2962744242088939597}
-  - component: {fileID: 2962744242088939596}
   - component: {fileID: 2962744242088939598}
   m_Layer: 12
   m_Name: DefenseMode
@@ -729,8 +729,6 @@ MonoBehaviour:
   - {fileID: 2962744242088939593}
   - {fileID: 2962744242088939592}
   - {fileID: 2962744242088939595}
-  - {fileID: 2962744242088939596}
-  - {fileID: 2962744242088939597}
   m_actor: {fileID: 2962744240544369504}
   rb: {fileID: 2962744240544369519}
   lineOfSight: {fileID: 2962744241433431909}
@@ -792,37 +790,6 @@ MonoBehaviour:
   priority: 3
   throwThreshold: 4.2
   throwForce: 15
---- !u!114 &2962744242088939597
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2962744242088939958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3d91739544a1124985711841ca5b71a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  priority: 2
-  stepBackDuration: 2
-  stopSteppingBackThreshold: 0.8
-  stepBackSpeed: 0.85
---- !u!114 &2962744242088939596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2962744242088939958}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdcf33ffb5bb4e6428a9b457faf7b771, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  priority: 1
-  defenseThreshold: 4
-  defenseCoolDown: 20
 --- !u!114 &2962744242088939598
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -849,7 +816,6 @@ GameObject:
   - component: {fileID: 2962744242505823904}
   - component: {fileID: 6973081568470684432}
   - component: {fileID: 6053797303516809870}
-  - component: {fileID: 8123589712327772313}
   - component: {fileID: 5717363680691226278}
   - component: {fileID: 5851949567077389279}
   - component: {fileID: 6579637478158748564}
@@ -891,7 +857,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   states:
-  - {fileID: 8123589712327772313}
   - {fileID: 5717363680691226278}
   m_actor: {fileID: 2962744240544369504}
   rb: {fileID: 2962744240544369519}
@@ -927,24 +892,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
---- !u!114 &8123589712327772313
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2962744242505823919}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0118d9d2ba18f1549a920c35f310f5fe, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  priority: 1
-  ramCoolDown: 10
-  ramDuration: 5
-  bounderOffest: 2
-  ramSpeed: 6
-  RamThreshold: 4.5
 --- !u!114 &5717363680691226278
 MonoBehaviour:
   m_ObjectHideFlags: 0

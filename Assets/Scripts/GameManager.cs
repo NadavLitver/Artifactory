@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
 
@@ -14,13 +15,16 @@ public class GameManager : MonoBehaviour
     public LevelManager LevelManager { get; private set; }
     public CraftinManager CraftingManager { get; private set; }
     public RelicManager RelicManager { get; private set; }
-
+    public ZooManager Zoo { get; private set; }
     public VfxManager vfxManager { get; private set; }
 
 
     public bool isTutorial;
     public SoundManager soundManager { get; private set; }
     public DialogueExecuter dialogueExecuter { get; private set; }
+
+    public UnityEvent OnRunStart;
+    public UnityEvent OnRunEnd;
 
 
     [SerializeField] internal AssetsRefrence assets;
@@ -50,6 +54,7 @@ public class GameManager : MonoBehaviour
         vfxManager = GetComponentInChildren<VfxManager>();
         dialogueExecuter = GetComponentInChildren<DialogueExecuter>();
         RelicManager = GetComponentInChildren<RelicManager>();
+        Zoo = GetComponentInChildren<ZooManager>();
     }
     private void Start()
     {
@@ -129,6 +134,7 @@ public class AssetsRefrence
     public Sprite GlimmeringSprite;
     public Sprite BranchSprite;
     public Sprite RuneSprite;
+    public Sprite TuffCointSprite;
     public Sprite LeatherSprite;
     public ItemUiSlot ItemUiSlot;
 
@@ -201,6 +207,8 @@ public class GeneralFunctions
                 return new RubberDuck();
             case StatusEffectEnum.TurtlePendant:
                 return new TurtlePendant();
+            case StatusEffectEnum.Legendary:
+                return new LegendaryStatus();
             default:
                 break;
         }
@@ -218,6 +226,8 @@ public class GeneralFunctions
                 return GameManager.Instance.assets.BranchSprite;
             case ItemType.Rune:
                 return GameManager.Instance.assets.RuneSprite;
+            case ItemType.TuffCoin:
+                return GameManager.Instance.assets.TuffCointSprite;
             default:
                 return null;
         }

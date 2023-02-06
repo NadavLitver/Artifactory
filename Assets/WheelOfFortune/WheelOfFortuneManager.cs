@@ -20,11 +20,11 @@ public class WheelOfFortuneManager : MonoBehaviour//not a real "Manager"
 
         LeanTween.rotateZ(gameObject, transform.rotation.z + currentAmount, currentDuration).setOnComplete(() => CheckWinningSection());
     }
-    [ContextMenu("Start normal Spin")]
 
+    [ContextMenu("Start normal Spin")]
     public void SpinBasedOnResultOfChances()
     {
-      float result = Random.value;    
+       float result = Random.value;    
         if (inBetween(result, 0, 0.19f))
         {
             Debug.Log("First Win");

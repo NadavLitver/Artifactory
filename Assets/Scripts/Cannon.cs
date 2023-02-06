@@ -24,6 +24,10 @@ public class Cannon : Weapon
     private void OnEnable()
     {
         isCharging = false;
+        if (GameManager.Instance.assets.PlayerController.GetIsGrounded)
+        {
+            ResetJumped();
+        }
         StartCoroutine(StartCharging());
 
     }
@@ -36,6 +40,7 @@ public class Cannon : Weapon
             Bullet bullet = item.GetComponent<Bullet>();
             bullet.CahceSource(this);
         }
+        GameManager.Instance.assets.PlayerController.OnsGroundCheck1.OnGrounded.AddListener(ResetJumped);
     }
 
     protected override void Attack()
@@ -68,7 +73,6 @@ public class Cannon : Weapon
     public override void Mobility()
     {
         RocketJump();
-
     }
 
     private void RocketJump()
@@ -84,7 +88,6 @@ public class Cannon : Weapon
 
             jumped = true;
             GameManager.Instance.assets.PlayerController.StartCoroutine(GameManager.Instance.assets.PlayerController.JumpApexWait());
-            StartCoroutine(waitForGrounded());
             if (!isLoaded && !isCharging)
             {
                 StartCoroutine(StartCharging());
@@ -92,10 +95,8 @@ public class Cannon : Weapon
         }
     }
 
-    IEnumerator waitForGrounded()
+    private void ResetJumped()
     {
-        yield return new WaitForSeconds(0.1f);
-        yield return new WaitUntil(() => GameManager.Instance.assets.PlayerController.GetIsGrounded);
         jumped = false;
     }
 
@@ -130,7 +131,7 @@ public class Cannon : Weapon
     }
     private void OnDisable()
     {
-        jumped = false;
+        //jumped = false;
         isLoaded = false;
         GameManager.Instance.assets.PlayerController.canMove = true;
         GameManager.Instance.assets.PlayerController.ResetGravity();

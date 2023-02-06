@@ -11,6 +11,7 @@ public class BasicSword : Weapon
     private float lastDash;
     private float counter = 0;
     public float dashForce;
+    private bool canDash;
     [SerializeField] float floatTimeInAirBeforeDash = 0.12f;
     [SerializeField] float GravityScaleBeforeDash;
     private PlayerController player => GameManager.Instance.assets.PlayerController;
@@ -20,8 +21,17 @@ public class BasicSword : Weapon
 
     public override void Mobility()
     {
-        if (Time.time - lastDash >= dashCooldown)
+        if (Time.time - lastDash >= dashCooldown && canDash)
             StartCoroutine(IEDash());
+    }
+
+    private void Start()
+    {
+        GameManager.Instance.assets.PlayerController.OnsGroundCheck1.OnGrounded.AddListener(ResetCanDash);
+    }
+    private void ResetCanDash()
+    {
+        canDash = true;
     }
 
     IEnumerator IEDash()
@@ -66,8 +76,17 @@ public class BasicSword : Weapon
     }
     private void OnDisable()
     {
+        canDash = false;
         player.canMove = true;
         isDashing = false;
         player.ResetGravity();
+    }
+
+    private void OnEnable()
+    {
+        if (GameManager.Instance.assets.PlayerController.GetIsGrounded)
+        {
+            canDash = true;
+        }
     }
 }

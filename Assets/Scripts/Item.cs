@@ -8,6 +8,7 @@ public enum ItemType
     Glimmering,
     Branch,
     Rune,
+    TuffCoin,
     Null
 }
 public class Item : MonoBehaviour

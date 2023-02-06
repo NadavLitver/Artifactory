@@ -42,6 +42,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Range(0, 100)] float maxGravity;
     [SerializeField, Range(0, 100)] float GravityScale;
     [Range(0, 100), SerializeField, Tooltip("Increasing Acceleration Speed will Decrease the time the player takes to reach max speed")] float accelerationSpeed;
+    [Range(0, 100), SerializeField, Tooltip("Increasing Acceleration Speed will Decrease the time the player takes to reach max speed")] float AirAccelerationSpeed;
+
     [Range(0, 100), SerializeField, Tooltip("Increasing deacceleration Speed will Decrease the time the player takes to reach zero speed on x")] float deaccelerationSpeed;
 
     [SerializeField, Tooltip("What is Ground?")] LayerMask GroundLayerMask;
@@ -69,6 +71,7 @@ public class PlayerController : MonoBehaviour
     public Animator Animator { get => m_animator; set => m_animator = value; }
     public Transform ClawEffectPoint { get => clawEffectPoint; }
     public Transform JumpEffectPoint { get => jumpEffectPoint; }
+    public SensorGroup OnsGroundCheck1 { get => OnsGroundCheck; }
 
     private int FallingHash;
     private int GroundedHash;
@@ -103,7 +106,7 @@ public class PlayerController : MonoBehaviour
 
 
     }
-   
+
     private void JumpPressed()
     {
         if ((OnsGroundCheck.IsGrounded() || CoyoteAvailable) && GameManager.Instance.inputManager.JumpDown() && canMove && !playingTraversal)
@@ -233,11 +236,25 @@ public class PlayerController : MonoBehaviour
             }
             bool noInput = horInput == 0;
             float accelGoal = noInput ? 0 : 1;
+
+            // this just sets maxSpeed;
             currentSpeed = GetIsGrounded ? speed : AirSpeed;
-            currentAccel = noInput ? deaccelerationSpeed : accelerationSpeed;
+
+            if (GetIsGrounded)
+            {
+                currentAccel = noInput ? deaccelerationSpeed : accelerationSpeed;
+            }
+            else
+            {
+                currentAccel = noInput ? deaccelerationSpeed : AirAccelerationSpeed;
+
+            }
+         
 
             acceleration = Mathf.MoveTowards(acceleration, accelGoal, currentAccel * Time.deltaTime);
-            velocity.x = Mathf.MoveTowards(velocity.x, horInput == 0 ? 0 : horInput * currentSpeed * acceleration, currentAccel * Time.deltaTime);
+
+            //not good//y?
+            velocity.x = Mathf.MoveTowards(velocity.x, noInput ? 0 : horInput * currentSpeed * acceleration, currentAccel * Time.deltaTime);
             externalForces = Vector2.MoveTowards(externalForces, Vector2.zero, accelerationSpeed * Time.deltaTime);
 
         }
@@ -295,7 +312,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-       
+
         Gizmos.color = CheckIsCeiling() ? Color.green : Color.red;
         Gizmos.DrawRay(transform.position, Vector2.up * groundCheckDistance);
     }

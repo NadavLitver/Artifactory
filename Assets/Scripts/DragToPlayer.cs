@@ -7,7 +7,7 @@ using UnityEngine;
 public class DragToPlayer : MonoBehaviour
 {
 
-    [SerializeField] float dragTime;
+    [SerializeField] float dragSpeed;
     IProximityDetection proximityDetection;
 
     private void Start()
@@ -30,7 +30,7 @@ public class DragToPlayer : MonoBehaviour
         {
             Vector3 positionLerp = Vector3.Lerp(startPosition, GameManager.Instance.assets.Player.transform.position, counter);
             transform.position = positionLerp;
-            counter += Time.deltaTime;
+            counter += Time.deltaTime * dragSpeed;
             yield return new WaitForEndOfFrame();
         }
         OnDragEnd();
