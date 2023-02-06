@@ -69,6 +69,7 @@ public class PlayerController : MonoBehaviour
     public Animator Animator { get => m_animator; set => m_animator = value; }
     public Transform ClawEffectPoint { get => clawEffectPoint; }
     public Transform JumpEffectPoint { get => jumpEffectPoint; }
+    public SensorGroup OnsGroundCheck1 { get => OnsGroundCheck; }
 
     private int FallingHash;
     private int GroundedHash;
@@ -103,7 +104,7 @@ public class PlayerController : MonoBehaviour
 
 
     }
-   
+
     private void JumpPressed()
     {
         if ((OnsGroundCheck.IsGrounded() || CoyoteAvailable) && GameManager.Instance.inputManager.JumpDown() && canMove && !playingTraversal)
@@ -233,10 +234,14 @@ public class PlayerController : MonoBehaviour
             }
             bool noInput = horInput == 0;
             float accelGoal = noInput ? 0 : 1;
+
+            //You shouldn't change velocity immidiatly
             currentSpeed = GetIsGrounded ? speed : AirSpeed;
             currentAccel = noInput ? deaccelerationSpeed : accelerationSpeed;
 
             acceleration = Mathf.MoveTowards(acceleration, accelGoal, currentAccel * Time.deltaTime);
+
+            //not good
             velocity.x = Mathf.MoveTowards(velocity.x, horInput == 0 ? 0 : horInput * currentSpeed * acceleration, currentAccel * Time.deltaTime);
             externalForces = Vector2.MoveTowards(externalForces, Vector2.zero, accelerationSpeed * Time.deltaTime);
 
@@ -295,7 +300,7 @@ public class PlayerController : MonoBehaviour
     }
     private void OnDrawGizmos()
     {
-       
+
         Gizmos.color = CheckIsCeiling() ? Color.green : Color.red;
         Gizmos.DrawRay(transform.position, Vector2.up * groundCheckDistance);
     }

@@ -9,8 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77f6d4d9bbe049f47b941c271a5208c5, type: 3}
-  m_Name: HealingGoblet_Crafted
+  m_Script: {fileID: 11500000, guid: 757d3b2d1e0d7814790a3d735bb50836, type: 3}
+  m_Name: ShroomFood
   m_EditorClassIdentifier: 
-  sprite: {fileID: 21300000, guid: fe4a173f80ba0da409911bb0b7cedd77, type: 3}
-  myRelic: {fileID: 11400000, guid: 527b6041e746de443a5be4e1562b62de, type: 2}
+  components:
+  - itemType: 1
+    amount: 1
+  craftedItem: {fileID: 0}

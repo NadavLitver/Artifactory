@@ -28,5 +28,6 @@ public enum StatusEffectEnum
     Invulnerability,
     TurtlePendant,
     KnifeOfTheHunter,
-    WindChimes
+    WindChimes,
+    Legendary
 }

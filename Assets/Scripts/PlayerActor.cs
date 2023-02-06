@@ -7,6 +7,12 @@ public class PlayerActor : Actor
     public Animator m_animator;
     [SerializeField] RelicInventory playerRelicInventory;
     [SerializeField] ItemInventory playerItemInventory;
+
+    [SerializeField] private Material normalMat;
+    [SerializeField] private Material legendaryMat;
+    [SerializeField] private SpriteRenderer mainRenderer;
+    [SerializeField] private GameObject legendaryTrailVFX;
+
     public RelicInventory PlayerRelicInventory { get => playerRelicInventory;}
     public ItemInventory PlayerItemInventory { get => playerItemInventory; set => playerItemInventory = value; }
 
@@ -33,5 +39,15 @@ public class PlayerActor : Actor
         base.onActorDeath();
         m_animator.Play("Die");
     }
-    
+
+    public void EnableLegendaryActorVFX()
+    {
+        mainRenderer.material = legendaryMat;
+        legendaryTrailVFX.SetActive(true);
+    }
+    public void DisableLegendaryActorVFX()
+    {
+        mainRenderer.material = normalMat;
+        legendaryTrailVFX.SetActive(false);
+    }
 }

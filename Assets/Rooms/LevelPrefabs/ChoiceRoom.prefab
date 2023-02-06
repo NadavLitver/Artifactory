@@ -5239,6 +5239,9 @@ MonoBehaviour:
   startPosition: {fileID: 0}
   chestSpawnPoints:
   - {fileID: 3056701065969533198}
+  OnEntered:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2327155660508821556
 GameObject:
   m_ObjectHideFlags: 0
@@ -14517,6 +14520,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1971918845093407975, guid: 235d4ef7a93cadf4db055cac29dd2050, type: 3}
+      propertyPath: objectToSpawn
+      value: 
+      objectReference: {fileID: 4694302363693926822, guid: 2a62ef9f7fb3fa14bb99ac57c52c492a, type: 3}
     - target: {fileID: 3782547868592779118, guid: 235d4ef7a93cadf4db055cac29dd2050, type: 3}
       propertyPath: m_Name
       value: SpawnPoint
@@ -15631,7 +15638,7 @@ PolygonCollider2D:
       - {x: -10.249998, y: 4.7200003}
       - {x: -1.6297607, y: 4.720001}
       - {x: -1.6297607, y: 12.829998}
-      - {x: 16.401535, y: 12.829998}
+      - {x: 16.401533, y: 12.829998}
       - {x: 16.40154, y: 4.720001}
       - {x: 25.130001, y: 4.7200003}
       - {x: 25.13, y: 1.29}

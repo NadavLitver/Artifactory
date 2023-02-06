@@ -38,6 +38,19 @@ public class ItemInventory : MonoBehaviour
         return itemsByAmount;
     }
 
+    public int GetItemTypeAmount(ItemType givenItem)
+    {
+        int counter = 0;
+        foreach (var item in items)
+        {
+            if (item == givenItem)
+            {
+                counter++;
+            }
+        }
+        return counter;
+    }
+
     public bool IsComponentAvailable(RecipeCoponent comp)
     {
         List<RecipeCoponent> comps = GetEachItemByAmount();
@@ -61,7 +74,10 @@ public class ItemInventory : MonoBehaviour
             items.Remove(comp.itemType);
         }
         OnCraftItem?.Invoke(GetEachItemByAmount());
-        givenRecipe.CraftedItem.Obtain();
+        if (!ReferenceEquals(givenRecipe.CraftedItem, null))
+        {
+            givenRecipe.CraftedItem.Obtain();
+        }
     }
 
 }

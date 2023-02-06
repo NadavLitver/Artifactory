@@ -15697,6 +15697,9 @@ MonoBehaviour:
   startPosition: {fileID: 1453202645112678680}
   chestSpawnPoints:
   - {fileID: 6198938630458336085}
+  OnEntered:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &3801197212739490648
 GameObject:
   m_ObjectHideFlags: 0
@@ -29185,6 +29188,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1971918845093407975, guid: 235d4ef7a93cadf4db055cac29dd2050, type: 3}
+      propertyPath: objectToSpawn
+      value: 
+      objectReference: {fileID: 4694302363693926822, guid: 2a62ef9f7fb3fa14bb99ac57c52c492a, type: 3}
     - target: {fileID: 3782547868592779118, guid: 235d4ef7a93cadf4db055cac29dd2050, type: 3}
       propertyPath: m_Name
       value: SpawnPoint
@@ -31051,15 +31058,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1595102629011138451, guid: b755821dee527964ea281a3dca70ae4c, type: 3}
       propertyPath: m_LocalAABB.m_Center.y
-      value: -8.000331
+      value: -8.00033
       objectReference: {fileID: 0}
     - target: {fileID: 1595102629011138451, guid: b755821dee527964ea281a3dca70ae4c, type: 3}
       propertyPath: m_LocalAABB.m_Extent.x
-      value: 72.355194
+      value: 72.35519
       objectReference: {fileID: 0}
     - target: {fileID: 1595102629011138451, guid: b755821dee527964ea281a3dca70ae4c, type: 3}
       propertyPath: m_LocalAABB.m_Extent.y
-      value: 9.30033
+      value: 9.300329
       objectReference: {fileID: 0}
     - target: {fileID: 1595102629011138451, guid: b755821dee527964ea281a3dca70ae4c, type: 3}
       propertyPath: m_Sprites.Array.data[0]
@@ -31157,7 +31164,7 @@ PolygonCollider2D:
       - {x: 57.10967, y: -10.2}
       - {x: 89.85, y: -10.2}
       - {x: 89.85, y: -17.05033}
-      - {x: -54.360184, y: -16.859438}
+      - {x: -54.360176, y: -16.859438}
       - {x: -54.350136, y: 0.23043095}
       - {x: -54.35012, y: 0.30017632}
       - {x: -54.349937, y: 1.0500002}
