@@ -29,7 +29,7 @@ public class LevelManager : MonoBehaviour
     private void Start()
     {
         mapGenerator = FindObjectOfType<MapGenerator>();
-        InstantiateRooms(firstIsleRooms);
+        //InstantiateRooms(firstIsleRooms);
         //  LeanTween.delayedCall(0.5f ,AssembleLevel);
     }
 
@@ -330,7 +330,7 @@ public class LevelManager : MonoBehaviour
             GameObject go = Instantiate(item.gameObject);
             Room r = go.GetComponent<Room>();
             createdRooms.Add(r);
-            go.SetActive(false);
+            go.SetActive(true);
         }
     }
 
