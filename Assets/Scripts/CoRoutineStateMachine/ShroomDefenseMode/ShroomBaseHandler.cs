@@ -11,8 +11,11 @@ public class ShroomBaseHandler : CoRoutineStateHandler
     [SerializeField] private RigidBodyFlip flipper;
     [SerializeField] private CoRoutineState takeDamageState;
     [SerializeField] private ShroomBaseHandler otherMode;
+    [SerializeField] CoRoutineState deathState;
+
     private ShroomCap currentCap;
     private bool capDestroyed;
+    public bool DoneDying;
     public UnityEvent OnDeath;
     public Rigidbody2D Rb { get => rb; }
     public SensorGroup LineOfSight { get => lineOfSight; }
@@ -28,6 +31,20 @@ public class ShroomBaseHandler : CoRoutineStateHandler
         Actor.OnDamageCalcOver.AddListener(InterruptTakeDamage);
         groundCheck.OnGrounded.AddListener(bounder.StartBounder);
         OnDeath.AddListener(Actor.DropResource);
+        Actor.OnDeath.AddListener(AdressDeath);
+
+    }
+
+    private void AdressDeath()
+    {
+        InterruptDeath();
+    }
+
+    public void InterruptDeath()
+    {
+        OnDeath?.Invoke();
+        ResetAnim();
+        Interrupt(deathState);
     }
 
     protected override void OnEnable()
@@ -77,9 +94,9 @@ public class ShroomBaseHandler : CoRoutineStateHandler
     public virtual void InterruptTakeDamage(DamageHandler givenDamage)
     {
         ResetAnim();
-        Interrupt(takeDamageState);   
+        Interrupt(takeDamageState);
     }
-    
+
     public virtual void ResetAnim()
     {
         foreach (var item in anim.parameters)

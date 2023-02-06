@@ -8,7 +8,7 @@ public class ShroomCapHitCollider : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.CompareTag("Player") && !cap.GroundCheck.IsGrounded())
+        if (collision.gameObject.CompareTag("Player") && !cap.DealtDamage)
         {
             //calc direction
             SoundManager.Play(SoundManager.Sound.MushroomEnemyCapHitPlayer, cap.m_audioSource);

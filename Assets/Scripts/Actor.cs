@@ -198,6 +198,10 @@ public class Actor : MonoBehaviour, IDamagable
         float finalDamage = dmgHandler.calculateFinalNumberMult();
         currentHP -= finalDamage;
         TakeDamageGFX?.Invoke();
+        if (finalDamage <= 0)
+        {
+            return;
+        }
         Debug.Log(gameObject.name + "Took Damage");
         if (currentHP <= 0 && deathEffectsOnHp)
         {
@@ -237,6 +241,10 @@ public class Actor : MonoBehaviour, IDamagable
         float finalDamage = dmgHandler.calculateFinalNumberMult();
         currentHP -= finalDamage;
         TakeDamageGFX?.Invoke();
+        if (finalDamage <= 0)
+        {
+            return;
+        }
         if (currentHP <= 0 && deathEffectsOnHp)
         {
             onActorDeath();
