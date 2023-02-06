@@ -105,6 +105,7 @@ public class CraftingMap : MonoBehaviour
             node.RotateLine(givenLine.BaseRotation);
             node.transform.localPosition = lastPos;
             node.transform.localPosition += node.CalacDistanceFromSpriteToConnectionPoint();
+            node.transform.localScale = Vector3.one;
             //get the distance from the node to its connection point
             //place the node on the previous node
             //move the node by the distance
@@ -118,6 +119,8 @@ public class CraftingMap : MonoBehaviour
         Vector3 pos = givenLine.Nodes[givenLine.Nodes.Count - 1].transform.localPosition + givenLine.Nodes[givenLine.Nodes.Count - 1].GetConnectionPoint(givenLine.LineConnectionPoint.ConnectionPoint).localPosition;
         finalNode.transform.localPosition = pos;
         finalNode.transform.localPosition += finalNode.CalacDistanceFromSpriteToConnectionPoint();
+        finalNode.transform.localScale = Vector3.one;
+
         givenLine.Nodes.Add(finalNode);
 
         createdLines.Add(givenLine);
