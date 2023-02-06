@@ -836,6 +836,7 @@ GameObject:
   - component: {fileID: 5851949567077389279}
   - component: {fileID: 6579637478158748564}
   - component: {fileID: 8053518562303579834}
+  - component: {fileID: 1633901181383395670}
   m_Layer: 12
   m_Name: AttackMode
   m_TagString: Untagged
@@ -893,6 +894,7 @@ MonoBehaviour:
   startRamming: 0
   pickUpState: {fileID: 6053797303516809870}
   ressurectState: {fileID: 6579637478158748564}
+  ramState: {fileID: 1633901181383395670}
   ramCollider: {fileID: 7706441859698970193}
   m_audioSource: {fileID: 918272322872504960}
 --- !u!114 &6053797303516809870
@@ -964,6 +966,24 @@ MonoBehaviour:
   priority: 0
   stunDuration: 0.1
   knockBackForce: 1
+--- !u!114 &1633901181383395670
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2962744242505823919}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0118d9d2ba18f1549a920c35f310f5fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  ramCoolDown: 0
+  ramDuration: 2
+  bounderOffest: 1
+  ramSpeed: 1.8
+  RamThreshold: 4.71
 --- !u!1 &7706441859698970193
 GameObject:
   m_ObjectHideFlags: 0
