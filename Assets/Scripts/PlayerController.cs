@@ -234,10 +234,14 @@ public class PlayerController : MonoBehaviour
             }
             bool noInput = horInput == 0;
             float accelGoal = noInput ? 0 : 1;
+
+            //You shouldn't change velocity immidiatly
             currentSpeed = GetIsGrounded ? speed : AirSpeed;
             currentAccel = noInput ? deaccelerationSpeed : accelerationSpeed;
 
             acceleration = Mathf.MoveTowards(acceleration, accelGoal, currentAccel * Time.deltaTime);
+
+            //not good
             velocity.x = Mathf.MoveTowards(velocity.x, horInput == 0 ? 0 : horInput * currentSpeed * acceleration, currentAccel * Time.deltaTime);
             externalForces = Vector2.MoveTowards(externalForces, Vector2.zero, accelerationSpeed * Time.deltaTime);
 
