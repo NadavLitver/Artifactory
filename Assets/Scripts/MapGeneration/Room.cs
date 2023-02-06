@@ -46,6 +46,7 @@ public class Room : MonoBehaviour
 
     void Awake()
     {
+        Debug.Log("awaken");
         size = new RoomSize(sizeX, sizeY);
         ExitInteractable[] exitsFound = GetComponentsInChildren<ExitInteractable>();
         foreach (ExitInteractable exitInteractable in exitsFound)
@@ -89,6 +90,7 @@ public class Room : MonoBehaviour
     {
         myPos = givenPos;
 
+        string s = gameObject.name;
         for (int i = 0; i < size.X; i++)
         {
             for (int j = 0; j < size.Y; j++)

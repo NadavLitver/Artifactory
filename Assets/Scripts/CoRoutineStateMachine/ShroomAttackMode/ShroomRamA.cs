@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class ShroomRamA : ShroomBaseStateA
 {
-    [SerializeField] private float ramCoolDown;
     [SerializeField] private float ramDuration;
     [SerializeField] private float bounderOffest;
     [SerializeField] private float ramSpeed;
-    [SerializeField] private float RamThreshold;
-    private float lastRammed;
 
 
     public override IEnumerator StateRoutine()
@@ -23,7 +20,8 @@ public class ShroomRamA : ShroomBaseStateA
         handler.startRamming = false;
         handler.Actor.OnDealDamage.AddListener(OnRamHit);
         handler.ramCollider.SetActive(true);
-        Vector2 dir = new Vector2(handler.GetPlayerDirection().x * ramSpeed, 0);
+        Vector2 dir = (handler.CurrentCap.transform.position - transform.position).normalized;
+        dir *= ramSpeed;
         while (counter < ramDuration && !handler.IsWithinRangeToBounder(bounderOffest))
         {
             handler.Rb.velocity = dir;
@@ -35,7 +33,6 @@ public class ShroomRamA : ShroomBaseStateA
         handler.ramCollider.SetActive(false);
         handler.Anim.SetBool("Ram", false);
         handler.Rb.velocity = Vector3.zero;
-        lastRammed = Time.time;
     }
 
     private void OnRamHit(DamageHandler _dmgHandler, Actor _actor)
@@ -43,23 +40,10 @@ public class ShroomRamA : ShroomBaseStateA
         SoundManager.Play(SoundManager.Sound.MushroomEnemyRamHit, handler.m_audioSource);
     }
 
-    private void Start()
-    {
-        lastRammed = ramCoolDown * -1;
-    }
-
     internal override bool myCondition()
     {
-        if (Time.time - lastRammed >= ramCoolDown && handler.IsPlayerWithinThreshold(RamThreshold))
-        {
-            return true;
-        }
-        return false;
+        return true;
     }
 
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, RamThreshold);
-    }
+   
 }

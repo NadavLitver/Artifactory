@@ -10,6 +10,7 @@ public class ShroomSateHandlerA : ShroomBaseHandler
 
     [SerializeField] ShroomBaseStateA pickUpState;
     [SerializeField] ShroomBaseStateA ressurectState;
+    [SerializeField] ShroomBaseStateA ramState;
     public GameObject ramCollider;
     public AudioSource m_audioSource;
 
@@ -19,18 +20,41 @@ public class ShroomSateHandlerA : ShroomBaseHandler
         if (!ReferenceEquals(CurrentCap, null))
         {
             //CurrentCap.OnPickedUp.AddListener(InterruptPickup);
-            CurrentCap.GroundCheck.OnGrounded.AddListener(InterruptRessurect);
+            CurrentCap.GroundCheck.OnGrounded.AddListener(RollAction);
+        }
+    }
+    public override void InterruptTakeDamage(DamageHandler givenDamage)
+    {
+        if (givenDamage.calculateFinalNumberMult() > 0)
+        {
+            base.InterruptTakeDamage(givenDamage);
         }
     }
 
-    
+    private void RollAction()
+    {
+        if (Random.Range(0, 100) <= 50)
+        {
+            InterruptRam();
+        }
+        else
+        {
+            InterruptRessurect();
+        }
+    }
 
     public void InterruptPickup()
     {
         ResetAnim();
         Interrupt(pickUpState);
     }
-   
+
+
+    public void InterruptRam()
+    {
+        ResetAnim();
+        Interrupt(ramState);
+    }
     public void InterruptRessurect()
     {
         ResetAnim();
