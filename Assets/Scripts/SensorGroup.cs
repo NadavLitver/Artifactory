@@ -11,9 +11,16 @@ public class SensorGroup : MonoBehaviour
     public UnityEvent OnGrounded;
     public UnityEvent OnNotGrounded;
 
-    private void Start()
+    private void OnEnable()
     {
-        StartCoroutine(WaitForGrounded());
+        if (IsGrounded())
+        {
+            StartCoroutine(WaitForNotGrounded());
+        }
+        else
+        {
+            StartCoroutine(WaitForGrounded());
+        }
     }
 
     public bool IsAllGrounded()
@@ -55,15 +62,16 @@ public class SensorGroup : MonoBehaviour
     IEnumerator WaitForGrounded()
     {
         yield return new WaitUntil(() => IsGrounded());
+        Debug.Log(transform.name + " grounded");
         OnGrounded?.Invoke();
         StartCoroutine(WaitForNotGrounded());
     }
     IEnumerator WaitForNotGrounded()
     {
         yield return new WaitUntil(() => !IsGrounded());
+        Debug.Log(transform.name + " isnt grounded");
         OnNotGrounded?.Invoke();
         StartCoroutine(WaitForGrounded());
-
     }
 
     public void AddSensor(GroundCheckSensor givenSensor)

@@ -31,6 +31,12 @@ public class ShroomCap : Actor, IDamagable
         RB = GetComponent<Rigidbody2D>();
         effectable = false;
         OnDeath.AddListener(() => gameObject.SetActive(false));
+        groundCheck.OnGrounded.AddListener(DisableGravity);
+    }
+    private void DisableGravity()
+    {
+        RB.velocity = Vector3.zero;
+        RB.gravityScale = 0f;
     }
 
     private void OnEnable()
@@ -40,6 +46,7 @@ public class ShroomCap : Actor, IDamagable
         Heal(new DamageHandler() { amount = maxHP });
         Destroyed = false;
         OnDeath.AddListener(DestroyedOn);
+
     }
 
     private void OnDisable()
@@ -66,7 +73,7 @@ public class ShroomCap : Actor, IDamagable
     {
         dealtDamage = true;
         RB.velocity = Vector2.zero;
-        RB.gravityScale = 0;
+        //RB.gravityScale = 0;
         groundCheck.OnGrounded.RemoveListener(LandedReset);
     }
     
@@ -77,9 +84,6 @@ public class ShroomCap : Actor, IDamagable
     public void PlayOnGroundedSound()
     {
         SoundManager.Play(SoundManager.Sound.MushroomEnemyCapHitGround, m_audioSource);
-
-
-
     }
     IEnumerator KeepToBounries()
     {
@@ -92,7 +96,8 @@ public class ShroomCap : Actor, IDamagable
         {
             transform.position = new Vector2(minPoint.x + 1, minPoint.y);
         }
-        RB.velocity = Vector2.zero;
-        RB.gravityScale = 0;
+        LandedReset();
+        /*RB.velocity = Vector2.zero;
+        RB.gravityScale = 0;*/
     }
 }
