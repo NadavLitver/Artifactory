@@ -9,4 +9,9 @@ public class ShroomAnimationEventsD : MonoBehaviour
     {
         handler.throwFlag = true;
     }
+
+    public void DoneDying()
+    {
+        handler.DoneDying = true;
+    }
 }
