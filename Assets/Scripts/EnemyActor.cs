@@ -8,6 +8,7 @@ public class EnemyActor : Actor
     [SerializeField] private ItemType item;
     [SerializeField] private bool dropOnDeath;
     [SerializeField] private CatchHandler catchHandler;
+    private bool dropped;
 
     private void Start()
     {
@@ -31,12 +32,13 @@ public class EnemyActor : Actor
 
     public void DropResource()
     {
-        Debug.Log("Dropping");
-        if (UnityEngine.Random.Range(0, 100) > dropChance)
+        if (UnityEngine.Random.Range(0, 100) > dropChance || dropped)
         {
             return;
         }
+        Debug.Log("Dropping");
         ItemPickup pickup = Instantiate(GameManager.Instance.assets.ItemPickUpPrefab, transform.position, Quaternion.identity);
+        dropped = true;
         pickup.CacheItemType(item);
 
     }

@@ -59,7 +59,7 @@ MonoBehaviour:
   maxHP: 100
   baseCritHit: 0
   baseCritDamage: 0
-  deathEffectsOnHp: 0
+  deathEffectsOnHp: 1
   OnDealDamage:
     m_PersistentCalls:
       m_Calls: []
@@ -544,10 +544,10 @@ MonoBehaviour:
   sensors:
   - Direcion: {x: 1, y: 0}
     Offset: {x: 0, y: 0}
-    Range: 2
+    Range: 5
   - Direcion: {x: -1, y: 0}
     Offset: {x: 0, y: 0}
-    Range: 2
+    Range: 5
   hitLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -690,6 +690,7 @@ GameObject:
   - component: {fileID: 2962744242088939592}
   - component: {fileID: 2962744242088939595}
   - component: {fileID: 2962744242088939598}
+  - component: {fileID: 5926192734959646063}
   m_Layer: 12
   m_Name: DefenseMode
   m_TagString: Untagged
@@ -738,6 +739,8 @@ MonoBehaviour:
   flipper: {fileID: 2962744240544369506}
   takeDamageState: {fileID: 2962744242088939598}
   otherMode: {fileID: 6973081568470684432}
+  deathState: {fileID: 5926192734959646063}
+  DoneDying: 0
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
@@ -805,6 +808,19 @@ MonoBehaviour:
   priority: 0
   stunDuration: 0.1
   knockBackForce: 2
+--- !u!114 &5926192734959646063
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2962744242088939958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd26fc30eea9bb644854dabc6c912437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
 --- !u!1 &2962744242505823919
 GameObject:
   m_ObjectHideFlags: 0
@@ -867,15 +883,15 @@ MonoBehaviour:
   flipper: {fileID: 2962744240544369506}
   takeDamageState: {fileID: 8053518562303579834}
   otherMode: {fileID: 2962744242088939594}
+  deathState: {fileID: 5851949567077389279}
+  DoneDying: 0
   OnDeath:
     m_PersistentCalls:
       m_Calls: []
   PickedUp: 0
   DoneRessurecting: 0
-  DoneDying: 0
   startRamming: 0
   pickUpState: {fileID: 6053797303516809870}
-  deathState: {fileID: 5851949567077389279}
   ressurectState: {fileID: 6579637478158748564}
   ramCollider: {fileID: 7706441859698970193}
   m_audioSource: {fileID: 918272322872504960}
@@ -965,7 +981,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6745996199338330757
 Transform:
   m_ObjectHideFlags: 0

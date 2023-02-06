@@ -6,11 +6,9 @@ public class ShroomSateHandlerA : ShroomBaseHandler
 {
     public bool PickedUp;
     public bool DoneRessurecting;
-    public bool DoneDying;
     public bool startRamming;
 
     [SerializeField] ShroomBaseStateA pickUpState;
-    [SerializeField] ShroomBaseStateA deathState;
     [SerializeField] ShroomBaseStateA ressurectState;
     public GameObject ramCollider;
     public AudioSource m_audioSource;
@@ -18,36 +16,21 @@ public class ShroomSateHandlerA : ShroomBaseHandler
     protected override void Start()
     {
         base.Start();
-        Actor.OnDeath.AddListener(AdressDeath);
         if (!ReferenceEquals(CurrentCap, null))
         {
-            CurrentCap.OnPickedUp.AddListener(InterruptPickup);
+            //CurrentCap.OnPickedUp.AddListener(InterruptPickup);
+            CurrentCap.GroundCheck.OnGrounded.AddListener(InterruptRessurect);
         }
     }
 
-    private void AdressDeath()
-    {
-        if (CurrentCap.Destroyed)
-        {
-            InterruptDeath();
-        }
-        else
-        {
-            InterruptRessurect();
-        }
-    }
+    
 
     public void InterruptPickup()
     {
         ResetAnim();
         Interrupt(pickUpState);
     }
-    public void InterruptDeath()
-    {
-        OnDeath?.Invoke();
-        ResetAnim();
-        Interrupt(deathState);
-    }
+   
     public void InterruptRessurect()
     {
         ResetAnim();
