@@ -31,6 +31,7 @@ public class CombatRoom : Room
         TurnOffOnExitClosers(false);
 
     }
+
     public void OnAllWavesOver()
     {
         Debug.Log("WavesDone");
