@@ -64,14 +64,20 @@ public class SensorGroup : MonoBehaviour
         yield return new WaitUntil(() => IsGrounded());
         Debug.Log(transform.name + " grounded");
         OnGrounded?.Invoke();
-        StartCoroutine(WaitForNotGrounded());
+        if (gameObject.activeInHierarchy)
+        {
+            StartCoroutine(WaitForNotGrounded());
+        }
     }
     IEnumerator WaitForNotGrounded()
     {
         yield return new WaitUntil(() => !IsGrounded());
         Debug.Log(transform.name + " isnt grounded");
         OnNotGrounded?.Invoke();
-        StartCoroutine(WaitForGrounded());
+        if (gameObject.activeInHierarchy)
+        {
+            StartCoroutine(WaitForGrounded());
+        }
     }
 
     public void AddSensor(GroundCheckSensor givenSensor)

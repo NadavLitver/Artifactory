@@ -12,9 +12,12 @@ public class Cannon : Weapon
     bool isCharging;
     bool jumped;
     [SerializeField] float jumpForce;
-    [SerializeField] Light cannonGlow;
+    [SerializeField] ParticleSystem cannonGlow;
     [SerializeField] float slowDuration;
     [SerializeField] float gravityScaleOnShoot;
+
+    [SerializeField] private float endEmission;
+
     private int AttackHash;
     private int MobilityHash;
 
@@ -24,6 +27,7 @@ public class Cannon : Weapon
     private void OnEnable()
     {
         isCharging = false;
+        cannonGlow.gameObject.SetActive(true);
         if (GameManager.Instance.assets.PlayerController.GetIsGrounded)
         {
             ResetJumped();
@@ -31,6 +35,7 @@ public class Cannon : Weapon
         StartCoroutine(StartCharging());
 
     }
+
     private void Start()
     {
         AttackHash = Animator.StringToHash("Attack");
@@ -53,8 +58,17 @@ public class Cannon : Weapon
 
     IEnumerator StartCharging()
     {
+        var emission = cannonGlow.emission;
+        emission.rateOverTime = 0f;
         isCharging = true;
-        yield return new WaitForSecondsRealtime(chargeDuration);
+        float counter = 0f;
+        while (counter < 1)
+        {
+            counter += Time.deltaTime / chargeDuration;
+            emission.rateOverTime = Mathf.Lerp(0f, endEmission, counter);
+            yield return new WaitForEndOfFrame();
+        }
+        emission.rateOverTime = endEmission;
         isCharging = false;
         isLoaded = true;
         loadedTime = Time.time;
@@ -133,6 +147,7 @@ public class Cannon : Weapon
     {
         //jumped = false;
         isLoaded = false;
+        cannonGlow.gameObject.SetActive(false);
         GameManager.Instance.assets.PlayerController.canMove = true;
         GameManager.Instance.assets.PlayerController.ResetGravity();
     }

@@ -42,6 +42,12 @@ public class Ability : ScriptableObject
     public bool IsMelee { get => isMelee; }
     public bool IsRanged { get => isRanged; }
 
+    private void OnEnable()
+    {
+        Debug.Log("enabled");
+        damageHandler.ClearMods();
+    }
+
     public void CacheForceDirection(Vector2 givenDirection)
     {
         forceDircetion = givenDirection;

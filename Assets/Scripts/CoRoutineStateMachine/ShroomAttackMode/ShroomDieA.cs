@@ -23,6 +23,10 @@ public class ShroomDieA : ShroomBaseStateA
 
     internal override bool myCondition()
     {
-        return true;
+        if (handler.Actor.currentHP <= 0)
+        {
+            return true;
+        }
+        return false;
     }
 }
