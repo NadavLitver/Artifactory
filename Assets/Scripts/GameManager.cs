@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         // If there is an instance, and it's not me, delete myself.
-
+        Application.targetFrameRate = 300;
         if (Instance != null && Instance != this)
         {
             Destroy(this);
