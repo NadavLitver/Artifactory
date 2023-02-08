@@ -1016,6 +1016,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShroomEnemyNew
       objectReference: {fileID: 0}
+    - target: {fileID: 2962744242088939594, guid: 3bbf0681aeaa09f42a93f1b025a9e61e, type: 3}
+      propertyPath: states.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2962744242088939594, guid: 3bbf0681aeaa09f42a93f1b025a9e61e, type: 3}
+      propertyPath: states.Array.data[3]
+      value: 
+      objectReference: {fileID: 1787908288}
+    - target: {fileID: 6973081568470684432, guid: 3bbf0681aeaa09f42a93f1b025a9e61e, type: 3}
+      propertyPath: states.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6973081568470684432, guid: 3bbf0681aeaa09f42a93f1b025a9e61e, type: 3}
+      propertyPath: states.Array.data[0]
+      value: 
+      objectReference: {fileID: 1741108901}
+    - target: {fileID: 6973081568470684432, guid: 3bbf0681aeaa09f42a93f1b025a9e61e, type: 3}
+      propertyPath: states.Array.data[1]
+      value: 
+      objectReference: {fileID: 1741108903}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3bbf0681aeaa09f42a93f1b025a9e61e, type: 3}
 --- !u!1 &718258162 stripped
@@ -2162,6 +2182,28 @@ Transform:
   m_Father: {fileID: 2134569504}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1741108901 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5851949567077389279, guid: 3bbf0681aeaa09f42a93f1b025a9e61e, type: 3}
+  m_PrefabInstance: {fileID: 684280551}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 46f4ce7390700fe4398d2c4771d9657c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1741108903 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5717363680691226278, guid: 3bbf0681aeaa09f42a93f1b025a9e61e, type: 3}
+  m_PrefabInstance: {fileID: 684280551}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2628641480f7b0048897b4567d8df1da, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1741421690
 GameObject:
   m_ObjectHideFlags: 0
@@ -2246,6 +2288,17 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1787908288 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5926192734959646063, guid: 3bbf0681aeaa09f42a93f1b025a9e61e, type: 3}
+  m_PrefabInstance: {fileID: 684280551}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd26fc30eea9bb644854dabc6c912437, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1807146379 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1807146379, guid: 877a6add5b775234baa437818e4992dd, type: 3}
