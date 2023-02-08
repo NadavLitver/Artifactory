@@ -123,7 +123,7 @@ public class SoundManager : MonoBehaviour
     }
     public static void Play(Sound sound, AudioSource source)
     {
-       
+        source.volume = Mathf.Clamp01(GetVolumeOfClip(sound));
         source.PlayOneShot(GetAudioClip(sound));
 
     }
@@ -183,6 +183,17 @@ public class SoundManager : MonoBehaviour
         }
         return null;
     }
+    public static float GetVolumeOfClip(Sound sound)
+    {
+        foreach (SoundAudioClip clip in GameManager.Instance.soundManager.clips)
+        {
+            if (clip.m_Sound == sound)
+            {
+                return clip.m_Volume;
+            }
+        }
+        return 1;
+    }
     private IEnumerator DestroyAudioObjects(GameObject go)
     {
         yield return new WaitForSeconds(DeactivateAudioObjectsTime);
@@ -204,4 +215,5 @@ public class SoundAudioClip
     }
     public SoundManager.Sound m_Sound;
     public AudioClip m_AudioClip;
+    [Range(0, 1)] public float m_Volume = 1;
 }
