@@ -32,7 +32,7 @@ public class ShroomSateHandlerA : ShroomBaseHandler
     }
 
     private void RollAction()
-    {
+    {/*
         if (Random.Range(0, 100) <= 50)
         {
             InterruptRam();
@@ -40,7 +40,8 @@ public class ShroomSateHandlerA : ShroomBaseHandler
         else
         {
             InterruptRessurect();
-        }
+        }*/
+        InterruptRessurect();
     }
 
     public void InterruptPickup()

@@ -168,7 +168,7 @@ public class Actor : MonoBehaviour, IDamagable
         }
         if (host.CalcCrit(givenAbility))//checking for crit hit
         {
-            //adding damage mod
+            Debug.Log("critical hit");
             host.OnDealCriticalDamage?.Invoke(givenAbility.DamageHandler);
             OnTakeCriticalDamage?.Invoke(givenAbility.DamageHandler);
             givenAbility.DamageHandler.AddModifier(host.CalcCritDamage(givenAbility));
@@ -192,7 +192,6 @@ public class Actor : MonoBehaviour, IDamagable
     {
         host.OnDealDamage?.Invoke(dmgHandler, this);
         onTakeDamage?.Invoke(dmgHandler);
-        //
         OnDamageCalcOver?.Invoke(dmgHandler);
         host.OnDealingDamageCalcOver?.Invoke(dmgHandler);
         float finalDamage = dmgHandler.calculateFinalNumberMult();
@@ -203,12 +202,12 @@ public class Actor : MonoBehaviour, IDamagable
             return;
         }
         Debug.Log(gameObject.name + "Took Damage");
+        dmgHandler.ClearMods();
         if (currentHP <= 0 && deathEffectsOnHp)
         {
             onActorDeath();
             host.OnKill?.Invoke(this, dmgHandler);
         }
-        dmgHandler.ClearMods();
         ClampHP();
     }
 
