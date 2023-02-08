@@ -17,6 +17,9 @@ public class CombatRoom : Room
     int waveIndex;
     [SerializeField] GameObject[] ExitClosers;
     [SerializeField] Cinemachine.CinemachineVirtualCamera m_VCam;
+    private int closeHash;
+    private int ReleaseHash;
+
     private void Start()
     {
         spawnPointsForWaves = GetComponentsInChildren<SpawnPoint>();
@@ -29,7 +32,8 @@ public class CombatRoom : Room
         m_dropChest.onTakeDamage.AddListener(StartEvent);
         dropChestCollider = m_dropChest.GetComponent<Collider2D>();
         TurnOffOnExitClosers(false);
-
+        closeHash = Animator.StringToHash("Close");
+        ReleaseHash = Animator.StringToHash("Release");
     }
 
     public void OnAllWavesOver()
@@ -38,6 +42,8 @@ public class CombatRoom : Room
         dropChestCollider.enabled = true;
         TurnOffOnExitClosers(false);
         m_VCam.Priority = 0;
+        m_dropChest.Anim.Play(ReleaseHash);
+
 
     }
     private void StartEvent(DamageHandler damageHandler)
@@ -49,6 +55,7 @@ public class CombatRoom : Room
         dropChestCollider.enabled = false;
         m_dropChest.onTakeDamage.RemoveListener(StartEvent);
         TurnOffOnExitClosers(true);
+        m_dropChest.Anim.Play(closeHash);
     }
 
     private void TurnOffOnExitClosers(bool isOn)

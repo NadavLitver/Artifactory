@@ -9,6 +9,8 @@ public class DropChest : Actor
     public AudioSource m_audioSource;
     private int OpenHash;
 
+    public Animator Anim { get => anim;}
+
     private void Start()
     {
         OpenHash = Animator.StringToHash("Open");
