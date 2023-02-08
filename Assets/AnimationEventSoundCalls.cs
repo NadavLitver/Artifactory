@@ -91,4 +91,8 @@ public class AnimationEventSoundCalls : MonoBehaviour
     {
         SoundManager.Play(current, m_audioSource);
     }
+    public void CallSound(SoundManager.Sound current,float volume)
+    {
+        SoundManager.Play(current, m_audioSource, volume);
+    }
 }
