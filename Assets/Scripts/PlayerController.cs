@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
 
@@ -26,6 +27,8 @@ public class PlayerController : MonoBehaviour
 
     private GameObject jumpEffect;
     private GameObject landEffect;
+
+    public UnityEvent OnFlip;
 
     private bool playingTraversal;
     [SerializeField] private float traversalTime;
@@ -259,7 +262,11 @@ public class PlayerController : MonoBehaviour
 
         }
     }
-    public void Flip() => transform.localScale = new Vector3(isLookingRight ? StartingScale.x : -StartingScale.x, StartingScale.y, 1);
+    public void Flip()
+    {
+        transform.localScale = new Vector3(isLookingRight ? StartingScale.x : -StartingScale.x, StartingScale.y, 1);
+        OnFlip?.Invoke();
+    }
     public void ResetVelocity()
     {
         velocity = Vector2.zero;
