@@ -44,7 +44,7 @@ public class Ability : ScriptableObject
 
     private void OnEnable()
     {
-        Debug.Log("enabled");
+        
         damageHandler.ClearMods();
     }
 

@@ -362,6 +362,7 @@ public class LevelManager : MonoBehaviour
         mapGenerator.UpdateMiniMap(active);
         GameManager.Instance.assets.baseFatherObject.SetActive(false);
         active.OnEntered?.Invoke();
+        GameManager.Instance.OnRunStart?.Invoke();
     }
 
 

@@ -62,7 +62,10 @@ public class GameManager : MonoBehaviour
         inputManager.inputs.General.Reset.canceled += ResetScene;
         if(!isTutorial)
             assets.playerActor.OnDeath.AddListener(generalFunctions.onPlayerDiedActions);
-      
+
+        OnRunStart.AddListener(assets.GlimmeringWoodsAudioSource.Play);
+
+
     }
     private void ResetScene(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
@@ -152,6 +155,8 @@ public class AssetsRefrence
     public TuffInteractionHandler tuffRef;
     public WheelOfFortuneManager wheelOfFortuneManager;
     public WheelOfFortunePrizes wheelOfFortunePrizes;
+    [Header("GlimmeringWoods")]
+    public AudioSource GlimmeringWoodsAudioSource;
 
 }
 public class GeneralFunctions
