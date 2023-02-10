@@ -33,7 +33,8 @@ public class SoundManager : MonoBehaviour
         MushroomEnemyRevive,MushroomEnemyBlocked, MushroomEnemyDead,MushroomEnemyCapHitPlayer, MushroomEnemyCapHitGround, MushroomEnemyRamHit, 
         NebulaFlowerPopped,BellFlowerBelling,NearNebulaFlower,
         OnDandilion,OnJumpPlatform,
-        SpikedFromJump,SpikedFrogDeath
+        SpikedFromJump,SpikedFrogDeath,
+        GlimmeringWoodsAmbiance
 
     }
     [ContextMenu("Reset List")]
