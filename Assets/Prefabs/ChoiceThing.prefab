@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4171604658288966332}
   - component: {fileID: 4171604658288966331}
-  m_Layer: 0
+  - component: {fileID: 1626373649159200877}
+  m_Layer: 9
   m_Name: ChoiceThing
-  m_TagString: Untagged
+  m_TagString: Interactable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -85,6 +86,26 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1626373649159200877
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4171604658288966330}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 62d44f7a33073dc438521c4e2aded8bb, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4171604658863138385
 GameObject:
   m_ObjectHideFlags: 0
@@ -94,7 +115,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4171604658863138386}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -128,7 +149,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4171604659364323414}
   - component: {fileID: 4171604659364323415}
-  m_Layer: 0
+  - component: {fileID: 1395448295397527270}
+  m_Layer: 9
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -176,6 +198,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.81292915, y: 2.1691933}
   m_EdgeRadius: 0
+--- !u!114 &1395448295397527270
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4171604659364323413}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772129331b4fd8743aaa54d0d42eebf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnSelectedRelic:
+    m_PersistentCalls:
+      m_Calls: []
+  myRelic: {fileID: 0}
+  side: 0
+  anim: {fileID: 1626373649159200877}
 --- !u!1 &4171604659649570515
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +226,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4171604659649570516}
   - component: {fileID: 4171604659649570517}
-  m_Layer: 0
+  - component: {fileID: 4805609638383350948}
+  m_Layer: 9
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -234,3 +275,21 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8713875, y: 2.075658}
   m_EdgeRadius: 0
+--- !u!114 &4805609638383350948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4171604659649570515}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 772129331b4fd8743aaa54d0d42eebf5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnSelectedRelic:
+    m_PersistentCalls:
+      m_Calls: []
+  myRelic: {fileID: 0}
+  side: 0
+  anim: {fileID: 1626373649159200877}

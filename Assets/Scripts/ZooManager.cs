@@ -4,37 +4,60 @@ using UnityEngine;
 public class ZooManager : MonoBehaviour
 {
     [SerializeField] private int zooSize;
-    private List<ZooAnimalGrowthData> caughtEnemies = new List<ZooAnimalGrowthData>();
-    private List<ZooActiveSlot> zooSlots = new List<ZooActiveSlot>();
+    [SerializeField] private List<ZooActiveSlot> zooSlots = new List<ZooActiveSlot>();
+    [SerializeField] ZooAnimal test;
 
-
-    private void Start()
+    public void AddSlot(ZooActiveSlot slot)
     {
-        foreach (var slot in zooSlots)
+        if (zooSlots.Count >= zooSize)
         {
-            GameManager.Instance.OnRunEnd.AddListener(slot.ResetFoodGivenThisInterval);
+            return;
         }
+        zooSlots.Add(slot);
     }
 
     public void CatchAnimal(ZooAnimal givenAnimal)
     {
-        if (caughtEnemies.Count >= zooSize)
-        {
-            return;
-        }
+        //checking for free space before catching anyway
         ZooAnimalGrowthData newAnimal = new ZooAnimalGrowthData() { animal = givenAnimal, CurrentGrownTime = 0 };
-        caughtEnemies.Add(newAnimal);
+        foreach (var item in zooSlots)
+        {
+            if (!item.IsOccupied)
+            {
+                item.CacheAnimal(newAnimal);
+            }
+        }
     }
 
     public void RemoveAnimal(ZooAnimalGrowthData givenAnimal)
     {
         foreach (var item in zooSlots)
         {
-            if (ReferenceEquals(item.CurrentRefAniaml, givenAnimal))
+            if (ReferenceEquals(item.CurrentRefAnimal, givenAnimal))
             {
                 zooSlots.Remove(item);
                 return;
             }
+        }
+    }
+    public bool CheckForFreeSpace()
+    {
+        foreach (var item in zooSlots)
+        {
+            if (!item.IsOccupied)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    [ContextMenu("TryCatchingTest")]
+    public void TryCatchTest()
+    {
+        if (CheckForFreeSpace())
+        {
+            CatchAnimal(test);
         }
     }
 }
