@@ -6,6 +6,9 @@ public class SelectedCraftingPanel : ItemPanel
     //panel at the bottom right corner of the screen. shows the 3 currently selected items in order
     [SerializeField] List<SelectedSlot> selectedSlots = new List<SelectedSlot>();
     [SerializeField] private Sprite basicSprite;
+
+    public List<SelectedSlot> SelectedSlots { get => selectedSlots;}
+
     public override void SubscribeSlots()
     {
         foreach (var item in selectedSlots)

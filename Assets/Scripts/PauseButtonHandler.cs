@@ -6,10 +6,11 @@ using UnityEngine.UI;
 public class PauseButtonHandler : MonoBehaviour
 {
     private Button m_button;
-    private PauseMenuHandler PauseHandler =>  GameManager.Instance.pauseMenuHandler;
+    private PauseMenuHandler PauseHandler;
     public GameObject PauseMenuPanel;
     void Start()
     {
+        PauseHandler = GameManager.Instance.pauseMenuHandler;
         m_button = GetComponent<Button>();
         m_button.onClick.AddListener(OnPause);
     }
