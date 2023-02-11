@@ -64,13 +64,13 @@ public class GameManager : MonoBehaviour
             assets.playerActor.OnDeath.AddListener(generalFunctions.onPlayerDiedActions);
 
         OnRunStart.AddListener(CallGlimmeringWoodsSound);
-        assets.GlimmeringWoodsAudioSource.clip = SoundManager.GetAudioClip(SoundManager.Sound.GlimmeringWoodsAmbiance);
-        assets.GlimmeringWoodsAudioSource.volume = SoundManager.GetVolumeOfClip(SoundManager.Sound.GlimmeringWoodsAmbiance);
+        //assets.GlimmeringWoodsAudioSource.clip = SoundManager.GetAudioClip(SoundManager.Sound.GlimmeringWoodsAmbiance);
+        //assets.GlimmeringWoodsAudioSource.volume = SoundManager.GetVolumeOfClip(SoundManager.Sound.GlimmeringWoodsAmbiance);
 
     }
     private void CallGlimmeringWoodsSound()
     {
-        assets.GlimmeringWoodsAudioSource.Play();
+       // assets.GlimmeringWoodsAudioSource.Play();
     }
     private void ResetScene(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
