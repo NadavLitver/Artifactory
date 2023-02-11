@@ -461,6 +461,7 @@ Transform:
   - {fileID: 1017730315}
   - {fileID: 1877112337}
   - {fileID: 1078534446947263185}
+  - {fileID: 507447349456157950}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -762,6 +763,53 @@ MonoBehaviour:
   pooledObjects: []
   objectToPool: {fileID: 4202387701244907970, guid: 2bd7551a8c06a96469b5fb854cd6fd88, type: 3}
   amountToPool: 10
+--- !u!1 &4822496986651673691
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 507447349456157950}
+  - component: {fileID: 3692407884404100494}
+  m_Layer: 0
+  m_Name: ZooManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &507447349456157950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4822496986651673691}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4180575170529028752}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3692407884404100494
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4822496986651673691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3278649e0bbcd34fbd4722360dcf174, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  zooSize: 3
+  zooSlots: []
+  test: {fileID: 11400000, guid: d36eb2db126b23149bd05e7e446290d4, type: 2}
 --- !u!1 &7028819647897419526
 GameObject:
   m_ObjectHideFlags: 0
