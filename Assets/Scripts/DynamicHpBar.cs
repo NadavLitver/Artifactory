@@ -138,7 +138,7 @@ public class DynamicHpBar : MonoBehaviour
 
             return;
         }
-        chipAwayDamagedhealthBar.localScale = new Vector3(curHp / maxHp, 1, 1);
+        chipAwayDamagedhealthBar.localScale = new Vector3(Mathf.Clamp(curHp, 0, maxHp) / maxHp, 1, 1);
         activeRotineHeal = StartCoroutine(ChipAwayHpBarHealing());
     }
 
