@@ -58,7 +58,7 @@ public class ItemInventory : MonoBehaviour
         {
             if (item.itemType == comp.itemType)
             {
-                if (comp.amount >= item.amount)
+                if (comp.amount <= item.amount)
                 {
                     return true;
                 }

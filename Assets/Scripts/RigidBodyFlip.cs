@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using System;
 
 public class RigidBodyFlip : MonoBehaviour
@@ -16,6 +17,8 @@ public class RigidBodyFlip : MonoBehaviour
 
     [SerializeField] private bool StartLeft;
 
+
+    public UnityEvent OnFlip;
     Coroutine activeRoutine;
     void Start()
     {
@@ -41,6 +44,7 @@ public class RigidBodyFlip : MonoBehaviour
         yield return new WaitUntil(() => rb.velocity.x < 0 );
         yield return new WaitUntil(() => !Disabled );
         transform.localScale = negativeVector;
+        OnFlip?.Invoke();
         IsLookingRight = false;
 
         activeRoutine = StartCoroutine(FlipWhenPositive());
@@ -50,6 +54,8 @@ public class RigidBodyFlip : MonoBehaviour
         yield return new WaitUntil(() => rb.velocity.x > 0);
         yield return new WaitUntil(() => !Disabled);
         transform.localScale  = positiveVector;
+        OnFlip?.Invoke();
+
         IsLookingRight = true;
         activeRoutine = StartCoroutine(FlipWhenNegative());
     }
@@ -69,11 +75,13 @@ public class RigidBodyFlip : MonoBehaviour
         if (StartLeft)
         {
             transform.localScale = positiveVector;
+            OnFlip?.Invoke();
             activeRoutine = StartCoroutine(FlipWhenNegative());
         }
         else
         {
             transform.localScale = negativeVector;
+            OnFlip?.Invoke();
             activeRoutine = StartCoroutine(FlipWhenPositive());
         }
     }
@@ -87,11 +95,13 @@ public class RigidBodyFlip : MonoBehaviour
         if (StartLeft)
         {
             transform.localScale = negativeVector;
+            OnFlip?.Invoke();
             activeRoutine = StartCoroutine(FlipWhenPositive());
         }
         else
         {
             transform.localScale = positiveVector;
+            OnFlip?.Invoke();
         }
     }
 
