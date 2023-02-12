@@ -162,6 +162,9 @@ public class AssetsRefrence
     public WheelOfFortunePrizes wheelOfFortunePrizes;
     [Header("GlimmeringWoods")]
     public AudioSource GlimmeringWoodsAudioSource;
+    [Header("ZOO")]
+    public AnimalPickup AnimalPickupPrefab;
+
 
 }
 public class GeneralFunctions
