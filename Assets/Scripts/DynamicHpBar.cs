@@ -138,6 +138,10 @@ public class DynamicHpBar : MonoBehaviour
 
             return;
         }
+        if (maxHp <= 0)
+        {
+            Debug.Log(actor.name + " max hp is 0 fix");
+        }
         chipAwayDamagedhealthBar.localScale = new Vector3(Mathf.Clamp(curHp, 0, maxHp) / maxHp, 1, 1);
         activeRotineHeal = StartCoroutine(ChipAwayHpBarHealing());
     }

@@ -264,6 +264,7 @@ public class BasicPickaxe : Weapon
     {
         player.canMove = true;
         airAttacking = false;
+        player.ResetGravity();
         OnGroundAttack.RemoveListener(StopPlayerWhileGroundAttacking);
     }
 
