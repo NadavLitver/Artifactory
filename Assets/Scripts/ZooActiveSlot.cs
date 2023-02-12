@@ -55,7 +55,10 @@ public class ZooActiveSlot : MonoBehaviour
 
     private void UpdateTimer()
     {
-        StartCoroutine(Countdown());
+        if (gameObject.activeInHierarchy)
+        {
+            StartCoroutine(Countdown());
+        }
     }
 
     private IEnumerator Countdown()
