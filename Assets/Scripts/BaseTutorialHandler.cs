@@ -147,14 +147,13 @@ public class BaseTutorialHandler : MonoBehaviour
             if (i == 0)
             {
                 Hand.gameObject.SetActive(true);
-                // Hand.transform.position = inventoryCraftingPanel.CreatedSlotsGetter[0].transform.position;
                 LeanTween.move(Hand.gameObject, inventoryCraftingPanel.CreatedSlotsGetter[0].transform.position, 1);
                 inventoryCraftingPanel.createdSlotsButtons[0].enabled = true;
                 yield return new WaitUntil(() => selectedCraftingPanel.SelectedSlots[0].Occupied);
             }
             else if (i == 1)
             {
-                //   Hand.transform.position = inventoryCraftingPanel.CreatedSlotsGetter[1].transform.position;
+         
                 LeanTween.move(Hand.gameObject, inventoryCraftingPanel.CreatedSlotsGetter[1].transform.position, 1);
 
                 inventoryCraftingPanel.createdSlotsButtons[1].enabled = true;
@@ -162,15 +161,14 @@ public class BaseTutorialHandler : MonoBehaviour
                 inventoryCraftingPanel.createdSlotsButtons[1].enabled = false;
 
             }
-            else if (i == 2)//use selected panel to check for cancelling the branch choice
+            else if (i == 2)
             {
                 if (selectedCraftingPanel.SelectedSlots[1].Occupied)
                 {
                     LeanTween.move(Hand.gameObject, selectedCraftingPanel.SelectedSlots[1].slot.transform.position, 1);
                     yield return new WaitUntil(() => !selectedCraftingPanel.SelectedSlots[1].Occupied);
                 }
-                //Hand.transform.position =  inventoryCraftingPanel.CreatedSlotsGetter[2].transform.position;
-
+               
                 LeanTween.move(Hand.gameObject, inventoryCraftingPanel.CreatedSlotsGetter[2].transform.position, 1);
 
             }
@@ -242,9 +240,7 @@ public class BaseTutorialHandler : MonoBehaviour
             {
                 Arrow.transform.position = CloneImage.transform.position + (Vector3.down *60);
                 Arrow.transform.localScale = new Vector3(1, -1, 1);
-                // yield return KeepArrowOnCloneTreeTable();
-
-                //Hand.transform.position = interactButton.transform.position + (Vector3.up * 160); 
+              
             }
             if (i == 4)
             {
@@ -252,15 +248,6 @@ public class BaseTutorialHandler : MonoBehaviour
                 yield return new WaitForSeconds(2);
                 StartPanel.SetActive(false);
                 cloneTree.Interact();
-            }
-            if (i == 5)
-            {
-                // cloneTree.gameObject.SetActive(true);
-
-            }
-            if (i == 6)
-            {
-
             }
 
             yield return new WaitForSeconds(1f);
@@ -293,15 +280,13 @@ public class BaseTutorialHandler : MonoBehaviour
     }
     IEnumerator KeepArrowOnCloneTreeTable()
     {
-        // cloneTree.gameObject.SetActive(true);
 
         while (!didPlayerContinue)
         {
             Arrow.transform.position = Camera.main.WorldToScreenPoint(cloneTree.transform.position + (Vector3.up * 2));
             yield return new WaitForEndOfFrame();
         }
-        //Arrow.transform.position = interactButton.transform.position + (Vector3.up * 160);
-        // cloneTree.gameObject.SetActive(false);
+    
 
     }
     IEnumerator HandleLine(string Line, TextMeshProUGUI textComponent)
