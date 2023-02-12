@@ -252,8 +252,10 @@ public class Actor : MonoBehaviour, IDamagable
     }
     public void Heal(DamageHandler givenDmg)
     {
+        Debug.Log(maxHP + gameObject.name);
         OnRecieveHealth?.Invoke(givenDmg);
         currentHP += givenDmg.calculateFinalNumberMult();
+        Debug.Log(maxHP);
         ClampHP();
         OnHealGFX?.Invoke();
     }
