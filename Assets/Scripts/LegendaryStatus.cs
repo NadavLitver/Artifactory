@@ -24,7 +24,7 @@ public class LegendaryStatus : StatusEffect
 
     protected override void Subscribe()
     {
-        host.maxHP *= GameManager.Instance.DamageManager.MaxHPIncreaseMod;
+        //host.maxHP *= GameManager.Instance.DamageManager.MaxHPIncreaseMod;
         host.OnKill.AddListener(HealOnKill);
         host.OnDeath.AddListener(StartSpinningWheel);
         ((PlayerActor)host).EnableLegendaryActorVFX();
@@ -32,7 +32,8 @@ public class LegendaryStatus : StatusEffect
 
     private void HealOnKill(Actor target, DamageHandler givenDamage)
     {
-        host.Heal(new DamageHandler() { amount = givenDamage.calculateFinalNumberMult() });
+        float final = givenDamage.calculateFinalNumberMult();
+        host.Heal(new DamageHandler() { amount = final });
     }
 
     private void StartSpinningWheel()

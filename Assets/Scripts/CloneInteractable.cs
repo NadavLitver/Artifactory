@@ -5,6 +5,7 @@ using UnityEngine;
 public class CloneInteractable : Interactable
 {
     [SerializeField] GameObject CloneTreePanel;
+    public IProximityDetection m_detection;
     public override void Interact()
     {
         CloneTreePanel.SetActive(true);

@@ -39,6 +39,7 @@ public class ItemUiSlot : MonoBehaviour
     {
         itemSprite.sprite = null;
         myItemType = ItemType.Null;
+        
     }
     public void ResetSlot(Sprite givenSprite)
     {

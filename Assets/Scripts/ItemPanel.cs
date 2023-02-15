@@ -4,6 +4,8 @@ using UnityEngine;
 public class ItemPanel : MonoBehaviour
 {
     protected List<ItemUiSlot> createdSlots = new List<ItemUiSlot>();
+
+
     //get list of items with amounts, 
     //loop over and create new slots
     public void SetUpSlots(List<RecipeCoponent> components)

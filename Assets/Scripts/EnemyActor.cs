@@ -8,6 +8,7 @@ public class EnemyActor : Actor
     [SerializeField] private ItemType item;
     [SerializeField] private bool dropOnDeath;
     [SerializeField] private CatchHandler catchHandler;
+    [SerializeField] private ZooAnimal animal;
     private bool dropped;
 
     private void Start()
@@ -18,6 +19,7 @@ public class EnemyActor : Actor
         {
             OnDeath.AddListener(DropResource);
         }
+        OnDeath.AddListener(AttemptCatching);
     }
 
     public override void RecieveForce()
@@ -51,9 +53,10 @@ public class EnemyActor : Actor
 
     private void AttemptCatching()
     {
-        if (catchHandler.TryCatchingMonster())
+        if (catchHandler.TryCatchingMonster() && GameManager.Instance.Zoo.CheckForFreeSpace())
         {
-
+            Debug.Log(name + " caught");
+            GameManager.Instance.Zoo.CatchAnimal(animal);
         }
     }
 }

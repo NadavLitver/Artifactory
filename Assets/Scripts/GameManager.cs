@@ -61,11 +61,14 @@ public class GameManager : MonoBehaviour
         inputManager.inputs.General.Quit.canceled += QuitGame;
         inputManager.inputs.General.Reset.canceled += ResetScene;
         if (!isTutorial)
+        {
             assets.playerActor.OnDeath.AddListener(generalFunctions.onPlayerDiedActions);
+            assets.GlimmeringWoodsAudioSource.clip = SoundManager.GetAudioClip(SoundManager.Sound.GlimmeringWoodsAmbiance);
+            assets.GlimmeringWoodsAudioSource.volume = SoundManager.GetVolumeOfClip(SoundManager.Sound.GlimmeringWoodsAmbiance);
+            OnRunStart.AddListener(CallGlimmeringWoodsSound);
+        }
 
-        OnRunStart.AddListener(CallGlimmeringWoodsSound);
-        assets.GlimmeringWoodsAudioSource.clip = SoundManager.GetAudioClip(SoundManager.Sound.GlimmeringWoodsAmbiance);
-        assets.GlimmeringWoodsAudioSource.volume = SoundManager.GetVolumeOfClip(SoundManager.Sound.GlimmeringWoodsAmbiance);
+      
 
     }
     private void CallGlimmeringWoodsSound()
@@ -194,6 +197,7 @@ public class GeneralFunctions
     {
         LeanTween.cancelAll();
         GameManager.Instance.assets.mobileControls.SetActive(false);
+        
         LeanTween.delayedCall(1, ResetScene);
     }
 
