@@ -55,9 +55,13 @@ public class ZooActiveSlot : MonoBehaviour
 
     private void UpdateTimer()
     {
-        if (gameObject.activeInHierarchy)
+        if (gameObject.activeInHierarchy && foodGivenThisInterval >= CurrentRefAnimal.animal.GrowthThreshold)
         {
-            StartCoroutine(Countdown());
+            StartCoroutine(GameManager.Instance.Zoo.Countdown(timeToWait, timerText));
+        }
+        else
+        {
+            timerText.text = "";
         }
     }
 
@@ -101,6 +105,10 @@ public class ZooActiveSlot : MonoBehaviour
     //called from button
     public void FeedSlot()
     {
+        if (ReferenceEquals(CurrentRefAnimal, null))
+        {
+            return;
+        }
         if (foodGivenThisInterval >= CurrentRefAnimal.animal.GrowthThreshold)
         {
             return;
@@ -125,6 +133,7 @@ public class ZooActiveSlot : MonoBehaviour
             releaseButton.SetActive(true);
         }
         UpdateSlider();
+        UpdateTimer();
     }
 
     //called when reached 100% feed automatically

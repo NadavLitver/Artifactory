@@ -1,5 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
+using System;
+using System.Collections;
+using TMPro;
 
 public class ZooManager : MonoBehaviour
 {
@@ -10,7 +13,10 @@ public class ZooManager : MonoBehaviour
     [SerializeField] ZooAnimal test;
 
     public GameObject ZooPanel { get => zooPanel; }
-
+    private void Start()
+    {
+        LeanTween.delayedCall(2f, TryCatchTest);
+    }
     public void AddSlot(ZooActiveSlot slot)
     {
         if (zooSlots.Count >= zooSize)
@@ -64,6 +70,19 @@ public class ZooManager : MonoBehaviour
         if (CheckForFreeSpace())
         {
             CatchAnimal(test);
+        }
+    }
+
+    public IEnumerator Countdown(float timeToWait, TextMeshProUGUI timerText)
+    {
+        //count 60 sec for X times
+        for (int i = 0; i < timeToWait; i++)
+        {
+            for (int y = 0; y < 60; y++)
+            {
+                timerText.text = $" Next Feeding {timeToWait - i} M {60 - y} S";
+                yield return new WaitForSecondsRealtime(1f);
+            }
         }
     }
 }
