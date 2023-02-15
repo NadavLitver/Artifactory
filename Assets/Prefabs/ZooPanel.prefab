@@ -222,7 +222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3423240285596136212
 RectTransform:
   m_ObjectHideFlags: 0
@@ -230,7 +230,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3423240285596136213}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.25, y: 1.25, z: 1.25}
   m_ConstrainProportionsScale: 0
@@ -1130,6 +1130,9 @@ MonoBehaviour:
   resourcePrefab: {fileID: 1718170184309512682, guid: cc227975bebb33241b577ace6d71b1fa, type: 3}
   resources: {fileID: 3423240285431389475}
   foodSlider: {fileID: 3423240286193147462}
+  nameText: {fileID: 0}
+  timerText: {fileID: 0}
+  timeToWait: 0
   OnAnimalFed:
     m_PersistentCalls:
       m_Calls: []

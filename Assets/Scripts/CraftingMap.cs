@@ -1,6 +1,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum CraftingMapType
+{
+    Relic,
+    Weapon
+}
+
 public class CraftingMap : MonoBehaviour
 {
     [SerializeField] List<CraftingRecipe> knownRecipes = new List<CraftingRecipe>();
@@ -8,6 +14,7 @@ public class CraftingMap : MonoBehaviour
     [SerializeField] float rotationOffestBetweenLines;
     [SerializeField] CraftingBaseNode baseNode;
     [SerializeField] GameObject CraftButton;
+    [SerializeField] private CraftingMapType mapType;
     NodeLine selectedLine;
     float lineLength;
     private void Start()
@@ -134,7 +141,7 @@ public class CraftingMap : MonoBehaviour
 
     private CraftingMapNode CreateNode()
     {
-        return Instantiate(GameManager.Instance.assets.craftingMapNode);
+        return Instantiate(GameManager.Instance.generalFunctions.GetCraftingMapNodeFromEnum(mapType));
     }
 
     private CraftingNodeConnection GetConnectionPointFromNode(CraftingMapNode node)
