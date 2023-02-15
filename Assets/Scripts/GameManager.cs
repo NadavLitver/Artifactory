@@ -138,7 +138,8 @@ public class AssetsRefrence
     public BounderScout BounderScout;
 
     [Header("CraftingUi"), Space(10)]
-    public CraftingMapNode craftingMapNode;
+    public CraftingMapNode RelicCraftingMapNode;
+    public CraftingMapNode WeaponCraftingMapNode;
     public Sprite GlimmeringSprite;
     public Sprite BranchSprite;
     public Sprite RuneSprite;
@@ -229,6 +230,18 @@ public class GeneralFunctions
         return null;
     }
 
+    public CraftingMapNode GetCraftingMapNodeFromEnum(CraftingMapType givenMapType)
+    {
+        switch (givenMapType)
+        {
+            case CraftingMapType.Relic:
+                return GameManager.Instance.assets.RelicCraftingMapNode;
+            case CraftingMapType.Weapon:
+                return GameManager.Instance.assets.WeaponCraftingMapNode;
+            default:
+                return null;
+        }
+    }
 
     public Sprite GetSpriteFromItemType(ItemType givenItem)
     {

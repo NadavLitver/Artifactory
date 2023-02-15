@@ -351,7 +351,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   craftingPanel: {fileID: 0}
-  map: {fileID: 0}
+  relicCraftinMap: {fileID: 0}
+  weaponCraftingMap: {fileID: 0}
+  weaponMap: {fileID: 0}
+  relicMap: {fileID: 0}
   inventorycraftingPanel: {fileID: 0}
   selectedCraftingPanel: {fileID: 0}
 --- !u!1 &4180575169982807779
@@ -504,7 +507,8 @@ MonoBehaviour:
     endInteractablePanel: {fileID: 0}
     CraftingPanel: {fileID: 0}
     BounderScout: {fileID: 8467794796436600464, guid: 1ec8468c7beb4c54582ca1c7171703da, type: 3}
-    craftingMapNode: {fileID: 1946464524881845352, guid: b4057901708be3c49843f221eafadf56, type: 3}
+    RelicCraftingMapNode: {fileID: 1946464524881845352, guid: b4057901708be3c49843f221eafadf56, type: 3}
+    WeaponCraftingMapNode: {fileID: 1946464524881845352, guid: f2ad09b178eca92488ca551a1ee7d5b9, type: 3}
     GlimmeringSprite: {fileID: 21300000, guid: 66a3d44b669a40942bbc63810551d001, type: 3}
     BranchSprite: {fileID: 21300000, guid: fa91225964ff1234ea62b1d40b743f2f, type: 3}
     RuneSprite: {fileID: 21300000, guid: 73a165a53d281ee4a88b8372312ffe7b, type: 3}
@@ -519,6 +523,7 @@ MonoBehaviour:
     wheelOfFortuneManager: {fileID: 0}
     wheelOfFortunePrizes: {fileID: 0}
     GlimmeringWoodsAudioSource: {fileID: 0}
+    AnimalPickupPrefab: {fileID: 1808717985204493064, guid: 4ce37bc1dabe9a9458409d4090f9e800, type: 3}
 --- !u!1 &4207107459726920179
 GameObject:
   m_ObjectHideFlags: 0

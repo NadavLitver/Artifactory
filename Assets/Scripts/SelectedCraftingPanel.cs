@@ -51,7 +51,8 @@ public class SelectedCraftingPanel : ItemPanel
         {
             itemsByOrder.Add(item.slot.MyItemType);
         }
-        GameManager.Instance.CraftingManager.Map.UpdateActivatedLines(itemsByOrder);
+        GameManager.Instance.CraftingManager.RelicCraftingMap.UpdateActivatedLines(itemsByOrder);
+        GameManager.Instance.CraftingManager.WeaponCraftingMap.UpdateActivatedLines(itemsByOrder);
     }
 
     public void RemoveFromPanel(ItemUiSlot givenSlot)
