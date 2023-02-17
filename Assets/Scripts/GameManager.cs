@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 [DefaultExecutionOrder(-10)]
@@ -120,6 +121,7 @@ public class AssetsRefrence
     public Sprite WindChimes;
     public Sprite KnifeOfTheHunter;
     public Sprite TurtlePendant;
+    public Image RelicBarImage;
 
     public RelicDrop relicDropPrefab;
 

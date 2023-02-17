@@ -8,7 +8,6 @@ public class RelicManager : MonoBehaviour
     //once a relic drop is created it will recieve a type thats not cached here
     private List<Relic> takenRelics = new List<Relic>();
     [SerializeField] private List<Relic> freeRelics = new List<Relic>();
-
     public List<Relic> TakenRelics { get => takenRelics; }
     public List<Relic> FreeRelics { get => freeRelics; }
 

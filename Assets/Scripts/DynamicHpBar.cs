@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 public enum BarMode
 {
     Cubic,
@@ -11,27 +12,26 @@ public class DynamicHpBar : MonoBehaviour
     [SerializeField] Actor actor;
     float maxHp;
     float curHp;
+    [SerializeField] bool refill;
+    [SerializeField] bool useUi;
     [SerializeField] BarMode mode;
     [SerializeField] float hpThreshold;
     [SerializeField] Transform bar;
     [SerializeField] Transform cubePrefab;
-    [SerializeField] bool refill;
-
+    [SerializeField] Image damageImage;
+    [SerializeField] Image hpImage;
     [SerializeField] Transform chipAwayhealthBar;
     [SerializeField] Transform chipAwayDamagedhealthBar;
     Coroutine activeRotineDMG;
     Coroutine activeRotineHeal;
-    //cubes amount = maxhp/ threshold
-    //cube x width  = threshold/maxhp
-
     List<Transform> cubesCreated = new List<Transform>();
 
     float camulativeDmg = 0;
-    float lastChangeCurrentHp =0;
+    float lastChangeCurrentHp = 0;
 
     private void Start()
     {
-       //actor = GetComponentInParent<Actor>();
+        //actor = GetComponentInParent<Actor>();
         actor.TakeDamageGFX.AddListener(updateValues);
         switch (mode)
         {
@@ -125,7 +125,14 @@ public class DynamicHpBar : MonoBehaviour
             activeRotineDMG = StartCoroutine(ChipAwayHpBarDamage());
             return;
         }
-        chipAwayhealthBar.localScale = new Vector3(amount, 1, 1);
+        if (useUi)
+        {
+            hpImage.fillAmount = amount;
+        }
+        else
+        {
+            chipAwayhealthBar.localScale = new Vector3(amount, 1, 1);
+        }
         activeRotineDMG = StartCoroutine(ChipAwayHpBarDamage());
     }
     public void ChipAwayBarHealDamage()
@@ -135,52 +142,80 @@ public class DynamicHpBar : MonoBehaviour
         {
             chipAwayhealthBar.localScale = new Vector3(1, 1, 1);
             activeRotineHeal = StartCoroutine(ChipAwayHpBarHealing());
-
             return;
         }
         if (maxHp <= 0)
         {
             Debug.Log(actor.name + " max hp is 0 fix");
         }
-        chipAwayDamagedhealthBar.localScale = new Vector3(Mathf.Clamp(curHp, 0, maxHp) / maxHp, 1, 1);
+        if (useUi)
+        {
+            damageImage.fillAmount = amount;
+        }
+        else
+        {
+            chipAwayDamagedhealthBar.localScale = new Vector3(Mathf.Clamp(curHp, 0, maxHp) / maxHp, 1, 1);
+        }
         activeRotineHeal = StartCoroutine(ChipAwayHpBarHealing());
     }
 
     IEnumerator ChipAwayHpBarDamage()
     {
         float counter = 0;
-        Vector3 sartScaleBack = chipAwayDamagedhealthBar.localScale;
-        Vector3 startScaleFront = chipAwayhealthBar.localScale;
+        float uiFillAmount;
+        Vector3 sartScaleBack = Vector3.zero;
+        Vector3 startScaleFront = Vector3.zero;
+        if (!useUi)
+        {
+            sartScaleBack = chipAwayDamagedhealthBar.localScale;
+            startScaleFront = chipAwayhealthBar.localScale;
+        }
         while (counter < 1)
         {
-            Vector3 scaleLerp = Vector3.Lerp(sartScaleBack, startScaleFront, counter);
-            chipAwayDamagedhealthBar.localScale = scaleLerp;
-            counter += Time.deltaTime;
-            yield return new WaitForEndOfFrame();
-        }        
-    }
-    IEnumerator ChipAwayHpBarHealing()
-    {
-        float counter = 0;
-        Vector3 sartScaleBack = chipAwayDamagedhealthBar.localScale;
-        Vector3 startScaleFront = chipAwayhealthBar.localScale;
-        while (counter < 1)
-        {
-            Vector3 scaleLerp = Vector3.Lerp(startScaleFront, sartScaleBack, counter);
-            chipAwayhealthBar.localScale = scaleLerp;
+            if (useUi)
+            {
+                uiFillAmount = Mathf.Lerp(damageImage.fillAmount, hpImage.fillAmount, counter);
+                damageImage.fillAmount = uiFillAmount;
+            }
+            else
+            {
+                Vector3 scaleLerp = Vector3.Lerp(sartScaleBack, startScaleFront, counter);
+                chipAwayDamagedhealthBar.localScale = scaleLerp;
+            }
             counter += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
     }
-
-    //while losing hp green bar is set to a certain fill, red bar is dragged to chase it
-    //while restoring hp red bar is set to a certain fill, green bar is dragged to chase it 
-    //if restoring hp while the red bar is being dragged - stop dragging it and set it to a pos instead
-    //if taking dmg while the green bar is being dragged - stop dragging it and set it to the pos instead
-    //if taking damage and healing and the same time - the second effect is given priority
+    IEnumerator ChipAwayHpBarHealing()
+    {
+        float counter = 0;
+        float uiFillAmount;
+        Vector3 sartScaleBack = Vector3.zero;
+        Vector3 startScaleFront = Vector3.zero;
+        if (!useUi)
+        {
+            sartScaleBack = chipAwayDamagedhealthBar.localScale;
+            startScaleFront = chipAwayhealthBar.localScale;
+        }
+        while (counter < 1)
+        {
+            if (useUi)
+            {
+                uiFillAmount = Mathf.Lerp(hpImage.fillAmount, damageImage.fillAmount, counter);
+                hpImage.fillAmount = uiFillAmount;
+            }
+            else
+            {
+                Vector3 scaleLerp = Vector3.Lerp(startScaleFront, sartScaleBack, counter);
+                chipAwayhealthBar.localScale = scaleLerp;
+            }
+            counter += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+    }
     IEnumerator FlipWhenNegative()
     {
-        yield return new WaitUntil(()=>transform.parent.transform.localScale.x < 0);
+        yield return new WaitUntil(() => transform.parent.transform.localScale.x < 0);
         transform.localScale *= -1;
         StartCoroutine(FlipWhenPositive());
     }
@@ -190,5 +225,5 @@ public class DynamicHpBar : MonoBehaviour
         yield return new WaitUntil(() => transform.parent.transform.localScale.x > 0);
         transform.localScale *= -1;
         StartCoroutine(FlipWhenNegative());
-    }    
+    }
 }
