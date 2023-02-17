@@ -42,7 +42,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1136814704922706}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 1
+  simulationSpeed: 0.5
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
@@ -187,7 +187,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.50886697, g: 0.28648987, b: 0.6981132, a: 1}
+      maxColor: {r: 0.9529412, g: 0.654902, b: 0.89411765, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -931,17 +931,17 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: -0.5
-          outSlope: -0.5
+          inSlope: -0.88461685
+          outSlope: -0.88461685
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 0.5
-          inSlope: -0.5
-          outSlope: -0.5
+          value: 0.11538315
+          inSlope: -0.88461685
+          outSlope: -0.88461685
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
@@ -4741,7 +4741,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1271459053672518}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 1
+  simulationSpeed: 0.5
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
@@ -4886,7 +4886,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.50886697, g: 0.28648987, b: 0.6981132, a: 1}
+      maxColor: {r: 0.9529412, g: 0.654902, b: 0.89411765, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -9538,7 +9538,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1288247888185432}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 1
+  simulationSpeed: 0.5
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
@@ -9683,7 +9683,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.50886697, g: 0.28648987, b: 0.6981132, a: 1}
+      maxColor: {r: 0.9529412, g: 0.654902, b: 0.89411765, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -10427,17 +10427,17 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0
           value: 1
-          inSlope: -0.5
-          outSlope: -0.5
+          inSlope: -0.88461685
+          outSlope: -0.88461685
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 0.5
-          inSlope: -0.5
-          outSlope: -0.5
+          value: 0.11538315
+          inSlope: -0.88461685
+          outSlope: -0.88461685
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
@@ -14240,7 +14240,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1727626132299242}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 1
+  simulationSpeed: 0.5
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
@@ -18921,7 +18921,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1930125201661818}
   serializedVersion: 8
   lengthInSec: 1
-  simulationSpeed: 1
+  simulationSpeed: 0.5
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
@@ -19066,7 +19066,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 0.50886697, g: 0.28648987, b: 0.6981132, a: 1}
+      maxColor: {r: 0.9529412, g: 0.654902, b: 0.89411765, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -23718,7 +23718,7 @@ ParticleSystem:
   m_GameObject: {fileID: 1961129281457384}
   serializedVersion: 8
   lengthInSec: 5
-  simulationSpeed: 1
+  simulationSpeed: 0.5
   stopAction: 0
   cullingMode: 3
   ringBufferMode: 0
@@ -28564,6 +28564,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
+      propertyPath: simulationSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
       propertyPath: ColorModule.gradient.maxGradient.key0.b
       value: 0.764151
       objectReference: {fileID: 0}
@@ -28589,15 +28593,55 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
       propertyPath: InitialModule.startColor.maxGradient.key0.a
-      value: 0.17254902
+      value: 0.36078432
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.b
+      value: 0.89411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.g
+      value: 0.654902
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key0.r
+      value: 0.9529412
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
       propertyPath: InitialModule.startColor.maxGradient.key1.a
-      value: 0.6039216
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.b
+      value: 0.89411765
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.g
+      value: 0.654902
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key1.r
+      value: 0.9529412
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key3.g
+      value: 0.21176471
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.key3.r
+      value: 0.827451
       objectReference: {fileID: 0}
     - target: {fileID: 19800000, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
       propertyPath: InitialModule.startColor.maxGradient.m_NumAlphaKeys
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
+      propertyPath: InitialModule.startColor.maxGradient.m_NumColorKeys
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800002, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
+      propertyPath: simulationSpeed
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 19900000, guid: db50ab1c866680e4bb870bf5eb72dd3d, type: 3}
       propertyPath: m_SortingLayer

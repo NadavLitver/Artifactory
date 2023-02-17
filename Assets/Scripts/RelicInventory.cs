@@ -5,6 +5,7 @@ using UnityEngine;
 public class RelicInventory : MonoBehaviour
 {
     [SerializeField] List <Relic> relicList = new List<Relic>();
+    [SerializeField] private RelicBar relicBar;
 
     public List<Relic> RelicList { get => relicList;}
 
@@ -13,6 +14,7 @@ public class RelicInventory : MonoBehaviour
     {
         relicList.Add(givenRelic);
         GameManager.Instance.assets.playerActor.RecieveStatusEffects(givenRelic.MyEffectEnum);
+        relicBar.AddRelic(givenRelic);
     }
 
 
