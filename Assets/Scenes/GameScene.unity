@@ -416,6 +416,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &582340470 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3327924038238445250, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+  m_PrefabInstance: {fileID: 172302675764313256}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &603077402 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 172302675201083314, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
@@ -490,6 +495,10 @@ PrefabInstance:
       propertyPath: miniMapCenterNode
       value: 
       objectReference: {fileID: 376335521}
+    - target: {fileID: 3692407884404100494, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
+      propertyPath: zooPanel
+      value: 
+      objectReference: {fileID: 582340470}
     - target: {fileID: 4180575170529028752, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -628,11 +637,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8895932958031719467, guid: fe83519093277c44eaf4d40aba01a972, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -193.69
+      value: -11.61
       objectReference: {fileID: 0}
     - target: {fileID: 8895932958031719467, guid: fe83519093277c44eaf4d40aba01a972, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 58.61
+      value: 4.8
       objectReference: {fileID: 0}
     - target: {fileID: 8895932958031719467, guid: fe83519093277c44eaf4d40aba01a972, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1022,11 +1031,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 840070347753010960, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -193.69
+      value: -11.61
       objectReference: {fileID: 0}
     - target: {fileID: 840070347753010960, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 57.61
+      value: 3.8
       objectReference: {fileID: 0}
     - target: {fileID: 840070347753010960, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1368,6 +1377,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 102715431, guid: 2ff9243ecc4261045a4942da7d3e427b, type: 3}
+      propertyPath: m_TagString
+      value: Interactable
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969337228, guid: 2ff9243ecc4261045a4942da7d3e427b, type: 3}
+      propertyPath: m_Size.y
+      value: 6.631221
+      objectReference: {fileID: 0}
+    - target: {fileID: 1969337228, guid: 2ff9243ecc4261045a4942da7d3e427b, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.6949525
+      objectReference: {fileID: 0}
+    - target: {fileID: 5242756471786834022, guid: 2ff9243ecc4261045a4942da7d3e427b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
     - target: {fileID: 9046812149282889916, guid: 2ff9243ecc4261045a4942da7d3e427b, type: 3}
       propertyPath: OnEnableEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -1436,6 +1461,10 @@ PrefabInstance:
       propertyPath: CloneTreePanel
       value: 
       objectReference: {fileID: 1211393328}
+    - target: {fileID: 9046812149917523954, guid: 2ff9243ecc4261045a4942da7d3e427b, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -27.23
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ff9243ecc4261045a4942da7d3e427b, type: 3}
 --- !u!1 &9046812149282889915 stripped
