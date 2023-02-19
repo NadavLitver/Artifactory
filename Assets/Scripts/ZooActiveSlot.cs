@@ -1,4 +1,3 @@
-using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,7 +9,7 @@ public class ZooActiveSlot : MonoBehaviour
     private int currentFoodgiven;
     private int foodGivenThisInterval;
     private bool isOccupied;
-
+    private float lastFed;
     [SerializeField] private Image animalImage;
     [SerializeField] private GameObject feedButton;
     [SerializeField] private GameObject releaseButton;
@@ -19,25 +18,30 @@ public class ZooActiveSlot : MonoBehaviour
     [SerializeField] private Slider foodSlider;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI timerText;
-    [SerializeField] private float timeToWait; // in mins
+    [SerializeField] private float timeToWait; // in mins4
+    [SerializeField] private GameObject coinButton;
+    [SerializeField] private int startGivenFood;
+    private bool timerStarted;
+    private bool animalDoneHealing;
 
     public UnityEvent<ZooAnimalGrowthData> OnAnimalFed;
     public UnityEvent<ZooAnimalGrowthData> OnAnimalFreed;
 
     public Image AnimalImage { get => animalImage; }
     public ZooAnimalGrowthData CurrentRefAnimal { get => currentRefAnimal; }
-    public int CurrentFoodgiven { get => currentFoodgiven; set => currentFoodgiven = value; }
+    public int CurrentFoodgiven { get => currentFoodgiven; }
     public bool IsOccupied { get => isOccupied; }
+    public bool AnimalDoneHealing { get => animalDoneHealing; }
 
-    private void Start()
+    private void Awake()
     {
         GameManager.Instance.Zoo.AddSlot(this);
         RemoveAnimal();
         GameManager.Instance.OnRunEnd.AddListener(ResetFoodGivenThisInterval);
     }
-
     public void CacheAnimal(ZooAnimalGrowthData givenAnimal)
     {
+        animalDoneHealing = false;
         currentRefAnimal = givenAnimal;
         animalImage.sprite = givenAnimal.animal.RSprite;
         animalImage.color = new Color(animalImage.color.r, animalImage.color.g, animalImage.color.b, 1);
@@ -45,6 +49,7 @@ public class ZooActiveSlot : MonoBehaviour
         timerText.text = "0";
         UpdateTimer();
         currentFoodgiven = 0;
+        currentFoodgiven = startGivenFood;
         ResetFoodGivenThisInterval();
         SetRecipeImage();
         feedButton.SetActive(true);
@@ -53,11 +58,16 @@ public class ZooActiveSlot : MonoBehaviour
         UpdateSlider();
     }
 
+    private void OnEnable()
+    {
+        UpdateTimer();
+    }
     private void UpdateTimer()
     {
-        if (gameObject.activeInHierarchy && foodGivenThisInterval >= CurrentRefAnimal.animal.GrowthThreshold)
+        if (gameObject.activeInHierarchy && foodGivenThisInterval >= CurrentRefAnimal?.animal.GrowthThreshold && !timerStarted)
         {
-            StartCoroutine(GameManager.Instance.Zoo.Countdown(timeToWait, timerText));
+            timerStarted = true;
+            GameManager.Instance.StartCoroutine(GameManager.Instance.Zoo.Countdown(timeToWait, timerText, this));
         }
         else
         {
@@ -65,20 +75,13 @@ public class ZooActiveSlot : MonoBehaviour
         }
     }
 
-    private IEnumerator Countdown()
+    private void ClearFoodImages()
     {
-        //count 60 sec for X times
-        for (int i = 0; i < timeToWait; i++)
+        for (int i = 0; i < resources.childCount; i++)
         {
-            for (int y = 0; y < 60; y++)
-            {
-                timerText.text = $" Next Feeding {timeToWait - i} M {60 - y} S";
-                yield return new WaitForSecondsRealtime(1f);
-            }
+            Destroy(resources.GetChild(i).gameObject);
         }
     }
-
-
     private void SetRecipeImage()
     {
         foreach (var item in CurrentRefAnimal.animal.Food.Components)
@@ -111,6 +114,7 @@ public class ZooActiveSlot : MonoBehaviour
         }
         if (foodGivenThisInterval >= CurrentRefAnimal.animal.GrowthThreshold)
         {
+            GameManager.Instance.Zoo.GetGemFromSlot(this).SetGreenActive();
             return;
         }
         foreach (var comp in CurrentRefAnimal.animal.Food.Components)
@@ -130,8 +134,11 @@ public class ZooActiveSlot : MonoBehaviour
             //unlock free button
             //on click free and give the player tuff coins
             feedButton.SetActive(false);
-            releaseButton.SetActive(true);
+            animalDoneHealing = true;
+            FreeAnimal();
+            //releaseButton.SetActive(true);
         }
+        lastFed = Time.time;
         UpdateSlider();
         UpdateTimer();
     }
@@ -141,12 +148,32 @@ public class ZooActiveSlot : MonoBehaviour
     {
         feedButton.SetActive(false);
         OnAnimalFreed?.Invoke(CurrentRefAnimal);
-        RemoveAnimal();
+        AnimalImage.gameObject.SetActive(false);
+        timerText.text = "";
+        nameText.text = "";
+        ClearFoodImages();
+        coinButton.SetActive(true);
     }
 
+    public void CoinButton()
+    {
+        GameManager.Instance.assets.playerActor.PlayerItemInventory.AddItem(ItemType.TuffCoin);
+        coinButton.SetActive(false);
+        AnimalImage.gameObject.SetActive(true);
+        ResetFoodGiven();
+        UpdateSlider();
+        RemoveAnimal();
+
+    }
+
+    public void ResetFoodGiven()
+    {
+        currentFoodgiven = 0;
+    }
 
     public void ResetFoodGivenThisInterval()
     {
         foodGivenThisInterval = 0;
+        timerStarted = false;
     }
 }

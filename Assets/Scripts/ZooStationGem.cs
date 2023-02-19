@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 public class ZooStationGem : MonoBehaviour
@@ -7,10 +6,18 @@ public class ZooStationGem : MonoBehaviour
     [SerializeField] private GameObject greenGem;
     [SerializeField] private GameObject redGem;
     [SerializeField] private GameObject grayGem;
+    [SerializeField, ReadOnly] private ZooActiveSlot refSlot;
 
-    private void Start()
+    public ZooActiveSlot RefSlot { get => refSlot; }
+
+    private void Awake()
     {
+        GameManager.Instance.Zoo.AddZooGem(this);
         SetGrayActive();
+    }
+    public void CacheRefSlot(ZooActiveSlot slot)
+    {
+        refSlot = slot;
     }
     public void SetRedActive()
     {
@@ -27,7 +34,7 @@ public class ZooStationGem : MonoBehaviour
     public void SetGreenActive()
     {
         greenGem.SetActive(true);
-        redGem.SetActive(true);
+        redGem.SetActive(false);
         grayGem.SetActive(false);
     }
 }
