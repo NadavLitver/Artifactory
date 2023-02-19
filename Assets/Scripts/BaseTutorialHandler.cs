@@ -32,6 +32,9 @@ public class BaseTutorialHandler : MonoBehaviour
     [Header("Objects to turn off")]
     [SerializeField] CraftInteractable craftingMachine;
     [SerializeField] CloneInteractable cloneTree;
+    [Header("Objects to use when entering the Zoo for the first time")]
+    [SerializeField] ZooIneractable zooIneractable;
+    [SerializeField] Dialogue zooDialogue;
     bool typing;
     bool didPlayerContinue;
     bool didPlayerGetCloseToCrafting;
@@ -51,6 +54,7 @@ public class BaseTutorialHandler : MonoBehaviour
         didPlayerGetCloseToCrafting = false;
         craftingMachine.gameObject.SetActive(false);
         cloneTree.gameObject.SetActive(false);
+        zooIneractable.gameObject.SetActive(false);
         m_interactable.gameObject.SetActive(true);
         BetweenSceneInfo.didBaseTutorialHappen = true;
         StartCoroutine(BaseTutorialRoutine());
@@ -70,10 +74,11 @@ public class BaseTutorialHandler : MonoBehaviour
         craftingPanel.SetActive(true);
         StartPanel.SetActive(false);
         yield return CraftingTutorial(craftingDialogue);
-        yield return AfterCrafting(AfterCraftingDialogue);
+        yield return CloneTreeTutorial(AfterCraftingDialogue);
 
         cloneTree.gameObject.SetActive(true);
         craftingMachine.gameObject.SetActive(true);
+        zooIneractable.gameObject.SetActive(true);
         cloneTree.m_detection.enabled = false;
         craftingMachine.enabled = false;
         m_interactable.onInteract.RemoveListener(() => didPlayerContinue = true);
@@ -212,7 +217,7 @@ public class BaseTutorialHandler : MonoBehaviour
         typing = false;
     }
 
-    IEnumerator AfterCrafting(Dialogue dialogue)
+    IEnumerator CloneTreeTutorial(Dialogue dialogue)
     {
         craftingMachine.gameObject.SetActive(false);
         m_interactable.gameObject.SetActive(true);

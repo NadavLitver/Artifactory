@@ -138,6 +138,7 @@ public class AssetsRefrence
     public MobileControlsHandler mobileButtonHandler;
     public GameObject endInteractablePanel;
     public GameObject CraftingPanel;
+    public BaseTutorialHandler baseTutorialHandler;
 
     [Header("Bounder"), Space(10)]
     public BounderScout BounderScout;
@@ -199,7 +200,7 @@ public class GeneralFunctions
     {
         obj.transform.position = pos;
     }
-    public void onPlayerDiedActions()
+    public void onPlayerDiedActions()//change this to not reset the scene.
     {
         LeanTween.cancelAll();
         GameManager.Instance.assets.mobileControls.SetActive(false);
