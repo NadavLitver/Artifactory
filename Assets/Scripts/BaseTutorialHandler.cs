@@ -35,6 +35,9 @@ public class BaseTutorialHandler : MonoBehaviour
     [Header("Objects to use when entering the Zoo for the first time")]
     [SerializeField] ZooIneractable zooIneractable;
     [SerializeField] Dialogue zooDialogue;
+    [SerializeField] Button feedButtonFirstPanel;
+    [SerializeField] Button ExitButtonZoo;
+
     bool typing;
     bool didPlayerContinue;
     bool didPlayerGetCloseToCrafting;
@@ -43,7 +46,7 @@ public class BaseTutorialHandler : MonoBehaviour
     bool didPlayerUseCrafting;
 
 
-    private void OnEnable()
+    private void Start()
     {
         if (BetweenSceneInfo.didBaseTutorialHappen)
         {
@@ -54,7 +57,7 @@ public class BaseTutorialHandler : MonoBehaviour
         didPlayerGetCloseToCrafting = false;
         craftingMachine.gameObject.SetActive(false);
         cloneTree.gameObject.SetActive(false);
-        zooIneractable.gameObject.SetActive(false);
+        zooIneractable.enabled = false;
         m_interactable.gameObject.SetActive(true);
         BetweenSceneInfo.didBaseTutorialHappen = true;
         StartCoroutine(BaseTutorialRoutine());
@@ -78,7 +81,7 @@ public class BaseTutorialHandler : MonoBehaviour
 
         cloneTree.gameObject.SetActive(true);
         craftingMachine.gameObject.SetActive(true);
-        zooIneractable.gameObject.SetActive(true);
+        zooIneractable.enabled = true;
         cloneTree.m_detection.enabled = false;
         craftingMachine.enabled = false;
         m_interactable.onInteract.RemoveListener(() => didPlayerContinue = true);
@@ -216,7 +219,85 @@ public class BaseTutorialHandler : MonoBehaviour
 
         typing = false;
     }
+    public void CallZooTutorial()
+    {
+        StartCoroutine(ZooTutorial(zooDialogue));
+    }
+    
+    IEnumerator ZooTutorial(Dialogue dialogue)
+    {
+        typing = true;
+        Arrow.SetActive(false);
 
+        craftingPanel.SetActive(true);
+        StartPanel.SetActive(false);
+        TextMeshProUGUI textComponent = craftingTextComponent;
+        for (int i = 0; i < dialogue.lines.Length; i++)
+        {
+            yield return HandleLine(dialogue.lines[i], textComponent);
+
+
+
+            yield return new WaitForSeconds(0.5f);
+            if (i == 0)
+            {
+                bool wasClicked = false;
+                void setWasClickedTrue() => wasClicked = true;
+                Hand.gameObject.SetActive(true);
+                LeanTween.move(Hand.gameObject, feedButtonFirstPanel.transform.position, 1);
+                feedButtonFirstPanel.onClick.AddListener(setWasClickedTrue);
+                yield return new WaitUntil(() => wasClicked == true);
+                feedButtonFirstPanel.onClick.RemoveListener(setWasClickedTrue);
+
+                //LeanTween.move(Hand.gameObject, inventoryCraftingPanel.CreatedSlotsGetter[0].transform.position, 1);
+
+            }
+            else if (i == 1)
+            {
+                bool wasClicked = false;
+                void setWasClickedTrue() => wasClicked = true;
+                LeanTween.move(Hand.gameObject, ExitButtonZoo.transform.position, 1);
+                ExitButtonZoo.onClick.AddListener(setWasClickedTrue);
+                yield return new WaitUntil(() => wasClicked == true);
+                ExitButtonZoo.onClick.RemoveListener(setWasClickedTrue);
+                textComponent = startingTextComponent;
+                craftingPanel.SetActive(false);
+                StartPanel.SetActive(true);
+                // LeanTween.move(Hand.gameObject, inventoryCraftingPanel.CreatedSlotsGetter[1].transform.position, 1);
+
+
+
+            }
+            else if (i == 2)
+            {
+
+                
+
+            }
+            else if (i == 3)
+            {
+              
+
+            }
+            else if (i == 4)
+            {
+             
+
+
+            }
+            else if (i == 5)
+            {
+               
+
+
+            }
+        }
+       
+        craftingPanel.SetActive(false);
+        
+
+        typing = false;
+    }
     IEnumerator CloneTreeTutorial(Dialogue dialogue)
     {
         craftingMachine.gameObject.SetActive(false);

@@ -2742,6 +2742,7 @@ GameObject:
   - component: {fileID: 172302675807526001}
   - component: {fileID: 172302675807526002}
   - component: {fileID: 172302675981161014}
+  - component: {fileID: 358051906}
   m_Layer: 5
   m_Name: BaseTutorialPanel
   m_TagString: Untagged
@@ -2837,13 +2838,17 @@ MonoBehaviour:
   Hand: {fileID: 172302675149205819}
   inventoryCraftingPanel: {fileID: 172302674313363655}
   selectedCraftingPanel: {fileID: 172302675978791519}
-  CraftButton: {fileID: 0}
+  CraftButton: {fileID: 172302675667410958}
   CloseButton: {fileID: 172302674792564409}
   AfterCraftingDialogue: {fileID: 172302675981161014}
   RelicBar: {fileID: 172302675814251379}
   CloneImage: {fileID: 172302675997033620}
   craftingMachine: {fileID: 0}
   cloneTree: {fileID: 0}
+  zooIneractable: {fileID: 0}
+  zooDialogue: {fileID: 358051906}
+  feedButtonFirstPanel: {fileID: 3327924037159923018}
+  ExitButtonZoo: {fileID: 3327924037660078097}
 --- !u!114 &172302675807526001
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2875,10 +2880,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lines:
-  - This is the Crafting Table Start by picking a resource
-  - Good Job! Now, Lets pick Another
+  - This is the Crafting Table Start by picking a resource.
+  - Good Job! Now, Lets pick Another.
   - Oops, no recipe. Cancel your pick by clicking it.
-  - Let's try another resource to find a recipe
+  - Let's try another resource to find a recipe.
   - We found a recipe! Tap the craft button.
   - You crafted a relic! Go on adventure to find more resources.
   m_sprite: {fileID: 0}
@@ -2900,6 +2905,28 @@ MonoBehaviour:
   - Interact with The Cloning Tree to start an adventure.
   - Use a clone to start an adventure. That way, the real you stays safe!
   - Clones are generated automatically over time.
+  m_sprite: {fileID: 0}
+--- !u!114 &358051906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 172302675807526012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4610090048ce3de44827f5aacdf870de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lines:
+  - Feed the monster with resources you found.
+  - 'Healing monsters bring them to their organic state. '
+  - 'The lights tell you when the monster is hungry again. '
+  - It seems the monster has fully  healed! Enter the Zoo again.
+  - The monster has return to the environment, pick up its gratitude token.
+  - Gratitude tokens allow you to empower your clones.
+  - Use 2 tokens to craft the legendary clone.
+  - Craft the Legendary clone relic!
   m_sprite: {fileID: 0}
 --- !u!1 &172302675814251379
 GameObject:
@@ -6379,7 +6406,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 34.30005, y: -95.100006}
+  m_AnchoredPosition: {x: 34.300293, y: -95.1001}
   m_SizeDelta: {x: 70, y: 70}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &1735682694433285410
@@ -8491,6 +8518,10 @@ PrefabInstance:
       propertyPath: m_text
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 3423240286269776473, guid: c46b4201408c66c458315f2712a308d8, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3423240286311536382, guid: c46b4201408c66c458315f2712a308d8, type: 3}
       propertyPath: nameText
       value: 
@@ -8499,8 +8530,54 @@ PrefabInstance:
       propertyPath: timerText
       value: 
       objectReference: {fileID: 3327924038194720512}
+    - target: {fileID: 3423240287166291399, guid: c46b4201408c66c458315f2712a308d8, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423240287166291399, guid: c46b4201408c66c458315f2712a308d8, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.000000048428774
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423240287166291399, guid: c46b4201408c66c458315f2712a308d8, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 111.29651
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423240287166291399, guid: c46b4201408c66c458315f2712a308d8, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 111.29651
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423240287166291399, guid: c46b4201408c66c458315f2712a308d8, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -55.648193
+      objectReference: {fileID: 0}
+    - target: {fileID: 3423240287166291399, guid: c46b4201408c66c458315f2712a308d8, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -111.29614
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c46b4201408c66c458315f2712a308d8, type: 3}
+--- !u!114 &3327924037159923018 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3423240286657740957, guid: c46b4201408c66c458315f2712a308d8, type: 3}
+  m_PrefabInstance: {fileID: 121284519699164631}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3327924037660078097 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3423240287166291398, guid: c46b4201408c66c458315f2712a308d8, type: 3}
+  m_PrefabInstance: {fileID: 121284519699164631}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &3327924038115672681 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3423240285704056766, guid: c46b4201408c66c458315f2712a308d8, type: 3}
@@ -8549,7 +8626,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 269731664777051977, guid: cd5e7f8b9699dd9448cc5a5d26a75633, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 64.499756
+      value: 64.49951
       objectReference: {fileID: 0}
     - target: {fileID: 269731664777051977, guid: cd5e7f8b9699dd9448cc5a5d26a75633, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -8565,7 +8642,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 269731664939177956, guid: cd5e7f8b9699dd9448cc5a5d26a75633, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 269731664939177957, guid: cd5e7f8b9699dd9448cc5a5d26a75633, type: 3}
       propertyPath: m_Pivot.x
@@ -9398,6 +9475,14 @@ PrefabInstance:
       value: CraftingPanel
       objectReference: {fileID: 0}
     - target: {fileID: 8843457425830199028, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.50000024
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843457425830199028, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.22600715
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843457425830199028, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
       propertyPath: m_SizeDelta.x
       value: 107.448
       objectReference: {fileID: 0}
@@ -9407,11 +9492,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8843457425830199028, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 243.28
+      value: 297.0044
       objectReference: {fileID: 0}
     - target: {fileID: 8843457425830199028, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -3.1074
+      value: -32.547607
       objectReference: {fileID: 0}
     - target: {fileID: 8843457426165219250, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -9438,6 +9523,14 @@ PrefabInstance:
       value: 55
       objectReference: {fileID: 0}
     - target: {fileID: 8843457426487964022, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.50000024
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843457426487964022, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.32019314
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843457426487964022, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
       propertyPath: m_SizeDelta.x
       value: 107.448
       objectReference: {fileID: 0}
@@ -9447,11 +9540,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8843457426487964022, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 77
+      value: 130.72433
       objectReference: {fileID: 0}
     - target: {fileID: 8843457426487964022, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -3.1074
+      value: -22.427513
       objectReference: {fileID: 0}
     - target: {fileID: 8843457426757038410, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
       propertyPath: m_fontSize
@@ -9506,6 +9599,14 @@ PrefabInstance:
       value: 16.052734
       objectReference: {fileID: 0}
     - target: {fileID: 8843457427340096907, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
+      propertyPath: m_Pivot.x
+      value: 0.5565518
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843457427340096907, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
+      propertyPath: m_Pivot.y
+      value: 0.18319523
+      objectReference: {fileID: 0}
+    - target: {fileID: 8843457427340096907, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
       propertyPath: m_SizeDelta.x
       value: 107.448
       objectReference: {fileID: 0}
@@ -9515,11 +9616,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8843457427340096907, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 407
+      value: 466.8003
       objectReference: {fileID: 0}
     - target: {fileID: 8843457427340096907, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -3.1074
+      value: -37.14766
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
@@ -9550,6 +9651,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 8843457425498558478, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
   m_PrefabInstance: {fileID: 8709506422663595637}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &172302675667410958 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8843457426198472315, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
+  m_PrefabInstance: {fileID: 8709506422663595637}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &172302675978791519 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8843457426423835690, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}

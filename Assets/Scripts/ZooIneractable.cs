@@ -10,6 +10,7 @@ public class ZooIneractable : Interactable
         if (!firstInteraction)
         {
             GameManager.Instance.assets.baseTutorialHandler.gameObject.SetActive(true);
+            GameManager.Instance.assets.baseTutorialHandler.CallZooTutorial();
             firstInteraction = true;
         }
         GameManager.Instance.Zoo.ZooPanel.SetActive(true);
