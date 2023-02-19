@@ -147,6 +147,12 @@ public class ZooActiveSlot : MonoBehaviour
         UpdateSlider();
         UpdateTimer();
     }
+    public void QuickFeed()
+    {
+        currentFoodgiven++;
+        UpdateSlider();
+
+    }
 
     //called when reached 100% feed automatically
     public void FreeAnimal()

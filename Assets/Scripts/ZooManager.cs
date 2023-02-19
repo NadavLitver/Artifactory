@@ -33,7 +33,19 @@ public class ZooManager : MonoBehaviour
         ZooStationGem gem = gems[index];
         gem.CacheRefSlot(slot);
     }
-
+    public void IncreaseFoodAmount(int amount)
+    {
+        foreach (var item in zooSlots)
+        {
+            if (item.IsOccupied)
+            {
+                for (int i = 0; i < amount; i++)
+                {
+                    item.QuickFeed();
+                }
+            }
+        }
+    }
     public void CatchAnimal(ZooAnimal givenAnimal)
     {
         //checking for free space before catching anyway
@@ -43,6 +55,7 @@ public class ZooManager : MonoBehaviour
             if (!item.IsOccupied)
             {
                 item.CacheAnimal(newAnimal);
+                
                 int index = zooSlots.FindIndex(a => zooSlots.Contains(item));
                 ZooStationGem gem = gems[index];
                 gem.SetRedActive();

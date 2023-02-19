@@ -5,8 +5,10 @@ using UnityEngine;
 public class ZooIneractable : Interactable
 {
     bool firstInteraction;
+   
     public override void Interact()
     {
+       
         if (!firstInteraction)
         {
             GameManager.Instance.assets.baseTutorialHandler.gameObject.SetActive(true);

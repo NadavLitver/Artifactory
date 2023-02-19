@@ -57,7 +57,7 @@ public class BaseTutorialHandler : MonoBehaviour
         didPlayerGetCloseToCrafting = false;
         craftingMachine.gameObject.SetActive(false);
         cloneTree.gameObject.SetActive(false);
-        zooIneractable.enabled = false;
+        zooIneractable.gameObject.SetActive(false);
         m_interactable.gameObject.SetActive(true);
         BetweenSceneInfo.didBaseTutorialHappen = true;
         StartCoroutine(BaseTutorialRoutine());
@@ -81,7 +81,7 @@ public class BaseTutorialHandler : MonoBehaviour
 
         cloneTree.gameObject.SetActive(true);
         craftingMachine.gameObject.SetActive(true);
-        zooIneractable.enabled = true;
+        zooIneractable.gameObject.SetActive(true);
         cloneTree.m_detection.enabled = false;
         craftingMachine.enabled = false;
         m_interactable.onInteract.RemoveListener(() => didPlayerContinue = true);
@@ -161,7 +161,7 @@ public class BaseTutorialHandler : MonoBehaviour
             }
             else if (i == 1)
             {
-         
+
                 LeanTween.move(Hand.gameObject, inventoryCraftingPanel.CreatedSlotsGetter[1].transform.position, 1);
 
                 inventoryCraftingPanel.createdSlotsButtons[1].enabled = true;
@@ -176,7 +176,7 @@ public class BaseTutorialHandler : MonoBehaviour
                     LeanTween.move(Hand.gameObject, selectedCraftingPanel.SelectedSlots[1].slot.transform.position, 1);
                     yield return new WaitUntil(() => !selectedCraftingPanel.SelectedSlots[1].Occupied);
                 }
-               
+
                 LeanTween.move(Hand.gameObject, inventoryCraftingPanel.CreatedSlotsGetter[2].transform.position, 1);
 
             }
@@ -223,7 +223,7 @@ public class BaseTutorialHandler : MonoBehaviour
     {
         StartCoroutine(ZooTutorial(zooDialogue));
     }
-    
+
     IEnumerator ZooTutorial(Dialogue dialogue)
     {
         typing = true;
@@ -263,6 +263,8 @@ public class BaseTutorialHandler : MonoBehaviour
                 textComponent = startingTextComponent;
                 craftingPanel.SetActive(false);
                 StartPanel.SetActive(true);
+                Hand.gameObject.SetActive(false);
+                GameManager.Instance.Zoo.IncreaseFoodAmount(5);
                 // LeanTween.move(Hand.gameObject, inventoryCraftingPanel.CreatedSlotsGetter[1].transform.position, 1);
 
 
@@ -271,30 +273,35 @@ public class BaseTutorialHandler : MonoBehaviour
             else if (i == 2)
             {
 
-                
+                m_interactable.gameObject.SetActive(true);
+                zooIneractable.gameObject.SetActive(false);
+                Arrow.gameObject.SetActive(true);
+                Arrow.transform.position = interactButton.transform.position + (Vector3.up * 160);
+                yield return new WaitUntil(() => didPlayerContinue);
+                didPlayerContinue = false;
 
             }
             else if (i == 3)
             {
-              
+
 
             }
             else if (i == 4)
             {
-             
+
 
 
             }
             else if (i == 5)
             {
-               
+
 
 
             }
         }
-       
+
         craftingPanel.SetActive(false);
-        
+
 
         typing = false;
     }
@@ -324,9 +331,9 @@ public class BaseTutorialHandler : MonoBehaviour
             }
             if (i == 3)
             {
-                Arrow.transform.position = CloneImage.transform.position + (Vector3.down *60);
+                Arrow.transform.position = CloneImage.transform.position + (Vector3.down * 60);
                 Arrow.transform.localScale = new Vector3(1, -1, 1);
-              
+
             }
             if (i == 4)
             {
@@ -372,7 +379,7 @@ public class BaseTutorialHandler : MonoBehaviour
             Arrow.transform.position = Camera.main.WorldToScreenPoint(cloneTree.transform.position + (Vector3.up * 2));
             yield return new WaitForEndOfFrame();
         }
-    
+
 
     }
     IEnumerator HandleLine(string Line, TextMeshProUGUI textComponent)
@@ -389,5 +396,6 @@ public class BaseTutorialHandler : MonoBehaviour
     private void OnDisable()
     {
         LeanTween.cancelAll();
+        zooIneractable.gameObject.SetActive(true);
     }
 }
