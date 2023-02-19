@@ -10,6 +10,7 @@ public class ZooManager : MonoBehaviour
     private List<ZooStationGem> gems = new List<ZooStationGem>();
     [SerializeField] private GameObject zooPanel;
     [SerializeField] ZooAnimal test;
+    [SerializeField] private GameObject spawnCoinParticle;
 
     public GameObject ZooPanel { get => zooPanel; }
 
@@ -61,6 +62,12 @@ public class ZooManager : MonoBehaviour
         }
         return null;
     }
+
+    public void SpawnEffectOnCreatureLeaving(ZooActiveSlot givenSlot)
+    {
+        Instantiate(spawnCoinParticle, givenSlot.AnimalImage.transform.position, Quaternion.identity);
+    }
+
     public void RemoveAnimal(ZooAnimalGrowthData givenAnimal)
     {
         foreach (var item in zooSlots)

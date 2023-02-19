@@ -26,7 +26,7 @@ public class ExitInteractable : MonoBehaviour
 
     [SerializeField] Collider2D exitCollider;
     [SerializeField] GameObject spikes;
-    //[SerializeField] GameObject gfx;
+    [SerializeField] GameObject gfx;
     public Room MyRoom { get => myRoom; set => myRoom = value; }
     public ExitLocationInfo ExitLocation { get => exitLocation; set => exitLocation = value; }
     public bool Occupied { get => occupied;}
@@ -63,7 +63,7 @@ public class ExitInteractable : MonoBehaviour
     {
         exitCollider.enabled = false;
         spikes.SetActive(true);
-        //gfx.SetActive(false);
+        gfx.SetActive(false);
     }
 }
 

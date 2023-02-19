@@ -18,9 +18,13 @@ public class ZooActiveSlot : MonoBehaviour
     [SerializeField] private Slider foodSlider;
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI timerText;
+    [SerializeField] private TextMeshProUGUI sliderText;
     [SerializeField] private float timeToWait; // in mins4
     [SerializeField] private GameObject coinButton;
     [SerializeField] private int startGivenFood;
+    [SerializeField] private GameObject renamePanel;
+
+    [SerializeField] private TMP_InputField inputField;
     private bool timerStarted;
     private bool animalDoneHealing;
 
@@ -94,6 +98,7 @@ public class ZooActiveSlot : MonoBehaviour
     private void UpdateSlider()
     {
         foodSlider.value = currentFoodgiven;
+        sliderText.text = "  " + ((foodSlider.value / foodSlider.maxValue) * 100).ToString("F1") + "%";
     }
 
     public void RemoveAnimal()
@@ -175,5 +180,20 @@ public class ZooActiveSlot : MonoBehaviour
     {
         foodGivenThisInterval = 0;
         timerStarted = false;
+    }
+
+    public void ChangeName()
+    {
+        if (ReferenceEquals(currentRefAnimal, null))
+        {
+            return;
+        }
+        renamePanel.SetActive(true);
+    }
+
+    public void ConfirmNameChange()
+    {
+        nameText.text = inputField.text;
+        inputField.text = "";
     }
 }
