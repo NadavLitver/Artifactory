@@ -6,14 +6,14 @@ public class RelicRoom : Room
 
     [SerializeField] private List<RelicChoiceInteractable> relicChoices = new List<RelicChoiceInteractable>();
     
-    private void Start()
+/*    private void Start()
     {
         foreach (var item in relicChoices)
         {
             item.OnSelectedRelic.AddListener(OnSelectedRelic);
         }   
     }
-
+*/
     private void OnSelectedRelic()
     {
         foreach (var item in relicChoices)
