@@ -53,6 +53,8 @@ public class EnemyActor : Actor
 
     private void AttemptCatching()
     {
+        if (GameManager.Instance.isTutorial)
+            return;
         if (catchHandler.TryCatchingMonster() && GameManager.Instance.Zoo.CheckForFreeSpace())
         {
             Debug.Log("caught animal");

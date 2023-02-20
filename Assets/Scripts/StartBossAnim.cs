@@ -11,7 +11,7 @@ public class StartBossAnim : MonoBehaviour
 
     private IEnumerator StartDelay()
     {
-        yield return new WaitForSecondsRealtime(0.3f);
+        yield return new WaitForSecondsRealtime(1f);
         GameManager.Instance.assets.BossAnimator.Play("BossAnim");
     }
 
