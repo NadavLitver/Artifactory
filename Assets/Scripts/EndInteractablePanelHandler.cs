@@ -26,6 +26,7 @@ public class EndInteractablePanelHandler : MonoBehaviour
 
     public void SpawnPlayerAtTempBossRoom()
     {
+        GameManager.Instance.LevelManager.TempBossRoom.gameObject.SetActive(true);
         StartCoroutine(FadeFromBlack());
     }
     private IEnumerator FadeFromBlack()

@@ -356,6 +356,7 @@ public class BaseTutorialHandler : MonoBehaviour
                 CraftButton.onClick.AddListener(SetCrafted);
                 yield return new WaitUntil(() => wasCrafted);
                 CraftButton.onClick.RemoveListener(SetCrafted);
+                cloneTree.gameObject.SetActive(true);
                 yield return new WaitForSeconds(0.5f);
                 this.gameObject.SetActive(false);
             }
