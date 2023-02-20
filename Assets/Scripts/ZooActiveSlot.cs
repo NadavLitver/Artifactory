@@ -158,6 +158,7 @@ public class ZooActiveSlot : MonoBehaviour
         timerText.text = "";
         nameText.text = "";
         ClearFoodImages();
+        GameManager.Instance.Zoo.GetGemFromSlot(this).SetGrayActive();
         coinButton.SetActive(true);
     }
 
