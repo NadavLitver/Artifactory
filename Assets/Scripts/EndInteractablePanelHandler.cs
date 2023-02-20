@@ -23,4 +23,17 @@ public class EndInteractablePanelHandler : MonoBehaviour
     {
         GameManager.Instance.assets.Player.transform.position = GameManager.Instance.assets.baseSpawnPlayerPositionObject.transform.position;
     }
+
+    public void SpawnPlayerAtTempBossRoom()
+    {
+        StartCoroutine(FadeFromBlack());
+    }
+    private IEnumerator FadeFromBlack()
+    {
+        GameManager.Instance.assets.blackFade.FadeToBlack();
+        yield return new WaitForSecondsRealtime(1f);
+        GameManager.Instance.assets.Player.transform.position = GameManager.Instance.LevelManager.TempBossRoom.StartPosition.position;
+        GameManager.Instance.assets.blackFade.FadeFromBlack();
+        gameObject.SetActive(false);
+    }
 }

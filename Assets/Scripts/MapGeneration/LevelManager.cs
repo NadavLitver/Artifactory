@@ -18,6 +18,8 @@ public class LevelManager : MonoBehaviour
     List<Room> createdRooms = new List<Room>();
     RoomConnectivity roomConnectionCheck = new RoomConnectivity();
     Room active;
+
+    public Room TempBossRoom;
     public List<Room> CurrentRunRooms { get => currentRunRooms; }
     public Room FirstRoom { get => firstRoom; set => firstRoom = value; }
     public int NumberOfRooms { get => numberOfRooms; }

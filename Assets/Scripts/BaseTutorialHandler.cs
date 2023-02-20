@@ -396,6 +396,6 @@ public class BaseTutorialHandler : MonoBehaviour
     private void OnDisable()
     {
         LeanTween.cancelAll();
-        zooIneractable.gameObject.SetActive(true);
+        //zooIneractable.gameObject.SetActive(true);
     }
 }

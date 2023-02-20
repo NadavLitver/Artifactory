@@ -128,6 +128,7 @@ public class AssetsRefrence
     [Header("CAMERA"), Space(10)]
     public CamPositionSetter camPositionSetter;
     public Cinemachine.CinemachineVirtualCamera mainVCam;
+    public CinemachineShake CamShaker;
 
     [Header("HEALTH BAR"), Space(10)]
     public ObjectPool CubePool;
@@ -171,6 +172,8 @@ public class AssetsRefrence
     public AudioSource GlimmeringWoodsAudioSource;
     [Header("ZOO")]
     public AnimalPickup AnimalPickupPrefab;
+    [Header("Boss")]
+    public Animator BossAnimator;
 
 
 }

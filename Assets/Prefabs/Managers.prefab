@@ -497,22 +497,25 @@ MonoBehaviour:
     WindChimes: {fileID: 21300000, guid: 831dc538b0dbe374e9fa8f649d08f38b, type: 3}
     KnifeOfTheHunter: {fileID: 0}
     TurtlePendant: {fileID: 0}
+    RelicBarImage: {fileID: 8755856494043025234, guid: 75017b6aa3987744b8c16ccdc5e620ba, type: 3}
     relicDropPrefab: {fileID: 437440526707936933, guid: 4a49ca5b1ebf92948a2d0b8c980df404, type: 3}
     camPositionSetter: {fileID: 0}
     mainVCam: {fileID: 0}
+    CamShaker: {fileID: 0}
     CubePool: {fileID: 0}
     blackFade: {fileID: 0}
     mobileControls: {fileID: 0}
     mobileButtonHandler: {fileID: 0}
     endInteractablePanel: {fileID: 0}
     CraftingPanel: {fileID: 0}
+    baseTutorialHandler: {fileID: 0}
     BounderScout: {fileID: 8467794796436600464, guid: 1ec8468c7beb4c54582ca1c7171703da, type: 3}
     RelicCraftingMapNode: {fileID: 1946464524881845352, guid: b4057901708be3c49843f221eafadf56, type: 3}
     WeaponCraftingMapNode: {fileID: 1946464524881845352, guid: f2ad09b178eca92488ca551a1ee7d5b9, type: 3}
     GlimmeringSprite: {fileID: 21300000, guid: 66a3d44b669a40942bbc63810551d001, type: 3}
     BranchSprite: {fileID: 21300000, guid: fa91225964ff1234ea62b1d40b743f2f, type: 3}
     RuneSprite: {fileID: 21300000, guid: 73a165a53d281ee4a88b8372312ffe7b, type: 3}
-    TuffCointSprite: {fileID: 21300000, guid: f6e4d09e4e4be6a49878bba310f8e330, type: 3}
+    TuffCointSprite: {fileID: 1749810795, guid: f6e4d09e4e4be6a49878bba310f8e330, type: 3}
     LeatherSprite: {fileID: 21300000, guid: 681cdb2853ae7144c815013a86c8da7c, type: 3}
     ItemUiSlot: {fileID: 1052155130899679002, guid: d0f22065e4078e447bddcdb0b03a269c, type: 3}
     ItemPickUpPrefab: {fileID: 1370576873857019599, guid: dccd0e3c00ef4894a95b1f6652bb72a7, type: 3}
@@ -814,12 +817,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   zooSize: 3
   zooSlots: []
-  gems:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   zooPanel: {fileID: 0}
   test: {fileID: 11400000, guid: d36eb2db126b23149bd05e7e446290d4, type: 2}
+  spawnCoinParticle: {fileID: 0}
 --- !u!1 &7028819647897419526
 GameObject:
   m_ObjectHideFlags: 0
@@ -938,6 +938,7 @@ MonoBehaviour:
   numberOfRooms: 7
   mapGenerator: {fileID: 1608005968017932032}
   maxNuberOfChests: 1
+  TempBossRoom: {fileID: 0}
 --- !u!1001 &6662966006180783118
 PrefabInstance:
   m_ObjectHideFlags: 0
