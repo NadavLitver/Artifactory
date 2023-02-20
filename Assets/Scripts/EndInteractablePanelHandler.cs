@@ -32,7 +32,7 @@ public class EndInteractablePanelHandler : MonoBehaviour
     private IEnumerator FadeFromBlack()
     {
         GameManager.Instance.assets.blackFade.FadeToBlack();
-        yield return new WaitForSecondsRealtime(1f);
+        yield return new WaitForSecondsRealtime(2.5f);
         GameManager.Instance.assets.Player.transform.position = GameManager.Instance.LevelManager.TempBossRoom.StartPosition.position;
         GameManager.Instance.assets.blackFade.FadeFromBlack();
         gameObject.SetActive(false);
