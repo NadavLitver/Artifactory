@@ -121,6 +121,7 @@ public class AssetsRefrence
     public Sprite WindChimes;
     public Sprite KnifeOfTheHunter;
     public Sprite TurtlePendant;
+    public Sprite LegendaryCloneRelic;
     public Image RelicBarImage;
 
     public RelicDrop relicDropPrefab;
@@ -139,7 +140,7 @@ public class AssetsRefrence
     public GameObject endInteractablePanel;
     public GameObject CraftingPanel;
     public BaseTutorialHandler baseTutorialHandler;
-
+    public ChoiceWorldManager choiceWorldHandler;
     [Header("Bounder"), Space(10)]
     public BounderScout BounderScout;
 

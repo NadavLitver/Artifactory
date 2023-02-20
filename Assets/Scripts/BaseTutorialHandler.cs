@@ -37,6 +37,8 @@ public class BaseTutorialHandler : MonoBehaviour
     [SerializeField] Dialogue zooDialogue;
     [SerializeField] Button feedButtonFirstPanel;
     [SerializeField] Button ExitButtonZoo;
+    [SerializeField] Button TuffCoinButtonFirstPanel;
+    [SerializeField] GameObject firstSlot;
 
     bool typing;
     bool didPlayerContinue;
@@ -248,7 +250,10 @@ public class BaseTutorialHandler : MonoBehaviour
                 feedButtonFirstPanel.onClick.AddListener(setWasClickedTrue);
                 yield return new WaitUntil(() => wasClicked == true);
                 feedButtonFirstPanel.onClick.RemoveListener(setWasClickedTrue);
-
+                if (TuffCoinButtonFirstPanel.gameObject.activeInHierarchy)
+                {
+                    TuffCoinButtonFirstPanel.enabled = false;
+                }
                 //LeanTween.move(Hand.gameObject, inventoryCraftingPanel.CreatedSlotsGetter[0].transform.position, 1);
 
             }
@@ -258,13 +263,15 @@ public class BaseTutorialHandler : MonoBehaviour
                 void setWasClickedTrue() => wasClicked = true;
                 LeanTween.move(Hand.gameObject, ExitButtonZoo.transform.position, 1);
                 ExitButtonZoo.onClick.AddListener(setWasClickedTrue);
-                yield return new WaitUntil(() => wasClicked == true);
+                yield return new WaitUntil(() => wasClicked);
                 ExitButtonZoo.onClick.RemoveListener(setWasClickedTrue);
                 textComponent = startingTextComponent;
                 craftingPanel.SetActive(false);
                 StartPanel.SetActive(true);
+                zooIneractable.gameObject.SetActive(false);
+                craftingMachine.gameObject.SetActive(false);
+                cloneTree.gameObject.SetActive(false);
                 Hand.gameObject.SetActive(false);
-                GameManager.Instance.Zoo.IncreaseFoodAmount(5);
                 // LeanTween.move(Hand.gameObject, inventoryCraftingPanel.CreatedSlotsGetter[1].transform.position, 1);
 
 
@@ -276,28 +283,86 @@ public class BaseTutorialHandler : MonoBehaviour
                 m_interactable.gameObject.SetActive(true);
                 zooIneractable.gameObject.SetActive(false);
                 Arrow.gameObject.SetActive(true);
-                Arrow.transform.position = interactButton.transform.position + (Vector3.up * 160);
-                yield return new WaitUntil(() => didPlayerContinue);
+                while (!didPlayerContinue)
+                {
+                    Arrow.transform.position = Camera.main.WorldToScreenPoint(firstSlot.transform.position + (Vector3.up));
+                    yield return new WaitForEndOfFrame();
+                }
+                // 
                 didPlayerContinue = false;
 
             }
             else if (i == 3)
             {
-
-
+                zooIneractable.gameObject.SetActive(true);
+                m_interactable.gameObject.SetActive(false);
+                bool interactedWithZoo = false;
+                void SetInteractionTrue() => interactedWithZoo = true;
+                zooIneractable.OnInteracted.AddListener(SetInteractionTrue);
+                while (!interactedWithZoo)
+                {
+                    Arrow.transform.position = Camera.main.WorldToScreenPoint(firstSlot.transform.position + (Vector3.up));
+                    yield return new WaitForEndOfFrame();
+                }
+                StartPanel.SetActive(false);
+                craftingPanel.SetActive(true);
+                textComponent = craftingTextComponent;
+                zooIneractable.OnInteracted.RemoveListener(SetInteractionTrue);
+                Arrow.gameObject.SetActive(false);
             }
             else if (i == 4)
             {
-
-
+                Hand.gameObject.SetActive(true);
+                TuffCoinButtonFirstPanel.enabled = true;
+                LeanTween.move(Hand.gameObject, TuffCoinButtonFirstPanel.transform.position, 1);
+                bool clickedTuffCoin = false;
+                void SetInteractionTrue() => clickedTuffCoin = true;
+                TuffCoinButtonFirstPanel.onClick.AddListener(SetInteractionTrue);
+                yield return new WaitUntil(() => clickedTuffCoin);
 
             }
             else if (i == 5)
             {
 
-
-
+                bool wasClicked = false;
+                void setWasClickedTrue() => wasClicked = true;
+                LeanTween.move(Hand.gameObject, ExitButtonZoo.transform.position, 1);
+                ExitButtonZoo.onClick.AddListener(setWasClickedTrue);
+                yield return new WaitUntil(() => wasClicked);
+                ExitButtonZoo.onClick.RemoveListener(setWasClickedTrue);
+                textComponent = startingTextComponent;
+                craftingPanel.SetActive(false);
+                StartPanel.SetActive(true);
+                textComponent.text = "Go and interact with the crafting station";
+                zooIneractable.gameObject.SetActive(false);
+                craftingMachine.gameObject.SetActive(false);
+                cloneTree.gameObject.SetActive(false);
+                Hand.gameObject.SetActive(false);
+                yield return KeepArrowOnCraftingTable();
+                yield return new WaitUntil(() => didPlayerUseCrafting);
+                Arrow.SetActive(false);
             }
+            else if(i == 6)
+            {
+                Hand.gameObject.SetActive(true);
+                LeanTween.move(Hand.gameObject, inventoryCraftingPanel.CreatedSlotsGetter[3].transform.position, 1);
+                yield return new WaitUntil(() => selectedCraftingPanel.SelectedSlots[0].Occupied  && selectedCraftingPanel.SelectedSlots[0].slot.MyItemType == ItemType.TuffCoin );
+            }
+            else if (i == 7)
+            {
+                LeanTween.move(Hand.gameObject, CraftButton.transform.position, 1);
+                bool wasCrafted = false;
+                void SetCrafted() => wasCrafted = true;
+                CraftButton.onClick.AddListener(SetCrafted);
+                yield return new WaitUntil(() => wasCrafted);
+                CraftButton.onClick.RemoveListener(SetCrafted);
+                yield return new WaitForSeconds(0.5f);
+                this.gameObject.SetActive(false);
+            }
+            //else if(i == 8)
+            //{
+               
+            //}
         }
 
         craftingPanel.SetActive(false);
@@ -361,14 +426,18 @@ public class BaseTutorialHandler : MonoBehaviour
 
     IEnumerator KeepArrowOnCraftingTable()
     {
+        Arrow.gameObject.SetActive(true);
         craftingMachine.gameObject.SetActive(true);
         m_interactable.gameObject.SetActive(false);
-        craftingMachine.OnInteract.AddListener(() => didPlayerUseCrafting = true);
+        void SetPlayerUseCrafting() => didPlayerUseCrafting =true;
+        craftingMachine.OnInteract.AddListener(() => SetPlayerUseCrafting());
         while (!didPlayerGetCloseToCrafting)
         {
             Arrow.transform.position = Camera.main.WorldToScreenPoint(craftingMachine.transform.position + (Vector3.up * 2));
             yield return new WaitForEndOfFrame();
         }
+        
+
         Arrow.transform.position = interactButton.transform.position + (Vector3.up * 160);
     }
     IEnumerator KeepArrowOnCloneTreeTable()
@@ -397,5 +466,6 @@ public class BaseTutorialHandler : MonoBehaviour
     {
         LeanTween.cancelAll();
         zooIneractable.gameObject.SetActive(true);
+     
     }
 }
