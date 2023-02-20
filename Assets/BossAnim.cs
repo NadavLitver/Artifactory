@@ -19,7 +19,7 @@ public class BossAnim : StateMachineBehaviour
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        GameManager.Instance.assets.blackFade.FadeToBlack();
+        GameManager.Instance.StartCoroutine(ResendToBase());
     }
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
@@ -33,4 +33,25 @@ public class BossAnim : StateMachineBehaviour
     //{
     //    // Implement code that sets up animation IK (inverse kinematics)
     //}
+
+    IEnumerator ResendToBase()
+    {
+        GameManager.Instance.assets.blackFade.FadeToBlack();
+        Color endColor = GameManager.Instance.assets.ThanksForPlaying.color;
+        GameManager.Instance.assets.ThanksForPlaying.color = new Color(GameManager.Instance.assets.ThanksForPlaying.color.r, GameManager.Instance.assets.ThanksForPlaying.color.g, GameManager.Instance.assets.ThanksForPlaying.color.b, 0);
+        Color startColor = GameManager.Instance.assets.ThanksForPlaying.color;
+        GameManager.Instance.assets.ThanksForPlaying.gameObject.SetActive(true);
+        float counter = 0f;
+        while (counter < 1)
+        {
+            GameManager.Instance.assets.ThanksForPlaying.color = Color.Lerp(startColor, endColor, counter);
+            counter += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        yield return new WaitForSecondsRealtime(2f);
+        GameManager.Instance.assets.blackFade.FadeFromBlack();
+        GameManager.Instance.assets.ThanksForPlaying.gameObject.SetActive(false);
+        GameManager.Instance.assets.baseFatherObject.SetActive(true);
+        GameManager.Instance.assets.Player.transform.position = GameManager.Instance.assets.baseSpawnPlayerPositionObject.transform.position;
+    }
 }

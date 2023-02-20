@@ -24,6 +24,7 @@ public class EndInteractablePanelHandler : MonoBehaviour
         GameManager.Instance.assets.Player.transform.position = GameManager.Instance.assets.baseSpawnPlayerPositionObject.transform.position;
     }
 
+    [ContextMenu("test Boss")]
     public void SpawnPlayerAtTempBossRoom()
     {
         GameManager.Instance.LevelManager.TempBossRoom.gameObject.SetActive(true);
