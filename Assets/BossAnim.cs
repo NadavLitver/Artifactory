@@ -8,6 +8,7 @@ public class BossAnim : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         GameManager.Instance.assets.CamShaker.Shake(new DamageHandler() { amount = 40});
+        GameManager.Instance.StartCoroutine(ResendToBase());
     }
 
     // OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
@@ -17,10 +18,7 @@ public class BossAnim : StateMachineBehaviour
     //}
 
     // OnStateExit is called when a transition ends and the state machine finishes evaluating this state
-    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
-    {
-        GameManager.Instance.StartCoroutine(ResendToBase());
-    }
+   
 
     // OnStateMove is called right after Animator.OnAnimatorMove()
     //override public void OnStateMove(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -36,7 +34,9 @@ public class BossAnim : StateMachineBehaviour
 
     IEnumerator ResendToBase()
     {
-        GameManager.Instance.assets.blackFade.FadeToBlack();
+        yield return new WaitForSeconds(1.5f);
+        yield return GameManager.Instance.assets.blackFade.GetFadeToBlackRoutine();
+        
         Color endColor = GameManager.Instance.assets.ThanksForPlaying.color;
         GameManager.Instance.assets.ThanksForPlaying.color = new Color(GameManager.Instance.assets.ThanksForPlaying.color.r, GameManager.Instance.assets.ThanksForPlaying.color.g, GameManager.Instance.assets.ThanksForPlaying.color.b, 0);
         Color startColor = GameManager.Instance.assets.ThanksForPlaying.color;
@@ -48,7 +48,7 @@ public class BossAnim : StateMachineBehaviour
             counter += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        yield return new WaitForSecondsRealtime(2f);
+        yield return new WaitForSecondsRealtime(4f);
         GameManager.Instance.assets.blackFade.FadeFromBlack();
         GameManager.Instance.assets.ThanksForPlaying.gameObject.SetActive(false);
         GameManager.Instance.assets.baseFatherObject.SetActive(true);

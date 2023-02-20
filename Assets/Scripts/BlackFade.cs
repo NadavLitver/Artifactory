@@ -19,6 +19,10 @@ public class BlackFade : MonoBehaviour
     {
         StartCoroutine(LerpAlpha(1, fadeToBlackCurve));
     }
+    public Coroutine GetFadeToBlackRoutine()
+    {
+      return StartCoroutine(LerpAlpha(1, fadeToBlackCurve));
+    }
     public void FadeFromBlack()
     {
         StartCoroutine(LerpAlpha(0, fadeFromBlackCurve));
