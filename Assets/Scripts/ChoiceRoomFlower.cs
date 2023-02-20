@@ -25,6 +25,9 @@ public class ChoiceRoomFlower : Interactable
         {
             return;
         }
-        //open ui
+        GameManager.Instance.assets.RelicChoicePanel.CacheLeftRelic(left.MyRelic);
+        GameManager.Instance.assets.RelicChoicePanel.CacheRightRelic(right.MyRelic);
+        GameManager.Instance.assets.RelicChoicePanel.CacheFlower(this);
+        GameManager.Instance.assets.RelicChoicePanel.gameObject.SetActive(true);
     }
 }

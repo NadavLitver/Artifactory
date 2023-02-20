@@ -144,6 +144,7 @@ public class AssetsRefrence
     public BaseTutorialHandler baseTutorialHandler;
     public ChoiceWorldManager choiceWorldHandler;
     public TextMeshProUGUI ThanksForPlaying;
+    public RelicChoicePanel RelicChoicePanel;
     [Header("Bounder"), Space(10)]
     public BounderScout BounderScout;
 

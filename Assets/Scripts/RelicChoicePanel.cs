@@ -15,13 +15,13 @@ public class RelicChoicePanel : MonoBehaviour
     }
     public void CacheRightRelic(Relic relic)
     {
-        leftRelic = relic;
+        rightRelic = relic;
         rightImage.sprite = GameManager.Instance.RelicManager.GetRelicSpriteFromRelic(relic);
     }
 
     public void CacheLeftRelic(Relic relic)
     {
-        rightRelic = relic;
+        leftRelic = relic;
         leftImage.sprite = GameManager.Instance.RelicManager.GetRelicSpriteFromRelic(relic);
     }
 
@@ -39,7 +39,7 @@ public class RelicChoicePanel : MonoBehaviour
     //left button
     public void DropLeftRelic()
     {
-        RelicDrop drop = Instantiate(GameManager.Instance.assets.relicDropPrefab, transform.position, Quaternion.identity, transform);
+        RelicDrop drop = Instantiate(GameManager.Instance.assets.relicDropPrefab, flower.transform.position, Quaternion.identity);
         drop.CacheRelic(leftRelic);
         flower.ChoseRelic = true;
         flower.Anim.Play("OpenLeft");
