@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 
 [DefaultExecutionOrder(-10)]
@@ -142,6 +143,7 @@ public class AssetsRefrence
     public GameObject CraftingPanel;
     public BaseTutorialHandler baseTutorialHandler;
     public ChoiceWorldManager choiceWorldHandler;
+    public TextMeshProUGUI ThanksForPlaying;
     [Header("Bounder"), Space(10)]
     public BounderScout BounderScout;
 
