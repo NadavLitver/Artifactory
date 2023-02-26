@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class ShroomCap : Actor, IDamagable
+public class ShroomCap : MonoBehaviour
 {
     public AudioSource m_audioSource;
     public Rigidbody2D RB;
@@ -29,8 +29,6 @@ public class ShroomCap : Actor, IDamagable
     void Start()
     {
         RB = GetComponent<Rigidbody2D>();
-        effectable = false;
-        OnDeath.AddListener(() => gameObject.SetActive(false));
         groundCheck.OnGrounded.AddListener(DisableGravity);
     }
     private void DisableGravity()
@@ -43,10 +41,7 @@ public class ShroomCap : Actor, IDamagable
     {
         lastThrown = Time.time;
         startingGrav = RB.gravityScale;
-        Heal(new DamageHandler() { amount = maxHP });
         Destroyed = false;
-        OnDeath.AddListener(DestroyedOn);
-
     }
 
     private void OnDisable()

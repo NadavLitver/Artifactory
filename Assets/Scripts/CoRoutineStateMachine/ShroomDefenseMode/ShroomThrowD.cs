@@ -16,7 +16,7 @@ public class ShroomThrowD : BaseShroomDState
         handler.CurrentCap.gameObject.SetActive(true);
         handler.CurrentCap.transform.position = new Vector3(transform.position.x, transform.position.y + 0.8f);
         handler.CurrentCap.SetUpPositions(handler.Bounder.MaxPos, handler.Bounder.MinPos);
-        handler.CurrentCap.Throw(handler.GetPlayerDirection() * throwForce);
+        handler.CurrentCap.Throw(new Vector3(handler.GetPlayerDirection().x, 0, 0) * throwForce);
         yield return new WaitForEndOfFrame();
         handler.SwitchToOtherMode();
     }

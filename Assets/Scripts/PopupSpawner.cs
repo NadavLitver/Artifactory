@@ -16,6 +16,10 @@ public class PopupSpawner : MonoBehaviour
 
     private void SpawnDmgPopup(DamageHandler givendmg)
     {
+        if (givendmg.calculateFinalNumberMult() <= 0)
+        {
+            return;
+        }
         GameManager.Instance.PopupManager.SetDamagePopup(givendmg, transform.position);
     }
 }

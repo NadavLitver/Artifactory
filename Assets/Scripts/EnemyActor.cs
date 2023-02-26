@@ -47,7 +47,7 @@ public class EnemyActor : Actor
 
     private void SetUpItemDrop()
     {
-        int temp = UnityEngine.Random.Range(0, Enum.GetNames(typeof(ItemType)).Length - 1);
+        int temp = UnityEngine.Random.Range(0, Enum.GetNames(typeof(ItemType)).Length - 2);
         item = (ItemType)temp;
     }
 
