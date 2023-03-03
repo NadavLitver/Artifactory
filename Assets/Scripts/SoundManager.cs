@@ -59,6 +59,10 @@ public class SoundManager : MonoBehaviour
     }
     public static void Play(Sound sound, Vector3 worldPos)
     {
+        if (ReferenceEquals(GameManager.Instance.soundManager.m_pool, null))
+        {
+            return;
+        }
         GameObject soundGO = GameManager.Instance.soundManager.m_pool.GetPooledObject();
         soundGO.SetActive(true);
         soundGO.transform.position = worldPos;
