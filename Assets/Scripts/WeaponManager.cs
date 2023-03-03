@@ -15,8 +15,8 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] Animator anim;
     private void Start()
     {
-        EquipWeapon(playerWeapons[0]);
         m_actor = GetComponentInParent<Actor>();
+        EquipWeapon(playerWeapons[0]);
         if (ReferenceEquals(m_actor, null))
         {
             Debug.LogError("Ability Combo on" + gameObject.name + " is Null");

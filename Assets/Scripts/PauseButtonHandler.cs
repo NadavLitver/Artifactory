@@ -13,6 +13,7 @@ public class PauseButtonHandler : MonoBehaviour
         PauseHandler = GameManager.Instance.pauseMenuHandler;
         m_button = GetComponent<Button>();
         m_button.onClick.AddListener(OnPause);
+        
     }
     public void OnPause()
     {

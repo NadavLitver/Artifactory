@@ -230,7 +230,7 @@ public class BaseTutorialHandler : MonoBehaviour
     {
         typing = true;
         Arrow.SetActive(false);
-
+        ExitButtonZoo.enabled = false;
         craftingPanel.SetActive(true);
         StartPanel.SetActive(false);
         TextMeshProUGUI textComponent = craftingTextComponent;
@@ -262,6 +262,8 @@ public class BaseTutorialHandler : MonoBehaviour
                 bool wasClicked = false;
                 void setWasClickedTrue() => wasClicked = true;
                 LeanTween.move(Hand.gameObject, ExitButtonZoo.transform.position, 1);
+                ExitButtonZoo.enabled = true;
+
                 ExitButtonZoo.onClick.AddListener(setWasClickedTrue);
                 yield return new WaitUntil(() => wasClicked);
                 ExitButtonZoo.onClick.RemoveListener(setWasClickedTrue);
