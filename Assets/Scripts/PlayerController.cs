@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
         OnsGroundCheck.OnNotGrounded.AddListener(TurnOnJumpEffect);
         OnsGroundCheck.OnGrounded.AddListener(TurnOnLandEffect);
         SetHashes();
+        OnFlip.AddListener(SwitchSensorPositons);
     }
     private void SetHashes()
     {
@@ -271,6 +272,14 @@ public class PlayerController : MonoBehaviour
         transform.localScale = new Vector3(isLookingRight ? StartingScale.x : -StartingScale.x, StartingScale.y, 1);
         OnFlip?.Invoke();
     }
+
+    public void SwitchSensorPositons()
+    {
+        Vector3 rightPos = RightSensors.transform.position;
+        RightSensors.transform.position = leftSensors.transform.position;
+        leftSensors.transform.position = rightPos;
+    }
+
     public void ResetVelocity()
     {
         velocity = Vector2.zero;
