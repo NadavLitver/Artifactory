@@ -39,7 +39,6 @@ public class BasicSword : Weapon
         yield return player.FreezePlayerForDuration(floatTimeInAirBeforeDash, GravityScaleBeforeDash);
         lastDash = Time.time;
         player.canMove = false;
-        isDashing = true;
         player.ResetVelocity();
         player.ZeroGravity();
         counter = 0;
@@ -47,10 +46,21 @@ public class BasicSword : Weapon
         Vector2 dir = new Vector2(player.transform.localScale.x, 0.1f);
         Vector2 dashVelocity = dashForce * dir;
         player.GetRb.velocity = dashVelocity;
-        yield return new WaitForSeconds(dashDuration);
+        StartCoroutine(DashDuration());
+        player.RightSensors.gameObject.SetActive(true);
+        player.LeftSensors.gameObject.SetActive(true);
+        yield return new WaitUntil(() => !isDashing || player.RightSensors.IsGrounded() || player.LeftSensors.IsGrounded());
+        player.RightSensors.gameObject.SetActive(false);
+        player.LeftSensors.gameObject.SetActive(false);
         player.ResetGravity();
         StartCoroutine(player.JumpApexWait());
         player.canMove = true;
+    }
+
+    private IEnumerator DashDuration()
+    {
+        isDashing = true;
+        yield return new WaitForSecondsRealtime(dashDuration);
         isDashing = false;
     }
 

@@ -534,6 +534,8 @@ Transform:
   - {fileID: 5508809317102165000}
   - {fileID: 1467768457}
   - {fileID: 1388797333}
+  - {fileID: 3221735829256321532}
+  - {fileID: 6526865076254477227}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -625,6 +627,8 @@ MonoBehaviour:
   apexAirTimeGravityChange: 0.1
   apexGravityScale: 5
   ceilingCheckDistance: 1
+  rightSensors: {fileID: 7321470390162770340}
+  leftSensors: {fileID: 59390766291667601}
 --- !u!114 &5508809318791304041
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1189,7 +1193,7 @@ SpriteRenderer:
   m_SortingLayerID: -2069616245
   m_SortingLayer: 4
   m_SortingOrder: 10
-  m_Sprite: {fileID: 1883508514, guid: 0de4057198c2d0d48aa35b13f7310dbb, type: 3}
+  m_Sprite: {fileID: -67119287, guid: d15c7d228c0907d4a9b0cda6ae35611b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1197,7 +1201,7 @@ SpriteRenderer:
   m_Size: {x: 5.12, y: 5.12}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &1003463036
@@ -1343,6 +1347,132 @@ Transform:
   m_Father: {fileID: 840070347753010960}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7834710151453349997
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6526865076254477227}
+  - component: {fileID: 59390766291667601}
+  m_Layer: 6
+  m_Name: LeftSensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6526865076254477227
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7834710151453349997}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.12, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 840070347753010960}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &59390766291667601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7834710151453349997}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6193962b013a7cb4593f05fbab66e330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensors:
+  - Direcion: {x: -1, y: 0}
+    Offset: {x: 0, y: 0}
+    Range: 1
+  - Direcion: {x: -1, y: 1}
+    Offset: {x: 0, y: 0}
+    Range: 0.75
+  - Direcion: {x: -1, y: -1}
+    Offset: {x: 0, y: 0}
+    Range: 0.75
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 37504
+  OnGrounded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNotGrounded:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!1 &8807402987338071027
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3221735829256321532}
+  - component: {fileID: 7321470390162770340}
+  m_Layer: 6
+  m_Name: RightSensor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &3221735829256321532
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8807402987338071027}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.56, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 840070347753010960}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7321470390162770340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8807402987338071027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6193962b013a7cb4593f05fbab66e330, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sensors:
+  - Direcion: {x: 1, y: 0}
+    Offset: {x: 0, y: 0}
+    Range: 1
+  - Direcion: {x: 1, y: 1}
+    Offset: {x: 0, y: 0}
+    Range: 0.75
+  - Direcion: {x: 1, y: -1}
+    Offset: {x: 0, y: 0}
+    Range: 0.75
+  hitLayer:
+    serializedVersion: 2
+    m_Bits: 37504
+  OnGrounded:
+    m_PersistentCalls:
+      m_Calls: []
+  OnNotGrounded:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &231805843970902974
 PrefabInstance:
   m_ObjectHideFlags: 0
