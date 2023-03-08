@@ -60,6 +60,8 @@ public class PlayerController : MonoBehaviour
     [Range(0, 1), SerializeField, Tooltip("How much time does the gravity change apply after hitting apex in jump")] float apexAirTimeGravityChange;
     [Range(0, 100), SerializeField, Tooltip("What is the new gravity applied at apex")] float apexGravityScale;
     [Range(0, 1), SerializeField] float ceilingCheckDistance;
+    [SerializeField] private SensorGroup rightSensors;
+    [SerializeField] private SensorGroup leftSensors;
 
 
     public float GetHorInput { get => horInput; set => horInput = value; }
@@ -75,6 +77,8 @@ public class PlayerController : MonoBehaviour
     public Transform ClawEffectPoint { get => clawEffectPoint; }
     public Transform JumpEffectPoint { get => jumpEffectPoint; }
     public SensorGroup OnsGroundCheck1 { get => OnsGroundCheck; }
+    public SensorGroup RightSensors { get => rightSensors; }
+    public SensorGroup LeftSensors { get => leftSensors; }
 
     private int FallingHash;
     private int GroundedHash;
@@ -91,6 +95,7 @@ public class PlayerController : MonoBehaviour
         OnsGroundCheck.OnNotGrounded.AddListener(TurnOnJumpEffect);
         OnsGroundCheck.OnGrounded.AddListener(TurnOnLandEffect);
         SetHashes();
+        OnFlip.AddListener(SwitchSensorPositons);
     }
     private void SetHashes()
     {
@@ -255,7 +260,7 @@ public class PlayerController : MonoBehaviour
                 currentAccel = noInput ? deaccelerationSpeed : AirAccelerationSpeed;
 
             }
-         
+
 
             acceleration = Mathf.MoveTowards(acceleration, accelGoal, currentAccel * Time.deltaTime);
 
@@ -270,6 +275,14 @@ public class PlayerController : MonoBehaviour
         transform.localScale = new Vector3(isLookingRight ? StartingScale.x : -StartingScale.x, StartingScale.y, 1);
         OnFlip?.Invoke();
     }
+
+    public void SwitchSensorPositons()
+    {
+        Vector3 rightPos = RightSensors.transform.position;
+        RightSensors.transform.position = leftSensors.transform.position;
+        leftSensors.transform.position = rightPos;
+    }
+
     public void ResetVelocity()
     {
         velocity = Vector2.zero;
