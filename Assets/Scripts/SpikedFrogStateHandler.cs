@@ -47,13 +47,13 @@ public class SpikedFrogStateHandler : StateHandler
     public void Freeze()
     {
         frozen = true;
-        RB.constraints = RigidbodyConstraints2D.FreezePosition;
+        RB.constraints = RigidbodyConstraints2D.FreezeAll;
         LeanTween.delayedCall(freezeDuration, UnFreeze);
     }
     public void Freeze(float freezeDur)
     {
         frozen = true;
-        RB.constraints = RigidbodyConstraints2D.FreezePosition;
+        RB.constraints = RigidbodyConstraints2D.FreezeAll;
         LeanTween.delayedCall(freezeDur, UnFreeze);
     }
     public void UnFreeze()

@@ -112,27 +112,11 @@ public class EnemyRayData : MonoBehaviour
         return HitPoints[randomPoint];
     }
     int GetRayDirection(int i) => (i % 2 == 0) ? 1 : -1;
-    private void OnDrawGizmosSelected()
-    {
-        if (Application.isPlaying)
-        {
-            for (int i = 0; i < rayPoints.Count; i++)
-            {
-                Gizmos.DrawWireSphere(rayPoints[i], 0.5f);
-                Gizmos.DrawRay(rayPoints[i], Vector2.down * RayLength);
-            }
-            for (int i = 0; i < HitPoints.Count; i++)
-            {
-                Gizmos.color = Color.green;
-                Gizmos.DrawWireSphere(HitPoints[i], 0.5f);
-
-            }
-        }
-    }
+  
 
     public Vector2 GetClosestPointToPoint(Vector2 givenPos)
     {
-        Vector2 currentPoint  = HitPoints[0];
+        Vector2 currentPoint = HitPoints[0];
         foreach (var item in HitPoints)
         {
             GameManager.Instance.generalFunctions.CalcRange(currentPoint, givenPos);
@@ -148,12 +132,23 @@ public class EnemyRayData : MonoBehaviour
     {
         if (Application.isPlaying)
         {
-          Gizmos.DrawWireCube(startingPos + m_boundingBox.offset, Vector2.one * m_boundingBox.size);
+            Gizmos.DrawWireCube(startingPos + m_boundingBox.offset, Vector2.one * m_boundingBox.size);
 
+            for (int i = 0; i < rayPoints.Count; i++)
+            {
+                Gizmos.DrawWireSphere(rayPoints[i], 0.5f);
+                Gizmos.DrawRay(rayPoints[i], Vector2.down * RayLength);
+            }
+            for (int i = 0; i < HitPoints.Count; i++)
+            {
+                Gizmos.color = Color.green;
+                Gizmos.DrawWireSphere(HitPoints[i], 0.5f);
+
+            }
         }
         else
         {
-         Gizmos.DrawWireCube((Vector2)transform.position + m_boundingBox.offset, Vector2.one * m_boundingBox.size);
+            Gizmos.DrawWireCube((Vector2)transform.position + m_boundingBox.offset, Vector2.one * m_boundingBox.size);
 
         }
         //Gizmos.DrawWireSphere(new Vector2(m_boundingBox.maxX, m_boundingBox.maxY),1);

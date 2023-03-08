@@ -51,7 +51,6 @@ public class JoystickConfiner : MonoBehaviour
 
         }
      
-        // Debug.Log("CurrentPositionOnScreen Primary :" + currentPosOnScreen + "CurrentPositionOnScreen Secondary" + currentPosOnScreenSecondary);
       
       
 

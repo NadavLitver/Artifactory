@@ -42,7 +42,7 @@ public class BallLauncher : MonoBehaviour
             return;
         LaunchData currentLaunchData = CalculateLaunchData(target);
         StartCoroutine(IEStopWhenTimeOver(currentLaunchData));
-
+       
         ball.velocity = currentLaunchData.initialVelocity;//use the calc func to get new one
 
     }
@@ -92,5 +92,9 @@ public class BallLauncher : MonoBehaviour
             this.timeToTarget = timeToTarget;
         }
 
+    }
+    private void OnDisable()
+    {
+        IsJumping = false;
     }
 }
