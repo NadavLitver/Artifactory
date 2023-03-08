@@ -53,6 +53,7 @@ public class BaseTutorialHandler : MonoBehaviour
         if (BetweenSceneInfo.didBaseTutorialHappen)
         {
             this.gameObject.SetActive(false);
+            zooIneractable.firstInteraction = true;
             return;
         }
         Arrow.transform.position = interactButton.transform.position + (Vector3.up * 160);

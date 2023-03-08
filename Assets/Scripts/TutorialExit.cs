@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class TutorialExit : MonoBehaviour
 {
@@ -30,7 +31,7 @@ public class TutorialExit : MonoBehaviour
         {
             GameManager.Instance.assets.blackFade.FadeToBlack();
             yield return new WaitForSeconds(1.5f);
-            GameManager.Instance.LoadMainMenu();
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
             //do last thing and break;
             yield break;
         }

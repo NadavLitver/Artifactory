@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class ZooIneractable : Interactable
 {
-    bool firstInteraction;
+    internal bool firstInteraction;
     public UnityEvent OnInteracted;
     public override void Interact()
     {
