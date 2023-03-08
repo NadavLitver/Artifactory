@@ -20,8 +20,11 @@ public class InputManager : MonoBehaviour
     public UnityEvent onJumpDown;
 
 
-    public UnityEvent OnTouchDown;
-    public UnityEvent OnTouchUp;
+    public UnityEvent<bool> OnPrimaryTouchDown;
+    public UnityEvent<bool> OnPrimaryTouchUp;
+
+    public UnityEvent<bool> OnSecondaryTouchDown;
+    public UnityEvent<bool> OnSecondaryTouchUp;
 
     public UnityEvent OnInteract;
 
@@ -33,12 +36,25 @@ public class InputManager : MonoBehaviour
         inputs.BaseMovement.Mobility.started += InvokeOnMobilityDown;
         inputs.BaseMovement.Ultimate.started += InvokeOnUltimateDown;
         inputs.BaseMovement.jump.started += InvokeOnJumpDown;
-        inputs.BaseMovement.Touch.started += Touch_started;
-        inputs.BaseMovement.Touch.canceled += Touch_canceled;
+        inputs.BaseMovement.PrimaryTouch.started += PrimaryTouch_started;
+        inputs.BaseMovement.PrimaryTouch.canceled += PrimaryTouch_canceled;
+        inputs.BaseMovement.SecondaryTouch.started += SecondaryTouch_started;
+        inputs.BaseMovement.SecondaryTouch.canceled += SecondaryTouch_canceled;
         inputs.BaseMovement.Interact.started += Interact_started;
 
 
 
+    }
+
+    private void SecondaryTouch_canceled(InputAction.CallbackContext obj)
+    {
+        OnSecondaryTouchUp?.Invoke(false);
+
+    }
+
+    private void SecondaryTouch_started(InputAction.CallbackContext obj)
+    {
+        OnSecondaryTouchDown?.Invoke(false);
     }
 
     private void Interact_started(InputAction.CallbackContext obj)
@@ -46,20 +62,23 @@ public class InputManager : MonoBehaviour
         OnInteract.Invoke();
     }
 
-    private void Touch_canceled(InputAction.CallbackContext obj)
+    private void PrimaryTouch_canceled(InputAction.CallbackContext obj)
     {
-        OnTouchUp.Invoke();
+        OnPrimaryTouchUp.Invoke(true);
     }
 
-    private void Touch_started(InputAction.CallbackContext obj)
+    private void PrimaryTouch_started(InputAction.CallbackContext obj)
     {
-        OnTouchDown.Invoke();
+        OnPrimaryTouchDown.Invoke(true);
     }
     public Vector2 Touch_ScreenPos()
     {
-        return inputs.BaseMovement.TouchPos.ReadValue<Vector2>();
+        return inputs.BaseMovement.PrimaryTouchPos.ReadValue<Vector2>();
     }
-
+    public Vector2 SecondaryTouch_ScreenPos()
+    {
+        return inputs.BaseMovement.SecondaryTouchPos.ReadValue<Vector2>();
+    }
     private void InvokeOnJumpDown(InputAction.CallbackContext obj)
     {
         onJumpDown.Invoke();

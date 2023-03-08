@@ -219,6 +219,7 @@ public class PlayerController : MonoBehaviour
         {
             if (horInput > 0)
             {
+                horInput = 1;
                 if (!isLookingRight)
                 {
                     isLookingRight = true;
@@ -229,6 +230,8 @@ public class PlayerController : MonoBehaviour
             }
             else if (horInput < 0)
             {
+                horInput = -1;
+
                 if (isLookingRight)
                 {
                     isLookingRight = false;
