@@ -201,7 +201,7 @@ public class CraftingMap : MonoBehaviour
 
     public void UpdateActivatedLines(List<ItemType> givenItems)
     {
-        TurnOffLines();
+        //TurnOffLines();
 
         for (int i = 0; i < givenItems.Count; i++)
         {
@@ -214,9 +214,11 @@ public class CraftingMap : MonoBehaviour
                 if (givenItems[i] == createdLines[j].Nodes[i].Mycomponent.itemType && IsLineActiveUpTo(createdLines[j], i))
                 {
                     createdLines[j].Nodes[i]/*.Line*/.gameObject.SetActive(true);
+                    createdLines[j].Nodes[i].Cover.SetActive(false);
                     if (createdLines[j].Nodes.Count - 2 == i) //if this is the item before last
                     {
-                        createdLines[j].Nodes[i + 1]/*.Line*/.gameObject.SetActive(true);
+                        //createdLines[j].Nodes[i + 1]/*.Line*/.gameObject.SetActive(true);
+                        createdLines[j].Nodes[i + 1].Cover.SetActive(false);
                         selectedLine = createdLines[j];
                         CraftButton.SetActive(true);
                         //craft button turn on
@@ -245,10 +247,14 @@ public class CraftingMap : MonoBehaviour
     {
         foreach (var line in createdLines)
         {
-            foreach (var node in line.Nodes)
+            for (int i = 1; i < line.Nodes.Count; i++)
             {
-                node./*Line.*/gameObject.SetActive(false);
+                line.Nodes[i].Cover.SetActive(true);
             }
+           /* foreach (var node in line.Nodes)
+            {
+                node.Cover.SetActive(true);
+            }*/
         }
     }
 
@@ -256,7 +262,7 @@ public class CraftingMap : MonoBehaviour
     {
         GameManager.Instance.assets.playerActor.PlayerItemInventory.CraftItem(selectedLine.myRecipe);
         GameManager.Instance.CraftingManager.SelectedCraftingPanel.ClearPanel();
-        TurnOffLines();
+        //TurnOffLines();
         CraftButton.SetActive(false);
     }
 
