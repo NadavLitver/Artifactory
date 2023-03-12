@@ -35,7 +35,7 @@ public class BlackFade : MonoBehaviour
         while (counter < 1)
         {
             m_image.color = new Color(0, 0, 0, Mathf.Lerp(startingAlpha, goal, curve.Evaluate(counter)));
-            counter += Time.deltaTime / 2;
+            counter += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
         GameManager.Instance.assets.mobileControls.SetActive(true);

@@ -28,7 +28,7 @@ public class SpikeCollider : MonoBehaviour
         GameManager.Instance.assets.PlayerController.ResetVelocity();
       
         blackFadeRef.FadeToBlack();
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1.1f);
         blackFadeRef.FadeFromBlack();
 
         if (CheckpointManager.hasPosition)
@@ -40,7 +40,7 @@ public class SpikeCollider : MonoBehaviour
             GameManager.Instance.assets.playerActor.transform.position = GameManager.Instance.LevelManager.Active.transform.position;
         }
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.5f);
         GameManager.Instance.assets.PlayerController.canMove = true;
         playerHit = false;
     }
