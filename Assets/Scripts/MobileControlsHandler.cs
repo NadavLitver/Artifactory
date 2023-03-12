@@ -12,7 +12,10 @@ public class MobileControlsHandler : MonoBehaviour
     [SerializeField] private Sprite[] MobilitySprites;
     [SerializeField] private Image MobilityImageRef;
     bool isAttackOn = true;
-
+    //private void Start()
+    //{
+    //   // SetMobilityOnButton(0);
+    //}
     public void SetMobilityOnButton(int index)
     {
 

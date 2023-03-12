@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -44,7 +45,8 @@ public class ButtonHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public void OnSelect(BaseEventData eventData)
     {
         selected = true;
-        m_selectedText.color = new Color(1, 1, 1, 0.2f);
+        m_selectedText.color = Color.gray;
+       // LeanTween.delayedCall(1f, () => m_selectedText.color = Color.white);
      
       
 
@@ -62,13 +64,12 @@ public class ButtonHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     {
         if (selected)
         {
-            // m_selectedText.color = Color.Lerp(StartingColor, Transperent, Mathf.PingPong(Time.time+1/2, 1));
             m_selectedText.fontSize = Mathf.MoveTowards(m_selectedText.fontSize, startingSize * 1.2f, Time.deltaTime * fontSizeGrowSpeed);
+           
         }
         else
         {
             m_selectedText.fontSize = Mathf.MoveTowards(m_selectedText.fontSize, startingSize, Time.deltaTime * fontSizeGrowSpeed);
-
         }
     }
 
@@ -77,4 +78,11 @@ public class ButtonHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         
         Instantiate(ParticaleSystemOnClick, eventData.pointerCurrentRaycast.worldPosition, Quaternion.identity, null);
     }
+    private void OnDisable()
+    {
+        selected = false;
+        m_selectedText.color = StartingColor;
+        
+    }
+   
 }

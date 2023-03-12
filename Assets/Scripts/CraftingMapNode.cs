@@ -25,6 +25,7 @@ public class CraftingMapNode : MonoBehaviour
     public float Rotation { get => rotation; set => rotation = value; }
     public CustomPos MyPos { get => myPos; }
     public List<CraftingNodeConnection> NodeConnections { get => nodeConnections; set => nodeConnections = value; }
+    public GameObject Cover { get => cover; }
 
     public UnityEvent OnDiscovered;
     private void Start()

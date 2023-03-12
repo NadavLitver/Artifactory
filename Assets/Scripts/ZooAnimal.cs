@@ -10,11 +10,15 @@ public class ZooAnimal : ScriptableObject
     [SerializeField] private int transformAmount;//how many times does the animal needs to be fed to be transformed
     [SerializeField] private CraftingRecipe food;//the items neseccery for each feeding
     [SerializeField] private int amountOfCoinsOnDrop;
+    [SerializeField] private RuntimeAnimatorController wAnim;
+    [SerializeField] private RuntimeAnimatorController rAnim;
     public int GrowthThreshold { get => growthThreshold; }
     public CraftingRecipe Food { get => food; }
     public int AmountNeeded { get => totalAmountNeeded; }
     public Sprite RSprite { get => rSprite; }
     public Sprite WSprite { get => wSprite; }
     public int AmountOfCoinsOnDrop { get => amountOfCoinsOnDrop; }
-    public int TrannsfromAmount { get => transformAmount;  }
+    public int TrannsfromAmount { get => transformAmount; }
+    public RuntimeAnimatorController WAnim { get => wAnim; }
+    public RuntimeAnimatorController RAnim { get => rAnim; }
 }

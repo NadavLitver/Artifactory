@@ -12,7 +12,7 @@ public class Cannon : Weapon
     bool isCharging;
     bool jumped;
     [SerializeField] float jumpForce;
-    [SerializeField] ParticleSystem cannonGlow;
+    //[SerializeField] ParticleSystem cannonGlow;
     [SerializeField] float slowDuration;
     [SerializeField] float gravityScaleOnShoot;
 
@@ -27,7 +27,7 @@ public class Cannon : Weapon
     private void OnEnable()
     {
         isCharging = false;
-        cannonGlow.gameObject.SetActive(true);
+       // cannonGlow.gameObject.SetActive(true);
         if (GameManager.Instance.assets.PlayerController.GetIsGrounded)
         {
             ResetJumped();
@@ -58,17 +58,17 @@ public class Cannon : Weapon
 
     IEnumerator StartCharging()
     {
-        var emission = cannonGlow.emission;
-        emission.rateOverTime = 0f;
+        //var emission = cannonGlow.emission;
+        //emission.rateOverTime = 0f;
         isCharging = true;
         float counter = 0f;
         while (counter < 1)
         {
             counter += Time.deltaTime / chargeDuration;
-            emission.rateOverTime = Mathf.Lerp(0f, endEmission, counter);
+            //emission.rateOverTime = Mathf.Lerp(0f, endEmission, counter);
             yield return new WaitForEndOfFrame();
         }
-        emission.rateOverTime = endEmission;
+      //  emission.rateOverTime = endEmission;
         isCharging = false;
         isLoaded = true;
         loadedTime = Time.time;
@@ -139,7 +139,7 @@ public class Cannon : Weapon
         {
             bullet.transform.localScale = Vector3.one;
         }
-        bullet.gameObject.SetActive(true);
+        bullet.SetActive(true);
         ShootFlag = false;
         StartCoroutine(StartCharging());
     }
@@ -147,7 +147,7 @@ public class Cannon : Weapon
     {
         //jumped = false;
         isLoaded = false;
-        cannonGlow.gameObject.SetActive(false);
+      //  cannonGlow.gameObject.SetActive(false);
         GameManager.Instance.assets.PlayerController.canMove = true;
         GameManager.Instance.assets.PlayerController.ResetGravity();
     }

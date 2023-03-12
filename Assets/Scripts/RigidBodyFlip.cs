@@ -20,9 +20,13 @@ public class RigidBodyFlip : MonoBehaviour
 
     public UnityEvent OnFlip;
     Coroutine activeRoutine;
-    void Start()
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
+
+    }
+    void OnEnable()
+    {
         if (StartLeft)
         {
             activeRoutine = StartCoroutine(FlipWhenPositive());

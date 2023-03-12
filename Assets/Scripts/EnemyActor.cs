@@ -47,12 +47,14 @@ public class EnemyActor : Actor
 
     private void SetUpItemDrop()
     {
-        int temp = UnityEngine.Random.Range(0, Enum.GetNames(typeof(ItemType)).Length - 1);
+        int temp = UnityEngine.Random.Range(0, Enum.GetNames(typeof(ItemType)).Length - 2);
         item = (ItemType)temp;
     }
 
     private void AttemptCatching()
     {
+        if (GameManager.Instance.isTutorial)
+            return;
         if (catchHandler.TryCatchingMonster() && GameManager.Instance.Zoo.CheckForFreeSpace())
         {
             Debug.Log("caught animal");

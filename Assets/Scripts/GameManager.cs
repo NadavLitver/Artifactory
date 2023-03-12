@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 
 [DefaultExecutionOrder(-10)]
@@ -121,6 +122,7 @@ public class AssetsRefrence
     public Sprite WindChimes;
     public Sprite KnifeOfTheHunter;
     public Sprite TurtlePendant;
+    public Sprite LegendaryCloneRelic;
     public Image RelicBarImage;
 
     public RelicDrop relicDropPrefab;
@@ -128,6 +130,7 @@ public class AssetsRefrence
     [Header("CAMERA"), Space(10)]
     public CamPositionSetter camPositionSetter;
     public Cinemachine.CinemachineVirtualCamera mainVCam;
+    public CinemachineShake CamShaker;
 
     [Header("HEALTH BAR"), Space(10)]
     public ObjectPool CubePool;
@@ -139,7 +142,9 @@ public class AssetsRefrence
     public GameObject endInteractablePanel;
     public GameObject CraftingPanel;
     public BaseTutorialHandler baseTutorialHandler;
-
+    public ChoiceWorldManager choiceWorldHandler;
+    public TextMeshProUGUI ThanksForPlaying;
+    public RelicChoicePanel RelicChoicePanel;
     [Header("Bounder"), Space(10)]
     public BounderScout BounderScout;
 
@@ -171,6 +176,8 @@ public class AssetsRefrence
     public AudioSource GlimmeringWoodsAudioSource;
     [Header("ZOO")]
     public AnimalPickup AnimalPickupPrefab;
+    [Header("Boss")]
+    public Animator BossAnimator;
 
 
 }

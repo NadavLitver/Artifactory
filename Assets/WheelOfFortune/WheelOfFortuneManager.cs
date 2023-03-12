@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class WheelOfFortuneManager : MonoBehaviour//not a real "Manager"
 {
@@ -10,7 +11,7 @@ public class WheelOfFortuneManager : MonoBehaviour//not a real "Manager"
     public UnityEvent<int> OnSpinOverWithWinnerIndex;
     public RectTransform[] sections;
     [SerializeField] int AmountMultiplier;
-
+    [SerializeField] Button SpinButton;
    
 
     [ContextMenu("Start Random Spin")]
@@ -24,6 +25,7 @@ public class WheelOfFortuneManager : MonoBehaviour//not a real "Manager"
     [ContextMenu("Start normal Spin")]
     public void SpinBasedOnResultOfChances()
     {
+        SpinButton.enabled = false;
        float result = Random.value;    
         if (inBetween(result, 0, 0.19f))
         {
@@ -94,5 +96,9 @@ public class WheelOfFortuneManager : MonoBehaviour//not a real "Manager"
             return true;
         }
         return false;
+    }
+    private void OnDisable()
+    {
+        SpinButton.enabled = true;
     }
 }

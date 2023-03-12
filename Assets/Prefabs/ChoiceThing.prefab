@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 4171604658288966332}
   - component: {fileID: 4171604658288966331}
   - component: {fileID: 1626373649159200877}
+  - component: {fileID: 3922718363942711547}
+  - component: {fileID: 2408830142998479527}
   m_Layer: 9
   m_Name: ChoiceThing
   m_TagString: Interactable
@@ -106,6 +108,45 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3922718363942711547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4171604658288966330}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db639317396715841ba7aca79cfafe31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 1626373649159200877}
+--- !u!61 &2408830142998479527
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4171604658288966330}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.025063515, y: 1.010189}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.49315068, y: 0.296875}
+    oldSize: {x: 5.11, y: 5.12}
+    newSize: {x: 1, y: 1}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3.5399761, y: 2.993513}
+  m_EdgeRadius: 0
 --- !u!1 &4171604658863138385
 GameObject:
   m_ObjectHideFlags: 0
@@ -148,7 +189,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4171604659364323414}
-  - component: {fileID: 4171604659364323415}
   - component: {fileID: 1395448295397527270}
   m_Layer: 9
   m_Name: Right
@@ -172,32 +212,6 @@ Transform:
   m_Father: {fileID: 4171604658863138386}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &4171604659364323415
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4171604659364323413}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.9353552, y: 0.6664405}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.81292915, y: 2.1691933}
-  m_EdgeRadius: 0
 --- !u!114 &1395448295397527270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -216,6 +230,7 @@ MonoBehaviour:
   myRelic: {fileID: 0}
   side: 0
   anim: {fileID: 1626373649159200877}
+  refFlower: {fileID: 3922718363942711547}
 --- !u!1 &4171604659649570515
 GameObject:
   m_ObjectHideFlags: 0
@@ -225,7 +240,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4171604659649570516}
-  - component: {fileID: 4171604659649570517}
   - component: {fileID: 4805609638383350948}
   m_Layer: 9
   m_Name: Left
@@ -249,32 +263,6 @@ Transform:
   m_Father: {fileID: 4171604658863138386}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!61 &4171604659649570517
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4171604659649570515}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: -0.9061241, y: 0.53782904}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.8713875, y: 2.075658}
-  m_EdgeRadius: 0
 --- !u!114 &4805609638383350948
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,5 +279,6 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   myRelic: {fileID: 0}
-  side: 0
+  side: 1
   anim: {fileID: 1626373649159200877}
+  refFlower: {fileID: 3922718363942711547}

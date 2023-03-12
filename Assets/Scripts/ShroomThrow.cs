@@ -21,7 +21,6 @@ public class ShroomThrow : State
         }
         handler.AttackMode = true;
         ShroomCap cap = handler.GetCapToThrow();
-        cap.OnDeath.AddListener(handler.DestoryCap);
         cap.transform.position = transform.position;
         cap.SetUpPositions(handler.Bounder.MaxPos, handler.Bounder.MinPos);
         cap.gameObject.SetActive(true);

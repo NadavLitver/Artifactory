@@ -59,6 +59,10 @@ public class SoundManager : MonoBehaviour
     }
     public static void Play(Sound sound, Vector3 worldPos)
     {
+        if (ReferenceEquals(GameManager.Instance.soundManager.m_pool, null))
+        {
+            return;
+        }
         GameObject soundGO = GameManager.Instance.soundManager.m_pool.GetPooledObject();
         soundGO.SetActive(true);
         soundGO.transform.position = worldPos;
@@ -125,6 +129,8 @@ public class SoundManager : MonoBehaviour
     public static void Play(Sound sound, AudioSource source)
     {
         source.volume = Mathf.Clamp01(GetVolumeOfClip(sound));
+        if (source.volume == 0)
+            return;
         source.PlayOneShot(GetAudioClip(sound));
 
     }
@@ -132,6 +138,8 @@ public class SoundManager : MonoBehaviour
     {
 
         source.volume = Mathf.Clamp01(Volume);
+        if (source.volume == 0)
+            return;
         source.PlayOneShot(GetAudioClip(sound));
 
     }
@@ -139,6 +147,8 @@ public class SoundManager : MonoBehaviour
     {
         source.pitch = Mathf.Clamp(pitch, -3, 3);
         source.volume = Mathf.Clamp01(Volume);
+        if (source.volume == 0)
+            return;
         source.PlayOneShot(GetAudioClip(sound));
 
     }
@@ -147,6 +157,8 @@ public class SoundManager : MonoBehaviour
         source.reverbZoneMix = Mathf.Clamp(reverb, 0, 1.1f);
         source.pitch = Mathf.Clamp(pitch, -3, 3);
         source.volume = Mathf.Clamp01(Volume);
+        if (source.volume == 0)
+            return;
         source.PlayOneShot(GetAudioClip(sound));
 
     }
@@ -156,6 +168,8 @@ public class SoundManager : MonoBehaviour
         source.reverbZoneMix = Mathf.Clamp(reverb, 0, 1.1f);
         source.pitch = Mathf.Clamp(pitch, -3, 3);
         source.volume = Mathf.Clamp01(Volume);
+        if (source.volume == 0)
+            return;
         source.PlayOneShot(GetAudioClip(sound));
 
     }
@@ -169,6 +183,8 @@ public class SoundManager : MonoBehaviour
         source.reverbZoneMix = Mathf.Clamp(reverb, 0, 1.1f);
         source.pitch = UnityEngine.Random.Range(Mathf.Clamp(pitchRange.x, -3, 3), Mathf.Clamp(pitchRange.y, -3, 3));
         source.volume = Mathf.Clamp01(Volume);
+        if (source.volume == 0)
+            return;
         source.PlayOneShot(GetAudioClip(sound));
 
     }

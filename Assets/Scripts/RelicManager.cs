@@ -72,6 +72,8 @@ public class RelicManager : MonoBehaviour
                 return GameManager.Instance.assets.KnifeOfTheHunter;
             case StatusEffectEnum.WindChimes:
                 return GameManager.Instance.assets.WindChimes;
+            case StatusEffectEnum.Legendary:
+                return GameManager.Instance.assets.LegendaryCloneRelic;
             default:
                 return null;
         }
