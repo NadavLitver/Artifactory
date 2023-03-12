@@ -23,6 +23,7 @@ public class ZooActiveSlot : MonoBehaviour
     [SerializeField] private GameObject coinButton;
     [SerializeField] private int startGivenFood;
     [SerializeField] private GameObject renamePanel;
+    [SerializeField] private Animator anim;
 
     [SerializeField] private TMP_InputField inputField;
     private bool timerStarted;
@@ -50,6 +51,7 @@ public class ZooActiveSlot : MonoBehaviour
         animalImage.sprite = givenAnimal.animal.RSprite;
         animalImage.color = new Color(animalImage.color.r, animalImage.color.g, animalImage.color.b, 1);
         nameText.text = givenAnimal.animal.name;
+        anim.runtimeAnimatorController = givenAnimal.animal.RAnim;
         timerText.text = "0";
         UpdateTimer();
         currentFoodgiven = 0;
@@ -143,6 +145,10 @@ public class ZooActiveSlot : MonoBehaviour
             FreeAnimal();
             //releaseButton.SetActive(true);
         }
+        else if (CurrentFoodgiven >= CurrentRefAnimal.animal.TrannsfromAmount)
+        {
+            ChangeAnimalToWForm();
+        }
         lastFed = Time.time;
         UpdateSlider();
         UpdateTimer();
@@ -173,6 +179,12 @@ public class ZooActiveSlot : MonoBehaviour
 
     }
 
+
+    public void ChangeAnimalToWForm()
+    {
+        animalImage.sprite = CurrentRefAnimal.animal.WSprite;
+        anim.runtimeAnimatorController = CurrentRefAnimal.animal.WAnim;
+    }
     public void ResetFoodGiven()
     {
         currentFoodgiven = 0;
