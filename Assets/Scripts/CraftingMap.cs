@@ -178,25 +178,48 @@ public class CraftingMap : MonoBehaviour
     }
     private CraftingNodeConnection GetConnectionPointFromNode(CraftingBaseNode node)
     {
-        List<CraftingNodeConnection> possibleConnections = new List<CraftingNodeConnection>();
+        List<CraftingNodeConnection> occupiedConnections = new List<CraftingNodeConnection>();
+        List<CraftingNodeConnection> nonOccupiedConnections = new List<CraftingNodeConnection>();
         foreach (var item in node.NodeConnections)
         {
-            if (!item.Occupied)
+            if (item.Occupied)
             {
-                possibleConnections.Add(item);
+                occupiedConnections.Add(item);
+            }
+            else
+            {
+                nonOccupiedConnections.Add(item);
             }
         }
-        if (possibleConnections.Count < 1)
-        {
-            return null;
-        }
-        else
-        {
-            CraftingNodeConnection selectedPoint = possibleConnections[Random.Range(0, possibleConnections.Count)];
+        if (occupiedConnections.Count < 1)
+        {   //non of the connection points are occupied
+            CraftingNodeConnection selectedPoint = node.NodeConnections[Random.Range(0, node.NodeConnections.Count)];
             selectedPoint.Occupied = true;
             return selectedPoint;
         }
+        else
+        {
+            foreach (var occupiedConnectionPoint in occupiedConnections)
+            {
+                CraftingNodeConnection selectedPoint = occupiedConnectionPoint;
+                ConnectionPoints invertedPoint = selectedPoint.GetInvertedConnectionPointFromPoint(selectedPoint.ConnectionPoint);
+                foreach (var connectionPoint in node.NodeConnections)
+                {
+                    if (connectionPoint.ConnectionPoint == invertedPoint && !connectionPoint.Occupied)
+                    {
+                        connectionPoint.Occupied = true;
+                        return connectionPoint;
+                    }
+                }
+            }
+            CraftingNodeConnection finalPoint = nonOccupiedConnections[Random.Range(0, nonOccupiedConnections.Count)];
+            finalPoint.Occupied = true;
+            return finalPoint;
+        }
     }
+
+
+
 
 
     public void UpdateActivatedLines(List<ItemType> givenItems)
@@ -251,10 +274,10 @@ public class CraftingMap : MonoBehaviour
             {
                 line.Nodes[i].Cover.SetActive(true);
             }
-           /* foreach (var node in line.Nodes)
-            {
-                node.Cover.SetActive(true);
-            }*/
+            /* foreach (var node in line.Nodes)
+             {
+                 node.Cover.SetActive(true);
+             }*/
         }
     }
 

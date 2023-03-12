@@ -10,7 +10,7 @@ public enum ConnectionPoints
     LowerRight,
     LowerLeft,
     Left,
-    Lower
+    Lower,
 }
 public class CraftingNodeConnection : MonoBehaviour
 {
@@ -41,4 +41,29 @@ public class CraftingNodeConnection : MonoBehaviour
         }
     }
 
+
+    public ConnectionPoints GetInvertedConnectionPointFromPoint(ConnectionPoints point)
+    {
+        switch (point)
+        {
+            case ConnectionPoints.Upper:
+                return ConnectionPoints.Lower;
+            case ConnectionPoints.UpperRight:
+                return ConnectionPoints.LowerLeft;
+            case ConnectionPoints.UpperLeft:
+                return ConnectionPoints.LowerRight;
+            case ConnectionPoints.Right:
+                return ConnectionPoints.Left;
+            case ConnectionPoints.LowerRight:
+                return ConnectionPoints.UpperLeft;
+            case ConnectionPoints.LowerLeft:
+                return ConnectionPoints.UpperRight;
+            case ConnectionPoints.Left:
+                return ConnectionPoints.Right;
+            case ConnectionPoints.Lower:
+                return ConnectionPoints.Upper;
+            default:
+                return ConnectionPoints.Left;
+        }
+    }
 }
