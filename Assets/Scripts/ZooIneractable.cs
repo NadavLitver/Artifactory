@@ -19,4 +19,5 @@ public class ZooIneractable : Interactable
         OnInteracted?.Invoke();
         GameManager.Instance.Zoo.ZooPanel.SetActive(true);
     }
+    public void SetFirstHappend() => firstInteraction = true;
 }

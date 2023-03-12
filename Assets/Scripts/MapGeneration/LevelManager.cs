@@ -1,5 +1,7 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class LevelManager : MonoBehaviour
 {
@@ -18,7 +20,7 @@ public class LevelManager : MonoBehaviour
     List<Room> createdRooms = new List<Room>();
     RoomConnectivity roomConnectionCheck = new RoomConnectivity();
     Room active;
-
+    public UnityEvent OnRoomMove;
     public Room TempBossRoom;
     public List<Room> CurrentRunRooms { get => currentRunRooms; }
     public Room FirstRoom { get => firstRoom; set => firstRoom = value; }
@@ -403,6 +405,13 @@ public class LevelManager : MonoBehaviour
 
     public void MoveToRoom(ExitInteractable givenExit)
     {
+        //delay
+        StartCoroutine(MoveToRoomRoutine(givenExit));
+    }
+    IEnumerator MoveToRoomRoutine(ExitInteractable givenExit)
+    {
+        OnRoomMove.Invoke();
+        yield return new WaitForSeconds(0.6f);
         active.gameObject.SetActive(false);
         givenExit.OtherExit.MyRoom.gameObject.SetActive(true);
         active = givenExit.OtherExit.MyRoom;
