@@ -14,6 +14,7 @@ public class BlackFade : MonoBehaviour
         if(!GameManager.Instance.isTutorial)
           GameManager.Instance.assets.playerActor.OnDeath.AddListener(FadeToBlack);
         FadeFromBlack();
+        GameManager.Instance.LevelManager.OnRoomMove.AddListener(CallFadeToAndFrom);
     }
     public void FadeToBlack()
     {
@@ -28,6 +29,13 @@ public class BlackFade : MonoBehaviour
         StartCoroutine(LerpAlpha(0, fadeFromBlackCurve));
 
     }
+    public void CallFadeToAndFrom()=> StartCoroutine(FadeToAndFromBlack());
+    public IEnumerator FadeToAndFromBlack()
+    {
+        yield return LerpAlpha(1, fadeToBlackCurve);
+        yield return new WaitForSeconds(0.4f);
+        yield return LerpAlpha(0, fadeFromBlackCurve);
+    }
     IEnumerator LerpAlpha(float goal, AnimationCurve curve)
     {
         float counter = 0;
@@ -35,7 +43,7 @@ public class BlackFade : MonoBehaviour
         while (counter < 1)
         {
             m_image.color = new Color(0, 0, 0, Mathf.Lerp(startingAlpha, goal, curve.Evaluate(counter)));
-            counter += Time.deltaTime;
+            counter += Time.deltaTime * 2f;
             yield return new WaitForEndOfFrame();
         }
         GameManager.Instance.assets.mobileControls.SetActive(true);
