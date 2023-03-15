@@ -7,7 +7,7 @@ public class BlackFade : MonoBehaviour
     Image m_image;
     [SerializeField] AnimationCurve fadeToBlackCurve;
     [SerializeField] AnimationCurve fadeFromBlackCurve;
-  
+
     private void Start()
     {
         m_image = GetComponent<Image>();
@@ -25,14 +25,14 @@ public class BlackFade : MonoBehaviour
     }
     public Coroutine GetFadeToBlackRoutine()
     {
-      return StartCoroutine(LerpAlpha(1, fadeToBlackCurve));
+        return StartCoroutine(LerpAlpha(1, fadeToBlackCurve));
     }
     public void FadeFromBlack()
     {
         StartCoroutine(LerpAlpha(0, fadeFromBlackCurve));
 
     }
-    public void CallFadeToAndFrom()=> StartCoroutine(FadeToAndFromBlack());
+    public void CallFadeToAndFrom() => StartCoroutine(FadeToAndFromBlack());
     public IEnumerator FadeToAndFromBlack()
     {
         yield return LerpAlpha(1, fadeToBlackCurve);
@@ -49,7 +49,8 @@ public class BlackFade : MonoBehaviour
             counter += Time.deltaTime * 2f;
             yield return new WaitForEndOfFrame();
         }
-        GameManager.Instance.assets.mobileControls.SetActive(true);
+        m_image.color = new Color(0, 0, 0, goal);
+       GameManager.Instance.assets.mobileControls.SetActive(true);
     }
-    
+
 }

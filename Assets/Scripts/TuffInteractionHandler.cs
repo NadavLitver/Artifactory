@@ -19,10 +19,6 @@ public class TuffInteractionHandler : Interactable
     public override void Interact()
     {
         StartCoroutine(InteractionRoutine());
-
-
-
-
     }
     IEnumerator InteractionRoutine()
     {
