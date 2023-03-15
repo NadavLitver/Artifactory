@@ -62,7 +62,6 @@ public class SensorGroup : MonoBehaviour
     IEnumerator WaitForGrounded()
     {
         yield return new WaitUntil(() => IsGrounded());
-        Debug.Log(transform.name + " grounded");
         OnGrounded?.Invoke();
         if (gameObject.activeInHierarchy)
         {
@@ -72,7 +71,6 @@ public class SensorGroup : MonoBehaviour
     IEnumerator WaitForNotGrounded()
     {
         yield return new WaitUntil(() => !IsGrounded());
-        Debug.Log(transform.name + " isnt grounded");
         OnNotGrounded?.Invoke();
         if (gameObject.activeInHierarchy)
         {

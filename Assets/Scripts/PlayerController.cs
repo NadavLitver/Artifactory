@@ -331,6 +331,7 @@ public class PlayerController : MonoBehaviour
     }
     public void RecieveForce(Vector2 force)
     {
+        Debug.Log("player recieved force");
         GetExternalForces += force;
     }
     private void OnDrawGizmos()
@@ -372,5 +373,14 @@ public class PlayerController : MonoBehaviour
         landEffect = landEffectPool.GetPooledObject();
         landEffect.transform.position = jumpEffectPoint.position;
         landEffect.SetActive(true);
+    }
+
+    public bool CheckForSideSensorsCollision()
+    {
+        if (rightSensors.IsGrounded() || leftSensors.IsGrounded())
+        {
+            return true;
+        }
+        return false;
     }
 }

@@ -7,8 +7,8 @@ public class ShroomThrowD : BaseShroomDState
     [SerializeField] private float throwForce;
     public override IEnumerator StateRoutine()
     {
-        handler.LookTowardsPlayer();
         handler.Rb.velocity = Vector3.zero;
+        handler.LookTowardsPlayer();
         handler.Anim.SetTrigger("Throw");
         yield return new WaitUntil(() => handler.throwFlag);
         handler.throwFlag = false;

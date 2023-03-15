@@ -8,14 +8,12 @@ public class ShroomCap : MonoBehaviour
     public AudioSource m_audioSource;
     public Rigidbody2D RB;
     public Ability ShroomCapAbility;
-    bool landed;
     [SerializeField] Vector2 maxPoint;
     [SerializeField] Vector2 minPoint;
     [SerializeField] float pickupCd;
     bool dealtDamage;
     float lastThrown;
     float startingGrav;
-    public bool Destroyed;
 
     [SerializeField] SensorGroup groundCheck;
 
@@ -41,7 +39,6 @@ public class ShroomCap : MonoBehaviour
     {
         lastThrown = Time.time;
         startingGrav = RB.gravityScale;
-        Destroyed = false;
     }
 
     private void OnDisable()
@@ -66,16 +63,12 @@ public class ShroomCap : MonoBehaviour
 
     private void LandedReset()
     {
-        dealtDamage = true;
         RB.velocity = Vector2.zero;
         //RB.gravityScale = 0;
         groundCheck.OnGrounded.RemoveListener(LandedReset);
     }
     
-    public void DestroyedOn()
-    {
-        Destroyed = true;
-    }
+   
     public void PlayOnGroundedSound()
     {
         SoundManager.Play(SoundManager.Sound.MushroomEnemyCapHitGround, m_audioSource);
