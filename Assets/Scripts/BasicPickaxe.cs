@@ -48,8 +48,7 @@ public class BasicPickaxe : Weapon
         WallJump();
     }
     private void WallJump()
-    {
-        
+    {   
         if (Clawed)
         {
             player.Animator.SetBool(ClimbHash, false);
@@ -58,33 +57,29 @@ public class BasicPickaxe : Weapon
             
             if (playerLookdir == -1 && (player.GetHorInput == -1 || player.GetHorInput == 0))
             {
-
                 wallJumpVelocity = new Vector2(0, forceForWallJump.y);
             }
             else if (playerLookdir == 1 && player.GetHorInput == -1)
             {
-
                 wallJumpVelocity = new Vector2(-forceForWallJump.x, forceForWallJump.y);
             }
             else if (playerLookdir == 1 && (player.GetHorInput == 1 || player.GetHorInput == 0))
             {
                 wallJumpVelocity = new Vector2(0, forceForWallJump.y);
-
             }
-
-            player.ResetGravity();
-            player.ResetVelocity();
-            player.RecieveForce(wallJumpVelocity);
+            if (gameObject.activeInHierarchy)
+            {
+                player.ResetGravity();
+                player.ResetVelocity();
+                player.RecieveForce(wallJumpVelocity);
+            }
             Clawed = false;
 
             if (!ReferenceEquals(ClawRoutine, null))
             {
                 StopCoroutine(ClawRoutine);
-
             }
         }
-
-
     }
 
     protected override void Attack()
@@ -264,6 +259,7 @@ public class BasicPickaxe : Weapon
     {
         player.canMove = true;
         airAttacking = false;
+        Clawed = false;
         player.ResetGravity();
         OnGroundAttack.RemoveListener(StopPlayerWhileGroundAttacking);
     }

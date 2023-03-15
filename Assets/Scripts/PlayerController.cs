@@ -331,6 +331,7 @@ public class PlayerController : MonoBehaviour
     }
     public void RecieveForce(Vector2 force)
     {
+        Debug.Log("player recieved force");
         GetExternalForces += force;
     }
     private void OnDrawGizmos()
