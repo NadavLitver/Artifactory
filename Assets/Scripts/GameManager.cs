@@ -1,8 +1,8 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
 
 
 [DefaultExecutionOrder(-10)]
@@ -22,8 +22,10 @@ public class GameManager : MonoBehaviour
 
 
     public bool isTutorial;
+    private bool gameStarted;
     public SoundManager soundManager { get; private set; }
     public DialogueExecuter dialogueExecuter { get; private set; }
+    public bool GameStarted { get => gameStarted; }
 
     public UnityEvent OnRunStart;
     public UnityEvent OnRunEnd;
@@ -69,9 +71,17 @@ public class GameManager : MonoBehaviour
             assets.GlimmeringWoodsAudioSource.volume = SoundManager.GetVolumeOfClip(SoundManager.Sound.GlimmeringWoodsAmbiance);
             OnRunStart.AddListener(CallGlimmeringWoodsSound);
         }
+        OnRunStart.AddListener(StartGameBool);
+        OnRunEnd.AddListener(EndGameBool);
+    }
 
-      
-
+    private void StartGameBool()
+    {
+        gameStarted = true;
+    }
+    private void EndGameBool()
+    {
+        gameStarted = false;
     }
     private void CallGlimmeringWoodsSound()
     {
@@ -211,7 +221,7 @@ public class GeneralFunctions
     {
         LeanTween.cancelAll();
         GameManager.Instance.assets.mobileControls.SetActive(false);
-        
+
         LeanTween.delayedCall(1, ResetScene);
     }
 

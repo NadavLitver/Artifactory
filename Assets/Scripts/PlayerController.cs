@@ -373,4 +373,13 @@ public class PlayerController : MonoBehaviour
         landEffect.transform.position = jumpEffectPoint.position;
         landEffect.SetActive(true);
     }
+
+    public bool CheckForSideSensorsCollision()
+    {
+        if (rightSensors.IsGrounded() || leftSensors.IsGrounded())
+        {
+            return true;
+        }
+        return false;
+    }
 }
