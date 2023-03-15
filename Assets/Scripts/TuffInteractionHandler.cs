@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class TuffInteractionHandler : Interactable
@@ -19,20 +18,26 @@ public class TuffInteractionHandler : Interactable
     }
     public override void Interact()
     {
-        if (!interacted)
-            StartCoroutine(InteractionRoutine());
-        else 
-            StartCoroutine(GameManager.Instance.dialogueExecuter.Type(didPlayerGetLegs ? endingDialogueWithLegs : endingDialogue));
+        StartCoroutine(InteractionRoutine());
 
-       
 
-        
+
+
     }
     IEnumerator InteractionRoutine()
     {
+        if (interacted)
+        {
+            m_collider.enabled = false;
+
+            yield return GameManager.Instance.dialogueExecuter.Type(didPlayerGetLegs ? endingDialogueWithLegs : endingDialogue);
+            m_collider.enabled = true;
+
+            yield break;
+        }
         m_collider.enabled = false;
         interacted = true;
-        yield return  GameManager.Instance.dialogueExecuter.Type(startingDialogue);
+        yield return GameManager.Instance.dialogueExecuter.Type(startingDialogue);
         WheelOfFortuneScreen.SetActive(true);
         m_collider.enabled = true;
 

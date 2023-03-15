@@ -24,7 +24,7 @@ public class WheelOfFortunePrizes : MonoBehaviour
     }
     IEnumerator GivePrizeRoutine(int index)
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
 
         switch (index)
         {

@@ -11,10 +11,13 @@ public class BlackFade : MonoBehaviour
     private void Start()
     {
         m_image = GetComponent<Image>();
-        if(!GameManager.Instance.isTutorial)
-          GameManager.Instance.assets.playerActor.OnDeath.AddListener(FadeToBlack);
         FadeFromBlack();
-        GameManager.Instance.LevelManager.OnRoomMove.AddListener(CallFadeToAndFrom);
+        if (!GameManager.Instance.isTutorial)
+        {
+            GameManager.Instance.assets.playerActor.OnDeath.AddListener(FadeToBlack);
+            GameManager.Instance.LevelManager.OnRoomMove.AddListener(CallFadeToAndFrom);
+
+        }
     }
     public void FadeToBlack()
     {
