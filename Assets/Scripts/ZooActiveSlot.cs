@@ -38,7 +38,7 @@ public class ZooActiveSlot : MonoBehaviour
     public bool IsOccupied { get => isOccupied; }
     public bool AnimalDoneHealing { get => animalDoneHealing; }
 
-    private void Awake()
+    private void Start()
     {
         GameManager.Instance.Zoo.AddSlot(this);
         RemoveAnimal();
@@ -121,7 +121,7 @@ public class ZooActiveSlot : MonoBehaviour
         }
         if (foodGivenThisInterval >= CurrentRefAnimal.animal.GrowthThreshold)
         {
-            GameManager.Instance.Zoo.GetGemFromSlot(this).SetGreenActive();
+            GameManager.Instance.Zoo.GetGemFromSlot(this)?.SetGreenActive();
             return;
         }
         foreach (var comp in CurrentRefAnimal.animal.Food.Components)
