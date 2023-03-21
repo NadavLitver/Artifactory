@@ -46,7 +46,6 @@ public class Room : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("awaken");
         size = new RoomSize(sizeX, sizeY);
         ExitInteractable[] exitsFound = GetComponentsInChildren<ExitInteractable>();
         foreach (ExitInteractable exitInteractable in exitsFound)

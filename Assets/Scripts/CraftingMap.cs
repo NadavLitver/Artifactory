@@ -16,6 +16,7 @@ public class CraftingMap : MonoBehaviour
     [SerializeField] GameObject CraftButton;
     [SerializeField] private CraftingMapType mapType;
     NodeLine selectedLine;
+    [SerializeField] private bool oneTimeCrafts;
     float lineLength;
     private void Start()
     {
@@ -27,6 +28,11 @@ public class CraftingMap : MonoBehaviour
         {
             CreateLineFromRecipe(recipe);
         }
+    }
+
+    private void OnEnable()
+    {
+        GameManager.Instance.CraftingManager.SetCraftButton(this);
     }
 
     private void CreateLineFromRecipe(CraftingRecipe givenRecipe)
@@ -234,7 +240,7 @@ public class CraftingMap : MonoBehaviour
                 {
                     continue;
                 }
-                if (givenItems[i] == createdLines[j].Nodes[i].Mycomponent.itemType && IsLineActiveUpTo(createdLines[j], i))
+                if (givenItems[i] == createdLines[j].Nodes[i].Mycomponent.itemType && IsLineActiveUpTo(createdLines[j], i, givenItems))
                 {
                     createdLines[j].Nodes[i]/*.Line*/.gameObject.SetActive(true);
                     createdLines[j].Nodes[i].Cover.SetActive(false);
@@ -243,7 +249,7 @@ public class CraftingMap : MonoBehaviour
                         //createdLines[j].Nodes[i + 1]/*.Line*/.gameObject.SetActive(true);
                         createdLines[j].Nodes[i + 1].Cover.SetActive(false);
                         selectedLine = createdLines[j];
-                        CraftButton.SetActive(true);
+                        //CraftButton.SetActive(true);
                         //craft button turn on
                         //set this line to be the selected one, 
                         //on press craft item
@@ -253,11 +259,11 @@ public class CraftingMap : MonoBehaviour
         }
     }
 
-    private bool IsLineActiveUpTo(NodeLine givenLine, int index)
+    private bool IsLineActiveUpTo(NodeLine givenLine, int index, List<ItemType> givenItems)
     {
         for (int i = 0; i < index; i++)
         {
-            if (!givenLine.Nodes[i].Line.gameObject.activeInHierarchy)
+            if ((!givenLine.Nodes[i].Line.gameObject.activeInHierarchy) || givenLine.Nodes[i].Mycomponent.itemType != givenItems[i])
             {
                 return false;
             }
@@ -281,12 +287,30 @@ public class CraftingMap : MonoBehaviour
         }
     }
 
+    public void TurnOffLine(NodeLine line)
+    {
+        foreach (var item in line.Nodes)
+        {
+            item.gameObject.SetActive(false);
+        }
+    }
+
+
     public void CraftItem() //called from button
     {
+        if (ReferenceEquals(selectedLine, null))
+        {
+            return;
+        }
         GameManager.Instance.assets.playerActor.PlayerItemInventory.CraftItem(selectedLine.myRecipe);
         GameManager.Instance.CraftingManager.SelectedCraftingPanel.ClearPanel();
+        if (oneTimeCrafts)
+        {
+            TurnOffLine(selectedLine);
+            createdLines.Remove(selectedLine);
+        }
         //TurnOffLines();
-        CraftButton.SetActive(false);
+        //CraftButton.SetActive(false);
     }
 
 }

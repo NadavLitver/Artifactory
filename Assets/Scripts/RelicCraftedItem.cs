@@ -13,16 +13,6 @@ public class RelicCraftedItem : CraftedItem
 
     public override void SetUp()
     {
-        switch (myRelic.MyEffectEnum)
-        {
-            case StatusEffectEnum.LightningEmblem:
-                sprite = GameManager.Instance.assets.LightningEmblem;
-                break;
-            case StatusEffectEnum.HealingGoblet:
-                sprite = GameManager.Instance.assets.HealingGoblet;
-                break;
-            default:
-                break;
-        }
+        sprite = GameManager.Instance.RelicManager.GetRelicSpriteFromRelic(myRelic);
     }
 }
