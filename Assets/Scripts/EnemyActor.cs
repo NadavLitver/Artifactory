@@ -55,11 +55,14 @@ public class EnemyActor : Actor
     {
         if (GameManager.Instance.isTutorial)
             return;
-        if (catchHandler.TryCatchingMonster() && GameManager.Instance.Zoo.CheckForFreeSpace())
+        if (/*catchHandler.TryCatchingMonster() &&*/ GameManager.Instance.Zoo.CheckForFreeSpace())
         {
             Debug.Log("caught animal");
             AnimalPickup pickup = Instantiate(GameManager.Instance.assets.AnimalPickupPrefab, transform.position, Quaternion.identity);
             pickup.CacheAnimal(animal);
+            return;
         }
+
+        Debug.Log("animal was not caught");
     }
 }

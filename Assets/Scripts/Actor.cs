@@ -281,7 +281,6 @@ public class Actor : MonoBehaviour, IDamagable
         critHit.ClearMods();
         if (Random.Range(1, 100) <= crit * 100)
         {
-            Debug.Log("Crit!");
             return true;
         }
         return false;

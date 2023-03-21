@@ -1,6 +1,7 @@
 using UnityEngine;
+using UnityEngine.UI;
 
-public class CraftinManager : MonoBehaviour
+public class CraftingManager : MonoBehaviour
 {
     [SerializeField] GameObject craftingPanel;
     [SerializeField] CraftingMap relicCraftinMap;
@@ -10,6 +11,7 @@ public class CraftinManager : MonoBehaviour
     CraftingMap activeCraftingMap;
     [SerializeField] InventoryCraftingPanel inventorycraftingPanel;
     [SerializeField] SelectedCraftingPanel selectedCraftingPanel;
+    [SerializeField] private Button craftButton;
 
 
     ItemInventory playerInventory => GameManager.Instance.assets.playerActor.PlayerItemInventory;
@@ -65,4 +67,9 @@ public class CraftinManager : MonoBehaviour
         selectedCraftingPanel.SubscribeSlots();
     }
 
+    public void SetCraftButton(CraftingMap activeMap)
+    {
+        craftButton.onClick.RemoveAllListeners();
+        craftButton.onClick.AddListener(activeMap.CraftItem);
+    }
 }
