@@ -53,12 +53,11 @@ public class CraftingMapNode : MonoBehaviour
 
         foreach (var item in node.NodeConnections)
         {
-            if (item.Occupied)
+            if (!item.Occupied)
             {
-                takenPoints.Add(item.ConnectionPoint);
+                viableConnectionPoints.Add(item.ConnectionPoint);
             }
         }
-        
         
         return viableConnectionPoints;
     }
