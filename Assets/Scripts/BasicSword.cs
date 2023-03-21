@@ -49,13 +49,23 @@ public class BasicSword : Weapon
         StartCoroutine(DashDuration());
         player.RightSensors.gameObject.SetActive(true);
         player.LeftSensors.gameObject.SetActive(true);
-        yield return new WaitUntil(() => !isDashing || player.RightSensors.IsGrounded() || player.LeftSensors.IsGrounded());
+        yield return new WaitUntil(() => !isDashing || CheckSensrosOutSideOfBase());
         player.RightSensors.gameObject.SetActive(false);
         player.LeftSensors.gameObject.SetActive(false);
         player.ResetGravity();
         StartCoroutine(player.JumpApexWait());
         player.canMove = true;
     }
+
+    private bool CheckSensrosOutSideOfBase()
+    {
+        if (!GameManager.Instance.GameStarted)
+        {
+            return false;
+        }
+        return player.CheckForSideSensorsCollision();
+    }
+
 
     private IEnumerator DashDuration()
     {

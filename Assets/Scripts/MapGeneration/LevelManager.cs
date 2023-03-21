@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
-
+[DefaultExecutionOrder(-1)]
 public class LevelManager : MonoBehaviour
 {
     [SerializeField] List<Room> firstIsleRooms = new List<Room>();
