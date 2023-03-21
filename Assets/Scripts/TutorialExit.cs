@@ -36,11 +36,15 @@ public class TutorialExit : MonoBehaviour
             yield break;
         }
         m_room.NextRoom.gameObject.SetActive(true);
-        player.position = m_room.NextRoom.StartingPosition.position;
+        player.gameObject.SetActive(false);
+      player.position = m_room.NextRoom.StartingPosition.position;
+        Debug.Break();
         yield return new WaitForSeconds(1);
         m_room.gameObject.SetActive(false);
         GameManager.Instance.assets.blackFade.FadeFromBlack();
         GameManager.Instance.assets.PlayerController.canMove = true;
+        player.gameObject.SetActive(true);
+
 
 
     }
