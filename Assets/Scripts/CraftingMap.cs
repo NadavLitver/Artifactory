@@ -29,6 +29,11 @@ public class CraftingMap : MonoBehaviour
         }
     }
 
+    private void OnEnable()
+    {
+        GameManager.Instance.CraftingManager.SetCraftButton(this);
+    }
+
     private void CreateLineFromRecipe(CraftingRecipe givenRecipe)
     {
         //loop over all components
@@ -243,7 +248,7 @@ public class CraftingMap : MonoBehaviour
                         //createdLines[j].Nodes[i + 1]/*.Line*/.gameObject.SetActive(true);
                         createdLines[j].Nodes[i + 1].Cover.SetActive(false);
                         selectedLine = createdLines[j];
-                        CraftButton.SetActive(true);
+                        //CraftButton.SetActive(true);
                         //craft button turn on
                         //set this line to be the selected one, 
                         //on press craft item
@@ -283,10 +288,14 @@ public class CraftingMap : MonoBehaviour
 
     public void CraftItem() //called from button
     {
+        if (ReferenceEquals(selectedLine, null))
+        {
+            return;
+        }
         GameManager.Instance.assets.playerActor.PlayerItemInventory.CraftItem(selectedLine.myRecipe);
         GameManager.Instance.CraftingManager.SelectedCraftingPanel.ClearPanel();
         //TurnOffLines();
-        CraftButton.SetActive(false);
+        //CraftButton.SetActive(false);
     }
 
 }

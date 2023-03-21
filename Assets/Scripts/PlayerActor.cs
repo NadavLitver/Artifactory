@@ -5,7 +5,7 @@ public class PlayerActor : Actor
     public Animator m_animator;
     [SerializeField] RelicInventory playerRelicInventory;
     [SerializeField] ItemInventory playerItemInventory;
-    [SerializeField] private WeaponManager weapoonManager;
+    [SerializeField] private WeaponManager weaponManager;
     [SerializeField] private Material normalMat;
     [SerializeField] private Material legendaryMat;
     [SerializeField] private SpriteRenderer mainRenderer;
@@ -13,7 +13,7 @@ public class PlayerActor : Actor
 
     public RelicInventory PlayerRelicInventory { get => playerRelicInventory; }
     public ItemInventory PlayerItemInventory { get => playerItemInventory; }
-    public WeaponManager WeapoonManager { get => weapoonManager; }
+    public WeaponManager WeaponManager { get => weaponManager; }
 
     private void Start()
     {

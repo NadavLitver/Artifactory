@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 enum WeaponEnum
@@ -17,40 +15,41 @@ public class WeaponImprovement : CraftedItem
     [SerializeField] private WeaponEnum weaponType;
     public override void Obtain()
     {
-        GameManager.Instance.assets.playerActor.WeapoonManager.CurrentWeapon.OnActorHit.AddListener(AddWeaponDamage);
+        GameManager.Instance.assets.playerActor.OnDealDamage.AddListener(AddWeaponDamage);
     }
 
     public override void SetUp()
     {
-       //throw new System.NotImplementedException();
+        //throw new System.NotImplementedException();
     }
-    private void AddWeaponDamage(Actor target, Ability ability)
+    private void AddWeaponDamage(DamageHandler damage, Actor target)
     {
         switch (weaponType)
         {
             case WeaponEnum.Sword:
-                if (GameManager.Instance.assets.playerActor.WeapoonManager.CurrentWeapon is BasicSword)
+                if (GameManager.Instance.assets.playerActor.WeaponManager.CurrentWeapon is BasicSword)
                 {
-                    ability.DamageHandler.AddModifier(damageMod);
+                    Debug.Log("sword damage increased");
+                    damage.AddModifier(damageMod);
                 }
                 break;
             case WeaponEnum.Axe:
-                if (GameManager.Instance.assets.playerActor.WeapoonManager.CurrentWeapon is BasicPickaxe)
+                if (GameManager.Instance.assets.playerActor.WeaponManager.CurrentWeapon is BasicPickaxe)
                 {
-                    ability.DamageHandler.AddModifier(damageMod);
+                    damage.AddModifier(damageMod);
                 }
                 break;
             case WeaponEnum.Gun:
-                if (GameManager.Instance.assets.playerActor.WeapoonManager.CurrentWeapon is Cannon)
+                if (GameManager.Instance.assets.playerActor.WeaponManager.CurrentWeapon is Cannon)
                 {
-                    ability.DamageHandler.AddModifier(damageMod);
+                    damage.AddModifier(damageMod);
                 }
                 break;
             default:
                 break;
         }
 
-        
+
     }
 
 }
