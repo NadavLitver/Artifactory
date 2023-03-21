@@ -68,7 +68,7 @@ public class EnemyRayData : MonoBehaviour
     {
         if (point.x < m_boundingBox.maxX && point.x > m_boundingBox.minX && point.y < m_boundingBox.maxY && point.y > m_boundingBox.minY)
         {
-            if (!Physics2D.OverlapPoint(point))
+            if (!Physics2D.OverlapPoint(point,GroundMask))
             {
                 return true;
             }

@@ -33,7 +33,7 @@ public class RelicManager : MonoBehaviour
             return null;
         }
         Relic relic = FreeRelics[Random.Range(0, FreeRelics.Count)];
-        takenRelics.Add(relic);
+        AddTakenRelic(relic);
         return relic;
     }
     public Relic GetRelic(StatusEffectEnum requestedRelicEnum)

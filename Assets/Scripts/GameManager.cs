@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
     public DamageManager DamageManager { get; private set; }
     public DamagePopupManager PopupManager { get; private set; }
     public LevelManager LevelManager { get; private set; }
-    public CraftinManager CraftingManager { get; private set; }
+    public CraftingManager CraftingManager { get; private set; }
     public RelicManager RelicManager { get; private set; }
     public ZooManager Zoo { get; private set; }
     public VfxManager vfxManager { get; private set; }
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour
         DamageManager = GetComponentInChildren<DamageManager>();
         PopupManager = GetComponentInChildren<DamagePopupManager>();
         LevelManager = GetComponentInChildren<LevelManager>();
-        CraftingManager = GetComponentInChildren<CraftinManager>();
+        CraftingManager = GetComponentInChildren<CraftingManager>();
         vfxManager = GetComponentInChildren<VfxManager>();
         dialogueExecuter = GetComponentInChildren<DialogueExecuter>();
         RelicManager = GetComponentInChildren<RelicManager>();

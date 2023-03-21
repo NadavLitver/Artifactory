@@ -28,7 +28,7 @@ public class RelicChoicePanel : MonoBehaviour
     //right button
     public void DropRightRelic()
     {
-        RelicDrop drop = Instantiate(GameManager.Instance.assets.relicDropPrefab, transform.position, Quaternion.identity, transform);
+        RelicDrop drop = Instantiate(GameManager.Instance.assets.relicDropPrefab, flower.transform.position, Quaternion.identity);
         drop.CacheRelic(rightRelic);
         flower.ChoseRelic = true;
         flower.Anim.Play("OpenRight");

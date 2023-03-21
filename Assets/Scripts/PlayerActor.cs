@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerActor : Actor
@@ -7,21 +5,22 @@ public class PlayerActor : Actor
     public Animator m_animator;
     [SerializeField] RelicInventory playerRelicInventory;
     [SerializeField] ItemInventory playerItemInventory;
-
+    [SerializeField] private WeaponManager weaponManager;
     [SerializeField] private Material normalMat;
     [SerializeField] private Material legendaryMat;
     [SerializeField] private SpriteRenderer mainRenderer;
     [SerializeField] private GameObject legendaryTrailVFX;
 
-    public RelicInventory PlayerRelicInventory { get => playerRelicInventory;}
-    public ItemInventory PlayerItemInventory { get => playerItemInventory; set => playerItemInventory = value; }
+    public RelicInventory PlayerRelicInventory { get => playerRelicInventory; }
+    public ItemInventory PlayerItemInventory { get => playerItemInventory; }
+    public WeaponManager WeaponManager { get => weaponManager; }
 
     private void Start()
     {
         //  OnDealingDamageCalcOver.AddListener(GameManager.Instance.assets.CameraShake.screenShakeBasedOnDamage);
         OnDealDamage.AddListener(PlayerOnHitVFX);
     }
-    private void PlayerOnHitVFX(DamageHandler damage,Actor actorHit)
+    private void PlayerOnHitVFX(DamageHandler damage, Actor actorHit)
     {
         if (damage.myDmgType == DamageType.fire)
         {

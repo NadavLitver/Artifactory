@@ -7,6 +7,7 @@ public class CinemachineShake : MonoBehaviour
     CinemachineVirtualCamera cam;
     CinemachineBasicMultiChannelPerlin camNoise;
     Coroutine activeRoutine;
+    [SerializeField] private float maxAmplitude;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,14 +21,18 @@ public class CinemachineShake : MonoBehaviour
         if (!ReferenceEquals(camNoise, null))
         {
             camNoise.m_AmplitudeGain = givenDmg.calculateFinalNumberMult() / 100;
-            camNoise.m_AmplitudeGain = Mathf.Clamp(camNoise.m_AmplitudeGain, 0, 1);
-            camNoise.m_AmplitudeGain *= 2;
+            ClampAmplitude();
             if (!ReferenceEquals(activeRoutine, null))
             {
                 StopCoroutine(activeRoutine);
             }
             activeRoutine = StartCoroutine(DecreaseOverTime());
         }
+    }
+
+    private void ClampAmplitude()
+    {
+        camNoise.m_AmplitudeGain = Mathf.Clamp(camNoise.m_AmplitudeGain, 0, maxAmplitude);
     }
 
     IEnumerator DecreaseOverTime()
@@ -39,6 +44,7 @@ public class CinemachineShake : MonoBehaviour
         }
         camNoise.m_AmplitudeGain = 0;
         cam.transform.parent.eulerAngles = Vector3.zero;
+        ClampAmplitude();
     }
 
 }

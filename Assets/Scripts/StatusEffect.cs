@@ -23,9 +23,9 @@ public enum StatusEffectEnum
 {
     burn,
     freeze,
+    Invulnerability,
     LightningEmblem,
     HealingGoblet,
-    Invulnerability,
     TurtlePendant,
     KnifeOfTheHunter,
     WindChimes,
