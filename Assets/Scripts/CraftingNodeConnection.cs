@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 public enum ConnectionPoints
@@ -25,7 +24,7 @@ public class CraftingNodeConnection : MonoBehaviour
             case ConnectionPoints.UpperRight:
                 return -45;
             case ConnectionPoints.UpperLeft:
-                return 45;  
+                return 45;
             case ConnectionPoints.Right:
                 return -90;
             case ConnectionPoints.LowerRight:
@@ -66,4 +65,6 @@ public class CraftingNodeConnection : MonoBehaviour
                 return ConnectionPoints.Left;
         }
     }
+
+
 }

@@ -152,35 +152,28 @@ public class CraftingMap : MonoBehaviour
 
     private CraftingNodeConnection GetConnectionPointFromNode(CraftingMapNode node)
     {
-        List<ConnectionPoints> allowedPoints = node.GetAllowedPoints();
-
-        List<CraftingNodeConnection> possibleConnections = new List<CraftingNodeConnection>();
-        foreach (var item in node.NodeConnections)
+        Vector3 distanceFromBase = node.transform.position - baseNode.transform.position;
+        Debug.Log(distanceFromBase);
+        List<ConnectionPoints> validPoints = node.GetAvailableConnectionPointsFromDirection(distanceFromBase, node);
+        List<CraftingNodeConnection> availableValidPoints = new List<CraftingNodeConnection>();
+        foreach (var point in node.NodeConnections)
         {
-            if (item.Occupied)
+            if (point.Occupied)
             {
                 continue;
             }
 
-            foreach (var point in allowedPoints)
+            foreach (var validPoint in validPoints)
             {
-                if (item.ConnectionPoint == point)
+                if (validPoint == point.ConnectionPoint)
                 {
-                    possibleConnections.Add(item);
-
+                    availableValidPoints.Add(point);
                 }
             }
         }
-        if (possibleConnections.Count < 1)
-        {
-            return null;
-        }
-        else
-        {
-            CraftingNodeConnection selectedPoint = possibleConnections[Random.Range(0, possibleConnections.Count)];
-            selectedPoint.Occupied = true;
-            return selectedPoint;
-        }
+        CraftingNodeConnection finalPoint =  availableValidPoints[Random.Range(0, availableValidPoints.Count)];
+        finalPoint.Occupied = true;
+        return finalPoint;
     }
     private CraftingNodeConnection GetConnectionPointFromNode(CraftingBaseNode node)
     {

@@ -46,7 +46,22 @@ public class CraftingMapNode : MonoBehaviour
             nodeConnections[n] = value;
         }
     }
+    public List<ConnectionPoints> GetAvailableConnectionPointsFromDirection(Vector3 direction, CraftingMapNode node)
+    {
+        List<ConnectionPoints> viableConnectionPoints = new List<ConnectionPoints>();
+        List<ConnectionPoints> takenPoints = new List<ConnectionPoints>();
 
+        foreach (var item in node.NodeConnections)
+        {
+            if (item.Occupied)
+            {
+                takenPoints.Add(item.ConnectionPoint);
+            }
+        }
+        
+        
+        return viableConnectionPoints;
+    }
 
     public void SetPos(CustomPos givenPos)
     {
@@ -69,7 +84,7 @@ public class CraftingMapNode : MonoBehaviour
     public void RotateLine(float givenBaseRotation)
     {
         rotation = givenBaseRotation;
-        float finalRot = Random.Range(rotation - 20, rotation + 21);
+        float finalRot = Random.Range(rotation - 15, rotation + 16);
         line.transform.rotation = Quaternion.Euler(0f, 0f, finalRot);
     }
 
@@ -88,6 +103,7 @@ public class CraftingMapNode : MonoBehaviour
         {
             if (givenPoint == item.ConnectionPoint)
             {
+                item.Occupied = true;
                 return item.transform;
             }
         }
