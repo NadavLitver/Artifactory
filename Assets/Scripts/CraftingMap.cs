@@ -16,6 +16,7 @@ public class CraftingMap : MonoBehaviour
     [SerializeField] GameObject CraftButton;
     [SerializeField] private CraftingMapType mapType;
     NodeLine selectedLine;
+    [SerializeField] private bool oneTimeCrafts;
     float lineLength;
     private void Start()
     {
@@ -286,6 +287,15 @@ public class CraftingMap : MonoBehaviour
         }
     }
 
+    public void TurnOffLine(NodeLine line)
+    {
+        foreach (var item in line.Nodes)
+        {
+            item.gameObject.SetActive(false);
+        }
+    }
+
+
     public void CraftItem() //called from button
     {
         if (ReferenceEquals(selectedLine, null))
@@ -294,6 +304,11 @@ public class CraftingMap : MonoBehaviour
         }
         GameManager.Instance.assets.playerActor.PlayerItemInventory.CraftItem(selectedLine.myRecipe);
         GameManager.Instance.CraftingManager.SelectedCraftingPanel.ClearPanel();
+        if (oneTimeCrafts)
+        {
+            TurnOffLine(selectedLine);
+            createdLines.Remove(selectedLine);
+        }
         //TurnOffLines();
         //CraftButton.SetActive(false);
     }
