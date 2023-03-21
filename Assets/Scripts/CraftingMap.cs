@@ -240,7 +240,7 @@ public class CraftingMap : MonoBehaviour
                 {
                     continue;
                 }
-                if (givenItems[i] == createdLines[j].Nodes[i].Mycomponent.itemType && IsLineActiveUpTo(createdLines[j], i))
+                if (givenItems[i] == createdLines[j].Nodes[i].Mycomponent.itemType && IsLineActiveUpTo(createdLines[j], i, givenItems))
                 {
                     createdLines[j].Nodes[i]/*.Line*/.gameObject.SetActive(true);
                     createdLines[j].Nodes[i].Cover.SetActive(false);
@@ -259,11 +259,11 @@ public class CraftingMap : MonoBehaviour
         }
     }
 
-    private bool IsLineActiveUpTo(NodeLine givenLine, int index)
+    private bool IsLineActiveUpTo(NodeLine givenLine, int index, List<ItemType> givenItems)
     {
         for (int i = 0; i < index; i++)
         {
-            if (!givenLine.Nodes[i].Line.gameObject.activeInHierarchy)
+            if ((!givenLine.Nodes[i].Line.gameObject.activeInHierarchy) || givenLine.Nodes[i].Mycomponent.itemType != givenItems[i])
             {
                 return false;
             }
