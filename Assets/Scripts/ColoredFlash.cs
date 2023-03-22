@@ -15,7 +15,7 @@ public class ColoredFlash : MonoBehaviour
     [SerializeField] private float duration;
 
     #endregion
-    #region Private Fields
+    #region Fields
     [SerializeField] private Actor m_actor;
     // The SpriteRenderer that should flash.
     public SpriteRenderer[] spriteRenderers;
