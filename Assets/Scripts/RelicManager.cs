@@ -15,7 +15,7 @@ public class RelicManager : MonoBehaviour
     {
         foreach (var item in freeRelics)
         {
-            if (item.GetType() == givenRelic.GetType())
+            if (item.MyEffectEnum == givenRelic.MyEffectEnum)
             {
                 freeRelics.Remove(item);
                 break;

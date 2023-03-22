@@ -28,6 +28,7 @@ public class RelicChoiceInteractable : MonoBehaviour
     public void SetUp()
     {
         myRelic = GameManager.Instance.RelicManager.GetFreeRelic();
+        Debug.Log(MyRelic);
         if (side == ChestSide.Left)
         {
             refFlower.CacheLeftRelic(this);
