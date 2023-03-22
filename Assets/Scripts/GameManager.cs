@@ -188,7 +188,8 @@ public class AssetsRefrence
     public AnimalPickup AnimalPickupPrefab;
     [Header("Boss")]
     public Animator BossAnimator;
-
+    [Header("Object Pools")]
+    public ExplosionObjectPool ExplsionOP;
 
 }
 public class GeneralFunctions

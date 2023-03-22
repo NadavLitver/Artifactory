@@ -17,6 +17,7 @@ public class AnimationEventFunctions : MonoBehaviour
     private int PickaxeFirstAttackWhooshHash;
     private int PickaxeSecondAttackWhooshHash;
     private int CannonShootWhoosh;
+    private int CannonMuzzleFlashHash;
 
 
 
@@ -36,6 +37,12 @@ public class AnimationEventFunctions : MonoBehaviour
         PickaxeSecondAttackWhooshHash = Animator.StringToHash("PickaxeSecondAttackWhoosh");
         PickaxeAirAttackLandWhooshHash = Animator.StringToHash("PickaxeAirAttackLandWhoosh");
         CannonShootWhoosh = Animator.StringToHash("CannonShootWhoosh");
+        CannonMuzzleFlashHash = Animator.StringToHash("MuzzleFlash");
+    }
+
+    public void PlayCannonMuzzleFlash()
+    {
+        PlayWhooshAnimation(CannonMuzzleFlashHash);
 
     }
     public void PlayPickaxeSecondAttackWhoosh()
@@ -101,10 +108,6 @@ public class AnimationEventFunctions : MonoBehaviour
     {
         PlayWhooshAnimation(PickaxeAirAttackLandWhooshHash);
 
-    }
-    public void PlayCannonShootWhoosh()
-    {
-       // PlayWhooshAnimation(CannonShootWhoosh);// w8ting with this one
     }
     private void PlayWhooshAnimation(string name)
     {
