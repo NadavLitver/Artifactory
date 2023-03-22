@@ -9,6 +9,7 @@ public class WheelOfFortunePrizes : MonoBehaviour
     [SerializeField] WheelOfFortuneManager fortuneManager;
     [SerializeField, Range(1, 100)] int HealAmount;
     [SerializeField] GameObject fatherGO;
+    [SerializeField] OnWinWheelOfFortuneUIEffectsHandler OnWinWheelOfFortuneUI;
     
     void Start()
     {
@@ -24,7 +25,7 @@ public class WheelOfFortunePrizes : MonoBehaviour
     }
     IEnumerator GivePrizeRoutine(int index)
     {
-        yield return new WaitForSeconds(1);
+        yield return OnWinWheelOfFortuneUI.onWinUIGrow(index);
 
         switch (index)
         {
