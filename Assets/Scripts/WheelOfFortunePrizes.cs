@@ -50,7 +50,7 @@ public class WheelOfFortunePrizes : MonoBehaviour
                 DropResource(ItemType.Glimmering);
                 break;
             case 4:
-                GameManager.Instance.assets.playerActor.Heal(new DamageHandler() { amount = GameManager.Instance.assets.playerActor.maxHP }); ;
+                GameManager.Instance.assets.playerActor.Heal(new DamageHandler() { amount = GameManager.Instance.assets.playerActor.maxHP });
                 break;
             case 5:
                 GameManager.Instance.assets.tuffRef.didPlayerGetLegs = true;

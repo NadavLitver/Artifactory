@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private SensorGroup leftSensors;
 
 
-    public float GetHorInput { get => horInput; set => horInput = value; }
+    public float GetHorInput { get => horInput; }
     public Rigidbody2D GetRb { get => m_rb; set => m_rb = value; }
     public Vector2 GetVelocity { get => velocity; set => velocity = value; }
     public bool GetIsLookingRight { get => isLookingRight; set => isLookingRight = value; }

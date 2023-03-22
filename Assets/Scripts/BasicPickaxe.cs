@@ -186,7 +186,16 @@ public class BasicPickaxe : Weapon
         }
         Debug.Log("PickaxeReached");
         TurnOnClawEffect();
-        yield return new WaitForSeconds(maxClawTime);
+        Counter = 0;
+        while (Counter < maxClawTime)
+        {
+         
+            player.Animator.SetBool("IsLookingAwayFromWall", -player.GetHorInput == playerLookdir);
+            Counter += Time.deltaTime;
+            yield return new WaitForEndOfFrame();
+
+        }
+        // yield return new WaitForSeconds(maxClawTime);
         player.Animator.SetBool("Climb", false);
         Clawed = false;
         player.canMove = true;
