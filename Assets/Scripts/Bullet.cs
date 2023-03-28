@@ -55,7 +55,7 @@ public class Bullet : MonoBehaviour
              TurnOff();
              return;
          }*/
-        SoundManager.Play(SoundManager.Sound.BasicGunExplosion, transform.position);
+        SoundManager.Play(SoundManager.Sound.BasicGunExplosion, transform.position,SoundManager.GetVolumeOfClip(SoundManager.Sound.BasicGunExplosion));
         rb.velocity = Vector2.zero;
         exploded = true;
         Explosion.gameObject.SetActive(true);
