@@ -40,7 +40,7 @@ public class NewRBFlipper : MonoBehaviour
     {
         if (leftyObject)
         {
-            objectToFlip.localScale = new Vector3(-1 * startingScale.x, 0, 0);
+            objectToFlip.localScale = new Vector3(-1 * startingScale.x, startingScale.y, 1);
         }
         else
         {
@@ -55,7 +55,7 @@ public class NewRBFlipper : MonoBehaviour
         }
         else
         {
-            objectToFlip.localScale = new Vector3(-1 * startingScale.x, 0, 0);
+            objectToFlip.localScale = new Vector3(-1 * startingScale.x, startingScale.y, 1);
         }
 
     }

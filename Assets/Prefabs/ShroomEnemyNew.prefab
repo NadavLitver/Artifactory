@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 2962744240544369519}
   - component: {fileID: 2962744240544369518}
   - component: {fileID: 2962744240544369517}
-  - component: {fileID: 2962744240544369506}
   - component: {fileID: 593577357}
   - component: {fileID: 918272322872504960}
   - component: {fileID: 4312838092896058648}
+  - component: {fileID: 767550679717588959}
   m_Layer: 12
   m_Name: ShroomEnemyNew
   m_TagString: Untagged
@@ -192,26 +192,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2448788, y: 1.5053184}
   m_EdgeRadius: 0
---- !u!114 &2962744240544369506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2962744240544369516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 260220feca668bd418b158dcffc82824, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  positiveVector: {x: 0, y: 0, z: 0}
-  negativeVector: {x: 0, y: 0, z: 0}
-  Disabled: 0
-  IsLookingRight: 0
-  StartLeft: 1
-  OnFlip:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &593577357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +316,24 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   catchCahcne: 100
+--- !u!114 &767550679717588959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2962744240544369516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45abf37d93f84164db9f23ae96a7193b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToFlip: {fileID: 2962744242088939959}
+  OnFlip:
+    m_PersistentCalls:
+      m_Calls: []
+  Disabled: 0
+  leftyObject: 1
 --- !u!1 &2962744240795717377
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,7 +756,7 @@ MonoBehaviour:
   groundCheck: {fileID: 2962744241184279366}
   bounder: {fileID: 2962744240544369518}
   anim: {fileID: 2962744240795717380}
-  flipper: {fileID: 2962744240544369506}
+  flipper: {fileID: 767550679717588959}
   takeDamageState: {fileID: 2962744242088939598}
   otherMode: {fileID: 6973081568470684432}
   deathState: {fileID: 5926192734959646063}
@@ -904,7 +902,7 @@ MonoBehaviour:
   groundCheck: {fileID: 2962744241184279366}
   bounder: {fileID: 2962744240544369518}
   anim: {fileID: 3314009879725532973}
-  flipper: {fileID: 2962744240544369506}
+  flipper: {fileID: 767550679717588959}
   takeDamageState: {fileID: 8053518562303579834}
   otherMode: {fileID: 2962744242088939594}
   deathState: {fileID: 5851949567077389279}

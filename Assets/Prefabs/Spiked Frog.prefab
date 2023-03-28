@@ -370,9 +370,9 @@ GameObject:
   - component: {fileID: 1367142806}
   - component: {fileID: 1367142808}
   - component: {fileID: 8148802219243712764}
-  - component: {fileID: 378837385}
   - component: {fileID: 7677894173265101549}
   - component: {fileID: 1658575090173467875}
+  - component: {fileID: 4075781168779194767}
   m_Layer: 12
   m_Name: Spiked Frog
   m_TagString: Untagged
@@ -528,26 +528,6 @@ MonoBehaviour:
   dropOnDeath: 1
   catchHandler: {fileID: 1658575090173467875}
   animal: {fileID: 11400000, guid: 3e4baf4aafb47164fbb19e7b890424b9, type: 2}
---- !u!114 &378837385
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6728404320883149187}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 260220feca668bd418b158dcffc82824, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  positiveVector: {x: 0, y: 0, z: 0}
-  negativeVector: {x: 0, y: 0, z: 0}
-  Disabled: 0
-  IsLookingRight: 0
-  StartLeft: 0
-  OnFlip:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!82 &7677894173265101549
 AudioSource:
   m_ObjectHideFlags: 0
@@ -660,6 +640,24 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   catchCahcne: 100
+--- !u!114 &4075781168779194767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6728404320883149187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45abf37d93f84164db9f23ae96a7193b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToFlip: {fileID: 1279974855012235335}
+  OnFlip:
+    m_PersistentCalls:
+      m_Calls: []
+  Disabled: 0
+  leftyObject: 0
 --- !u!1 &7329605738004119608
 GameObject:
   m_ObjectHideFlags: 0
