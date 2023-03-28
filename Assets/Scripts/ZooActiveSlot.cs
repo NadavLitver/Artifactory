@@ -25,6 +25,7 @@ public class ZooActiveSlot : MonoBehaviour
     [SerializeField] private GameObject renamePanel;
     [SerializeField] private Animator anim;
 
+
     [SerializeField] private TMP_InputField inputField;
     private bool timerStarted;
     private bool animalDoneHealing;

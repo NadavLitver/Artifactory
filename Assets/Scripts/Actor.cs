@@ -150,6 +150,8 @@ public class Actor : MonoBehaviour, IDamagable
         if (!hittable)
             return;
 
+        givenAbility.DamageHandler.myDmgType = DamageType.normal;
+
         if (givenAbility.IsMelee)
         {
             StartCoroutine(HitCooldown());
@@ -172,6 +174,7 @@ public class Actor : MonoBehaviour, IDamagable
             host.OnDealCriticalDamage?.Invoke(givenAbility.DamageHandler);
             OnTakeCriticalDamage?.Invoke(givenAbility.DamageHandler);
             givenAbility.DamageHandler.AddModifier(host.CalcCritDamage(givenAbility));
+            givenAbility.DamageHandler.myDmgType = DamageType.critical;
         }
         OnGetHit?.Invoke(givenAbility);
         if (givenAbility.IsMelee)
