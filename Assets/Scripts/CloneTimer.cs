@@ -10,12 +10,15 @@ public class CloneTimer : MonoBehaviour
     int hours;
     int minutes;
     private string m_Time;
+    private int m_cloneCount;
+    [SerializeField] int startingCloneCount = 3;
     private void Start()
     { 
 
         hours =3;
         minutes = 47;
         MinuteCounter = 60;
+        m_cloneCount = startingCloneCount;
     }
     private void Update()
     {
@@ -31,12 +34,13 @@ public class CloneTimer : MonoBehaviour
                 if(hours < 0)
                 {
                     hours = 4;
+                    m_cloneCount++;
                 }
             }
         }
         m_Time = hours + "h" + "  " + minutes + "m"  + "  " + (int)MinuteCounter + "s";
 
-        m_text.text = "Next Clone: " + m_Time;
+        m_text.text = "x" + m_cloneCount + "   Next Clone: " + m_Time;
 
     }
 }

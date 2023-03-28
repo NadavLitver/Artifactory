@@ -357,6 +357,7 @@ MonoBehaviour:
   relicMap: {fileID: 0}
   inventorycraftingPanel: {fileID: 0}
   selectedCraftingPanel: {fileID: 0}
+  craftButton: {fileID: 0}
 --- !u!1 &4180575169982807779
 GameObject:
   m_ObjectHideFlags: 0
@@ -413,10 +414,16 @@ MonoBehaviour:
   onJumpDown:
     m_PersistentCalls:
       m_Calls: []
-  OnTouchDown:
+  OnPrimaryTouchDown:
     m_PersistentCalls:
       m_Calls: []
-  OnTouchUp:
+  OnPrimaryTouchUp:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSecondaryTouchDown:
+    m_PersistentCalls:
+      m_Calls: []
+  OnSecondaryTouchUp:
     m_PersistentCalls:
       m_Calls: []
   OnInteract:
@@ -532,6 +539,7 @@ MonoBehaviour:
     GlimmeringWoodsAudioSource: {fileID: 0}
     AnimalPickupPrefab: {fileID: 1808717985204493064, guid: 4ce37bc1dabe9a9458409d4090f9e800, type: 3}
     BossAnimator: {fileID: 0}
+    ExplsionOP: {fileID: 0}
 --- !u!1 &4207107459726920179
 GameObject:
   m_ObjectHideFlags: 0
@@ -835,6 +843,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1078534446947263185}
   - component: {fileID: 5111662350817070084}
+  - component: {fileID: 379764918394835550}
   m_Layer: 0
   m_Name: ObjectPools
   m_TagString: Untagged
@@ -871,6 +880,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pooledObjects: []
   PrefabToPool: {fileID: 800068218782913412, guid: 8eb96fa6730adeb41b59afd425f5d01e, type: 3}
+  NumToPool: 10
+--- !u!114 &379764918394835550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7028819647897419526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e231d1755d6419046b21e4d24317493a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  PrefabToPool: {fileID: 5846453044655557716, guid: 461f9d71b5b137c4dab5bc0c3611d783, type: 3}
   NumToPool: 10
 --- !u!1 &7568456704651568653
 GameObject:
@@ -943,6 +967,9 @@ MonoBehaviour:
   numberOfRooms: 7
   mapGenerator: {fileID: 1608005968017932032}
   maxNuberOfChests: 1
+  OnRoomMove:
+    m_PersistentCalls:
+      m_Calls: []
   TempBossRoom: {fileID: 0}
 --- !u!1001 &6662966006180783118
 PrefabInstance:

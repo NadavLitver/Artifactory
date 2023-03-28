@@ -72,7 +72,7 @@ public class Cannon : Weapon
         isCharging = false;
         isLoaded = true;
         loadedTime = Time.time;
-        Debug.Log("cannon armed");
+        //Debug.Log("cannon armed");
     }
 
     public void CheckBulletFade()

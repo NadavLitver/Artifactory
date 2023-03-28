@@ -28,7 +28,7 @@ public class ZooManager : MonoBehaviour
         int index = zooSlots.FindIndex(a => zooSlots.Contains(slot));
         ZooStationGem gem = gems[index];
         gem.CacheRefSlot(slot);
-        Debug.Log(zooSlots.Count);
+       // Debug.Log(zooSlots.Count);
     }
    
     public void CatchAnimal(ZooAnimal givenAnimal)

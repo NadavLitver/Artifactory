@@ -154,7 +154,7 @@ public class DynamicHpBar : MonoBehaviour
         }
         if (maxHp <= 0)
         {
-            Debug.Log(actor.name + " max hp is 0 fix");
+            //Debug.Log(actor.name + " max hp is 0 fix");
         }
         if (useUi)
         {

@@ -10,7 +10,7 @@ public class SpikedFrogChase : State
         if (!handler.launcher.IsJumping)
         {
             handler.launcher.Launch(handler.rayData.GetClosestPointToPoint(GameManager.Instance.assets.playerActor.transform.position));
-            Debug.Log("chased jumped");
+           // Debug.Log("chased jumped");
         }
         else
         {

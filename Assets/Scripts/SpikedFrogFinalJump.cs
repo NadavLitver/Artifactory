@@ -11,7 +11,7 @@ public class SpikedFrogFinalJump : State
         if (!handler.launcher.IsJumping)
         {
             handler.launcher.Launch(handler.rayData.GetClosestPointToPoint(GameManager.Instance.assets.playerActor.transform.position));
-            Debug.Log("final jumped");
+            //Debug.Log("final jumped");
         }
         else
         {

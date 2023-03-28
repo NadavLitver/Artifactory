@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour
     public SensorGroup OnsGroundCheck1 { get => OnsGroundCheck; }
     public SensorGroup RightSensors { get => rightSensors; }
     public SensorGroup LeftSensors { get => leftSensors; }
+    public AudioSource AudioSource { get => m_audioSource;}
 
     private int FallingHash;
     private int GroundedHash;
@@ -180,7 +181,7 @@ public class PlayerController : MonoBehaviour
                 externalForces.y = 0;
 
             }
-            Debug.Log("Ceiling");
+            //Debug.Log("Ceiling");
         }
     }
 
@@ -331,7 +332,7 @@ public class PlayerController : MonoBehaviour
     }
     public void RecieveForce(Vector2 force)
     {
-        Debug.Log("player recieved force");
+        //Debug.Log("player recieved force");
         GetExternalForces += force;
     }
     private void OnDrawGizmos()

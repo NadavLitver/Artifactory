@@ -38,7 +38,7 @@ public class TutorialExit : MonoBehaviour
         m_room.NextRoom.gameObject.SetActive(true);
         player.gameObject.SetActive(false);
       player.position = m_room.NextRoom.StartingPosition.position;
-        Debug.Break();
+        //Debug.Break();
         yield return new WaitForSeconds(1);
         m_room.gameObject.SetActive(false);
         GameManager.Instance.assets.blackFade.FadeFromBlack();

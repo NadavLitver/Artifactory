@@ -23,12 +23,16 @@ public class Interactor : MonoBehaviour
 
     public void Interact()
     {
-        if (!closestInteractable.gameObject.activeInHierarchy)
-            closestInteractable = null;
+      
 
         if (closestInteractable != null )
         {
-            
+            if (!closestInteractable.gameObject.activeInHierarchy)
+            {
+                closestInteractable = null;
+                return;
+            }
+
             closestInteractable.GetComponent<Interactable>().Interact();
         }
     }

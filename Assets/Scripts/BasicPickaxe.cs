@@ -167,12 +167,12 @@ public class BasicPickaxe : Weapon
     }
     IEnumerator IEMoveToWall(Vector3 positionToMoveTo)
     {
-        m_animator.SetTrigger("Climb");
+       // m_animator.SetTrigger("Climb");
         Clawed = true;
         moveToPositionForDebug = positionToMoveTo;
         player.canMove = false;
         airAttacking = false;
-        player.Animator.SetBool("Climb", true);
+        player.Animator.SetBool(ClimbHash, true);
         player.ResetVelocity();
         player.ZeroGravity();
         float Counter = 0;
@@ -184,7 +184,7 @@ public class BasicPickaxe : Weapon
             Counter += Time.deltaTime * 5;
             yield return new WaitForEndOfFrame();
         }
-        Debug.Log("PickaxeReached");
+        SoundManager.Play(SoundManager.Sound.BasicPickaxeClimb, player.AudioSource);
         TurnOnClawEffect();
         Counter = 0;
         while (Counter < maxClawTime)
@@ -196,7 +196,7 @@ public class BasicPickaxe : Weapon
 
         }
         // yield return new WaitForSeconds(maxClawTime);
-        player.Animator.SetBool("Climb", false);
+        player.Animator.SetBool(ClimbHash, false);
         Clawed = false;
         player.canMove = true;
         player.ResetGravity();
@@ -245,7 +245,7 @@ public class BasicPickaxe : Weapon
         stringBuilder.Append(attackPrefix);
         stringBuilder.Append(AbilityCombo.GetAbilityIndex().ToString());
         animationString = stringBuilder.ToString();
-        Debug.Log(animationString);
+        //Debug.Log(animationString);
         m_animator.SetTrigger(animationString);
         OnGroundAttack?.Invoke();
     }
