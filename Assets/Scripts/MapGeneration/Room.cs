@@ -9,7 +9,6 @@ public enum RoomType
     HARD,
     BOSS,
     SPECIAL
-    //can add more types in the future - merchant, rest etc...
 }
 
 public class Room : MonoBehaviour
@@ -25,6 +24,8 @@ public class Room : MonoBehaviour
     [SerializeField] List<CustomPos> occupiedPositions = new List<CustomPos>();
     [SerializeField] Transform startPosition;
     [SerializeField] List<SpawnPoint> chestSpawnPoints = new List<SpawnPoint>();
+
+
     public UnityEvent OnEntered;
 
     private bool hasChest;
