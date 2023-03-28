@@ -49,9 +49,9 @@ public class Bullet : MonoBehaviour
         if (!ReferenceEquals(Explosion, null))
         {
             Explosion.CacheSource(source);
+            Explosion.transform.position = transform.position;
+            Explosion.gameObject.SetActive(true);
         }
-        Explosion.gameObject.SetActive(true);
-        Explosion.transform.position = transform.position;
         //Explosion.gameObject.SetActive(true); place an explosion in this position.
         TurnOff();
     }
