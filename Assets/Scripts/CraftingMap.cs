@@ -153,8 +153,7 @@ public class CraftingMap : MonoBehaviour
     private CraftingNodeConnection GetConnectionPointFromNode(CraftingMapNode node)
     {
         Vector3 distanceFromBase = node.transform.position - baseNode.transform.position;
-        Debug.Log(distanceFromBase);
-        List<ConnectionPoints> validPoints = node.GetAvailableConnectionPointsFromDirection(distanceFromBase, node);
+        List<ConnectionPoints> adjacentConnections = node.GetAdjacentConnections();
         List<CraftingNodeConnection> availableValidPoints = new List<CraftingNodeConnection>();
         foreach (var point in node.NodeConnections)
         {
@@ -163,7 +162,7 @@ public class CraftingMap : MonoBehaviour
                 continue;
             }
 
-            foreach (var validPoint in validPoints)
+            foreach (var validPoint in adjacentConnections)
             {
                 if (validPoint == point.ConnectionPoint)
                 {

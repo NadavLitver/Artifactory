@@ -62,6 +62,19 @@ public class CraftingMapNode : MonoBehaviour
         return viableConnectionPoints;
     }
 
+    public List<ConnectionPoints> GetAdjacentConnections()
+    {
+        foreach (var item in nodeConnections)
+        {
+            if (item.Occupied)
+            {
+                return item.GetAdjacentConnectionPoints(item.ConnectionPoint);
+            }
+        }
+        return null;
+    }
+
+
     public void SetPos(CustomPos givenPos)
     {
         myPos = givenPos;
