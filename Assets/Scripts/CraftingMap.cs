@@ -235,11 +235,13 @@ public class CraftingMap : MonoBehaviour
                 if (givenItems[i] == createdLines[j].Nodes[i].Mycomponent.itemType && IsLineActiveUpTo(createdLines[j], i, givenItems))
                 {
                     createdLines[j].Nodes[i]/*.Line*/.gameObject.SetActive(true);
+                    createdLines[j].Nodes[i]/*.Line*/.ItemSprite.gameObject.SetActive(true);
                     createdLines[j].Nodes[i].Cover.SetActive(false);
                     if (createdLines[j].Nodes.Count - 2 == i) //if this is the item before last
                     {
                         //createdLines[j].Nodes[i + 1]/*.Line*/.gameObject.SetActive(true);
                         createdLines[j].Nodes[i + 1].Cover.SetActive(false);
+                        createdLines[j].Nodes[i + 1].ItemSprite.gameObject.SetActive(true);
                         selectedLine = createdLines[j];
                         //CraftButton.SetActive(true);
                         //craft button turn on
@@ -271,6 +273,7 @@ public class CraftingMap : MonoBehaviour
             for (int i = 1; i < line.Nodes.Count; i++)
             {
                 line.Nodes[i].Cover.SetActive(true);
+                line.Nodes[i].ItemSprite.gameObject.SetActive(false);
             }
             /* foreach (var node in line.Nodes)
              {
