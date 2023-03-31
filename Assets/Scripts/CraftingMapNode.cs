@@ -1,8 +1,8 @@
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.Events;
-using System.Collections.Generic;
+using UnityEngine.UI;
 public class CraftingMapNode : MonoBehaviour
 {
     [SerializeField] Image itemSprite;
@@ -24,8 +24,9 @@ public class CraftingMapNode : MonoBehaviour
     public bool Discovered { get => discovered; set => discovered = value; }
     public float Rotation { get => rotation; set => rotation = value; }
     public CustomPos MyPos { get => myPos; }
-    public List<CraftingNodeConnection> NodeConnections { get => nodeConnections; set => nodeConnections = value; }
+    public List<CraftingNodeConnection> NodeConnections { get => nodeConnections; }
     public GameObject Cover { get => cover; }
+    public Image ItemSprite { get => itemSprite; set => itemSprite = value; }
 
     public UnityEvent OnDiscovered;
     private void Start()
@@ -46,6 +47,33 @@ public class CraftingMapNode : MonoBehaviour
             nodeConnections[n] = value;
         }
     }
+    public List<ConnectionPoints> GetAvailableConnectionPointsFromDirection(Vector3 direction, CraftingMapNode node)
+    {
+        List<ConnectionPoints> viableConnectionPoints = new List<ConnectionPoints>();
+        List<ConnectionPoints> takenPoints = new List<ConnectionPoints>();
+
+        foreach (var item in node.NodeConnections)
+        {
+            if (!item.Occupied)
+            {
+                viableConnectionPoints.Add(item.ConnectionPoint);
+            }
+        }
+
+        return viableConnectionPoints;
+    }
+
+    public List<ConnectionPoints> GetAdjacentConnections()
+    {
+        foreach (var item in nodeConnections)
+        {
+            if (item.Occupied)
+            {
+                return item.GetAdjacentConnectionPoints(item.ConnectionPoint);
+            }
+        }
+        return null;
+    }
 
 
     public void SetPos(CustomPos givenPos)
@@ -57,7 +85,7 @@ public class CraftingMapNode : MonoBehaviour
     {
         mycomponent = givenComp;
         itemSprite.sprite = GameManager.Instance.generalFunctions.GetSpriteFromItemType(givenComp.itemType);
-       // textMesh.text = givenComp.amount.ToString();
+        // textMesh.text = givenComp.amount.ToString();
         cover.SetActive(false);
     }
     public void SetUpNode(Sprite sprite)
@@ -69,7 +97,7 @@ public class CraftingMapNode : MonoBehaviour
     public void RotateLine(float givenBaseRotation)
     {
         rotation = givenBaseRotation;
-        float finalRot = Random.Range(rotation - 20, rotation + 21);
+        float finalRot = Random.Range(rotation - 15, rotation + 16);
         line.transform.rotation = Quaternion.Euler(0f, 0f, finalRot);
     }
 
@@ -81,13 +109,14 @@ public class CraftingMapNode : MonoBehaviour
         finalNodeBackground.SetActive(true);
         circle.gameObject.SetActive(false);
     }
-    
+
     public Transform GetConnectionPoint(ConnectionPoints givenPoint)
     {
         foreach (var item in nodeConnections)
         {
             if (givenPoint == item.ConnectionPoint)
             {
+                item.Occupied = true;
                 return item.transform;
             }
         }
@@ -105,7 +134,7 @@ public class CraftingMapNode : MonoBehaviour
             }
             if (transform.localPosition.x > 0)
             {
-                if (item.ConnectionPoint == ConnectionPoints.Right|| item.ConnectionPoint == ConnectionPoints.LowerRight || item.ConnectionPoint == ConnectionPoints.UpperRight)
+                if (item.ConnectionPoint == ConnectionPoints.Right || item.ConnectionPoint == ConnectionPoints.LowerRight || item.ConnectionPoint == ConnectionPoints.UpperRight)
                 {
                     allowedPoints.Add(item.ConnectionPoint);
                 }
@@ -120,7 +149,7 @@ public class CraftingMapNode : MonoBehaviour
         }
 
         return allowedPoints;
-      
+
     }
 
 

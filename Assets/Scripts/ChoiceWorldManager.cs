@@ -12,6 +12,7 @@ public class ChoiceWorldManager : MonoBehaviour
     public Button LeftArrow;
     public Image[] ResourceImages;
     private int index;
+    [SerializeField] private GameObject lockImage;
 
     [SerializeField] List<FloatingIslandInChoicePanel> islandsInChoicePanel;
 
@@ -29,6 +30,7 @@ public class ChoiceWorldManager : MonoBehaviour
     {
         if (ChooseButton.enabled)
         {
+            GameManager.Instance.assets.blackFade.CallFadeToAndFrom();
             GameManager.Instance.LevelManager.AssembleLevel();
             this.gameObject.SetActive(false);
             GameManager.Instance.assets.mobileControls.SetActive(true);
@@ -73,6 +75,15 @@ public class ChoiceWorldManager : MonoBehaviour
         DescriptionText.text = currentIsland.DescriptionText;
         ChooseButton.enabled = !currentIsland.isLocked;
 
+        if (currentIsland.isLocked)
+        {
+            lockImage.SetActive(true);
+        }
+        else
+        {
+            lockImage.SetActive(false);
+
+        }
         foreach (Image img in ResourceImages)
         {
             img.gameObject.SetActive(currentIsland.ShowResources);

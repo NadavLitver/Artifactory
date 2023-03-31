@@ -9,7 +9,7 @@ public class Explosion : MonoBehaviour
     private void OnEnable()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius, HitLayer);
-        Debug.Log(colliders.Length);
+       // Debug.Log(colliders.Length);
         
         foreach (var item in colliders)
         {
@@ -19,7 +19,6 @@ public class Explosion : MonoBehaviour
                 actor.GetHit(explosionAbility, source.Host);
             }
         }
-
     }
 
     public void CacheSource(Weapon givenWeapon)
@@ -30,6 +29,10 @@ public class Explosion : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawWireSphere(transform.position, radius);
+    }
+    public void TurnOff()
+    {
+        gameObject.SetActive(false);
     }
 
 }

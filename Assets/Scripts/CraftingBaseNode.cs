@@ -15,6 +15,7 @@ public class CraftingBaseNode : MonoBehaviour
         {
             if (givenPoint == item.ConnectionPoint)
             {
+                item.Occupied = true;
                 return item.transform;
             }
         }

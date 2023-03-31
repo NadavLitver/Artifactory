@@ -152,35 +152,27 @@ public class CraftingMap : MonoBehaviour
 
     private CraftingNodeConnection GetConnectionPointFromNode(CraftingMapNode node)
     {
-        List<ConnectionPoints> allowedPoints = node.GetAllowedPoints();
-
-        List<CraftingNodeConnection> possibleConnections = new List<CraftingNodeConnection>();
-        foreach (var item in node.NodeConnections)
+        Vector3 distanceFromBase = node.transform.position - baseNode.transform.position;
+        List<ConnectionPoints> adjacentConnections = node.GetAdjacentConnections();
+        List<CraftingNodeConnection> availableValidPoints = new List<CraftingNodeConnection>();
+        foreach (var point in node.NodeConnections)
         {
-            if (item.Occupied)
+            if (point.Occupied)
             {
                 continue;
             }
 
-            foreach (var point in allowedPoints)
+            foreach (var validPoint in adjacentConnections)
             {
-                if (item.ConnectionPoint == point)
+                if (validPoint == point.ConnectionPoint)
                 {
-                    possibleConnections.Add(item);
-
+                    availableValidPoints.Add(point);
                 }
             }
         }
-        if (possibleConnections.Count < 1)
-        {
-            return null;
-        }
-        else
-        {
-            CraftingNodeConnection selectedPoint = possibleConnections[Random.Range(0, possibleConnections.Count)];
-            selectedPoint.Occupied = true;
-            return selectedPoint;
-        }
+        CraftingNodeConnection finalPoint =  availableValidPoints[Random.Range(0, availableValidPoints.Count)];
+        finalPoint.Occupied = true;
+        return finalPoint;
     }
     private CraftingNodeConnection GetConnectionPointFromNode(CraftingBaseNode node)
     {
@@ -243,11 +235,13 @@ public class CraftingMap : MonoBehaviour
                 if (givenItems[i] == createdLines[j].Nodes[i].Mycomponent.itemType && IsLineActiveUpTo(createdLines[j], i, givenItems))
                 {
                     createdLines[j].Nodes[i]/*.Line*/.gameObject.SetActive(true);
+                    createdLines[j].Nodes[i]/*.Line*/.ItemSprite.gameObject.SetActive(true);
                     createdLines[j].Nodes[i].Cover.SetActive(false);
                     if (createdLines[j].Nodes.Count - 2 == i) //if this is the item before last
                     {
                         //createdLines[j].Nodes[i + 1]/*.Line*/.gameObject.SetActive(true);
                         createdLines[j].Nodes[i + 1].Cover.SetActive(false);
+                        createdLines[j].Nodes[i + 1].ItemSprite.gameObject.SetActive(true);
                         selectedLine = createdLines[j];
                         //CraftButton.SetActive(true);
                         //craft button turn on
@@ -279,6 +273,7 @@ public class CraftingMap : MonoBehaviour
             for (int i = 1; i < line.Nodes.Count; i++)
             {
                 line.Nodes[i].Cover.SetActive(true);
+                line.Nodes[i].ItemSprite.gameObject.SetActive(false);
             }
             /* foreach (var node in line.Nodes)
              {

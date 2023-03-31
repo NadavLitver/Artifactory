@@ -53,6 +53,7 @@ public class BaseTutorialHandler : MonoBehaviour
         if (BetweenSceneInfo.didBaseTutorialHappen)
         {
             this.gameObject.SetActive(false);
+            m_interactable.gameObject.SetActive(false);
             zooIneractable.firstInteraction = true;
             return;
         }
@@ -97,7 +98,7 @@ public class BaseTutorialHandler : MonoBehaviour
     {
         if (typing)
         {
-            Debug.Log("Tried to type new dialogue mid typing");
+            //Debug.Log("Tried to type new dialogue mid typing");
             return;
         }
         else
@@ -384,7 +385,7 @@ public class BaseTutorialHandler : MonoBehaviour
         for (int i = 0; i < dialogue.lines.Length; i++)
         {
             yield return HandleLine(dialogue.lines[i], startingTextComponent);
-            Debug.Log(i);
+            //Debug.Log(i);
             if (i == 0)
             {
                 Arrow.gameObject.SetActive(true);
@@ -470,6 +471,7 @@ public class BaseTutorialHandler : MonoBehaviour
     {
         LeanTween.cancelAll();
         zooIneractable.gameObject.SetActive(true);
-     
+        m_interactable.gameObject.SetActive(false);
+
     }
 }

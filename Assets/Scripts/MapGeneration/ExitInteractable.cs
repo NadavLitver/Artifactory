@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 
@@ -27,9 +23,11 @@ public class ExitInteractable : MonoBehaviour
     [SerializeField] Collider2D exitCollider;
     [SerializeField] GameObject spikes;
     [SerializeField] GameObject gfx;
+    public AudioSource m_audioSource;
+
     public Room MyRoom { get => myRoom; set => myRoom = value; }
     public ExitLocationInfo ExitLocation { get => exitLocation; set => exitLocation = value; }
-    public bool Occupied { get => occupied;}
+    public bool Occupied { get => occupied; }
     public ExitInteractable OtherExit { get => otherExit; set => otherExit = value; }
 
     public bool CanConnectToExit(ExitInteractable givenExit)//are the exits compatible?
@@ -39,6 +37,7 @@ public class ExitInteractable : MonoBehaviour
             return true;
         }
         return false;
+
     }
 
     public void ConnectToExit(ExitInteractable givenExit)
@@ -51,11 +50,12 @@ public class ExitInteractable : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {// on remember this is good remove comments!!!
-           /* if (!ReferenceEquals(m_animator, null))
-            {
-                m_animator.SetTrigger("Exited");
-            }*/
-           GameManager.Instance.LevelManager.MoveToRoom(this);
+            /* if (!ReferenceEquals(m_animator, null))
+             {
+                 m_animator.SetTrigger("Exited");
+             }*/
+            SoundManager.Play(SoundManager.Sound.RoomPortalSound, m_audioSource);
+            GameManager.Instance.LevelManager.MoveToRoom(this);
         }
     }
 
@@ -81,6 +81,6 @@ public class ExitLocationInfo
         }
         return false;
     }
-    
+
 }
 

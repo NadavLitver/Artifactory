@@ -9,13 +9,13 @@ public class DamagePopup : MonoBehaviour
     [SerializeField, Range(1,2)] float sizeIncrease;
    
 
-    public void SetUp(DamageHandler givenDmg, Vector2 position, Vector2 direction)
+    public void SetUp(DamageHandler givenDmg, Vector2 position, Vector2 direction, float sizeMod = 1)
     {
         text.color = GameManager.Instance.PopupManager.GetDamageTypeColor(givenDmg.myDmgType);
         text.text = ((int)givenDmg.calculateFinalNumberMult()).ToString();
         transform.position = position;
         LeanTween.move(gameObject, position + (direction * dragDistance), dragTime).setEaseOutCubic();
-        LeanTween.scale(gameObject, transform.localScale * sizeIncrease, dragTime);
+        LeanTween.scale(gameObject, transform.localScale * sizeIncrease * sizeMod, dragTime);
         // LeanTween.delayedCall(dragTime * 1.3f, TurnOff);// was doing bugs on reset scene maybe can returned later once gameloop is finished
         StartCoroutine(TurnOffRoutine(dragTime * 1.3f));
     }

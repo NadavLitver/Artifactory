@@ -8,7 +8,13 @@ public class DamagePopupManager : MonoBehaviour
     {
         DamagePopup pop = popupPool.GetPooledObject();
         pop.gameObject.SetActive(true);
-        pop.SetUp(amount, pos, GetDirectionToFloatIn());
+        if (amount.myDmgType == DamageType.critical)
+        {
+            pop.SetUp(amount, pos, GetDirectionToFloatIn(), 1.8f);        }
+        else
+        {
+            pop.SetUp(amount, pos, GetDirectionToFloatIn());
+        }
         //StartCoroutine(turnoff(pop.gameObject));
     }
 
@@ -29,16 +35,11 @@ public class DamagePopupManager : MonoBehaviour
         switch (givenType)
         {
             case DamageType.normal:
-                return Color.black;
-            
-            case DamageType.fire:
-                return Color.red;
-            
-            case DamageType.ice:
-                return Color.blue;
-
+                return new Color(185, 237, 239);
             case DamageType.heal:
                 return Color.green;
+            case DamageType.critical:
+                return Color.red;
 
             default:
                 return Color.black;

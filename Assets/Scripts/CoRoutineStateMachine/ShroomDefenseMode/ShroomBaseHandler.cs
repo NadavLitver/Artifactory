@@ -8,7 +8,7 @@ public class ShroomBaseHandler : CoRoutineStateHandler
     [SerializeField] private SensorGroup groundCheck;
     [SerializeField] private EnemyBounder bounder;
     [SerializeField] private Animator anim;
-    [SerializeField] private RigidBodyFlip flipper;
+    [SerializeField] private NewRBFlipper flipper;
     [SerializeField] private CoRoutineState takeDamageState;
     [SerializeField] private ShroomBaseHandler otherMode;
     [SerializeField] CoRoutineState deathState;
@@ -23,7 +23,7 @@ public class ShroomBaseHandler : CoRoutineStateHandler
     public EnemyBounder Bounder { get => bounder; }
     public Animator Anim { get => anim; }
     public ShroomCap CurrentCap { get => currentCap; set => currentCap = value; }
-    public RigidBodyFlip Flipper { get => flipper; }
+    public NewRBFlipper Flipper { get => flipper; }
     public bool CapDestroyed { get => capDestroyed; set => capDestroyed = value; }
 
     protected virtual void Start()

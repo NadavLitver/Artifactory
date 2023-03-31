@@ -16,7 +16,7 @@ public class MapConnectionPoint : MonoBehaviour
         //RectTransform lineRect = (RectTransform)line.transform.GetChild(0).transform;
         line.gameObject.SetActive(true);
         Line.sizeDelta = new Vector2(direction.magnitude * offset, 8);
-        Debug.Log(direction.magnitude);
+       // Debug.Log(direction.magnitude);
        /* if (locationInfo.HorizontalPos == ExitLocationHorizontal.LEFT)
         {
             line.transform.rotation = new Quaternion(0, 180, 0, 0);

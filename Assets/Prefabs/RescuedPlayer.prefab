@@ -460,7 +460,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 32768
   maxClawTime: 10
-  downForceFromAirAttack: 10
+  downForceFromAirAttack: 20
   groundedAttackTime: 0.1
   mobilityCD: 1
   clawEffectPool: {fileID: 542825379}
@@ -706,11 +706,11 @@ MonoBehaviour:
   m_animator: {fileID: 791565559279450814}
   playerRelicInventory: {fileID: 840070347042588615}
   playerItemInventory: {fileID: 3271807133343841365}
-  weaponManager: {fileID: 0}
+  weaponManager: {fileID: 840070347532740851}
   normalMat: {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   legendaryMat: {fileID: 2100000, guid: d7cfd1911b0aa84448fc594bb0c1537d, type: 2}
   mainRenderer: {fileID: 207153476}
-  legendaryTrailVFX: {fileID: 628304575505493079}
+  legendaryTrailVFX: {fileID: 9027514047683863944}
 --- !u!114 &840070347042588615
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -749,7 +749,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 562d4a81dc84ac8419b9ba8023dc82fe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  items: 0100000000000000020000000300000003000000010000000300000000000000
+  items: 01000000000000000200000003000000030000000100000003000000010000000000000002000000010000000000000002000000010000000000000002000000010000000000000002000000
   OnCraftItem:
     m_PersistentCalls:
       m_Calls: []
@@ -1024,13 +1024,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   abilities:
-  - Ability: {fileID: 11400000, guid: 89c42a226e5ce9849963c9f5611700b4, type: 2}
+  - Ability: {fileID: 11400000, guid: 1e7ddb25521470d4db946d6a74f1fbc6, type: 2}
     AbilityRecovery: 0
     AbilityAnimationName: Attack
-  - Ability: {fileID: 11400000, guid: bfd394731ce00b242a3ddf26ffc864ff, type: 2}
+  - Ability: {fileID: 11400000, guid: 1e7ddb25521470d4db946d6a74f1fbc6, type: 2}
     AbilityRecovery: 0
     AbilityAnimationName: Attack2
-  - Ability: {fileID: 11400000, guid: b9d93eb80b5623e45848348e1de8e35e, type: 2}
+  - Ability: {fileID: 11400000, guid: 7a7e75e9571d28c41b5ce36b90dbe3f7, type: 2}
     AbilityRecovery: 0
     AbilityAnimationName: Attack3
   currentAbilityCombo:
@@ -1123,7 +1123,7 @@ Animator:
   m_GameObject: {fileID: 841067442087295126}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 3eb4068e4fe87e04e99d7209d2434d7a, type: 2}
+  m_Controller: {fileID: 9100000, guid: 82a846ca4cc37004881f30bc16b90075, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1195,7 +1195,7 @@ SpriteRenderer:
   m_SortingLayerID: -2069616245
   m_SortingLayer: 4
   m_SortingOrder: 10
-  m_Sprite: {fileID: -67119287, guid: d15c7d228c0907d4a9b0cda6ae35611b, type: 3}
+  m_Sprite: {fileID: 992908466, guid: 46157dc2d6af956498ff89aeeaacb851, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1330,7 +1330,7 @@ GameObject:
   m_Layer: 6
   m_Name: BlastPoint
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1342,7 +1342,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5508809318916323047}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.46, y: 0.18, z: 0}
+  m_LocalPosition: {x: 1.89, y: -0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1532,6 +1532,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d51e7d5858a11c3449abacb9a5e28f15, type: 3}
+--- !u!1 &9027514047683863944 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9027514048236820045, guid: d51e7d5858a11c3449abacb9a5e28f15, type: 3}
+  m_PrefabInstance: {fileID: 587903941}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &9027514047683863951 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9027514048236820042, guid: d51e7d5858a11c3449abacb9a5e28f15, type: 3}

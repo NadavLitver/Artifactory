@@ -1,6 +1,5 @@
-using UnityEngine;
-using System;
 using System.Collections;
+using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
@@ -17,10 +16,6 @@ public class Bullet : MonoBehaviour
     public void CahceSource(Weapon givenWeapon)
     {
         source = givenWeapon;
-        if (!ReferenceEquals(Explosion, null))
-        {
-            Explosion.CacheSource(givenWeapon);
-        }
     }
 
     private void Start()
@@ -33,7 +28,7 @@ public class Bullet : MonoBehaviour
         rb.velocity = Vector2.right * Speed * GameManager.Instance.assets.Player.transform.localScale.x;
         StartCoroutine(ExplodeOnLifeTimeExpired());
     }
-   
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //the impact of the bullet itself.
@@ -47,24 +42,23 @@ public class Bullet : MonoBehaviour
 
     private void Explode()
     {
-        /* if (exploded || !explosive)
-         {
+        SoundManager.Play(SoundManager.Sound.BasicGunExplosion, transform.position, SoundManager.GetVolumeOfClip(SoundManager.Sound.BasicGunExplosion));
 
-             rb.velocity = Vector2.zero;
-             exploded = true;
-             TurnOff();
-             return;
-         }*/
-        SoundManager.Play(SoundManager.Sound.BasicGunExplosion, transform.position,SoundManager.GetVolumeOfClip(SoundManager.Sound.BasicGunExplosion));
         rb.velocity = Vector2.zero;
         exploded = true;
-        Explosion.gameObject.SetActive(true);
-        LeanTween.delayedCall(0.2f, TurnOff);
+        Explosion = GameManager.Instance.assets.ExplsionOP.GetPooledObject();
+        if (!ReferenceEquals(Explosion, null))
+        {
+            Explosion.CacheSource(source);
+            Explosion.transform.position = transform.position;
+            Explosion.gameObject.SetActive(true);
+        }
+        //Explosion.gameObject.SetActive(true); place an explosion in this position.
+        TurnOff();
     }
 
     private void TurnOff()
     {
-        Explosion.gameObject.SetActive(false);
         gameObject.SetActive(false);
         exploded = false;
     }

@@ -13,10 +13,10 @@ GameObject:
   - component: {fileID: 2962744240544369519}
   - component: {fileID: 2962744240544369518}
   - component: {fileID: 2962744240544369517}
-  - component: {fileID: 2962744240544369506}
   - component: {fileID: 593577357}
   - component: {fileID: 918272322872504960}
   - component: {fileID: 4312838092896058648}
+  - component: {fileID: 767550679717588959}
   m_Layer: 12
   m_Name: ShroomEnemyNew
   m_TagString: Untagged
@@ -192,26 +192,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2448788, y: 1.5053184}
   m_EdgeRadius: 0
---- !u!114 &2962744240544369506
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2962744240544369516}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 260220feca668bd418b158dcffc82824, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  positiveVector: {x: 0, y: 0, z: 0}
-  negativeVector: {x: 0, y: 0, z: 0}
-  Disabled: 0
-  IsLookingRight: 0
-  StartLeft: 1
-  OnFlip:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &593577357
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -336,6 +316,24 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   catchCahcne: 100
+--- !u!114 &767550679717588959
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2962744240544369516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45abf37d93f84164db9f23ae96a7193b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToFlip: {fileID: 2962744242088939959}
+  OnFlip:
+    m_PersistentCalls:
+      m_Calls: []
+  Disabled: 0
+  leftyObject: 1
 --- !u!1 &2962744240795717377
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,6 +346,7 @@ GameObject:
   - component: {fileID: 2962744240795717380}
   - component: {fileID: 2962744240795717379}
   - component: {fileID: 2962744240795717381}
+  - component: {fileID: 1519436353388053905}
   m_Layer: 12
   m_Name: GFX
   m_TagString: Untagged
@@ -364,7 +363,7 @@ Transform:
   m_GameObject: {fileID: 2962744240795717377}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.0938227, y: 2.7369576, z: 1}
+  m_LocalScale: {x: 3, y: 2.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2962744242088939959}
@@ -455,6 +454,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handler: {fileID: 2962744242088939594}
+--- !u!114 &1519436353388053905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2962744240795717377}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d6d27cfd2b15a4f8bc4f59a1e3c3a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 3fe2e6052e81012498864f30e58f0837, type: 2}
+  duration: 0.1
+  m_actor: {fileID: 2962744240544369504}
+  spriteRenderers: []
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &2962744241184279364
 GameObject:
   m_ObjectHideFlags: 0
@@ -590,6 +606,7 @@ GameObject:
   - component: {fileID: 3314009879725532973}
   - component: {fileID: 3377001353745825009}
   - component: {fileID: 1181801619147920097}
+  - component: {fileID: 8257769105393253924}
   m_Layer: 12
   m_Name: GFX
   m_TagString: Untagged
@@ -606,7 +623,7 @@ Transform:
   m_GameObject: {fileID: 2962744241441462592}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 3.0938227, y: 2.7369576, z: 1}
+  m_LocalScale: {x: 3, y: 2.7, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2962744242505823904}
@@ -697,6 +714,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8257769105393253924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2962744241441462592}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d6d27cfd2b15a4f8bc4f59a1e3c3a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 3fe2e6052e81012498864f30e58f0837, type: 2}
+  duration: 0.1
+  m_actor: {fileID: 2962744240544369504}
+  spriteRenderers: []
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &2962744242088939958
 GameObject:
   m_ObjectHideFlags: 0
@@ -758,7 +792,7 @@ MonoBehaviour:
   groundCheck: {fileID: 2962744241184279366}
   bounder: {fileID: 2962744240544369518}
   anim: {fileID: 2962744240795717380}
-  flipper: {fileID: 2962744240544369506}
+  flipper: {fileID: 767550679717588959}
   takeDamageState: {fileID: 2962744242088939598}
   otherMode: {fileID: 6973081568470684432}
   deathState: {fileID: 5926192734959646063}
@@ -904,7 +938,7 @@ MonoBehaviour:
   groundCheck: {fileID: 2962744241184279366}
   bounder: {fileID: 2962744240544369518}
   anim: {fileID: 3314009879725532973}
-  flipper: {fileID: 2962744240544369506}
+  flipper: {fileID: 767550679717588959}
   takeDamageState: {fileID: 8053518562303579834}
   otherMode: {fileID: 2962744242088939594}
   deathState: {fileID: 5851949567077389279}

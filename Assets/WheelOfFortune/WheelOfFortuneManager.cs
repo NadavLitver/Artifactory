@@ -12,12 +12,20 @@ public class WheelOfFortuneManager : MonoBehaviour//not a real "Manager"
     public RectTransform[] sections;
     [SerializeField] int AmountMultiplier;
     [SerializeField] Button SpinButton;
-   
+    [SerializeField] AudioSource m_audioSource;
+    Quaternion startingRotation;
+    private void Start()
+    {
+        startingRotation = transform.rotation;
+        SpinButton.onClick.AddListener(SpinButtonSound);
+        
+    }
 
+    public void SpinButtonSound() => SoundManager.Play(SoundManager.Sound.SpinButton, m_audioSource);
     [ContextMenu("Start Random Spin")]
     public void RandomSpin()
     {
-        Debug.Log("Current Spin Amount " + currentAmount + " Currnet Spin Duration " + currentDuration);
+        //Debug.Log("Current Spin Amount " + currentAmount + " Currnet Spin Duration " + currentDuration);
 
         LeanTween.rotateZ(gameObject, transform.rotation.z + currentAmount, currentDuration).setOnComplete(() => CheckWinningSection());
     }
@@ -85,7 +93,7 @@ public class WheelOfFortuneManager : MonoBehaviour//not a real "Manager"
             }
         }
         OnSpinOverWithWinnerIndex.Invoke(WinningIndex);
-        Debug.Log("Highest Height is " + highestHeight + "Section is" + highestRect.gameObject.name);
+        //Debug.Log("Highest Height is " + highestHeight + "Section is" + highestRect.gameObject.name);
 
     }
    
@@ -99,6 +107,7 @@ public class WheelOfFortuneManager : MonoBehaviour//not a real "Manager"
     }
     private void OnDisable()
     {
+        transform.rotation = startingRotation;
         SpinButton.enabled = true;
     }
 }

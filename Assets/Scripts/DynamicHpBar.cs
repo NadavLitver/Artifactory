@@ -118,6 +118,10 @@ public class DynamicHpBar : MonoBehaviour
 
     public void ChipAwayBarTakeDmg()
     {
+        if (curHp <=0 && actor is PlayerActor)
+        {
+            return;
+        }
         float amount = curHp / maxHp;
         if (amount <= 0)
         {
@@ -137,6 +141,10 @@ public class DynamicHpBar : MonoBehaviour
     }
     public void ChipAwayBarHealDamage()
     {
+        if (curHp <= 0 && actor is PlayerActor)
+        {
+            return;
+        }
         float amount = curHp / maxHp;
         if (amount >= maxHp)
         {
@@ -146,7 +154,7 @@ public class DynamicHpBar : MonoBehaviour
         }
         if (maxHp <= 0)
         {
-            Debug.Log(actor.name + " max hp is 0 fix");
+            //Debug.Log(actor.name + " max hp is 0 fix");
         }
         if (useUi)
         {
