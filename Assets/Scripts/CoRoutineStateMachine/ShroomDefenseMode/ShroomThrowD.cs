@@ -10,6 +10,7 @@ public class ShroomThrowD : BaseShroomDState
         handler.Rb.velocity = Vector3.zero;
         handler.LookTowardsPlayer();
         handler.Anim.SetTrigger("Throw");
+        SoundManager.Play(SoundManager.Sound.MushroomAttackSound, handler.m_audioSource);
         yield return new WaitUntil(() => handler.throwFlag);
         handler.throwFlag = false;
         handler.CurrentCap = GameManager.Instance.assets.CapPool.GetPooledObject();

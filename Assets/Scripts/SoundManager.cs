@@ -8,8 +8,13 @@ public class SoundManager : MonoBehaviour
 
     public List<SoundAudioClip> clips;
     public float DeactivateAudioObjectsTime;
-
+    private static AudioClip ErrorSound;
+    public AudioClip GetErrorSound;
     public ObjectPool m_pool;
+    private void Awake()
+    {
+        ErrorSound = GetErrorSound;
+    }
     public enum Sound
     {
         PlayerJump,
@@ -34,7 +39,21 @@ public class SoundManager : MonoBehaviour
         NebulaFlowerPopped,BellFlowerBelling,NearNebulaFlower,
         OnDandilion,OnJumpPlatform,
         SpikedFromJump,SpikedFrogDeath,
-        GlimmeringWoodsAmbiance
+        GlimmeringWoodsAmbiance,
+        //31/3
+        ChoiceRelicPicked,
+        PlayerHealed,
+        RoomPortalSound,
+        MushroomAttackSound,
+        TuffInteraction,
+        SpinButton,
+        PrizePanelOpen,
+        CraftingPanelResourceChosen,
+        CraftingPanelResourceDiscarded,
+        CraftButtonClicked,
+        FrogIdle1,FrogIdle2,FrogIdle3,
+        MushroomIdle,
+        EndingInteraction,
 
     }
     [ContextMenu("Reset List")]
@@ -128,6 +147,8 @@ public class SoundManager : MonoBehaviour
     }
     public static void Play(Sound sound, AudioSource source)
     {
+
+
         source.volume = Mathf.Clamp01(GetVolumeOfClip(sound));
         if (source.volume == 0)
             return;
@@ -198,7 +219,7 @@ public class SoundManager : MonoBehaviour
                 return clip.m_AudioClip;
             }
         }
-        return null;
+        return ErrorSound;
     }
     public static float GetVolumeOfClip(Sound sound)
     {

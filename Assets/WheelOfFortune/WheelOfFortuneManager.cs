@@ -12,8 +12,16 @@ public class WheelOfFortuneManager : MonoBehaviour//not a real "Manager"
     public RectTransform[] sections;
     [SerializeField] int AmountMultiplier;
     [SerializeField] Button SpinButton;
-   
+    [SerializeField] AudioSource m_audioSource;
+    Quaternion startingRotation;
+    private void Start()
+    {
+        startingRotation = transform.rotation;
+        SpinButton.onClick.AddListener(SpinButtonSound);
+        
+    }
 
+    public void SpinButtonSound() => SoundManager.Play(SoundManager.Sound.SpinButton, m_audioSource);
     [ContextMenu("Start Random Spin")]
     public void RandomSpin()
     {
@@ -99,6 +107,7 @@ public class WheelOfFortuneManager : MonoBehaviour//not a real "Manager"
     }
     private void OnDisable()
     {
+        transform.rotation = startingRotation;
         SpinButton.enabled = true;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class BaseShroomDState : CoRoutineState
 {
     protected ShroomDefenseHandler handler;
-
+   
     private void Awake()
     {
         handler = GetComponent<ShroomDefenseHandler>();

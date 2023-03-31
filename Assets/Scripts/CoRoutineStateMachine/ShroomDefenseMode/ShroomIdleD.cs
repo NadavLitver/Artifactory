@@ -6,10 +6,14 @@ public class ShroomIdleD : BaseShroomDState
     [SerializeField] private float stopDuration;
     [SerializeField] private float idleCoolDown;
     private float lastStopped;
+    
     public override IEnumerator StateRoutine()
     {
         lastStopped = Time.time;
         handler.Rb.velocity = Vector2.zero;
+        if(Random.Range(0,5) == 1)
+          SoundManager.Play(SoundManager.Sound.MushroomIdle, handler.m_audioSource);
+
         yield return new WaitForSeconds(stopDuration);
     }
 

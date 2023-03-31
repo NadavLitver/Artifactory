@@ -134,6 +134,10 @@ public class AssetsRefrence
     public Sprite TurtlePendant;
     public Sprite LegendaryCloneRelic;
     public Sprite BranchGlimmeringBundleSprite;
+    public Sprite HealingFromWheelSprite;
+    public Sprite TuffLegsSprite;
+
+
 
     public Image RelicBarImage;
     public PrizePanelHandler prizePanel;
@@ -282,9 +286,21 @@ public class GeneralFunctions
                 return GameManager.Instance.assets.RuneSprite;
             case ItemType.TuffCoin:
                 return GameManager.Instance.assets.TuffCointSprite;
-            case ItemType.BranchGlimmeringBundle:
-                return GameManager.Instance.assets.BranchGlimmeringBundleSprite;
 
+            default:
+                return null;
+        }
+    }
+    public Sprite GetSpriteFromSpecialPrizeType(SpecialPrizes prize)
+    {
+        switch (prize)
+        {
+            case SpecialPrizes.BranchAndGlimmering:
+                return GameManager.Instance.assets.BranchGlimmeringBundleSprite;
+            case SpecialPrizes.Healing:
+                return GameManager.Instance.assets.HealingFromWheelSprite;
+            case SpecialPrizes.TuffLegs:
+                return GameManager.Instance.assets.TuffLegsSprite;
             default:
                 return null;
         }

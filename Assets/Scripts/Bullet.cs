@@ -42,7 +42,8 @@ public class Bullet : MonoBehaviour
 
     private void Explode()
     {
-        SoundManager.Play(SoundManager.Sound.BasicGunExplosion, transform.position);
+        SoundManager.Play(SoundManager.Sound.BasicGunExplosion, transform.position, SoundManager.GetVolumeOfClip(SoundManager.Sound.BasicGunExplosion));
+
         rb.velocity = Vector2.zero;
         exploded = true;
         Explosion = GameManager.Instance.assets.ExplsionOP.GetPooledObject();

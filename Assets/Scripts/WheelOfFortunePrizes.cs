@@ -42,18 +42,23 @@ public class WheelOfFortunePrizes : MonoBehaviour
                 goblet.CacheRelic(GameManager.Instance.RelicManager.GetRelic(StatusEffectEnum.HealingGoblet));
                 break;
             case 2:
-                DropResource(ItemType.Rune);
+                DropResource(ItemType.Rune,true);
 
                 break;
             case 3:
-                DropResource(ItemType.Branch);
-                DropResource(ItemType.Glimmering);
+                DropResource(ItemType.Branch,false);
+                DropResource(ItemType.Glimmering, false);
+                GameManager.Instance.assets.prizePanel.CallShowPrizeFromSpecialPrize(SpecialPrizes.BranchAndGlimmering);
+
                 break;
             case 4:
                 GameManager.Instance.assets.playerActor.Heal(new DamageHandler() { amount = GameManager.Instance.assets.playerActor.maxHP , myDmgType = DamageType.heal});
+                GameManager.Instance.assets.prizePanel.CallShowPrizeFromSpecialPrize(SpecialPrizes.Healing);
+
                 break;
             case 5:
                 GameManager.Instance.assets.tuffRef.didPlayerGetLegs = true;
+                GameManager.Instance.assets.prizePanel.CallShowPrizeFromSpecialPrize(SpecialPrizes.TuffLegs);
                 //Ragain Golem legs
                 break;
             default:
@@ -72,12 +77,14 @@ public class WheelOfFortunePrizes : MonoBehaviour
         pickup.CacheItemType(GetItem());
 
     }
-    private void DropResource(ItemType item)
+    private void DropResource(ItemType item,bool callPrizePanel)
     {
 
         ItemPickup pickup = Instantiate(GameManager.Instance.assets.ItemPickUpPrefab, GameManager.Instance.assets.tuffRef.transform.position, Quaternion.identity);
-        GameManager.Instance.assets.prizePanel.CallShowPrizeFromResource(pickup);
         pickup.CacheItemType(item);
+        if(callPrizePanel)
+          GameManager.Instance.assets.prizePanel.CallShowPrizeFromResource(pickup);
+
 
     }
     //private void DropResourceAndCallPrize(ItemType item)

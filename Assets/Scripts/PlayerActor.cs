@@ -19,17 +19,18 @@ public class PlayerActor : Actor
     {
         //  OnDealingDamageCalcOver.AddListener(GameManager.Instance.assets.CameraShake.screenShakeBasedOnDamage);
         OnDealDamage.AddListener(PlayerOnHitVFX);
+        OnHealGFX.AddListener(OnHealSfx);
     }
     private void PlayerOnHitVFX(DamageHandler damage, Actor actorHit)
     {
         if (damage.myDmgType == DamageType.fire)
         {
-            GameObject vfx = GameManager.Instance.vfxManager.PlayAndGet(VisualEffect.RedHitEffect, actorHit.transform.position + Vector3.up);
+             GameManager.Instance.vfxManager.PlayAndGet(VisualEffect.RedHitEffect, actorHit.transform.position + Vector3.up);
 
         }
         else
         {
-            GameObject vfx = GameManager.Instance.vfxManager.PlayAndGet(VisualEffect.WhiteHitEffect, actorHit.transform.position + Vector3.up);
+             GameManager.Instance.vfxManager.PlayAndGet(VisualEffect.WhiteHitEffect, actorHit.transform.position + Vector3.up);
 
         }
     }
@@ -38,7 +39,7 @@ public class PlayerActor : Actor
         base.onActorDeath();
         m_animator.Play("Die");
     }
-
+    public void OnHealSfx() => SoundManager.Play(SoundManager.Sound.PlayerHealed, GameManager.Instance.assets.PlayerController.AudioSource);
     public void EnableLegendaryActorVFX()
     {
         mainRenderer.material = legendaryMat;

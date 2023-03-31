@@ -6,6 +6,7 @@ public class ChoiceRoomFlower : Interactable
     private RelicChoiceInteractable right;
     [SerializeField] private Animator anim;
     bool choseRelic;
+    public AudioSource m_audioSource;
     public Animator Anim { get => anim; }
     public bool ChoseRelic { get => choseRelic; set => choseRelic = value; }
 
