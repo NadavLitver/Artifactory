@@ -6,7 +6,7 @@ public class SelectedCraftingPanel : ItemPanel
     //panel at the bottom right corner of the screen. shows the 3 currently selected items in order
     [SerializeField] List<SelectedSlot> selectedSlots = new List<SelectedSlot>();
     [SerializeField] private Sprite basicSprite;
-
+    internal AudioSource ManagerAudioSource;
     public List<SelectedSlot> SelectedSlots { get => selectedSlots;}
 
     public override void SubscribeSlots()
@@ -22,6 +22,7 @@ public class SelectedCraftingPanel : ItemPanel
     public void AddToPanel(ItemUiSlot givenSlot)
     {//sets up the next free slot
         Debug.Log("selecting item");
+        SoundManager.Play(SoundManager.Sound.CraftingPanelResourceChosen, ManagerAudioSource);
         foreach (var selectedSlot in selectedSlots)
         {
             if (selectedSlot.slot.MyItemType == givenSlot.MyItemType)
@@ -57,6 +58,8 @@ public class SelectedCraftingPanel : ItemPanel
 
     public void RemoveFromPanel(ItemUiSlot givenSlot)
     {
+        SoundManager.Play(SoundManager.Sound.CraftingPanelResourceDiscarded, ManagerAudioSource);
+
         //sub on selected to this
         foreach (var item in selectedSlots)
         {

@@ -12,7 +12,7 @@ public class CraftingManager : MonoBehaviour
     [SerializeField] InventoryCraftingPanel inventorycraftingPanel;
     [SerializeField] SelectedCraftingPanel selectedCraftingPanel;
     [SerializeField] private Button craftButton;
-
+    [SerializeField] AudioSource m_audioSource;
 
     ItemInventory playerInventory => GameManager.Instance.assets.playerActor.PlayerItemInventory;
 
@@ -21,15 +21,22 @@ public class CraftingManager : MonoBehaviour
     public CraftingMap RelicCraftingMap { get => relicCraftinMap; }
     public CraftingMap WeaponCraftingMap { get => weaponCraftingMap; }
     public CraftingMap ActiveCraftingMap { get => activeCraftingMap; }
-
+    public void Start()
+    {
+        selectedCraftingPanel.ManagerAudioSource = m_audioSource;
+        craftButton.onClick.AddListener(PlayCraftSound);
+        playerInventory.OnCraftItem.AddListener(inventorycraftingPanel.UpdateAmounts);
+        SetUpCraftingScreens();
+    }
     public void SelectInventoryItem(ItemUiSlot givenItem)
     {
         if (givenItem.Amount > 0)
         {
             selectedCraftingPanel.AddToPanel(givenItem);
         }
+      
     }
-
+    public void PlayCraftSound() => SoundManager.Play(SoundManager.Sound.CraftButtonClicked, m_audioSource);
     public void TurnOnCraftingPanel()
     {
         craftingPanel.SetActive(true);
@@ -53,13 +60,6 @@ public class CraftingManager : MonoBehaviour
         weaponMap.SetActive(false);
         relicMap.SetActive(true);
     }
-
-    private void Start()
-    {
-        playerInventory.OnCraftItem.AddListener(inventorycraftingPanel.UpdateAmounts);
-        SetUpCraftingScreens();
-    }
-
     private void SetUpCraftingScreens()
     {
         inventorycraftingPanel.SetUpSlots(playerInventory.GetEachItemByAmount());
