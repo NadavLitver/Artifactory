@@ -45,5 +45,7 @@ public class RelicChoicePanel : MonoBehaviour
         flower.ChoseRelic = true;
         flower.Anim.Play("OpenLeft");
         gameObject.SetActive(false);
+        SoundManager.Play(SoundManager.Sound.ChoiceRelicPicked, flower.m_audioSource);
+
     }
 }

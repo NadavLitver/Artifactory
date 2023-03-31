@@ -36,13 +36,21 @@ public class ColoredFlash : MonoBehaviour
     #region Methods
 
     #region Unity Callbacks
+    private void OnEnable()
+    {
+        m_actor.TakeDamageGFX.AddListener(Flash);
 
+    }
+    private void OnDisable()
+    {
+        m_actor.TakeDamageGFX.RemoveListener(Flash);
+
+    }
     void Start()
     {
         // Get the SpriteRenderer to be used,
         // alternatively you could set it from the inspector.
         //GetActorWhereverItMayBe();
-        m_actor.TakeDamageGFX.AddListener(Flash);
         spriteRenderers = GetComponents<SpriteRenderer>();
         originalColors = new Color[spriteRenderers.Length];
         // Get the material that the SpriteRenderer uses, 

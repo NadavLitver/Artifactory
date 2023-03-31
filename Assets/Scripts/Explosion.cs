@@ -9,7 +9,7 @@ public class Explosion : MonoBehaviour
     private void OnEnable()
     {
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, radius, HitLayer);
-        Debug.Log(colliders.Length);
+       // Debug.Log(colliders.Length);
         
         foreach (var item in colliders)
         {
