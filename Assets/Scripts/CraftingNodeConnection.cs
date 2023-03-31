@@ -66,5 +66,46 @@ public class CraftingNodeConnection : MonoBehaviour
         }
     }
 
+    public List<ConnectionPoints> GetAdjacentConnectionPoints(ConnectionPoints point)
+    {
+        List<ConnectionPoints> adjacentPoints = new List<ConnectionPoints>();
+        switch (point)
+        {
+            case ConnectionPoints.Upper:
+                adjacentPoints.Add(ConnectionPoints.UpperLeft);
+                adjacentPoints.Add(ConnectionPoints.UpperRight);
+                break;
+            case ConnectionPoints.UpperRight:
+                adjacentPoints.Add(ConnectionPoints.Upper);
+                adjacentPoints.Add(ConnectionPoints.Right);
+                break;
+            case ConnectionPoints.UpperLeft:
+                adjacentPoints.Add(ConnectionPoints.Upper);
+                adjacentPoints.Add(ConnectionPoints.Left);
+                break;
+            case ConnectionPoints.Right:
+                adjacentPoints.Add(ConnectionPoints.UpperRight);
+                adjacentPoints.Add(ConnectionPoints.LowerRight);
+                break;
+            case ConnectionPoints.LowerRight:
+                adjacentPoints.Add(ConnectionPoints.Lower);
+                adjacentPoints.Add(ConnectionPoints.Right);
+                break;
+            case ConnectionPoints.LowerLeft:
+                adjacentPoints.Add(ConnectionPoints.Lower);
+                adjacentPoints.Add(ConnectionPoints.Left);
+                break;
+            case ConnectionPoints.Left:
+                adjacentPoints.Add(ConnectionPoints.LowerLeft);
+                adjacentPoints.Add(ConnectionPoints.UpperLeft);
+                break;
+            case ConnectionPoints.Lower:
+                adjacentPoints.Add(ConnectionPoints.LowerLeft);
+                adjacentPoints.Add(ConnectionPoints.LowerRight);
+                break;
+        }
+        return adjacentPoints;
+    }
+
 
 }
