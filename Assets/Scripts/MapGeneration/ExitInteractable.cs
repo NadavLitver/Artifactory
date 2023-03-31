@@ -23,7 +23,6 @@ public class ExitInteractable : MonoBehaviour
     [SerializeField] Collider2D exitCollider;
     [SerializeField] GameObject spikes;
     [SerializeField] GameObject gfx;
-    public AudioSource m_audioSource;
 
     public Room MyRoom { get => myRoom; set => myRoom = value; }
     public ExitLocationInfo ExitLocation { get => exitLocation; set => exitLocation = value; }
@@ -54,7 +53,7 @@ public class ExitInteractable : MonoBehaviour
              {
                  m_animator.SetTrigger("Exited");
              }*/
-            SoundManager.Play(SoundManager.Sound.RoomPortalSound, m_audioSource);
+            SoundManager.Play(SoundManager.Sound.RoomPortalSound, GameManager.Instance.LevelManager.audioSource);
             GameManager.Instance.LevelManager.MoveToRoom(this);
         }
     }

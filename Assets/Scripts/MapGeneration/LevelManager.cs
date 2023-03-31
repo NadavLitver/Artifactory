@@ -20,6 +20,7 @@ public class LevelManager : MonoBehaviour
     List<Room> createdRooms = new List<Room>();
     RoomConnectivity roomConnectionCheck = new RoomConnectivity();
     Room active;
+    public AudioSource audioSource;
     public UnityEvent OnRoomMove;
     public Room TempBossRoom;
     public List<Room> CurrentRunRooms { get => currentRunRooms; }
