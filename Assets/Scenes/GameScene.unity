@@ -155,6 +155,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &144009338 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+  m_PrefabInstance: {fileID: 172302675764313256}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67d3279329c585043a05a2edd5cff41b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &150630605 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 51161737725704038, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
@@ -696,6 +707,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1389544291}
     - target: {fileID: 4180575170813383680, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
+      propertyPath: assets.prizePanel
+      value: 
+      objectReference: {fileID: 144009338}
+    - target: {fileID: 4180575170813383680, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
       propertyPath: assets.playerActor
       value: 
       objectReference: {fileID: 2138488576}
@@ -763,6 +778,10 @@ PrefabInstance:
       propertyPath: assets.GlimmeringWoodsAudioSource
       value: 
       objectReference: {fileID: 519709311}
+    - target: {fileID: 4180575170813383680, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
+      propertyPath: assets.BranchGlimmeringBundleSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 05ada02a21ce8034691bcd334ffb0354, type: 3}
     - target: {fileID: 4180575170813383680, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
       propertyPath: assets.baseSpawnPlayerPositionObject
       value: 
@@ -1579,13 +1598,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 172302674927090713, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 172302675152284729, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
       propertyPath: m_SizeDelta.y
       value: 74.3909
       objectReference: {fileID: 0}
     - target: {fileID: 172302675168922440, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 172302675201083312, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
@@ -1921,9 +1944,13 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 2138488569}
+    - target: {fileID: 3327924038238445250, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3327924038638407566, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3327924038714260265, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
       propertyPath: startGivenFood
@@ -1931,15 +1958,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4196740903969279409, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4196740904028846359, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 438
+      value: 399
       objectReference: {fileID: 0}
     - target: {fileID: 4196740904028846359, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 94
+      objectReference: {fileID: 0}
+    - target: {fileID: 4611684580561084974, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5076679259597393229, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
       propertyPath: prizeUIReferenceDatas.Array.data[0].name
@@ -1952,6 +1983,154 @@ PrefabInstance:
     - target: {fileID: 5076679259597393229, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
       propertyPath: prizeUIReferenceDatas.Array.data[2].name
       value: Glimmering Rune
+      objectReference: {fileID: 0}
+    - target: {fileID: 5664234869657966528, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 5664234869657966528, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 120
+      objectReference: {fileID: 0}
+    - target: {fileID: 6614180165660473407, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: m_fontSize
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 6614180165660473407, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 48
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicPrizeDatas.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: ResourcePrizeDatas.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicPrizeDatas.Array.data[0].m_enum
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicPrizeDatas.Array.data[0].m_name
+      value: Lightning Emblem
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicPrizeDatas.Array.data[1].m_enum
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicPrizeDatas.Array.data[1].m_name
+      value: Healing Goblet
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicPrizeDatas.Array.data[2].m_enum
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicPrizeDatas.Array.data[2].m_name
+      value: Turtle Pendant
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicPrizeDatas.Array.data[3].m_enum
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicPrizeDatas.Array.data[3].m_name
+      value: Knife of the Hunter
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicPrizeDatas.Array.data[4].m_enum
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicPrizeDatas.Array.data[4].m_name
+      value: Wind chimes
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicPrizeDatas.Array.data[5].m_enum
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicPrizeDatas.Array.data[5].m_name
+      value: Legendary Clone
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: ResourcePrizeDatas.Array.data[0].m_name
+      value: Glimmering Stone
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: ResourcePrizeDatas.Array.data[1].m_enum
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: ResourcePrizeDatas.Array.data[1].m_name
+      value: Branch
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: ResourcePrizeDatas.Array.data[2].m_enum
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: ResourcePrizeDatas.Array.data[2].m_name
+      value: Rune Stone
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: ResourcePrizeDatas.Array.data[3].m_enum
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: ResourcePrizeDatas.Array.data[3].m_name
+      value: Tuff Coin
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicPrizeDatas.Array.data[0].m_description
+      value: After a kill, empower your next attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicPrizeDatas.Array.data[1].m_description
+      value: 'Heal after attacking enemies 10 times. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicPrizeDatas.Array.data[2].m_description
+      value: 'When your HP is high, Block part of incoming damage '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicPrizeDatas.Array.data[3].m_description
+      value: 'Hitting enemy with Gun empowers your next melee attack '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicPrizeDatas.Array.data[4].m_description
+      value: 'Chance to negate incoming damage. '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicPrizeDatas.Array.data[5].m_description
+      value: 'Attacks are stronger and inflict lightning  '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: ResourcePrizeDatas.Array.data[0].m_description
+      value: 'Used to craft items at the Crafting Station '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: ResourcePrizeDatas.Array.data[1].m_description
+      value: 'Used to craft items at the Crafting Station '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: ResourcePrizeDatas.Array.data[2].m_description
+      value: 'Used to craft items at the Crafting Station '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6980314321111006717, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: ResourcePrizeDatas.Array.data[3].m_description
+      value: 'Used to craft items at the Crafting Station '
+      objectReference: {fileID: 0}
+    - target: {fileID: 7570083594117145323, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8113515037239398242, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8789231746706710916, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
       propertyPath: m_SizeDelta.x
@@ -2017,11 +2196,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1229662474, guid: 2ff9243ecc4261045a4942da7d3e427b, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[5].x
-      value: 10.585277
+      value: 10.585278
       objectReference: {fileID: 0}
     - target: {fileID: 1229662474, guid: 2ff9243ecc4261045a4942da7d3e427b, type: 3}
       propertyPath: m_Points.m_Paths.Array.data[0].Array.data[8].x
-      value: -56.370647
+      value: -56.37065
       objectReference: {fileID: 0}
     - target: {fileID: 5242756471786834022, guid: 2ff9243ecc4261045a4942da7d3e427b, type: 3}
       propertyPath: m_Materials.Array.data[0]

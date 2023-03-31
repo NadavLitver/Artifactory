@@ -7,7 +7,7 @@ public class RelicBar : MonoBehaviour
 {
     public void AddRelic(Relic givenRelic)
     {
-       Image image = Instantiate(GameManager.Instance.assets.RelicBarImage, transform);
+        Image image = Instantiate(GameManager.Instance.assets.RelicBarImage, transform);
         image.sprite = GameManager.Instance.RelicManager.GetRelicSpriteFromRelic(givenRelic);
     }
 }

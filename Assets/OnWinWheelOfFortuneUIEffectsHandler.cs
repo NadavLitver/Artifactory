@@ -14,7 +14,7 @@ public class OnWinWheelOfFortuneUIEffectsHandler : MonoBehaviour
 
     public IEnumerator onWinUIGrow(int index)
     {
-        //m_Image.sprite = Images[index];
+
         current = prizeUIReferenceDatas[index];
         for (int i = 0; i < prizeUIReferenceDatas.Length; i++)
         {
@@ -51,7 +51,7 @@ public class OnWinWheelOfFortuneUIEffectsHandler : MonoBehaviour
 
         nameText.gameObject.SetActive(false);
         CleanCurrent(startingSize);
-      
+
     }
     public void CleanCurrent(Vector2 startingSize)
     {

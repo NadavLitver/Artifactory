@@ -9,7 +9,6 @@ public class WheelOfFortunePrizes : MonoBehaviour
     [SerializeField] WheelOfFortuneManager fortuneManager;
     [SerializeField, Range(1, 100)] int HealAmount;
     [SerializeField] GameObject fatherGO;
-    [SerializeField] OnWinWheelOfFortuneUIEffectsHandler OnWinWheelOfFortuneUI;
     
     void Start()
     {
@@ -25,7 +24,8 @@ public class WheelOfFortunePrizes : MonoBehaviour
     }
     IEnumerator GivePrizeRoutine(int index)
     {
-        yield return OnWinWheelOfFortuneUI.onWinUIGrow(index);
+       // GameManager.Instance.assets.prizePanel.isDisabled = true;
+       // yield return OnWinWheelOfFortuneUI.onWinUIGrow(index);
 
         switch (index)
         {
@@ -59,6 +59,8 @@ public class WheelOfFortunePrizes : MonoBehaviour
             default:
                 break;
         }
+       // GameManager.Instance.assets.prizePanel.isDisabled = false;
+
         TurnOfScreen();
         
     }
@@ -74,10 +76,18 @@ public class WheelOfFortunePrizes : MonoBehaviour
     {
 
         ItemPickup pickup = Instantiate(GameManager.Instance.assets.ItemPickUpPrefab, GameManager.Instance.assets.tuffRef.transform.position, Quaternion.identity);
+        GameManager.Instance.assets.prizePanel.CallShowPrizeFromResource(pickup);
         pickup.CacheItemType(item);
 
     }
+    //private void DropResourceAndCallPrize(ItemType item)
+    //{
 
+    //    ItemPickup pickup = Instantiate(GameManager.Instance.assets.ItemPickUpPrefab, GameManager.Instance.assets.tuffRef.transform.position, Quaternion.identity);
+
+    //    pickup.CacheItemType(item);
+
+    //}
     private ItemType GetItem()
     {
         ItemType item;

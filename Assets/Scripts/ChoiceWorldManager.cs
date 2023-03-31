@@ -30,6 +30,7 @@ public class ChoiceWorldManager : MonoBehaviour
     {
         if (ChooseButton.enabled)
         {
+            GameManager.Instance.assets.blackFade.CallFadeToAndFrom();
             GameManager.Instance.LevelManager.AssembleLevel();
             this.gameObject.SetActive(false);
             GameManager.Instance.assets.mobileControls.SetActive(true);

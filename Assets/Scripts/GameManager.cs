@@ -133,7 +133,10 @@ public class AssetsRefrence
     public Sprite KnifeOfTheHunter;
     public Sprite TurtlePendant;
     public Sprite LegendaryCloneRelic;
+    public Sprite BranchGlimmeringBundleSprite;
+
     public Image RelicBarImage;
+    public PrizePanelHandler prizePanel;
 
     public RelicDrop relicDropPrefab;
 
@@ -279,6 +282,9 @@ public class GeneralFunctions
                 return GameManager.Instance.assets.RuneSprite;
             case ItemType.TuffCoin:
                 return GameManager.Instance.assets.TuffCointSprite;
+            case ItemType.BranchGlimmeringBundle:
+                return GameManager.Instance.assets.BranchGlimmeringBundleSprite;
+
             default:
                 return null;
         }

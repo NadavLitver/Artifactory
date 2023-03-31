@@ -43,14 +43,29 @@ public class BlackFade : MonoBehaviour
     {
         float counter = 0;
         float startingAlpha = m_image.color.a;
+
+        GameManager.Instance.assets.mainVCam.enabled = goal == 0;
+
+
         while (counter < 1)
         {
             m_image.color = new Color(0, 0, 0, Mathf.Lerp(startingAlpha, goal, curve.Evaluate(counter)));
-            counter += Time.deltaTime * 2f;
+            counter += Time.deltaTime * 3f;
             yield return new WaitForEndOfFrame();
-        }
-        m_image.color = new Color(0, 0, 0, goal);
-       GameManager.Instance.assets.mobileControls.SetActive(true);
-    }
 
+        }
+
+        m_image.color = new Color(0, 0, 0, goal);
+
+        GameManager.Instance.assets.mobileControls.SetActive(true);
+
+    }
+    public void EnableCamera()
+    {
+
+    }
+    public void DisableCamera()
+    {
+
+    }
 }
