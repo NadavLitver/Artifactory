@@ -23,7 +23,7 @@ public class TuffInteractionHandler : Interactable
     }
     IEnumerator InteractionRoutine()
     {
-        SoundManager.Play(SoundManager.Sound.TuffInteraction, m_audioSource);
+        //SoundManager.Play(SoundManager.Sound.TuffInteraction, m_audioSource);
         if (interacted)
         {
             m_collider.enabled = false;

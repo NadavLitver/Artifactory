@@ -45,9 +45,9 @@ public class SoundManager : MonoBehaviour
         PlayerHealed,
         RoomPortalSound,
         MushroomAttackSound,
-        TuffInteraction,
+        TuffInteraction,//doesnt exist
         SpinButton,
-        PrizePanelOpen,
+        PrizePanelOpen,//doesnt exist
         CraftingPanelResourceChosen,
         CraftingPanelResourceDiscarded,
         CraftButtonClicked,

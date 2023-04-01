@@ -1,3 +1,5 @@
+using UnityEngine;
+
 public class SpikedFrogNoticePlayer : State
 {
     SpikedFrogStateHandler handler;
@@ -7,8 +9,8 @@ public class SpikedFrogNoticePlayer : State
         {
             return this;
         }
-
         handler.m_animator.Play(handler.FrogNoticeHash);
+        PlayIdleStopSound();
         handler.Freeze(0.5f);
         if (handler.rayData.isPointInBoxButNotInCollider(GameManager.Instance.assets.Player.transform.position))
         {   //enemy is in range to jump
@@ -28,5 +30,26 @@ public class SpikedFrogNoticePlayer : State
         handler = GetComponent<SpikedFrogStateHandler>();
     }
 
+    public void PlayIdleStopSound()
+    {
 
+        if (Random.Range(0, 2) == 1)
+        {
+            int frogIdleNum = Random.Range(0, 3);
+            switch (frogIdleNum)
+            {
+                case 0:
+                    SoundManager.Play(SoundManager.Sound.FrogIdle1);
+                    break;
+                case 1:
+                    SoundManager.Play(SoundManager.Sound.FrogIdle2);
+                    break;
+                case 2:
+                    SoundManager.Play(SoundManager.Sound.FrogIdle3);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }
