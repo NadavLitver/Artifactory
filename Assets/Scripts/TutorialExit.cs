@@ -6,10 +6,12 @@ using UnityEngine.SceneManagement;
 public class TutorialExit : MonoBehaviour
 {
     [SerializeField] TutorialRoom m_room;
+    [SerializeField] AudioSource m_audioSource;
     private bool triggered;
     private void Start()
     {
         triggered = false;
+        m_audioSource = GetComponent<AudioSource>();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -26,6 +28,7 @@ public class TutorialExit : MonoBehaviour
 
         triggered = true;
         GameManager.Instance.assets.blackFade.FadeToBlack();
+        SoundManager.Play(SoundManager.Sound.RoomPortalSound, m_audioSource);
         yield return new WaitForSeconds(2);
         if (m_room.isLastTutorialRoom)
         {
@@ -37,7 +40,7 @@ public class TutorialExit : MonoBehaviour
         }
         m_room.NextRoom.gameObject.SetActive(true);
         player.gameObject.SetActive(false);
-      player.position = m_room.NextRoom.StartingPosition.position;
+        player.position = m_room.NextRoom.StartingPosition.position;
         //Debug.Break();
         yield return new WaitForSeconds(1);
         m_room.gameObject.SetActive(false);

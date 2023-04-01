@@ -21,10 +21,11 @@ public class CraftingManager : MonoBehaviour
     public CraftingMap RelicCraftingMap { get => relicCraftinMap; }
     public CraftingMap WeaponCraftingMap { get => weaponCraftingMap; }
     public CraftingMap ActiveCraftingMap { get => activeCraftingMap; }
+  
     public void Start()
     {
         selectedCraftingPanel.ManagerAudioSource = m_audioSource;
-        craftButton.onClick.AddListener(PlayCraftSound);
+      //  craftButton.onClick.AddListener(PlayCraftSound);//done in inspector didnt work for some reason
         playerInventory.OnCraftItem.AddListener(inventorycraftingPanel.UpdateAmounts);
         SetUpCraftingScreens();
     }

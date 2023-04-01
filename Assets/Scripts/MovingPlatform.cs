@@ -15,6 +15,7 @@ public class MovingPlatform : MonoBehaviour
     {
         startingPos = transform.localPosition;
         currentDestenation = startingPos;
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -69,7 +70,7 @@ public class MovingPlatform : MonoBehaviour
 
     public void MoveTowardsDestenation()
     {
-        if (!GameManager.Instance.generalFunctions.IsInRange(currentDestenation, transform.localPosition, 0.1f))
+        if (!GameManager.Instance.generalFunctions.IsInRange(currentDestenation, transform.localPosition, 0.1f) && !GameManager.Instance.assets.playerActor.IsInAttackAnim)
         {
             Vector3 direction = (currentDestenation - transform.localPosition).normalized;
             transform.position += direction * moveSpeed * Time.deltaTime;

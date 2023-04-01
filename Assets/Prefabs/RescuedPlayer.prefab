@@ -1089,6 +1089,7 @@ GameObject:
   - component: {fileID: 207153476}
   - component: {fileID: 1003463036}
   - component: {fileID: 2138488581}
+  - component: {fileID: 5489084402615863150}
   m_Layer: 6
   m_Name: WeaponManagerGfx
   m_TagString: Untagged
@@ -1234,6 +1235,23 @@ MonoBehaviour:
   swordRef: {fileID: 8006054158216643493}
   pickaxeRef: {fileID: 840070347747206294}
   m_audioSource: {fileID: 2138488591}
+--- !u!114 &5489084402615863150
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 841067442087295126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7d6d27cfd2b15a4f8bc4f59a1e3c3a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashMaterial: {fileID: 2100000, guid: 3fe2e6052e81012498864f30e58f0837, type: 2}
+  duration: 0.1
+  m_actor: {fileID: 5508809318791304041}
+  spriteRenderers: []
+  flashColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1 &841343073143446564
 GameObject:
   m_ObjectHideFlags: 0

@@ -52,9 +52,7 @@ public class BaseTutorialHandler : MonoBehaviour
     {
         if (BetweenSceneInfo.didBaseTutorialHappen)
         {
-            this.gameObject.SetActive(false);
-            m_interactable.gameObject.SetActive(false);
-            zooIneractable.firstInteraction = true;
+            Cancel();
             return;
         }
         Arrow.transform.position = interactButton.transform.position + (Vector3.up * 160);
@@ -68,7 +66,14 @@ public class BaseTutorialHandler : MonoBehaviour
 
     }
 
-
+    private void Cancel()
+    {
+        StopAllCoroutines();
+        this.gameObject.SetActive(false);
+        m_interactable.gameObject.SetActive(false);
+        zooIneractable.firstInteraction = true;
+        CloseButton.onClick.RemoveListener(Cancel);
+    }
 
     IEnumerator BaseTutorialRoutine()
     {
@@ -148,7 +153,7 @@ public class BaseTutorialHandler : MonoBehaviour
         }
 
 
-        CloseButton.enabled = false;
+        CloseButton.onClick.AddListener(Cancel);
         for (int i = 0; i < dialogue.lines.Length; i++)
         {
             yield return HandleLine(dialogue.lines[i], craftingTextComponent);
@@ -472,6 +477,7 @@ public class BaseTutorialHandler : MonoBehaviour
         LeanTween.cancelAll();
         zooIneractable.gameObject.SetActive(true);
         m_interactable.gameObject.SetActive(false);
+        zooIneractable.firstInteraction = true;
 
     }
 }
