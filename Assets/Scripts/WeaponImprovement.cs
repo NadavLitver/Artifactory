@@ -19,7 +19,6 @@ public class WeaponImprovement : CraftedItem
     public override void Obtain()
     {
         GameManager.Instance.assets.playerActor.OnDealDamage.AddListener(AddWeaponDamage);
-        Debug.Log(m_weaponType);
         GameManager.Instance.assets.prizePanel.CallShowPrizeFromWeaponImprovments(this);
     }
 

@@ -11,6 +11,11 @@ public class ShroomAnimationEventsA : MonoBehaviour
         handler.DoneDying = true;
     }
 
+    public void StartedRessurecting()
+    {
+        handler.StartedRessurecting = true;
+    }
+
     public void DoneRessurecting()
     {
         handler.DoneRessurecting = true;
