@@ -1,6 +1,6 @@
 using UnityEngine;
 
-enum WeaponEnum
+public enum WeaponEnum
 {
     Sword,
     Axe,
@@ -12,10 +12,15 @@ enum WeaponEnum
 public class WeaponImprovement : CraftedItem
 {
     [SerializeField] private float damageMod;
-    [SerializeField] private WeaponEnum weaponType;
+    [SerializeField] private WeaponEnum m_weaponType;
+
+    public WeaponEnum WeaponType { get => m_weaponType; }
+
     public override void Obtain()
     {
         GameManager.Instance.assets.playerActor.OnDealDamage.AddListener(AddWeaponDamage);
+        Debug.Log(m_weaponType);
+        GameManager.Instance.assets.prizePanel.CallShowPrizeFromWeaponImprovments(this);
     }
 
     public override void SetUp()
@@ -24,7 +29,7 @@ public class WeaponImprovement : CraftedItem
     }
     private void AddWeaponDamage(DamageHandler damage, Actor target)
     {
-        switch (weaponType)
+        switch (m_weaponType)
         {
             case WeaponEnum.Sword:
                 if (GameManager.Instance.assets.playerActor.WeaponManager.CurrentWeapon is BasicSword)
