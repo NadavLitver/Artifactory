@@ -4345,6 +4345,7 @@ MonoBehaviour:
   selectedCraftingPanel: {fileID: 172302675978791519}
   CraftButton: {fileID: 6943950588559339921}
   CloseButton: {fileID: 172302674792564409}
+  WeaponScreenButton: {fileID: 172302674126518787}
   AfterCraftingDialogue: {fileID: 172302675981161014}
   RelicBar: {fileID: 172302675814251379}
   CloneImage: {fileID: 172302675997033620}
@@ -11422,7 +11423,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3423240285596136213, guid: c46b4201408c66c458315f2712a308d8, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3423240285704056766, guid: c46b4201408c66c458315f2712a308d8, type: 3}
       propertyPath: m_text
@@ -11430,7 +11431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3423240286269776473, guid: c46b4201408c66c458315f2712a308d8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3423240286311536382, guid: c46b4201408c66c458315f2712a308d8, type: 3}
       propertyPath: nameText
@@ -11442,7 +11443,7 @@ PrefabInstance:
       objectReference: {fileID: 3327924038194720512}
     - target: {fileID: 3423240286311536382, guid: c46b4201408c66c458315f2712a308d8, type: 3}
       propertyPath: startGivenFood
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3423240286311536383, guid: c46b4201408c66c458315f2712a308d8, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -11784,7 +11785,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3294845413559919907, guid: 5bea5a4a036754f4aa2d5c83464428f6, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3294845413619470724, guid: 5bea5a4a036754f4aa2d5c83464428f6, type: 3}
+      propertyPath: startGivenFood
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 3294845413619470725, guid: 5bea5a4a036754f4aa2d5c83464428f6, type: 3}
       propertyPath: m_Pivot.x
@@ -13039,7 +13044,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8843457425498558479, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8843457425830199028, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
       propertyPath: m_Pivot.x
@@ -13219,6 +13224,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
+--- !u!114 &172302674126518787 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8843457426804046966, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
+  m_PrefabInstance: {fileID: 8709506422663595637}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &172302674313363655 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8843457427016025778, guid: 5fb34de61cfa12546953e5746fccb5b9, type: 3}
