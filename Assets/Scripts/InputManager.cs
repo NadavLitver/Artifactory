@@ -23,6 +23,11 @@ public class InputManager : MonoBehaviour
     public UnityEvent<bool> OnPrimaryTouchDown;
     public UnityEvent<bool> OnPrimaryTouchUp;
 
+    private bool primaryDown;
+    private bool secondaryDown;
+
+    public bool bothFingersDown => primaryDown && secondaryDown;
+
     public UnityEvent<bool> OnSecondaryTouchDown;
     public UnityEvent<bool> OnSecondaryTouchUp;
 
@@ -49,12 +54,14 @@ public class InputManager : MonoBehaviour
     private void SecondaryTouch_canceled(InputAction.CallbackContext obj)
     {
         OnSecondaryTouchUp?.Invoke(false);
+        secondaryDown = false;
 
     }
 
     private void SecondaryTouch_started(InputAction.CallbackContext obj)
     {
         OnSecondaryTouchDown?.Invoke(false);
+        secondaryDown = true;
     }
 
     private void Interact_started(InputAction.CallbackContext obj)
@@ -65,11 +72,14 @@ public class InputManager : MonoBehaviour
     private void PrimaryTouch_canceled(InputAction.CallbackContext obj)
     {
         OnPrimaryTouchUp.Invoke(true);
+        primaryDown = false;
+
     }
 
     private void PrimaryTouch_started(InputAction.CallbackContext obj)
     {
         OnPrimaryTouchDown.Invoke(true);
+        primaryDown = true;
     }
     public Vector2 Touch_ScreenPos()
     {
