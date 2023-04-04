@@ -73,4 +73,5 @@ public class CraftingManager : MonoBehaviour
         craftButton.onClick.RemoveAllListeners();
         craftButton.onClick.AddListener(activeMap.CraftItem);
     }
+
 }
