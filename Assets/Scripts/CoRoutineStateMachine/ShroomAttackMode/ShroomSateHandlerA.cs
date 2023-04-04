@@ -6,6 +6,7 @@ public class ShroomSateHandlerA : ShroomBaseHandler
 {
     public bool PickedUp;
     public bool DoneRessurecting;
+    public bool StartedRessurecting;
     public bool startRamming;
 
     [SerializeField] ShroomBaseStateA pickUpState;
