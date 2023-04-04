@@ -21,6 +21,10 @@ public class ZooManager : MonoBehaviour
     {
         gems.Add(gem);
     }
+    private void Start()
+    {
+        Invoke("TryCatchTest", 2f);
+    }
     public void AddSlot(ZooActiveSlot slot)
     {
         if (zooSlots.Count >= zooSize)

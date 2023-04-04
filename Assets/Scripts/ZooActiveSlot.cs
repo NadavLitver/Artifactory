@@ -57,6 +57,10 @@ public class ZooActiveSlot : MonoBehaviour
         UpdateTimer();
         currentFoodgiven = 0;
         currentFoodgiven = startGivenFood;
+        if (CurrentFoodgiven >= CurrentRefAnimal.animal.TrannsfromAmount)
+        {
+            ChangeAnimalToWForm();
+        }
         ResetFoodGivenThisInterval();
         SetRecipeImage();
         feedButton.SetActive(true);
@@ -165,7 +169,7 @@ public class ZooActiveSlot : MonoBehaviour
         timerText.text = "";
         nameText.text = "";
         ClearFoodImages();
-        GameManager.Instance.Zoo.GetGemFromSlot(this).SetGrayActive();
+        GameManager.Instance.Zoo.GetGemFromSlot(this)?.SetGrayActive();
         coinButton.SetActive(true);
     }
 
