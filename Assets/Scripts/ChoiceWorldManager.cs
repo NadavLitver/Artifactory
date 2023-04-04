@@ -6,6 +6,7 @@ public class ChoiceWorldManager : MonoBehaviour
 {
     public TMPro.TextMeshProUGUI titleText;
     public TMPro.TextMeshProUGUI DescriptionText;
+    public TMPro.TextMeshProUGUI ResourceText;
     public Image islandImage;
     public Button ChooseButton;
     public Button RightArrow;
@@ -84,11 +85,11 @@ public class ChoiceWorldManager : MonoBehaviour
             lockImage.SetActive(false);
 
         }
-        foreach (Image img in ResourceImages)
-        {
-            img.gameObject.SetActive(currentIsland.ShowResources);
-        }
-
+        //foreach (Image img in ResourceImages)
+        //{
+        //    img.gameObject.SetActive(currentIsland.ShowResources);
+        //}
+        ResourceText.gameObject.SetActive(currentIsland.ShowResources);
     }
 }
 [System.Serializable]
