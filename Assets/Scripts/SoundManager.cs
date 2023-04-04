@@ -54,6 +54,9 @@ public class SoundManager : MonoBehaviour
         FrogIdle1,FrogIdle2,FrogIdle3,
         MushroomIdle,
         EndingInteraction,
+        BaseSound,
+        PlayerTakeDamage,
+
 
     }
     [ContextMenu("Reset List")]

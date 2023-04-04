@@ -17,6 +17,11 @@ public class ItemUiSlot : MonoBehaviour
     public ItemType MyItemType { get => myItemType; }
     public int Amount { get => amount;}
 
+    internal Button m_button;
+    private void Awake()
+    {
+        m_button = GetComponent<Button>();
+    }
     public void SetUpSlot(ItemUiSlot givenSlot)
     {
         myItemType = givenSlot.myItemType;

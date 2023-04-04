@@ -25,6 +25,8 @@ public class BaseTutorialHandler : MonoBehaviour
     [SerializeField] SelectedCraftingPanel selectedCraftingPanel;
     [SerializeField] Button CraftButton;
     [SerializeField] Button CloseButton;
+    [SerializeField] Button WeaponScreenButton;
+
     [Header("Objects to use After Crafting")]
     [SerializeField] Dialogue AfterCraftingDialogue;
     [SerializeField] GameObject RelicBar;
@@ -68,11 +70,24 @@ public class BaseTutorialHandler : MonoBehaviour
 
     private void Cancel()
     {
+        LeanTween.cancelAll();
         StopAllCoroutines();
-        this.gameObject.SetActive(false);
         m_interactable.gameObject.SetActive(false);
         zooIneractable.firstInteraction = true;
+        zooIneractable.gameObject.SetActive(true);
+      
         CloseButton.onClick.RemoveListener(Cancel);
+        WeaponScreenButton.enabled = true;
+
+        if (didPlayerUseCrafting)
+        {
+            TurnOnOffCraftingSelectedPanel(true);
+            TurnOnOffCraftingResourceInventory(true);
+        }
+  
+
+        this.gameObject.SetActive(false);
+
     }
 
     IEnumerator BaseTutorialRoutine()
@@ -146,12 +161,9 @@ public class BaseTutorialHandler : MonoBehaviour
     {
         typing = true;
         Arrow.SetActive(false);
-        for (int i = 0; i < inventoryCraftingPanel.CreatedSlotsGetter.Count; i++)
-        {
-            inventoryCraftingPanel.createdSlotsButtons[i].enabled = false;
-
-        }
-
+        WeaponScreenButton.enabled = false;
+        TurnOnOffCraftingSelectedPanel(false);
+        TurnOnOffCraftingResourceInventory(false);
 
         CloseButton.onClick.AddListener(Cancel);
         for (int i = 0; i < dialogue.lines.Length; i++)
@@ -182,6 +194,7 @@ public class BaseTutorialHandler : MonoBehaviour
             {
                 if (selectedCraftingPanel.SelectedSlots[1].Occupied)
                 {
+                    selectedCraftingPanel.SelectedSlots[1].slot.m_button.enabled = true;
                     LeanTween.move(Hand.gameObject, selectedCraftingPanel.SelectedSlots[1].slot.transform.position, 1);
                     yield return new WaitUntil(() => !selectedCraftingPanel.SelectedSlots[1].Occupied);
                 }
@@ -210,6 +223,7 @@ public class BaseTutorialHandler : MonoBehaviour
             }
             else if (i == 5)
             {
+                CloseButton.onClick.RemoveListener(Cancel);
                 CloseButton.enabled = true;
                 bool didClose = false;
                 CloseButton.onClick.AddListener(() => didClose = true);
@@ -219,15 +233,32 @@ public class BaseTutorialHandler : MonoBehaviour
 
             }
         }
-        for (int i = 0; i < inventoryCraftingPanel.CreatedSlotsGetter.Count; i++)
-        {
-            inventoryCraftingPanel.createdSlotsButtons[i].enabled = true;
-
-        }
+        TurnOnOffCraftingSelectedPanel(true);
+        TurnOnOffCraftingResourceInventory(true);
+        WeaponScreenButton.enabled = true;
         craftingPanel.SetActive(false);
 
         typing = false;
     }
+
+    private void TurnOnOffCraftingSelectedPanel(bool _enabled)
+    {
+        
+        for (int i = 0; i < selectedCraftingPanel.SelectedSlots.Count; i++)
+        {
+            selectedCraftingPanel.SelectedSlots[i].slot.m_button.enabled = _enabled;
+        }
+    }
+
+    private void TurnOnOffCraftingResourceInventory(bool _enabled)
+    {
+        for (int i = 0; i < inventoryCraftingPanel.CreatedSlotsGetter.Count; i++)
+        {
+            inventoryCraftingPanel.createdSlotsButtons[i].enabled = _enabled;
+
+        }
+    }
+
     public void CallZooTutorial()
     {
         StartCoroutine(ZooTutorial(zooDialogue));
@@ -474,10 +505,8 @@ public class BaseTutorialHandler : MonoBehaviour
     }
     private void OnDisable()
     {
-        LeanTween.cancelAll();
-        zooIneractable.gameObject.SetActive(true);
-        m_interactable.gameObject.SetActive(false);
-        zooIneractable.firstInteraction = true;
+     
+        Cancel();
 
     }
 }

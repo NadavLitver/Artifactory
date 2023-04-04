@@ -69,6 +69,9 @@ public class GameManager : MonoBehaviour
             assets.playerActor.OnDeath.AddListener(generalFunctions.onPlayerDiedActions);
             assets.GlimmeringWoodsAudioSource.clip = SoundManager.GetAudioClip(SoundManager.Sound.GlimmeringWoodsAmbiance);
             assets.GlimmeringWoodsAudioSource.volume = SoundManager.GetVolumeOfClip(SoundManager.Sound.GlimmeringWoodsAmbiance);
+            assets.BaseAudioSource.clip = SoundManager.GetAudioClip(SoundManager.Sound.BaseSound);
+            assets.BaseAudioSource.volume = SoundManager.GetVolumeOfClip(SoundManager.Sound.BaseSound);
+            assets.BaseAudioSource.Play();
             OnRunStart.AddListener(CallGlimmeringWoodsSound);
         }
         OnRunStart.AddListener(StartGameBool);
@@ -85,6 +88,9 @@ public class GameManager : MonoBehaviour
     }
     private void CallGlimmeringWoodsSound()
     {
+        //turn off base 
+        assets.BaseAudioSource.Stop();
+        //turn on glimmering sound
         assets.GlimmeringWoodsAudioSource.Play();
     }
     private void ResetScene(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -181,6 +187,8 @@ public class AssetsRefrence
     [Header("Base"), Space(10)]
     public GameObject baseFatherObject;
     public GameObject baseSpawnPlayerPositionObject;
+    public AudioSource BaseAudioSource;
+
 
     [Header("Mushroom"), Space(10)]
     public ShroomCapObjectPool CapPool;
