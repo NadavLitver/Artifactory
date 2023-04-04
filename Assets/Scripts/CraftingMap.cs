@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum CraftingMapType
 {
@@ -7,7 +8,7 @@ public enum CraftingMapType
     Weapon
 }
 
-public class CraftingMap : MonoBehaviour
+public class CraftingMap : MonoBehaviour, IZoomAble
 {
     [SerializeField] List<CraftingRecipe> knownRecipes = new List<CraftingRecipe>();
     [SerializeField] List<NodeLine> createdLines = new List<NodeLine>();
@@ -18,6 +19,9 @@ public class CraftingMap : MonoBehaviour
     NodeLine selectedLine;
     [SerializeField] private bool oneTimeCrafts;
     float lineLength;
+    [SerializeField] private ScrollRect scroll;
+
+    public ScrollRect Scroller() => scroll;
     private void Start()
     {
         SetUpMap();
@@ -33,6 +37,11 @@ public class CraftingMap : MonoBehaviour
     private void OnEnable()
     {
         GameManager.Instance.CraftingManager.SetCraftButton(this);
+        GameManager.Instance.ZoomTool.CacheActive(this);
+    }
+    private void OnDisable()
+    {
+        GameManager.Instance.ZoomTool.CacheActive(null);
     }
 
     private void CreateLineFromRecipe(CraftingRecipe givenRecipe)
@@ -308,6 +317,22 @@ public class CraftingMap : MonoBehaviour
         //CraftButton.SetActive(false);
     }
 
+    public void ZoomIn()
+    {
+        transform.localScale = new Vector3(transform.localScale.x + Time.deltaTime, transform.localScale.y + Time.deltaTime, transform.localScale.z);
+        ClampZoom();
+    }
+
+    public void ZoomOut()
+    {
+        transform.localScale = new Vector3(transform.localScale.x - Time.deltaTime, transform.localScale.y - Time.deltaTime, transform.localScale.z);
+        ClampZoom();
+
+    }
+    public void ClampZoom()
+    {
+        transform.localScale = new Vector3(Mathf.Clamp(transform.localScale.x, 0.5f, 1.5f), Mathf.Clamp(transform.localScale.y, 0.5f, 1.5f), transform.localScale.z);
+    }
 }
 
 

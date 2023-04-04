@@ -19,6 +19,8 @@ public class GameManager : MonoBehaviour
     public RelicManager RelicManager { get; private set; }
     public ZooManager Zoo { get; private set; }
     public VfxManager vfxManager { get; private set; }
+    public ZoomTool ZoomTool { get; private set; }
+
 
 
     public bool isTutorial;
@@ -59,6 +61,7 @@ public class GameManager : MonoBehaviour
         dialogueExecuter = GetComponentInChildren<DialogueExecuter>();
         RelicManager = GetComponentInChildren<RelicManager>();
         Zoo = GetComponentInChildren<ZooManager>();
+        ZoomTool = GetComponentInChildren<ZoomTool>();
     }
     private void Start()
     {
