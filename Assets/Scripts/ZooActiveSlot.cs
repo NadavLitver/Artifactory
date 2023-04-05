@@ -126,7 +126,7 @@ public class ZooActiveSlot : MonoBehaviour
         }
         if (foodGivenThisInterval >= CurrentRefAnimal.animal.GrowthThreshold)
         {
-            GameManager.Instance.Zoo.GetGemFromSlot(this)?.SetGreenActive();
+            GameManager.Instance.Zoo.GetGemFromSlot(this).SetGreenActive();
             return;
         }
         foreach (var comp in CurrentRefAnimal.animal.Food.Components)
@@ -169,13 +169,14 @@ public class ZooActiveSlot : MonoBehaviour
         timerText.text = "";
         nameText.text = "";
         ClearFoodImages();
-        GameManager.Instance.Zoo.GetGemFromSlot(this)?.SetGrayActive();
+        GameManager.Instance.Zoo.GetGemFromSlot(this).SetGrayActive();
         coinButton.SetActive(true);
     }
 
     public void CoinButton()
     {
         GameManager.Instance.assets.playerActor.PlayerItemInventory.AddItem(ItemType.TuffCoin);
+        GameManager.Instance.Zoo.GetGemFromSlot(this).SetGrayActive();
         coinButton.SetActive(false);
         AnimalImage.gameObject.SetActive(true);
         ResetFoodGiven();
