@@ -118,7 +118,7 @@ public class PlayerController : MonoBehaviour
 
     private void JumpPressed()
     {
-        if ((OnsGroundCheck.IsGrounded() || CoyoteAvailable) && GameManager.Instance.inputManager.JumpDown() && canMove && !playingTraversal)
+        if ((OnsGroundCheck.IsGrounded() || CoyoteAvailable) && GameManager.Instance.inputManager.JumpDown() && canMove)
         {
             Jumping = true;
             velocity.y = jumpForce;
@@ -131,12 +131,12 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public IEnumerator TogglePlayingTraversal()
-    {
-        playingTraversal = true;
-        yield return new WaitForSecondsRealtime(traversalTime);
-        playingTraversal = false;
-    }
+    //public IEnumerator TogglePlayingTraversal()
+    //{
+    //    playingTraversal = true;
+    //    yield return new WaitForSecondsRealtime(traversalTime);
+    //    playingTraversal = false;
+    //}
 
     public void ExteriorJump()
     {

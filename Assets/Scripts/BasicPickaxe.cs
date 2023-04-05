@@ -135,17 +135,12 @@ public class BasicPickaxe : Weapon
     IEnumerator IEJumpFromMobility()
     {
         player.ResetVelocity();
-        StartCoroutine(player.TogglePlayingTraversal());
+        
         player.RecieveForce(jumpToClawForce);
 
         yield return new WaitUntil(() => player.GetIsFalling == true);
         yield return MobilityInAir();
 
-        //while (!player.GetIsGrounded && !Clawed)
-        //{
-        //    CheckFromWall();
-        //    yield return new WaitForEndOfFrame();
-        //}
     }
     IEnumerator IEMobilityCD()
     {
@@ -158,8 +153,7 @@ public class BasicPickaxe : Weapon
     }
     IEnumerator IEJumpFromClawedWithMobility()
     {
-        //player.ResetVelocity();
-        //player.RecieveForce(jumpToClawForce);
+       
         WallJump();
         yield return new WaitForSeconds(0.2f);
         yield return new WaitUntil(() => player.GetIsFalling == true);
