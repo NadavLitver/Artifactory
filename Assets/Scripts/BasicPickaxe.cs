@@ -153,7 +153,7 @@ public class BasicPickaxe : Weapon
     IEnumerator IEJumpFromMobility()
     {
         player.ResetVelocity();
-        StartCoroutine(player.TogglePlayingTraversal());
+        //StartCoroutine(player.TogglePlayingTraversal());
         player.RecieveForce(jumpToClawForce);
 
         yield return new WaitUntil(() => player.GetIsFalling == true);
