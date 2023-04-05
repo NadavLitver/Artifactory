@@ -9,7 +9,7 @@ public class EndInteractable : Interactable
     public override void Interact()
     {
         EndInteractablePanel.SetActive(true);
-        SoundManager.Play(SoundManager.Sound.EndingInteraction, m_audioSource);
+       // SoundManager.Play(SoundManager.Sound.EndingInteraction, m_audioSource);
     }
 
   
