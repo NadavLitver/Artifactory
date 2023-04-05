@@ -41,7 +41,7 @@ public class ZooActiveSlot : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.Zoo.AddSlot(this);
+        //GameManager.Instance.Zoo.AddSlot(this);
         RemoveAnimal();
         GameManager.Instance.OnRunEnd.AddListener(ResetFoodGivenThisInterval);
     }
