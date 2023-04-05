@@ -102,6 +102,12 @@ public class GameManager : MonoBehaviour
         //turn on glimmering sound
         assets.GlimmeringWoodsAudioSource.Play();
     }
+
+    [ContextMenu("Reset Scene")]
+    private void ResetScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
     private void ResetScene(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);

@@ -39,9 +39,9 @@ public class ZooActiveSlot : MonoBehaviour
     public bool IsOccupied { get => isOccupied; }
     public bool AnimalDoneHealing { get => animalDoneHealing; }
 
-    private void Start()
+    private void Awake()
     {
-        GameManager.Instance.Zoo.AddSlot(this);
+        //GameManager.Instance.Zoo.AddSlot(this);
         RemoveAnimal();
         GameManager.Instance.OnRunEnd.AddListener(ResetFoodGivenThisInterval);
     }
