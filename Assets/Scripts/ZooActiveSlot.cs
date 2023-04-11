@@ -39,9 +39,9 @@ public class ZooActiveSlot : MonoBehaviour
     public bool IsOccupied { get => isOccupied; }
     public bool AnimalDoneHealing { get => animalDoneHealing; }
 
-    private void Start()
+    private void Awake()
     {
-        GameManager.Instance.Zoo.AddSlot(this);
+        //GameManager.Instance.Zoo.AddSlot(this);
         RemoveAnimal();
         GameManager.Instance.OnRunEnd.AddListener(ResetFoodGivenThisInterval);
     }
@@ -57,6 +57,10 @@ public class ZooActiveSlot : MonoBehaviour
         UpdateTimer();
         currentFoodgiven = 0;
         currentFoodgiven = startGivenFood;
+        if (CurrentFoodgiven >= CurrentRefAnimal.animal.TrannsfromAmount)
+        {
+            ChangeAnimalToWForm();
+        }
         ResetFoodGivenThisInterval();
         SetRecipeImage();
         feedButton.SetActive(true);
@@ -122,7 +126,7 @@ public class ZooActiveSlot : MonoBehaviour
         }
         if (foodGivenThisInterval >= CurrentRefAnimal.animal.GrowthThreshold)
         {
-            GameManager.Instance.Zoo.GetGemFromSlot(this)?.SetGreenActive();
+            GameManager.Instance.Zoo.GetGemFromSlot(this).SetGreenActive();
             return;
         }
         foreach (var comp in CurrentRefAnimal.animal.Food.Components)
@@ -172,6 +176,7 @@ public class ZooActiveSlot : MonoBehaviour
     public void CoinButton()
     {
         GameManager.Instance.assets.playerActor.PlayerItemInventory.AddItem(ItemType.TuffCoin);
+        GameManager.Instance.Zoo.GetGemFromSlot(this).SetGrayActive();
         coinButton.SetActive(false);
         AnimalImage.gameObject.SetActive(true);
         ResetFoodGiven();

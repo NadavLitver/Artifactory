@@ -67,15 +67,20 @@ public class GameManager : MonoBehaviour
     {
         inputManager.inputs.General.Quit.canceled += QuitGame;
         inputManager.inputs.General.Reset.canceled += ResetScene;
+        assets.GlimmeringWoodsAudioSource.clip = SoundManager.GetAudioClip(SoundManager.Sound.GlimmeringWoodsAmbiance);
+        assets.GlimmeringWoodsAudioSource.volume = SoundManager.GetVolumeOfClip(SoundManager.Sound.GlimmeringWoodsAmbiance);
         if (!isTutorial)
         {
             assets.playerActor.OnDeath.AddListener(generalFunctions.onPlayerDiedActions);
-            assets.GlimmeringWoodsAudioSource.clip = SoundManager.GetAudioClip(SoundManager.Sound.GlimmeringWoodsAmbiance);
-            assets.GlimmeringWoodsAudioSource.volume = SoundManager.GetVolumeOfClip(SoundManager.Sound.GlimmeringWoodsAmbiance);
+          
             assets.BaseAudioSource.clip = SoundManager.GetAudioClip(SoundManager.Sound.BaseSound);
             assets.BaseAudioSource.volume = SoundManager.GetVolumeOfClip(SoundManager.Sound.BaseSound);
             assets.BaseAudioSource.Play();
             OnRunStart.AddListener(CallGlimmeringWoodsSound);
+        }
+        else
+        {
+            assets.GlimmeringWoodsAudioSource.Play();
         }
         OnRunStart.AddListener(StartGameBool);
         OnRunEnd.AddListener(EndGameBool);
@@ -92,9 +97,16 @@ public class GameManager : MonoBehaviour
     private void CallGlimmeringWoodsSound()
     {
         //turn off base 
+        
         assets.BaseAudioSource.Stop();
         //turn on glimmering sound
         assets.GlimmeringWoodsAudioSource.Play();
+    }
+
+    [ContextMenu("Reset Scene")]
+    private void ResetScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     private void ResetScene(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {

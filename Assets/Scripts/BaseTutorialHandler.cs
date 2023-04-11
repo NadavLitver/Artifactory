@@ -98,6 +98,7 @@ public class BaseTutorialHandler : MonoBehaviour
 
         yield return TypeStart(startingDialogue);
         yield return new WaitUntil(() => didPlayerUseCrafting);
+        
         craftingPanel.SetActive(true);
         StartPanel.SetActive(false);
         yield return CraftingTutorial(craftingDialogue);
@@ -172,7 +173,7 @@ public class BaseTutorialHandler : MonoBehaviour
 
 
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.25f);
             if (i == 0)
             {
                 Hand.gameObject.SetActive(true);
@@ -271,6 +272,7 @@ public class BaseTutorialHandler : MonoBehaviour
         ExitButtonZoo.enabled = false;
         craftingPanel.SetActive(true);
         StartPanel.SetActive(false);
+        didPlayerUseCrafting = false;
         TextMeshProUGUI textComponent = craftingTextComponent;
         for (int i = 0; i < dialogue.lines.Length; i++)
         {
@@ -278,7 +280,7 @@ public class BaseTutorialHandler : MonoBehaviour
 
 
 
-            yield return new WaitForSeconds(0.5f);
+            yield return new WaitForSeconds(0.25f);
             if (i == 0)
             {
                 bool wasClicked = false;
@@ -323,6 +325,8 @@ public class BaseTutorialHandler : MonoBehaviour
                 m_interactable.gameObject.SetActive(true);
                 zooIneractable.gameObject.SetActive(false);
                 Arrow.gameObject.SetActive(true);
+                Arrow.transform.localScale = new Vector3(Arrow.transform.localScale.x, -Arrow.transform.localScale.y, Arrow.transform.localScale.z);
+
                 while (!didPlayerContinue)
                 {
                     Arrow.transform.position = Camera.main.WorldToScreenPoint(firstSlot.transform.position + (Vector3.up));
@@ -348,6 +352,7 @@ public class BaseTutorialHandler : MonoBehaviour
                 craftingPanel.SetActive(true);
                 textComponent = craftingTextComponent;
                 zooIneractable.OnInteracted.RemoveListener(SetInteractionTrue);
+                Arrow.transform.localScale = new Vector3(Arrow.transform.localScale.x, Arrow.transform.localScale.y, Arrow.transform.localScale.z);
                 Arrow.gameObject.SetActive(false);
             }
             else if (i == 4)
@@ -371,15 +376,17 @@ public class BaseTutorialHandler : MonoBehaviour
                 yield return new WaitUntil(() => wasClicked);
                 ExitButtonZoo.onClick.RemoveListener(setWasClickedTrue);
                 textComponent = startingTextComponent;
+                textComponent.text = "Go and interact with the crafting station";
                 craftingPanel.SetActive(false);
                 StartPanel.SetActive(true);
-                textComponent.text = "Go and interact with the crafting station";
                 zooIneractable.gameObject.SetActive(false);
                 craftingMachine.gameObject.SetActive(false);
                 cloneTree.gameObject.SetActive(false);
                 Hand.gameObject.SetActive(false);
                 yield return KeepArrowOnCraftingTable();
                 yield return new WaitUntil(() => didPlayerUseCrafting);
+                didPlayerUseCrafting = false;
+
                 Arrow.SetActive(false);
             }
             else if(i == 6)

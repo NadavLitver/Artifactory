@@ -22,10 +22,12 @@ public class PrizePanelHandler : MonoBehaviour
     [SerializeField] RelicPrizeData[] RelicPrizeDatas;
     [SerializeField] ResourcePrizeData[] ResourcePrizeDatas;
     [SerializeField] SpecialPrizeData[] specialPrizeDatas;
+    [SerializeField] WeaponImprovmentData[] weaponImprovemntPrizeDatas;
 
     RelicPrizeData currentRelicPrizeData;
     ResourcePrizeData currentResourcePrizeData;
     SpecialPrizeData currentSpecialPrizeData;
+    WeaponImprovmentData currentWeaponImprovmentData;
 
 
     float ImageSizeGoal;
@@ -43,7 +45,7 @@ public class PrizePanelHandler : MonoBehaviour
         if (isDisabled)
             yield break;
         UIHolder.SetActive(true);
-       // SoundManager.Play(SoundManager.Sound.PrizePanelOpen, m_audioSource);
+        SoundManager.Play(SoundManager.Sound.CraftButtonClicked, m_audioSource);
         Time.timeScale = 0;
 
         currentRelicPrizeData = GetCurrentPrizeDataBasedOnRelic(relic);
@@ -67,9 +69,6 @@ public class PrizePanelHandler : MonoBehaviour
         ResetCurrentAndPanel();
         // LeanTween.size(ImageForPrize.rectTransform, vectorGoal, 3).setOnComplete(ResetCurrentAndPanel);
 
-
-
-
     }
     public void CallShowPrizeFromResource(ItemPickup resource) => StartCoroutine(OnWinShowPrize(resource));
     public IEnumerator OnWinShowPrize(ItemPickup resource)
@@ -77,12 +76,48 @@ public class PrizePanelHandler : MonoBehaviour
         if (isDisabled)
             yield break;
         UIHolder.SetActive(true);
-       // SoundManager.Play(SoundManager.Sound.PrizePanelOpen, m_audioSource);
+        SoundManager.Play(SoundManager.Sound.CraftButtonClicked, m_audioSource);
+
         Time.timeScale = 0;
 
         currentResourcePrizeData = GetCurrentPrizeDataBasedOnResource(resource);
         ImageSizeGoal = ImageForPrize.rectTransform.sizeDelta.x * 3;//goal for size
         SetUI(resource);
+        // lerp data
+        Vector2 vectorGoal = new Vector2(ImageSizeGoal, ImageSizeGoal);
+
+        float counter = 0;
+        while (counter < 1)
+        {
+
+            ImageForPrize.rectTransform.sizeDelta = Vector2.Lerp(startingSize, vectorGoal, counter);
+
+            counter += Time.unscaledDeltaTime;
+            yield return new WaitForEndOfFrame();
+        }
+        yield return new WaitForSecondsRealtime(3);
+        Time.timeScale = 1;
+
+        ResetCurrentAndPanel();
+        // LeanTween.size(ImageForPrize.rectTransform, vectorGoal, 3).setOnComplete(ResetCurrentAndPanel);
+
+
+
+
+    }
+    public void CallShowPrizeFromWeaponImprovments(WeaponImprovement weaponBuff) => StartCoroutine(OnWinShowPrize(weaponBuff));
+    public IEnumerator OnWinShowPrize(WeaponImprovement weaponBuff)
+    {
+        if (isDisabled)
+            yield break;
+        UIHolder.SetActive(true);
+        SoundManager.Play(SoundManager.Sound.CraftButtonClicked, m_audioSource);
+
+        Time.timeScale = 0;
+        
+        currentWeaponImprovmentData = GetCurrentPrizeDataBasedOnWeaponImprovment(weaponBuff);
+        ImageSizeGoal = ImageForPrize.rectTransform.sizeDelta.x * 3;//goal for size
+        SetUI(weaponBuff);
         // lerp data
         Vector2 vectorGoal = new Vector2(ImageSizeGoal, ImageSizeGoal);
 
@@ -111,7 +146,8 @@ public class PrizePanelHandler : MonoBehaviour
         if (isDisabled)
             yield break;
         UIHolder.SetActive(true);
-        SoundManager.Play(SoundManager.Sound.PrizePanelOpen, m_audioSource);
+        SoundManager.Play(SoundManager.Sound.CraftButtonClicked, m_audioSource);
+
         Time.timeScale = 0;
 
         currentSpecialPrizeData = GetCurrentPrizeDataBasedOnSpecialPrize(prize);
@@ -166,6 +202,15 @@ public class PrizePanelHandler : MonoBehaviour
         nameText.text = currentResourcePrizeData.m_name;
         DescriptionText.text = currentResourcePrizeData.m_description;
     }
+    private void SetUI(WeaponImprovement weaponBuff)
+    {
+        BlackFadeForPrize.color = new Color(0, 0, 0, 0.75f);//give blackbackground with slight opacity
+        ImageForPrize.color = Color.white;
+
+        ImageForPrize.sprite = weaponBuff.Sprite;
+        nameText.text = currentWeaponImprovmentData.m_name;
+        DescriptionText.text = currentWeaponImprovmentData.m_description;
+    }
     public void ResetCurrentAndPanel()
     {
         BlackFadeForPrize.color = new Color(0, 0, 0, 0);
@@ -202,9 +247,21 @@ public class PrizePanelHandler : MonoBehaviour
         Debug.Log("ResourcePrizeData = NULL");
         return null;
     }
+    public WeaponImprovmentData GetCurrentPrizeDataBasedOnWeaponImprovment(WeaponImprovement weaponImprovement)
+    {
+        for (int i = 0; i < weaponImprovemntPrizeDatas.Length; i++)
+        {
+            if (weaponImprovemntPrizeDatas[i].m_enum == weaponImprovement.WeaponType)
+            {
+                return weaponImprovemntPrizeDatas[i];
+            }
+        }
+        Debug.Log("ResourcePrizeData = NULL");
+        return null;
+    }
     public SpecialPrizeData GetCurrentPrizeDataBasedOnSpecialPrize(SpecialPrizes currentPrize)
     {
-        for (int i = 0; i < ResourcePrizeDatas.Length; i++)
+        for (int i = 0; i < specialPrizeDatas.Length; i++)
         {
             if (specialPrizeDatas[i].m_enum == currentPrize)
             {
@@ -241,4 +298,10 @@ public class SpecialPrizeData
     public string m_description;
     public SpecialPrizes m_enum;
 }
-
+[System.Serializable]
+public class WeaponImprovmentData
+{
+    public string m_name;
+    public string m_description;
+    public WeaponEnum m_enum;
+}

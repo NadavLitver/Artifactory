@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public enum CraftingMapType
 {
@@ -14,7 +15,8 @@ public class CraftingMap : MonoBehaviour, IZoomAble
     [SerializeField] List<NodeLine> createdLines = new List<NodeLine>();
     [SerializeField] float rotationOffestBetweenLines;
     [SerializeField] CraftingBaseNode baseNode;
-    [SerializeField] GameObject CraftButton;
+    [SerializeField] Button CraftButton;
+    [SerializeField] TextMeshProUGUI craftingButtonText;
     [SerializeField] private CraftingMapType mapType;
     NodeLine selectedLine;
     [SerializeField] private bool oneTimeCrafts;
@@ -252,7 +254,8 @@ public class CraftingMap : MonoBehaviour, IZoomAble
                         createdLines[j].Nodes[i + 1].Cover.SetActive(false);
                         createdLines[j].Nodes[i + 1].ItemSprite.gameObject.SetActive(true);
                         selectedLine = createdLines[j];
-                        //CraftButton.SetActive(true);
+                        CraftButton.enabled = true;
+                        craftingButtonText.color = Color.white;
                         //craft button turn on
                         //set this line to be the selected one, 
                         //on press craft item
@@ -299,6 +302,11 @@ public class CraftingMap : MonoBehaviour, IZoomAble
         }
     }
 
+    public void CraftButtonReset()
+    {
+        craftingButtonText.color = Color.gray;
+        CraftButton.enabled = false;
+    }
 
     public void CraftItem() //called from button
     {
@@ -316,7 +324,7 @@ public class CraftingMap : MonoBehaviour, IZoomAble
         //TurnOffLines();
         //CraftButton.SetActive(false);
     }
-
+     
     public void ZoomIn()
     {
         transform.localScale = new Vector3(transform.localScale.x + Time.deltaTime, transform.localScale.y + Time.deltaTime, transform.localScale.z);

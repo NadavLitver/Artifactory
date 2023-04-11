@@ -34,7 +34,7 @@ public class BossAnim : StateMachineBehaviour
 
     IEnumerator ResendToBase()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(3f);
         yield return GameManager.Instance.assets.blackFade.GetFadeToBlackRoutine();
         
         Color endColor = GameManager.Instance.assets.ThanksForPlaying.color;

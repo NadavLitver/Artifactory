@@ -7,8 +7,10 @@ public class ShroomRessurectA : ShroomBaseStateA
     public override IEnumerator StateRoutine()
     {
         handler.Actor.RecieveStatusEffects(StatusEffectEnum.Invulnerability);
-        handler.Anim.Play("Ressurect");
+        handler.Anim.SetTrigger("Ressurect");
         handler.Rb.velocity = Vector2.zero;
+        yield return new WaitUntil(() => handler.StartedRessurecting);
+        handler.StartedRessurecting = false;
         //handler.Actor.Heal(new DamageHandler() { amount = handler.Actor.maxHP });
         transform.parent.transform.position = handler.CurrentCap.transform.position;
         SoundManager.Play(SoundManager.Sound.MushroomEnemyRevive, handler.m_audioSource);

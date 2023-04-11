@@ -10,6 +10,12 @@ public class BasicPickaxe : Weapon
     [SerializeField] Vector2 JumpToClawForce;
     private bool Clawed;
     private Vector2 moveToPositionForDebug;
+
+    [SerializeField] private float calwCoolDown;
+    private float lastCalwed;
+
+
+
     private int playerLookdir => player.GetIsLookingRight ? 1 : -1;
     private Vector2 jumpToClawForce => new Vector2(JumpToClawForce.x * playerLookdir, JumpToClawForce.y);
     private Vector2 positionToCheckFrom => (Vector2)transform.position + (Vector2.right * distaceFromPlayerToCheck * playerLookdir);
@@ -41,6 +47,7 @@ public class BasicPickaxe : Weapon
         ClimbHash = Animator.StringToHash("Climb");
         MobilityHash = Animator.StringToHash("Mobility");
         canMobility = true;
+        lastCalwed = calwCoolDown * -1;
     }
     public void CallWallJump()
     {
@@ -88,12 +95,13 @@ public class BasicPickaxe : Weapon
     }
     public override void Mobility()
     {
-        if (!canMobility)
+        if (!ClawInteractionCoolDown())
+        {
             return;
-
+        }
+        lastCalwed = Time.time;
         if (Clawed)
         {
-
             m_animator.SetTrigger(MobilityHash);
             StartCoroutine(IEJumpFromClawedWithMobility());
             return;
@@ -108,9 +116,19 @@ public class BasicPickaxe : Weapon
             m_animator.SetTrigger(MobilityHash);
             StartCoroutine(MobilityInAir());
         }
-        StartCoroutine(IEMobilityCD());
+       // StartCoroutine(IEMobilityCD());
 
     }
+
+    private bool ClawInteractionCoolDown()
+    {
+        if (Time.time - lastCalwed >= calwCoolDown)
+        {
+            return true;
+        }
+        return false;
+    }
+
 
     private void CheckFromWall()
     {
@@ -135,7 +153,7 @@ public class BasicPickaxe : Weapon
     IEnumerator IEJumpFromMobility()
     {
         player.ResetVelocity();
-        StartCoroutine(player.TogglePlayingTraversal());
+        //StartCoroutine(player.TogglePlayingTraversal());
         player.RecieveForce(jumpToClawForce);
 
         yield return new WaitUntil(() => player.GetIsFalling == true);
@@ -158,8 +176,6 @@ public class BasicPickaxe : Weapon
     }
     IEnumerator IEJumpFromClawedWithMobility()
     {
-        //player.ResetVelocity();
-        //player.RecieveForce(jumpToClawForce);
         WallJump();
         yield return new WaitForSeconds(0.2f);
         yield return new WaitUntil(() => player.GetIsFalling == true);
