@@ -2,12 +2,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine.Events;
 
 public class SaveLoadSystem : MonoBehaviour
 {
-    public string SavePath => $"{Application.persistentDataPath}/save.txt";
+    public static string SavePath => $"{Application.persistentDataPath}/save.txt";
+    public static bool noSaveFile => !File.Exists(SavePath);
 
-    [ContextMenu("Save")]
+
+ [ContextMenu("Save")]
     public void Save()
     {
         var state = LoadFile();
@@ -30,7 +33,7 @@ public class SaveLoadSystem : MonoBehaviour
     }
     Dictionary<string,object> LoadFile()
     {
-        if (!File.Exists(SavePath))
+        if (noSaveFile)
         {
             Debug.Log("No Save File Found");
             return new Dictionary<string, object>();
@@ -62,7 +65,7 @@ public class SaveLoadSystem : MonoBehaviour
         }
     }
     [ContextMenu("DeleteSaveFile")]
-    void DeleteSaveFile()
+    public void DeleteSaveFile()
     {
         File.Delete(SavePath);
     }
