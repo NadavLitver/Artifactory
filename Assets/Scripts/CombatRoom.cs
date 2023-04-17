@@ -49,7 +49,8 @@ public class CombatRoom : Room
     private void StartEvent(DamageHandler damageHandler)
     {
         SoundManager.Play(SoundManager.Sound.BellFlowerBelling, m_dropChest.m_audioSource);
-        m_VCam.Priority = GameManager.Instance.assets.mainVCam.Priority + 10;
+        m_VCam.gameObject.SetActive(true);
+       m_VCam.Priority = GameManager.Instance.assets.mainVCam.Priority + 10;
         damageHandler.AddModifier(0);
         SpawnEnemies();
         dropChestCollider.enabled = false;

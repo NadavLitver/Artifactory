@@ -7,7 +7,7 @@ public class ZooManager : MonoBehaviour
 {
     [SerializeField] private int zooSize;
     [SerializeField] private List<ZooActiveSlot> zooSlots = new List<ZooActiveSlot>();
-    private List<ZooStationGem> gems = new List<ZooStationGem>();
+    [SerializeField] private List<ZooStationGem> gems = new List<ZooStationGem>();
     [SerializeField] private GameObject zooPanel;
     [SerializeField] ZooAnimal test;
     [SerializeField] private GameObject spawnCoinParticle;
@@ -23,7 +23,8 @@ public class ZooManager : MonoBehaviour
     }
     private void Start()
     {
-        Invoke("TryCatchTest", 2f);
+       // Invoke("TryCatchTest", 2f);
+        LeanTween.delayedCall(2, TryCatchTest);
     }
     public void AddSlot(ZooActiveSlot slot)
     {
@@ -47,10 +48,10 @@ public class ZooManager : MonoBehaviour
             if (!item.IsOccupied)
             {
                 item.CacheAnimal(newAnimal);
-                
-                int index = zooSlots.FindIndex(a => zooSlots.Contains(item));
+                GameManager.Instance.Zoo.GetGemFromSlot(item).SetRedActive();
+                /*int index = zooSlots.FindIndex(a => zooSlots.Contains(item));
                 ZooStationGem gem = gems[index];
-                gem.SetRedActive();
+                gem.SetRedActive();*/
                 return;
             }
         }

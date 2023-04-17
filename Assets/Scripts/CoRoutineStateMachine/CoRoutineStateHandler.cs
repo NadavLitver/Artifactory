@@ -54,6 +54,12 @@ public class CoRoutineStateHandler : MonoBehaviour
     {
         states.Sort((p1, p2) => p1.priority.CompareTo(p2.priority));
     }
+    //this is the lambda voodoo magic above
+    // states.Sort(SortByPriority);
+    //static int SortByPriority(CoRoutineState p1, CoRoutineState p2)
+    //{
+    //    return p1.priority.CompareTo(p2.priority);
+    //}
     public CoRoutineState GetNextState()
     {
         foreach (var state in states)
@@ -74,11 +80,6 @@ public class CoRoutineStateHandler : MonoBehaviour
             StartCoroutine(RunStateMachine(givenState));
         }
     }
-    //this is the lambda voodoo magic above
-    // states.Sort(SortByPriority);
-    //static int SortByPriority(CoRoutineState p1, CoRoutineState p2)
-    //{
-    //    return p1.priority.CompareTo(p2.priority);
-    //}
+  
     // [SerializeField] 
 }

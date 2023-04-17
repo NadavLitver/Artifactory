@@ -98,7 +98,7 @@ public class Cannon : Weapon
             Vector2 velocity = GameManager.Instance.assets.PlayerController.GetVelocity;
             GameManager.Instance.assets.PlayerController.ResetVelocity();
             GameManager.Instance.assets.PlayerController.RecieveForce(new Vector2(velocity.x, jumpForce));
-            StartCoroutine(GameManager.Instance.assets.PlayerController.TogglePlayingTraversal());
+          
 
             jumped = true;
             GameManager.Instance.assets.PlayerController.StartCoroutine(GameManager.Instance.assets.PlayerController.JumpApexWait());

@@ -45,7 +45,7 @@ public class PrizePanelHandler : MonoBehaviour
         if (isDisabled)
             yield break;
         UIHolder.SetActive(true);
-       // SoundManager.Play(SoundManager.Sound.PrizePanelOpen, m_audioSource);
+        SoundManager.Play(SoundManager.Sound.CraftButtonClicked, m_audioSource);
         Time.timeScale = 0;
 
         currentRelicPrizeData = GetCurrentPrizeDataBasedOnRelic(relic);
@@ -76,7 +76,8 @@ public class PrizePanelHandler : MonoBehaviour
         if (isDisabled)
             yield break;
         UIHolder.SetActive(true);
-       // SoundManager.Play(SoundManager.Sound.PrizePanelOpen, m_audioSource);
+        SoundManager.Play(SoundManager.Sound.CraftButtonClicked, m_audioSource);
+
         Time.timeScale = 0;
 
         currentResourcePrizeData = GetCurrentPrizeDataBasedOnResource(resource);
@@ -110,7 +111,8 @@ public class PrizePanelHandler : MonoBehaviour
         if (isDisabled)
             yield break;
         UIHolder.SetActive(true);
-        // SoundManager.Play(SoundManager.Sound.PrizePanelOpen, m_audioSource);
+        SoundManager.Play(SoundManager.Sound.CraftButtonClicked, m_audioSource);
+
         Time.timeScale = 0;
         
         currentWeaponImprovmentData = GetCurrentPrizeDataBasedOnWeaponImprovment(weaponBuff);
@@ -144,7 +146,8 @@ public class PrizePanelHandler : MonoBehaviour
         if (isDisabled)
             yield break;
         UIHolder.SetActive(true);
-        SoundManager.Play(SoundManager.Sound.PrizePanelOpen, m_audioSource);
+        SoundManager.Play(SoundManager.Sound.CraftButtonClicked, m_audioSource);
+
         Time.timeScale = 0;
 
         currentSpecialPrizeData = GetCurrentPrizeDataBasedOnSpecialPrize(prize);

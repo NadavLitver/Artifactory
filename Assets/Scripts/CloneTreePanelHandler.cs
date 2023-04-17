@@ -7,6 +7,9 @@ public class CloneTreePanelHandler : MonoBehaviour
 {
     [SerializeField] Image cloneImage;
     [SerializeField] GameObject BaseUI;
+    [SerializeField] GameObject MapPanel;
+
+    bool routineLive;
     public void OnYes()
     {
         //start generation
@@ -21,6 +24,10 @@ public class CloneTreePanelHandler : MonoBehaviour
     }
     IEnumerator OnYesRoutine()
     {
+        if (routineLive)
+            yield break;
+
+        routineLive = true;
         Color goal = new Color(1, 1, 1, 1);
         Color StartingColor = new Color(1, 1, 1, 0);
         float counter = 0;
@@ -36,9 +43,12 @@ public class CloneTreePanelHandler : MonoBehaviour
         Time.timeScale = 1;
 
         GameManager.Instance.assets.choiceWorldHandler.gameObject.SetActive(true);
+        MapPanel.SetActive(true);
         GameManager.Instance.assets.mobileControls.SetActive(false);
         BaseUI.SetActive(false);
         gameObject.SetActive(false);
+        routineLive = false;
+         
     }
     private void OnDisable()
     {
