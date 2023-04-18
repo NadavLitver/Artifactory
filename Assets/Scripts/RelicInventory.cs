@@ -22,21 +22,24 @@ public class RelicInventory : MonoBehaviour,ISaveable
         relicBar.AddRelic(givenRelic);
     }
 
-    public void RemoveRelic(Relic givenRelic)
+    public void RemoveRelic(Relic givenRelic, bool remove = true)
     {
         if (!RelicList.Contains(givenRelic))
         {
             return;
         }
         GameManager.Instance.assets.playerActor.RemoveStatusEffect(GameManager.Instance.generalFunctions.GetStatusFromType(givenRelic.MyEffectEnum));
-        relicList.Remove(givenRelic);
+        if (remove)
+        {
+            relicList.Remove(givenRelic);
+        }
     }
 
     public void ClearRelics()
     {
         foreach (var item in relicList)
         {
-            RemoveRelic(item);
+            RemoveRelic(item, false);
         }
         relicList.Clear();
     }
