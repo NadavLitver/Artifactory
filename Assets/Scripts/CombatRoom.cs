@@ -43,8 +43,6 @@ public class CombatRoom : Room
         TurnOffOnExitClosers(false);
         m_VCam.Priority = 0;
         m_dropChest.Anim.Play(ReleaseHash);
-
-
     }
     private void StartEvent(DamageHandler damageHandler)
     {
@@ -121,7 +119,6 @@ public class CombatRoom : Room
             SpawnedEnemies.Add(currentEnemy);
             currentEnemy.OnDeath.AddListener(() => SpawnedEnemies.Remove(currentEnemy));
             currentEnemy.OnDeath.AddListener(() => CheckWaveEnemiesDead());
-
         }
         waveIndex--;
     }
@@ -133,7 +130,6 @@ public class CombatRoom : Room
             return true;
         }
         return false;
-
     }
     [ContextMenu("KillWaves")]
     public void KillSpawnedEnemy()
@@ -145,8 +141,6 @@ public class CombatRoom : Room
             currentDmgHandler.amount = SpawnedEnemies[0].currentHP;
             SpawnedEnemies[0].TakeDamage(currentDmgHandler);
         }
-       
-
     }
 }
 [Serializable]
