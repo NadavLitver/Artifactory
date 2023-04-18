@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ItemInventory : MonoBehaviour
+public class ItemInventory : MonoBehaviour, ISaveable
 {
     [SerializeField] List<ItemType> items = new List<ItemType>();
-    public UnityEvent <List<RecipeCoponent>>OnCraftItem;
+    public UnityEvent<List<RecipeCoponent>> OnCraftItem;
 
     public List<ItemType> Items { get => items; }
 
@@ -80,4 +80,31 @@ public class ItemInventory : MonoBehaviour
         }
     }
 
+
+    public object SaveState()
+    {
+        return
+            new MySaveData()
+            {
+                _Items = items
+            };
+    }
+
+    public void LoadState(object state)
+    {
+        var saveData = (MySaveData)state;
+        if (saveData._Items != null)
+        {
+            items = saveData._Items;
+            GameManager.Instance.CraftingManager.InventorycraftingPanel.UpdateAmounts(GetEachItemByAmount());
+            //OnCraftItem?.Invoke(GetEachItemByAmount());
+
+        }
+
+    }
+    [System.Serializable]
+    private struct MySaveData
+    {
+        public List<ItemType> _Items;
+    }
 }

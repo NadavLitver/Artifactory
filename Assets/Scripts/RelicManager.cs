@@ -8,6 +8,7 @@ public class RelicManager : MonoBehaviour
     //once a relic drop is created it will recieve a type thats not cached here
     private List<Relic> takenRelics = new List<Relic>();
     [SerializeField] private List<Relic> freeRelics = new List<Relic>();
+    public List<Relic> allRelics;
     public List<Relic> TakenRelics { get => takenRelics; }
     public List<Relic> FreeRelics { get => freeRelics; }
 
@@ -39,6 +40,17 @@ public class RelicManager : MonoBehaviour
     public Relic GetRelic(StatusEffectEnum requestedRelicEnum)
     {
         foreach (var relic in FreeRelics)
+        {
+            if (relic.MyEffectEnum == requestedRelicEnum)
+            {
+                return relic;
+            }
+        }
+        return null;
+    }
+    public Relic GetAnyRelicByEnum(StatusEffectEnum requestedRelicEnum)
+    {
+        foreach (var relic in allRelics)
         {
             if (relic.MyEffectEnum == requestedRelicEnum)
             {

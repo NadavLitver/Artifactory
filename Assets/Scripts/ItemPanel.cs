@@ -8,6 +8,7 @@ public class ItemPanel : MonoBehaviour
 
     //get list of items with amounts, 
     //loop over and create new slots
+   
     public void SetUpSlots(List<RecipeCoponent> components)
     {
         foreach (var comp in components)
