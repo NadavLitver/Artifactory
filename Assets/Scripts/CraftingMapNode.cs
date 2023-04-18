@@ -46,7 +46,13 @@ public class CraftingMapNode : MonoBehaviour
         nodeSprite = circle.sprite;
     }
 
-    public void SelectedColor()
+    public void SetLineLength()
+    {
+        RectTransform lineRect = ((RectTransform)line.transform);
+        lineRect.sizeDelta = new Vector2(lineRect.sizeDelta.x, Random.Range(lineRect.sizeDelta.y * 0.75f, lineRect.sizeDelta.y * 1.25f));
+    }
+
+public void SelectedColor()
     {
         finalNodeBackground.sprite = finalNodeSelectedSprite;
         line.sprite = selectedLineSprite;

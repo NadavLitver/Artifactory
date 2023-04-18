@@ -110,6 +110,7 @@ public class CraftingMap : MonoBehaviour, IZoomAble
         for (int i = from; i < givenRecipe.Components.Count; i++)
         {
             CraftingMapNode node = CreateNode();
+            node.SetLineLength();
             node.transform.SetParent(transform);
             node.SetUpNode(givenRecipe.Components[i]);
             givenLine.Nodes.Add(node);
@@ -137,6 +138,7 @@ public class CraftingMap : MonoBehaviour, IZoomAble
 
         //creating the final node
         CraftingMapNode finalNode = CreateNode();
+        finalNode.SetLineLength();
         finalNode.transform.SetParent(transform);
         finalNode.SetUpNode(givenRecipe.CraftedItem.Sprite);
         finalNode.RotateAndSetFinalLine(givenLine.BaseRotation);
