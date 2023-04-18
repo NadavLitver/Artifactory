@@ -5,11 +5,28 @@ using UnityEngine.UI;
 
 public class RelicBar : MonoBehaviour
 {
+
+    private List<Image> relicImages = new List<Image>();
     public void AddRelic(Relic givenRelic)
     {
         Image image = Instantiate(GameManager.Instance.assets.RelicBarImage, transform);
         image.sprite = GameManager.Instance.RelicManager.GetRelicSpriteFromRelic(givenRelic);
+        relicImages.Add(image);
         Image OwnedRelicImage = Instantiate(GameManager.Instance.assets.OwnedRelicImage, GameManager.Instance.assets.OwnedRelicsPanel);
         OwnedRelicImage.sprite = GameManager.Instance.RelicManager.GetRelicSpriteFromRelic(givenRelic);
     }
+
+    public void RemoveRelic(Relic givenRelic)
+    {
+        foreach (var item in relicImages)
+        {
+            if (item.sprite == GameManager.Instance.RelicManager.GetRelicSpriteFromRelic(givenRelic))
+            {
+                relicImages.Remove(item);
+                Destroy(item);
+                return;
+            }
+        }
+    }
+
 }

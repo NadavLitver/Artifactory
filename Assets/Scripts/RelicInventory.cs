@@ -33,6 +33,7 @@ public class RelicInventory : MonoBehaviour,ISaveable
         {
             relicList.Remove(givenRelic);
         }
+        relicBar.RemoveRelic(givenRelic);
     }
 
     public void ClearRelics()
