@@ -13,6 +13,7 @@ public class CraftingManager : MonoBehaviour
     [SerializeField] SelectedCraftingPanel selectedCraftingPanel;
     [SerializeField] private Button craftButton;
     [SerializeField] AudioSource m_audioSource;
+    [SerializeField] private GameObject ownedRelicsPanel;
 
     ItemInventory playerInventory => GameManager.Instance.assets.playerActor.PlayerItemInventory;
 
@@ -72,6 +73,13 @@ public class CraftingManager : MonoBehaviour
     {
         craftButton.onClick.RemoveAllListeners();
         craftButton.onClick.AddListener(activeMap.CraftItem);
+    }
+
+    public void ToggleInventories()
+    {
+        bool InventoryActive = inventorycraftingPanel.gameObject.activeInHierarchy;
+        inventorycraftingPanel.gameObject.SetActive(!InventoryActive);
+        ownedRelicsPanel.SetActive(InventoryActive);
     }
 
 }

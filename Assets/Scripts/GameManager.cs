@@ -195,6 +195,8 @@ public class AssetsRefrence
     public Sprite TuffCointSprite;
     public Sprite LeatherSprite;
     public ItemUiSlot ItemUiSlot;
+    public Transform OwnedRelicsPanel;
+    public Image OwnedRelicImage;
 
     [Header("Crafting"), Space(10)]
     public ItemPickup ItemPickUpPrefab;
