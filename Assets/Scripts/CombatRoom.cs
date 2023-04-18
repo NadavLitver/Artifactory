@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -25,7 +26,7 @@ public class CombatRoom : Room
         spawnPointsForWaves = GetComponentsInChildren<SpawnPoint>();
         m_VCam.Priority = 0;
         waveIndex = waves.Count-1;
-        OnSpawnedEnemiesDead.AddListener(SpawnEnemies);
+        OnSpawnedEnemiesDead.AddListener(StartSpawningEnemies);
         ShuffleWaves();
         ShuffleSpawnPoint();
         AllWavesOver.AddListener(OnAllWavesOver);
@@ -50,7 +51,7 @@ public class CombatRoom : Room
         m_VCam.gameObject.SetActive(true);
        m_VCam.Priority = GameManager.Instance.assets.mainVCam.Priority + 10;
         damageHandler.AddModifier(0);
-        SpawnEnemies();
+        StartSpawningEnemies();
         dropChestCollider.enabled = false;
         m_dropChest.onTakeDamage.RemoveListener(StartEvent);
         TurnOffOnExitClosers(true);
@@ -77,6 +78,11 @@ public class CombatRoom : Room
             waves[n] = value;
         }
     }
+
+    private void StartSpawningEnemies()
+    {
+        StartCoroutine(SpawnEnemies());
+    }
     public void ShuffleSpawnPoint()
     {
         int n = spawnPointsForWaves.Length;
@@ -90,24 +96,25 @@ public class CombatRoom : Room
         }
     }
     [ContextMenu("StartSpawning")]
-    public void SpawnEnemies()
+    public IEnumerator SpawnEnemies()
     {
         Debug.Log("Spawn Enemies Reached");
 
         if (waveIndex < 0)
         {
             AllWavesOver?.Invoke();
-            return;
+            yield break;
         }
 
 
         if (spawnPointsForWaves.Length < waves[waveIndex].Wave.Count)
         {
             Debug.Log("Too many enemies not enough spawnPoints");
-            return;
+            yield break;
         }
         GameManager.Instance.assets.CombatRoomUiPanel.gameObject.SetActive(true);
-        StartCoroutine(GameManager.Instance.assets.CombatRoomUiPanel.SetTitle($" WAVE  {waves.Count - waveIndex}"));
+        yield return StartCoroutine(GameManager.Instance.assets.CombatRoomUiPanel.SetTitle($" WAVE  {waves.Count - waveIndex}"));
+        yield return new WaitForSeconds(0.3f);
         for (int i = 0; i < waves[waveIndex].Wave.Count; i++)
         {
             // this line spawns

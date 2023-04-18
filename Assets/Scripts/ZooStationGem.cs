@@ -20,7 +20,6 @@ public class ZooStationGem : MonoBehaviour
     }
     public void SetRedActive()
     {
-        Debug.Log("setting red active");
 
         greenGem.SetActive(false);
         redGem.SetActive(true);
@@ -28,14 +27,12 @@ public class ZooStationGem : MonoBehaviour
     }
     public void SetGrayActive()
     {
-        Debug.Log("setting gray active");
         greenGem.SetActive(false);
         redGem.SetActive(false);
         grayGem.SetActive(true);
     }
     public void SetGreenActive()
     {
-        Debug.Log("setting green active");
 
         greenGem.SetActive(true);
         redGem.SetActive(false);
