@@ -67,10 +67,7 @@ public class CraftingMap : MonoBehaviour, IZoomAble
                 break;
             }
         }
-
         TurnOffLines();
-
-
     }
 
     private CraftingMapNode TryGettingSpecificNodeInPlace(RecipeCoponent givenComp, int index)

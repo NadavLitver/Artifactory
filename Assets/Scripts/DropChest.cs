@@ -19,7 +19,6 @@ public class DropChest : Actor
     {
         anim.Play(OpenHash);
         SoundManager.Play(SoundManager.Sound.NebulaFlowerPopped, m_audioSource);
-
     }
 
     public void DoneOpening()
