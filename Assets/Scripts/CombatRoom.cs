@@ -99,14 +99,15 @@ public class CombatRoom : Room
             AllWavesOver?.Invoke();
             return;
         }
-       
+
 
         if (spawnPointsForWaves.Length < waves[waveIndex].Wave.Count)
         {
-            Debug.Log("Too much enemies not enough spawnPoints");
+            Debug.Log("Too many enemies not enough spawnPoints");
             return;
         }
-
+        GameManager.Instance.assets.CombatRoomUiPanel.gameObject.SetActive(true);
+        StartCoroutine(GameManager.Instance.assets.CombatRoomUiPanel.SetTitle($" WAVE  {waves.Count}"));
         for (int i = 0; i < waves[waveIndex].Wave.Count; i++)
         {
             // this line spawns
@@ -120,6 +121,7 @@ public class CombatRoom : Room
             currentEnemy.OnDeath.AddListener(() => SpawnedEnemies.Remove(currentEnemy));
             currentEnemy.OnDeath.AddListener(() => CheckWaveEnemiesDead());
         }
+        
         waveIndex--;
     }
     public bool CheckWaveEnemiesDead()

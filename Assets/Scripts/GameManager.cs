@@ -222,6 +222,9 @@ public class AssetsRefrence
     public Animator BossAnimator;
     [Header("Object Pools")]
     public ExplosionObjectPool ExplsionOP;
+    [Header("Combat Room")]
+    public CombatRoomUI CombatRoomUiPanel;
+
 
 }
 public class GeneralFunctions
