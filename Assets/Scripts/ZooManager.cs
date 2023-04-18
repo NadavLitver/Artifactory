@@ -43,15 +43,12 @@ public class ZooManager : MonoBehaviour
     }
     public ZooAnimalGrowthData GetZooAnimalSOBasedOnEnum(ZooAnimalsEnum currentEnum)
     {
-        switch (currentEnum)
+        return currentEnum switch
         {
-            case ZooAnimalsEnum.Frog:
-                return new ZooAnimalGrowthData() { animal = frogTest, CurrentFoodGiven = 0 };
-            case ZooAnimalsEnum.Shroom:
-                return new ZooAnimalGrowthData() { animal = shroomTest, CurrentFoodGiven = 0 };
-            default:
-                return null;
-        }
+            ZooAnimalsEnum.Frog => new ZooAnimalGrowthData() { animal = frogTest, CurrentFoodGiven = 0 },
+            ZooAnimalsEnum.Shroom => new ZooAnimalGrowthData() { animal = shroomTest, CurrentFoodGiven = 0 },
+            _ => null,
+        };
     }
     public void CatchAnimal(ZooAnimal givenAnimal)
     {
