@@ -11,8 +11,16 @@ public class CraftingMapNode : MonoBehaviour
     [SerializeField] Image line;
     [SerializeField] Transform connectionPoint;
     [SerializeField] GameObject cover;
-    [SerializeField] GameObject finalNodeBackground;
+    [SerializeField] Image finalNodeBackground;
     [SerializeField] Image circle;
+
+    [SerializeField] Sprite selectedLineSprite;
+    Sprite lineSprite;
+    [SerializeField] Sprite selectedNodeSprite;
+    Sprite nodeSprite;
+    [SerializeField] Sprite finalNodeSelectedSprite;
+    Sprite finalNodeSprite;
+
 
     [SerializeField] List<CraftingNodeConnection> nodeConnections = new List<CraftingNodeConnection>();
     private CustomPos myPos;
@@ -33,8 +41,29 @@ public class CraftingMapNode : MonoBehaviour
     {
         OnDiscovered.AddListener(RemoveCover);
         ShufflePoints();
+        finalNodeSprite = finalNodeBackground.sprite;
+        lineSprite = line.sprite;
+        nodeSprite = circle.sprite;
     }
 
+    public void SetLineLength()
+    {
+        RectTransform lineRect = ((RectTransform)line.transform);
+        lineRect.sizeDelta = new Vector2(lineRect.sizeDelta.x, Random.Range(lineRect.sizeDelta.y * 0.75f, lineRect.sizeDelta.y * 1.25f));
+    }
+
+public void SelectedColor()
+    {
+        finalNodeBackground.sprite = finalNodeSelectedSprite;
+        line.sprite = selectedLineSprite;
+        circle.sprite = selectedNodeSprite;
+    }
+    public void UnSelectedColor()
+    {
+        finalNodeBackground.sprite = finalNodeSprite;
+        line.sprite = lineSprite;
+        circle.sprite = nodeSprite;
+    }
     public void ShufflePoints()
     {
         int n = nodeConnections.Count;
@@ -97,7 +126,7 @@ public class CraftingMapNode : MonoBehaviour
     public void RotateLine(float givenBaseRotation)
     {
         rotation = givenBaseRotation;
-        float finalRot = Random.Range(rotation - 15, rotation + 16);
+        float finalRot = Random.Range(rotation - 9, rotation + 11);
         line.transform.rotation = Quaternion.Euler(0f, 0f, finalRot);
     }
 
@@ -106,7 +135,7 @@ public class CraftingMapNode : MonoBehaviour
         ((RectTransform)line.transform).sizeDelta = new Vector2(((RectTransform)line.transform).sizeDelta.x, ((RectTransform)line.transform).sizeDelta.y * 1.2f);
         rotation = givenBaseRotation;
         line.transform.rotation = Quaternion.Euler(0f, 0f, rotation);
-        finalNodeBackground.SetActive(true);
+        finalNodeBackground.gameObject.SetActive(true);
         circle.gameObject.SetActive(false);
     }
 

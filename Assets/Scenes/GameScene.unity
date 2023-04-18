@@ -655,6 +655,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 914369842}
     - target: {fileID: 2443271746410904546, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
+      propertyPath: ownedRelicsPanel
+      value: 
+      objectReference: {fileID: 941101658}
+    - target: {fileID: 2443271746410904546, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
       propertyPath: weaponCraftingMap
       value: 
       objectReference: {fileID: 1488996118}
@@ -810,6 +814,14 @@ PrefabInstance:
       propertyPath: assets.BaseAudioSource
       value: 
       objectReference: {fileID: 1637805995}
+    - target: {fileID: 4180575170813383680, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
+      propertyPath: assets.OwnedRelicImage
+      value: 
+      objectReference: {fileID: 976251601172616779, guid: e583eeb5b75e3d447b75050c2b95ed63, type: 3}
+    - target: {fileID: 4180575170813383680, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
+      propertyPath: assets.OwnedRelicsPanel
+      value: 
+      objectReference: {fileID: 941101659}
     - target: {fileID: 4180575170813383680, guid: 3dbfc81bcae82bd40be9aa69bb94c5a5, type: 3}
       propertyPath: assets.PlayerController
       value: 
@@ -1054,6 +1066,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f0a10054101c8941b8a125ff70f226e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &941101658 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6043349257664443119, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+  m_PrefabInstance: {fileID: 172302675764313256}
+  m_PrefabAsset: {fileID: 0}
+--- !u!224 &941101659 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 2877426964899531799, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+  m_PrefabInstance: {fileID: 172302675764313256}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &973803959 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 9027514047683863944, guid: 97680a444ec4aaf4890e4fa7ab02bc88, type: 3}
@@ -2114,10 +2136,14 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 2138488569}
-    - target: {fileID: 3327924038238445250, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
+    - target: {fileID: 3231522825981412541, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: m_TargetGraphic
+      value: 
+      objectReference: {fileID: 2540305936552202904, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+    - target: {fileID: 3231522825981412541, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 217712429}
     - target: {fileID: 3449053818316702086, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

@@ -26,8 +26,9 @@ public class RubberDuck : StatusEffect
 
     public void RollForDamageBlock(DamageHandler givenDmg)
     {
-        if (Random.Range(1, 100) > GameManager.Instance.DamageManager.RubberDuckDamageBlockChance)
+        if (Random.Range(1, 100) <= GameManager.Instance.DamageManager.RubberDuckDamageBlockChance)
         {
+            Debug.Log("blocked attack");
             givenDmg.AddModifier(0);
             //play vfx whatever
         }

@@ -9,5 +9,7 @@ public class RelicBar : MonoBehaviour
     {
         Image image = Instantiate(GameManager.Instance.assets.RelicBarImage, transform);
         image.sprite = GameManager.Instance.RelicManager.GetRelicSpriteFromRelic(givenRelic);
+        Image OwnedRelicImage = Instantiate(GameManager.Instance.assets.OwnedRelicImage, GameManager.Instance.assets.OwnedRelicsPanel);
+        OwnedRelicImage.sprite = GameManager.Instance.RelicManager.GetRelicSpriteFromRelic(givenRelic);
     }
 }
