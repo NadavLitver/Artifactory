@@ -54,9 +54,9 @@ public class CraftingMapNode : MonoBehaviour
     }
     public void UnSelectedColor()
     {
-        finalNodeSprite = finalNodeBackground.sprite;
-        lineSprite = line.sprite;
-        nodeSprite = circle.sprite;
+        finalNodeBackground.sprite = finalNodeSprite;
+        line.sprite = lineSprite;
+        circle.sprite = nodeSprite;
     }
     public void ShufflePoints()
     {
@@ -120,7 +120,7 @@ public class CraftingMapNode : MonoBehaviour
     public void RotateLine(float givenBaseRotation)
     {
         rotation = givenBaseRotation;
-        float finalRot = Random.Range(rotation - 15, rotation + 16);
+        float finalRot = Random.Range(rotation - 9, rotation + 11);
         line.transform.rotation = Quaternion.Euler(0f, 0f, finalRot);
     }
 

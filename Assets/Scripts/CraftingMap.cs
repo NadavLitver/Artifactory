@@ -228,13 +228,12 @@ public class CraftingMap : MonoBehaviour, IZoomAble
     }
 
 
-
-
-
     public void UpdateActivatedLines(List<ItemType> givenItems)
     {
         //TurnOffLines();
         selectedLine = null;
+        craftingButtonText.color = Color.gray;
+        UnselectAll();
         for (int i = 0; i < givenItems.Count; i++)
         {
             for (int j = 0; j < createdLines.Count; j++)
@@ -287,24 +286,20 @@ public class CraftingMap : MonoBehaviour, IZoomAble
             for (int i = 1; i < line.Nodes.Count; i++)
             {
                 line.Nodes[i].Cover.SetActive(true);
-                line.Nodes[i].UnSelectedColor();
+                //line.Nodes[i].UnSelectedColor();
                 line.Nodes[i].ItemSprite.gameObject.SetActive(false);
             }
-            /* foreach (var node in line.Nodes)
-             {
-                 node.Cover.SetActive(true);
-             }*/
         }
     }
+    [ContextMenu("unselect nodes")]
     public void UnselectAll()
     {
         foreach (var line in createdLines)
         {
-            for (int i = 1; i < line.Nodes.Count; i++)
+            for (int i = 0; i < line.Nodes.Count; i++)
             {
                 line.Nodes[i].UnSelectedColor();
             }
-           
         }
     }
     public void TurnOffLine(NodeLine line)
