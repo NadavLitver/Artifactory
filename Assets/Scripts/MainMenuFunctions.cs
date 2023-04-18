@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuFunctions : MonoBehaviour
 {
-    
+
     public void LoadNextScene()
     {
       LeanTween.delayedCall(1 ,() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1));
@@ -21,14 +21,24 @@ public class MainMenuFunctions : MonoBehaviour
     {
         LoadTutorial();
         BetweenSceneInfo.didBaseTutorialHappen = false;
+        SaveLoadSystem.DeleteSaveFileStatic();
 
     }
     public void OnNo()
     {
         LoadNextScene();
         BetweenSceneInfo.didBaseTutorialHappen = true;
+        SaveLoadSystem.DeleteSaveFileStatic();
+
 
     }
+    public void OnContinue()
+    {
+        LoadNextScene();
+        BetweenSceneInfo.didBaseTutorialHappen = true;
+
+    }
+
 
     public void QuitGame()
     {

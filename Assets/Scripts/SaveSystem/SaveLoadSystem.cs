@@ -74,4 +74,9 @@ public class SaveLoadSystem : MonoBehaviour
     {
         File.Delete(SavePath);
     }
+    [ContextMenu("DeleteSaveFile")]
+    public static void DeleteSaveFileStatic()
+    {
+        File.Delete(SavePath);
+    }
 }

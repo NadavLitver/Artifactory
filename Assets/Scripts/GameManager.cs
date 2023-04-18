@@ -21,6 +21,9 @@ public class GameManager : MonoBehaviour
     public VfxManager vfxManager { get; private set; }
     public ZoomTool ZoomTool { get; private set; }
 
+    public SaveLoadSystem saveLoadSystem { get; private set; }
+
+
 
 
     public bool isTutorial;
@@ -62,6 +65,7 @@ public class GameManager : MonoBehaviour
         RelicManager = GetComponentInChildren<RelicManager>();
         Zoo = GetComponentInChildren<ZooManager>();
         ZoomTool = GetComponentInChildren<ZoomTool>();
+        saveLoadSystem = GetComponentInChildren<SaveLoadSystem>();
     }
     private void Start()
     {
@@ -72,11 +76,15 @@ public class GameManager : MonoBehaviour
         if (!isTutorial)
         {
             assets.playerActor.OnDeath.AddListener(generalFunctions.onPlayerDiedActions);
-          
             assets.BaseAudioSource.clip = SoundManager.GetAudioClip(SoundManager.Sound.BaseSound);
             assets.BaseAudioSource.volume = SoundManager.GetVolumeOfClip(SoundManager.Sound.BaseSound);
             assets.BaseAudioSource.Play();
             OnRunStart.AddListener(CallGlimmeringWoodsSound);
+            if (!SaveLoadSystem.noSaveFile)
+            {
+                saveLoadSystem.Load();
+            }
+            
         }
         else
         {

@@ -48,9 +48,10 @@ public class BossAnim : StateMachineBehaviour
             counter += Time.deltaTime;
             yield return new WaitForEndOfFrame();
         }
-        yield return new WaitForSecondsRealtime(4f);
         GameManager.Instance.assets.playerActor.PlayerRelicInventory.ClearRelics();
-      GameManager.Instance.assets.blackFade.FadeFromBlack();
+        GameManager.Instance.saveLoadSystem.Save();
+        yield return new WaitForSecondsRealtime(4f);
+        GameManager.Instance.assets.blackFade.FadeFromBlack();
         GameManager.Instance.assets.ThanksForPlaying.gameObject.SetActive(false);
         GameManager.Instance.assets.baseFatherObject.SetActive(true);
         GameManager.Instance.assets.Player.transform.position = GameManager.Instance.assets.baseSpawnPlayerPositionObject.transform.position;
