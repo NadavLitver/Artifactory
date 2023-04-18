@@ -160,6 +160,7 @@ public class ZooActiveSlot : MonoBehaviour, ISaveable
         lastFed = Time.time;
         UpdateSlider();
         UpdateTimer();
+        GameManager.Instance.saveLoadSystem.Save();
     }
 
 
@@ -185,6 +186,8 @@ public class ZooActiveSlot : MonoBehaviour, ISaveable
         ResetFoodGiven();
         UpdateSlider();
         RemoveAnimal();
+        GameManager.Instance.saveLoadSystem.Save();
+
 
     }
 
@@ -222,17 +225,27 @@ public class ZooActiveSlot : MonoBehaviour, ISaveable
 
     public object SaveState()
     {
+        if(currentRefAnimal == null)
+        {
+            return new MySaveData() { isEmpty = true };
+        }
         return
            new MySaveData()
            {
                m_animalType = currentRefAnimal.animal.m_animalType,
-               _currentFoodAmount = currentRefAnimal.CurrentFoodGiven
+               _currentFoodAmount = currentRefAnimal.CurrentFoodGiven,
+               isEmpty = false,
+               
            };
     }
 
     public void LoadState(object state)
     {
+
         var saveData = (MySaveData)state;
+
+        if (saveData.isEmpty)
+            return;
         //if (saveData._currentRefAnimal == null)
         //{
         //    currentRefAnimal = null;
@@ -252,6 +265,7 @@ public class ZooActiveSlot : MonoBehaviour, ISaveable
     {
         public ZooAnimalsEnum m_animalType;
         public int _currentFoodAmount;
+        public bool isEmpty;
     }
 
 }

@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 public enum ZooAnimalsEnum
 {
-    Frog,Shroom
+    Frog, Shroom
 }
 public class ZooManager : MonoBehaviour
 {
@@ -26,8 +26,10 @@ public class ZooManager : MonoBehaviour
     }
     private void Start()
     {
-       // Invoke("TryCatchTest", 2f);
-       // LeanTween.delayedCall(2, TryCatchTest);
+        // Invoke("TryCatchTest", 2f);
+        if (SaveLoadSystem.noSaveFile)
+            TryCatchTest();
+        //    LeanTween.delayedCall(1, TryCatchTest);
     }
     public void AddSlot(ZooActiveSlot slot)
     {
@@ -39,7 +41,7 @@ public class ZooManager : MonoBehaviour
         int index = zooSlots.FindIndex(a => zooSlots.Contains(slot));
         ZooStationGem gem = gems[index];
         gem.CacheRefSlot(slot);
-       // Debug.Log(zooSlots.Count);
+        // Debug.Log(zooSlots.Count);
     }
     public ZooAnimalGrowthData GetZooAnimalSOBasedOnEnum(ZooAnimalsEnum currentEnum)
     {

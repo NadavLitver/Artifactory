@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,7 +30,7 @@ public class SaveableEntity : MonoBehaviour
         foreach (var saveable in saveables)
         {
             string typeName = saveable.GetType().ToString();
-            if(stateDictionary.TryGetValue(typeName, out object savedState))
+            if (stateDictionary.TryGetValue(typeName, out object savedState))
             {
                 saveable.LoadState(savedState);
             }

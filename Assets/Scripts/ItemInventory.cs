@@ -78,6 +78,7 @@ public class ItemInventory : MonoBehaviour, ISaveable
         {
             givenRecipe.CraftedItem.Obtain();
         }
+        GameManager.Instance.saveLoadSystem.Save();
     }
 
 
