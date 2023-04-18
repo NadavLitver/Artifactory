@@ -191,6 +191,7 @@ public class AssetsRefrence
     public ChoiceWorldManager choiceWorldHandler;
     public TextMeshProUGUI ThanksForPlaying;
     public RelicChoicePanel RelicChoicePanel;
+    public RelicBarDesc RelicBarDesc;
     [Header("Bounder"), Space(10)]
     public BounderScout BounderScout;
 

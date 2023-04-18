@@ -14,6 +14,8 @@ public class RelicBar : MonoBehaviour
         relicImages.Add(image);
         Image OwnedRelicImage = Instantiate(GameManager.Instance.assets.OwnedRelicImage, GameManager.Instance.assets.OwnedRelicsPanel);
         OwnedRelicImage.sprite = GameManager.Instance.RelicManager.GetRelicSpriteFromRelic(givenRelic);
+        GameManager.Instance.assets.RelicBarDesc.AddRelic(givenRelic);
+        
     }
 
     public void RemoveRelic(Relic givenRelic)

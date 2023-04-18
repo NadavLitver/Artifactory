@@ -402,8 +402,6 @@ public class LevelManager : MonoBehaviour
     }
 
 
-
-
     public void MoveToRoom(ExitInteractable givenExit)
     {
         //delay

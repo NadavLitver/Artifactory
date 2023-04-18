@@ -6,8 +6,9 @@ using UnityEngine;
 public class Relic : ScriptableObject
 {
     [SerializeField] StatusEffectEnum myEffect;
+    [SerializeField] private string summery;
 
     public StatusEffect MyEffect { get => GameManager.Instance.generalFunctions.GetStatusFromType(myEffect); }
     public StatusEffectEnum MyEffectEnum { get => myEffect; set => myEffect = value; }
-
+    public string Summery { get => summery; set => summery = value; }
 }

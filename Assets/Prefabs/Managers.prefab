@@ -668,6 +668,7 @@ Transform:
   - {fileID: 507447349456157950}
   - {fileID: 1570458845717932993}
   - {fileID: 1815793317}
+  - {fileID: 1814046178191720868}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -720,6 +721,7 @@ MonoBehaviour:
     choiceWorldHandler: {fileID: 0}
     ThanksForPlaying: {fileID: 0}
     RelicChoicePanel: {fileID: 0}
+    RelicBarDesc: {fileID: 0}
     BounderScout: {fileID: 8467794796436600464, guid: 1ec8468c7beb4c54582ca1c7171703da, type: 3}
     RelicCraftingMapNode: {fileID: 1946464524881845352, guid: b4057901708be3c49843f221eafadf56, type: 3}
     WeaponCraftingMapNode: {fileID: 1946464524881845352, guid: f2ad09b178eca92488ca551a1ee7d5b9, type: 3}
@@ -744,7 +746,7 @@ MonoBehaviour:
     BossAnimator: {fileID: 0}
     ExplsionOP: {fileID: 379764918394835550}
     CombatRoomUiPanel: {fileID: 0}
-    SpawnEnemyVFXOP: {fileID: 0}
+    SpawnEnemyVFXOP: {fileID: 1070493601}
 --- !u!1 &4207107459726920179
 GameObject:
   m_ObjectHideFlags: 0
@@ -1096,6 +1098,7 @@ GameObject:
   - component: {fileID: 1078534446947263185}
   - component: {fileID: 5111662350817070084}
   - component: {fileID: 379764918394835550}
+  - component: {fileID: 1070493601}
   m_Layer: 0
   m_Name: ObjectPools
   m_TagString: Untagged
@@ -1148,6 +1151,65 @@ MonoBehaviour:
   pooledObjects: []
   PrefabToPool: {fileID: 5846453044655557716, guid: 461f9d71b5b137c4dab5bc0c3611d783, type: 3}
   NumToPool: 10
+--- !u!114 &1070493601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7028819647897419526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7345072aa3557714780bb694aecf0cd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pooledObjects: []
+  objectToPool: {fileID: 100000, guid: 08153b7371113104db2e57a4d5d8b4f0, type: 3}
+  amountToPool: 10
+--- !u!1 &7246305741083476312
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1814046178191720868}
+  - component: {fileID: 3302362583382241510}
+  m_Layer: 0
+  m_Name: SaveLoadSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1814046178191720868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7246305741083476312}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4180575170529028752}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3302362583382241510
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7246305741083476312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ee2af93c7f77b42a159b7a21e5eb7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7568456704651568653
 GameObject:
   m_ObjectHideFlags: 0

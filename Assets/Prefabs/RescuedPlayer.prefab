@@ -455,6 +455,7 @@ MonoBehaviour:
   radiusForWallCheck: 0.5
   distaceFromPlayerToCheck: 0.5
   JumpToClawForce: {x: 12, y: 20}
+  calwCoolDown: 0.5
   forceForWallJump: {x: 10, y: 20}
   contactFilter:
     serializedVersion: 2
@@ -510,6 +511,8 @@ GameObject:
   - component: {fileID: 3271807133343841365}
   - component: {fileID: 7347479043507101585}
   - component: {fileID: 2138488591}
+  - component: {fileID: 717439434}
+  - component: {fileID: 8692834850572073197}
   m_Layer: 6
   m_Name: RescuedPlayer
   m_TagString: Player
@@ -880,6 +883,27 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!81 &717439434
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840070347753010964}
+  m_Enabled: 1
+--- !u!114 &8692834850572073197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840070347753010964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e987829e26cbc0b438a4e755ab91a3b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: bcaa5164-1024-430e-949e-e78b66c326d2
 --- !u!1 &840070348364434354
 GameObject:
   m_ObjectHideFlags: 0
