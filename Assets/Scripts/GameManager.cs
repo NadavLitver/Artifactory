@@ -224,6 +224,7 @@ public class AssetsRefrence
     public ExplosionObjectPool ExplsionOP;
     [Header("Combat Room")]
     public CombatRoomUI CombatRoomUiPanel;
+    public EnemySpawnVFXPool SpawnEnemyVFXOP;
 
 
 }

@@ -107,7 +107,7 @@ public class CombatRoom : Room
             return;
         }
         GameManager.Instance.assets.CombatRoomUiPanel.gameObject.SetActive(true);
-        StartCoroutine(GameManager.Instance.assets.CombatRoomUiPanel.SetTitle($" WAVE  {waves.Count}"));
+        StartCoroutine(GameManager.Instance.assets.CombatRoomUiPanel.SetTitle($" WAVE  {waves.Count - waveIndex}"));
         for (int i = 0; i < waves[waveIndex].Wave.Count; i++)
         {
             // this line spawns

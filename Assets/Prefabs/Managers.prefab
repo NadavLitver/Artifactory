@@ -211,6 +211,50 @@ MonoBehaviour:
     effectPrefab: {fileID: 1040608886635896, guid: 889a3adaee382214da7e7e33527f6442, type: 3}
   - m_effect: 5
     effectPrefab: {fileID: 6351007847618363293, guid: 5a7d06d3022ff084db13a72f9a67ee92, type: 3}
+--- !u!1 &1815793316
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1815793317}
+  - component: {fileID: 1815793318}
+  m_Layer: 0
+  m_Name: SaveLoadSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1815793317
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815793316}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4180575170529028752}
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1815793318
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1815793316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7ee2af93c7f77b42a159b7a21e5eb7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1877112336
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,6 +302,13 @@ MonoBehaviour:
   freeRelics:
   - {fileID: 11400000, guid: 527b6041e746de443a5be4e1562b62de, type: 2}
   - {fileID: 11400000, guid: c69c6527b54aaf6429f37246308504ab, type: 2}
+  - {fileID: 11400000, guid: 949f5b039bdffdb43b9454dd036bd9a4, type: 2}
+  - {fileID: 11400000, guid: 144b789879b66814caa924e1ec73868e, type: 2}
+  - {fileID: 11400000, guid: f36e283c00a6a804f9ca850ced9f47c1, type: 2}
+  allRelics:
+  - {fileID: 11400000, guid: 527b6041e746de443a5be4e1562b62de, type: 2}
+  - {fileID: 11400000, guid: c69c6527b54aaf6429f37246308504ab, type: 2}
+  - {fileID: 11400000, guid: 16287ddb534eddf46be0165408567869, type: 2}
   - {fileID: 11400000, guid: 949f5b039bdffdb43b9454dd036bd9a4, type: 2}
   - {fileID: 11400000, guid: 144b789879b66814caa924e1ec73868e, type: 2}
   - {fileID: 11400000, guid: f36e283c00a6a804f9ca850ced9f47c1, type: 2}
@@ -404,6 +455,7 @@ MonoBehaviour:
   selectedCraftingPanel: {fileID: 0}
   craftButton: {fileID: 0}
   m_audioSource: {fileID: 729210910}
+  ownedRelicsPanel: {fileID: 0}
 --- !u!82 &729210910
 AudioSource:
   m_ObjectHideFlags: 0
@@ -615,6 +667,7 @@ Transform:
   - {fileID: 1078534446947263185}
   - {fileID: 507447349456157950}
   - {fileID: 1570458845717932993}
+  - {fileID: 1815793317}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -676,6 +729,8 @@ MonoBehaviour:
     TuffCointSprite: {fileID: 1749810795, guid: f6e4d09e4e4be6a49878bba310f8e330, type: 3}
     LeatherSprite: {fileID: 21300000, guid: 681cdb2853ae7144c815013a86c8da7c, type: 3}
     ItemUiSlot: {fileID: 1052155130899679002, guid: d0f22065e4078e447bddcdb0b03a269c, type: 3}
+    OwnedRelicsPanel: {fileID: 0}
+    OwnedRelicImage: {fileID: 976251601172616779, guid: e583eeb5b75e3d447b75050c2b95ed63, type: 3}
     ItemPickUpPrefab: {fileID: 1370576873857019599, guid: dccd0e3c00ef4894a95b1f6652bb72a7, type: 3}
     baseFatherObject: {fileID: 0}
     baseSpawnPlayerPositionObject: {fileID: 0}
@@ -688,6 +743,8 @@ MonoBehaviour:
     AnimalPickupPrefab: {fileID: 1808717985204493064, guid: 4ce37bc1dabe9a9458409d4090f9e800, type: 3}
     BossAnimator: {fileID: 0}
     ExplsionOP: {fileID: 379764918394835550}
+    CombatRoomUiPanel: {fileID: 0}
+    SpawnEnemyVFXOP: {fileID: 0}
 --- !u!1 &4207107459726920179
 GameObject:
   m_ObjectHideFlags: 0
@@ -951,6 +1008,9 @@ MonoBehaviour:
   - m_Sound: 55
     m_AudioClip: {fileID: 8300000, guid: c81f479105e335d42966a629234ee12a, type: 3}
     m_Volume: 1
+  - m_Sound: 56
+    m_AudioClip: {fileID: 8300000, guid: c168897182723464a93d806cec97c947, type: 3}
+    m_Volume: 0.6
   DeactivateAudioObjectsTime: 10
   GetErrorSound: {fileID: 8300000, guid: b1e2fd2bbae909444aadac4960793d30, type: 3}
   m_pool: {fileID: 8027128626043977255}
@@ -1014,12 +1074,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   zooSize: 3
-  zooSlots: []
+  zooSlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  gems:
+  - {fileID: 0}
+  - {fileID: 0}
   zooPanel: {fileID: 0}
   test: {fileID: 11400000, guid: 3e4baf4aafb47164fbb19e7b890424b9, type: 2}
   spawnCoinParticle: {fileID: 0}
-  shroomTest: {fileID: 0}
-  frogTest: {fileID: 0}
+  shroomTest: {fileID: 11400000, guid: d36eb2db126b23149bd05e7e446290d4, type: 2}
+  frogTest: {fileID: 11400000, guid: 3e4baf4aafb47164fbb19e7b890424b9, type: 2}
 --- !u!1 &7028819647897419526
 GameObject:
   m_ObjectHideFlags: 0
