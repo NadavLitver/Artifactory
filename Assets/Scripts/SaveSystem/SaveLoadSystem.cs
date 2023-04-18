@@ -1,21 +1,26 @@
 using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
-using UnityEngine.Events;
+using UnityEngine;
 
 public class SaveLoadSystem : MonoBehaviour
 {
     public static string SavePath => $"{Application.persistentDataPath}/save.txt";
     public static bool noSaveFile => !File.Exists(SavePath);
 
+    
+    SaveableEntity[] saveableEntities;
 
- [ContextMenu("Save")]
+    private void Awake()
+    {
+        saveableEntities = FindObjectsOfType<SaveableEntity>();
+    }
+    [ContextMenu("Save")]
     public void Save()
     {
         var state = LoadFile();
         SaveState(state);
-        SaveFile(state); 
+        SaveFile(state);
     }
     [ContextMenu("Load")]
     public void Load()
@@ -31,7 +36,7 @@ public class SaveLoadSystem : MonoBehaviour
             formatter.Serialize(stream, state);
         }
     }
-    Dictionary<string,object> LoadFile()
+    Dictionary<string, object> LoadFile()
     {
         if (noSaveFile)
         {
@@ -46,19 +51,19 @@ public class SaveLoadSystem : MonoBehaviour
     }
     void SaveState(Dictionary<string, object> state)
     {
-        SaveableEntity[] saveableEntities = FindObjectsOfType<SaveableEntity>();
+       // SaveableEntity[] saveableEntities = FindObjectsOfType<SaveableEntity>();
         foreach (var saveableEntity in saveableEntities)
         {
             state[saveableEntity.Id] = saveableEntity.SaveState();
         }
     }
-    void LoadState(Dictionary<string,object> state)
+    void LoadState(Dictionary<string, object> state)
     {
 
-        SaveableEntity[] saveableEntities = FindObjectsOfType<SaveableEntity>();
+       // SaveableEntity[] saveableEntities = FindObjectsOfType<SaveableEntity>();
         foreach (var saveableEntity in saveableEntities)
         {
-            if(state.TryGetValue(saveableEntity.Id,out object savedState))
+            if (state.TryGetValue(saveableEntity.Id, out object savedState))
             {
                 saveableEntity.LoadState(savedState);
             }

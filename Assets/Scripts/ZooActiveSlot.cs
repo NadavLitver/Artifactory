@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class ZooActiveSlot : MonoBehaviour
+public class ZooActiveSlot : MonoBehaviour, ISaveable
 {
     private ZooAnimalGrowthData currentRefAnimal;
     private int currentFoodgiven;
@@ -47,6 +47,7 @@ public class ZooActiveSlot : MonoBehaviour
     }
     public void CacheAnimal(ZooAnimalGrowthData givenAnimal)
     {
+
         animalDoneHealing = false;
         currentRefAnimal = givenAnimal;
         animalImage.sprite = givenAnimal.animal.RSprite;
@@ -55,12 +56,13 @@ public class ZooActiveSlot : MonoBehaviour
         anim.runtimeAnimatorController = givenAnimal.animal.RAnim;
         timerText.text = "0";
         UpdateTimer();
-        currentFoodgiven = 0;
         currentFoodgiven = startGivenFood;
+        givenAnimal.CurrentFoodGiven = startGivenFood;
         if (CurrentFoodgiven >= CurrentRefAnimal.animal.TrannsfromAmount)
         {
             ChangeAnimalToWForm();
         }
+        GameManager.Instance.Zoo.GetGemFromSlot(this).SetRedActive();
         ResetFoodGivenThisInterval();
         SetRecipeImage();
         feedButton.SetActive(true);
@@ -139,6 +141,7 @@ public class ZooActiveSlot : MonoBehaviour
         GameManager.Instance.assets.playerActor.PlayerItemInventory.CraftItem(CurrentRefAnimal.animal.Food);
         foodGivenThisInterval++;
         currentFoodgiven++;
+        CurrentRefAnimal.CurrentFoodGiven = currentFoodgiven;
         OnAnimalFed?.Invoke(CurrentRefAnimal);
         if (currentFoodgiven >= CurrentRefAnimal.animal.AmountNeeded)
         {
@@ -158,7 +161,7 @@ public class ZooActiveSlot : MonoBehaviour
         UpdateSlider();
         UpdateTimer();
     }
- 
+
 
     //called when reached 100% feed automatically
     public void FreeAnimal()
@@ -216,4 +219,39 @@ public class ZooActiveSlot : MonoBehaviour
         nameText.text = inputField.text;
         inputField.text = "";
     }
+
+    public object SaveState()
+    {
+        return
+           new MySaveData()
+           {
+               m_animalType = currentRefAnimal.animal.m_animalType,
+               _currentFoodAmount = currentRefAnimal.CurrentFoodGiven
+           };
+    }
+
+    public void LoadState(object state)
+    {
+        var saveData = (MySaveData)state;
+        //if (saveData._currentRefAnimal == null)
+        //{
+        //    currentRefAnimal = null;
+
+        //    GameManager.Instance.Zoo.TryCatchTest();
+        //}
+        //else
+        //{
+        currentRefAnimal = GameManager.Instance.Zoo.GetZooAnimalSOBasedOnEnum(saveData.m_animalType);
+        currentRefAnimal.CurrentFoodGiven = saveData._currentFoodAmount;
+        startGivenFood = currentRefAnimal.CurrentFoodGiven;
+        CacheAnimal(currentRefAnimal);
+        // }
+    }
+    [System.Serializable]
+    private struct MySaveData
+    {
+        public ZooAnimalsEnum m_animalType;
+        public int _currentFoodAmount;
+    }
+
 }

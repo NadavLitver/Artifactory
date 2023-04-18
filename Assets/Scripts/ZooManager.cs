@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-
+public enum ZooAnimalsEnum
+{
+    Frog,Shroom
+}
 public class ZooManager : MonoBehaviour
 {
     [SerializeField] private int zooSize;
@@ -24,7 +27,7 @@ public class ZooManager : MonoBehaviour
     private void Start()
     {
        // Invoke("TryCatchTest", 2f);
-        LeanTween.delayedCall(2, TryCatchTest);
+       // LeanTween.delayedCall(2, TryCatchTest);
     }
     public void AddSlot(ZooActiveSlot slot)
     {
@@ -38,17 +41,27 @@ public class ZooManager : MonoBehaviour
         gem.CacheRefSlot(slot);
        // Debug.Log(zooSlots.Count);
     }
-   
+    public ZooAnimalGrowthData GetZooAnimalSOBasedOnEnum(ZooAnimalsEnum currentEnum)
+    {
+        switch (currentEnum)
+        {
+            case ZooAnimalsEnum.Frog:
+                return new ZooAnimalGrowthData() { animal = frogTest, CurrentFoodGiven = 0 };
+            case ZooAnimalsEnum.Shroom:
+                return new ZooAnimalGrowthData() { animal = shroomTest, CurrentFoodGiven = 0 };
+            default:
+                return null;
+        }
+    }
     public void CatchAnimal(ZooAnimal givenAnimal)
     {
         //checking for free space before catching anyway
-        ZooAnimalGrowthData newAnimal = new ZooAnimalGrowthData() { animal = givenAnimal, CurrentGrownTime = 0 };
+        ZooAnimalGrowthData newAnimal = new ZooAnimalGrowthData() { animal = givenAnimal, CurrentFoodGiven = 0 };
         foreach (var item in zooSlots)
         {
             if (!item.IsOccupied)
             {
                 item.CacheAnimal(newAnimal);
-                GameManager.Instance.Zoo.GetGemFromSlot(item).SetRedActive();
                 /*int index = zooSlots.FindIndex(a => zooSlots.Contains(item));
                 ZooStationGem gem = gems[index];
                 gem.SetRedActive();*/
@@ -135,9 +148,9 @@ public class ZooManager : MonoBehaviour
         CatchAnimal(frogTest);
     }
 }
-
+[System.Serializable]
 public class ZooAnimalGrowthData
 {
     public ZooAnimal animal;
-    public int CurrentGrownTime;
+    public int CurrentFoodGiven;
 }

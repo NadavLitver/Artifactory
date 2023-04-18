@@ -21,4 +21,5 @@ public class ZooAnimal : ScriptableObject
     public int TrannsfromAmount { get => transformAmount; }
     public RuntimeAnimatorController WAnim { get => wAnim; }
     public RuntimeAnimatorController RAnim { get => rAnim; }
+    public ZooAnimalsEnum m_animalType;
 }
