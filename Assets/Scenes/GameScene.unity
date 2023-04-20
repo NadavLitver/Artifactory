@@ -997,78 +997,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 2877426964899531799, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
   m_PrefabInstance: {fileID: 172302675764313256}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1050067324 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 172302675814251379, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
-  m_PrefabInstance: {fileID: 172302675764313256}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1050067325 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 172302675814251381, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
-  m_PrefabInstance: {fileID: 172302675764313256}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1050067324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &1050067328
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1050067324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Navigation:
-    m_Mode: 3
-    m_WrapAround: 0
-    m_SelectOnUp: {fileID: 0}
-    m_SelectOnDown: {fileID: 0}
-    m_SelectOnLeft: {fileID: 0}
-    m_SelectOnRight: {fileID: 0}
-  m_Transition: 1
-  m_Colors:
-    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
-    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
-    m_ColorMultiplier: 1
-    m_FadeDuration: 0.1
-  m_SpriteState:
-    m_HighlightedSprite: {fileID: 0}
-    m_PressedSprite: {fileID: 0}
-    m_SelectedSprite: {fileID: 0}
-    m_DisabledSprite: {fileID: 0}
-  m_AnimationTriggers:
-    m_NormalTrigger: Normal
-    m_HighlightedTrigger: Highlighted
-    m_PressedTrigger: Pressed
-    m_SelectedTrigger: Selected
-    m_DisabledTrigger: Disabled
-  m_Interactable: 1
-  m_TargetGraphic: {fileID: 1050067325}
-  m_OnClick:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 321130100}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 1
-        m_CallState: 2
 --- !u!1 &1054980307
 GameObject:
   m_ObjectHideFlags: 0
@@ -1212,12 +1140,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 172302675168922440, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
   m_PrefabInstance: {fileID: 172302675764313256}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1312719789 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1349738151, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+  m_PrefabInstance: {fileID: 172302675764313256}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1349738156 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 900163691697866450, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
   m_PrefabInstance: {fileID: 172302675764313256}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1312719789}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 58c30c72478921741a15fca12c2eb8b1, type: 3}
@@ -1855,6 +1788,10 @@ PrefabInstance:
       propertyPath: actor
       value: 
       objectReference: {fileID: 2138488576}
+    - target: {fileID: 1395802118, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 172302674126518785, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -1947,6 +1884,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 217712429}
+    - target: {fileID: 172302675807526000, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
+      propertyPath: RelicBar
+      value: 
+      objectReference: {fileID: 1312719789}
     - target: {fileID: 172302675807526000, guid: 7d197ddeb4aa22545b939f3e186ecd54, type: 3}
       propertyPath: cloneTree
       value: 
