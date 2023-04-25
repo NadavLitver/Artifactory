@@ -75,7 +75,8 @@ public class BaseTutorialHandler : MonoBehaviour
         m_interactable.gameObject.SetActive(false);
         zooIneractable.firstInteraction = true;
         zooIneractable.gameObject.SetActive(true);
-      
+        craftingMachine.gameObject.SetActive(true);
+        cloneTree.gameObject.SetActive(true);
         CloseButton.onClick.RemoveListener(Cancel);
         WeaponScreenButton.enabled = true;
 

@@ -266,8 +266,9 @@ public class GeneralFunctions
     public void onPlayerDiedActions()//change this to not reset the scene.
     {
         LeanTween.cancelAll();
+        GameManager.Instance.assets.playerActor.PlayerRelicInventory.ClearRelics();
         GameManager.Instance.assets.mobileControls.SetActive(false);
-
+        GameManager.Instance.saveLoadSystem.Save();
         LeanTween.delayedCall(1, ResetScene);
     }
 
