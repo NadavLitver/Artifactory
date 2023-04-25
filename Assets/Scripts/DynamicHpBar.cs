@@ -32,7 +32,7 @@ public class DynamicHpBar : MonoBehaviour
     private void Start()
     {
         //actor = GetComponentInParent<Actor>();
-        actor.TakeDamageGFX.AddListener(updateValues);
+        actor?.TakeDamageGFX.AddListener(updateValues);
         switch (mode)
         {
             case BarMode.Cubic:
